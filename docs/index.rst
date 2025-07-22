@@ -12,11 +12,6 @@ Welcome to helloWorld's documentation!
 
    autodoc
 
-This is a new section
-=====================
-
-saki boo
-
 Indices and tables
 ==================
 
