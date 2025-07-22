@@ -17,7 +17,8 @@ For more information, see this article:
 
 1. Fork this repo
 1. On your forked repo, go to the "Actions" tab and click "I understand my workflows, go ahead and enable them" to enable GitHub workflows
-1. On your forked repo, go to the "Settings" tab. Under "GitHub Pages" choose 'gh-pages branch' under "Source"
+1. On your forked repo, go to the "Settings" tab. Under "Pages", then "Source" choose 'Deploy from a branch'
+2. On your forked repo, in the "Settings" tab. Under "Pages". Under "Branch". Choose 'gh-pages' then '/(root)' then click 'Save'
 1. Make a small change to [docs/index.rst](/docs/index.rst)
 1. `git commit` and `git push` something to trigger your site to be built
 
