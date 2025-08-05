@@ -19,9 +19,9 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'helloWorld'
-copyright = '2020, Michael Altfield'
-author = 'Michael Altfield'
+project = 'FRCTraining'
+copyright = '2025, HOT Programming Team'
+author = 'HOT Programming Team'
 
 # The short X.Y version
 version = ''
@@ -51,8 +51,8 @@ templates_path = ['_templates']
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
-# source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = ['.rst', '.md']
+#source_suffix = '.rst'
 
 # The master toctree document.
 master_doc = 'index'
