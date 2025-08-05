@@ -8,9 +8,10 @@ FRC Training
 
 .. toctree::
    :maxdepth: 2
-   :caption: Home:
+   :hidden:
+   :caption: Home
 
-   home
+   home.md
 
 Indices and tables
 ==================
