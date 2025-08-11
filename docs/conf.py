@@ -19,8 +19,8 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'FRCTraining'
-copyright = '2025, HOT Programming Team'
+project = 'HOT Programmers Guide'
+copyright = 'HOT Programming Team'
 author = 'HOT Programming Team'
 
 # The short X.Y version

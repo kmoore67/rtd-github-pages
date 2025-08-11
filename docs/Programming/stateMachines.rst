@@ -49,7 +49,7 @@ Other prime examples of State Machines are `PID Controllers </Romi/Control/romiP
 References
 ********************
 
-- Wikipedia `Finite State Machines <https://en.wikipedia.org/wiki/Finite-state_machine>`_ 
+- Wikipedia - `Finite State Machines <https://en.wikipedia.org/wiki/Finite-state_machine>`_ 
 
 - FRC Documentation - `The Command Scheduler <https://docs.wpilib.org/en/latest/docs/software/commandbased/command-scheduler.html>`_ 
  
