@@ -67,7 +67,7 @@ Git Repositories are normally physically located at GitHub. What is GitHub?
 Repositories hosted at GitHub can be **cloned** (copied) to a local computer. Changes can be made on the local computer and when completed and tested, the changes can be bundled together into a **commit**, and commits can be **pushed** up to the Github hosted repository. This distributed system allows many developers to work on the same code simultaneously and provides a disaster recovery capability  (in case one of the local computers is eaten by your dog, along with your homework!) as the source code is stored in the cloud.   
 
 
-.. image:: /images/FRCTools.037.jpg  
+.. image:: /images/FRCTools/FRCTools.037.jpg  
 
 
 The subsequent sections will drill down further into how the team uses github. 
@@ -126,14 +126,14 @@ You should see the following response:
 
 You will see a new directory under the project folder.
 
-.. image:: /images/FRCTools.001.jpeg 
+.. image:: /images/FRCTools/FRCTools.001.jpeg 
 
 VS Code 
 ============
 
 You can also initialize a repository in VSCode.  This is usually done after you have created a new project as detailed in `Creating a New WPILib Project <https://docs.wpilib.org/en/stable/docs/software/vscode-overview/creating-robot-program.html#creating-a-new-wpilib-project>`_. Click on **Initialize Repository** then **Stage** and **Commit** your changes. You now have a local repostitory on your PC.  See a more detailed overview of **Staging and Committing** below.
 
-.. image:: /images/FRCTools.012.jpeg 
+.. image:: /images/FRCTools/FRCTools.012.jpeg 
 
 
 Configuring Username and Email
@@ -165,7 +165,7 @@ Hiding Email Address
 
 If you don’t want to expose your GitHub email address in the commit logs you can hide your email address. In GitHub go to **Settings – Email – Keep my email address private**.
 
-.. image:: /images/FRCTools.019.jpeg 
+.. image:: /images/FRCTools/FRCTools.019.jpeg 
 
 You’ll notice a new email address `<username>@users.noreply.github.com` for you to use for your Git commits.
 
@@ -194,7 +194,7 @@ Command Line
 
 Now that we have initialized and configured the repository we can now stage and commit our files.  We're going to move our files to a staging area in preparation for a commit to the repository.
 
-.. image:: /images/FRCTools.002.jpeg 
+.. image:: /images/FRCTools/FRCTools.002.jpeg 
 
 First, let's get a status from Git by typing the following command: 
 
@@ -283,7 +283,7 @@ VS Code
 
 The previous process can be done in VSCode by carrying out the steps in the following diagram.
 
-.. image:: /images/FRCTools.014.jpeg 
+.. image:: /images/FRCTools/FRCTools.014.jpeg 
 
 
 Pushing to the Remote Repository
@@ -294,21 +294,21 @@ Command Line
 
 Before we can push code to our GitHub account we need to login and create a repository.  Click on the + (plus) icon at the top of the your Github home page and select "Create a Repository".
 
-.. image:: /images/FRCTools.003.jpeg 
+.. image:: /images/FRCTools/FRCTools.003.jpeg 
 
 Enter the repository name and a description.  Select a Public repository.
 
-.. image:: /images/FRCTools.004.jpeg 
+.. image:: /images/FRCTools/FRCTools.004.jpeg 
 
 Leave the add README and .gitignore unchecked.  We'll add these later.  Click on "Create repository".
 
-.. image:: /images/FRCTools.005.jpeg 
+.. image:: /images/FRCTools/FRCTools.005.jpeg 
 
 We now have to connect our local Git repository with the remote GitHub repository.  After the repository is created is displays the commands required to set your local repository to the remote.  Copy and paste these commands one at a time into a terminal on your laptop and execute them.  The `<repository>` part of the remote origin URL should be your Github account name.
 
 .. note:: You may have to go to settings in VSCode and type `git enable` in the search bar.  Make sure that *git enable* is checked.
 
-.. image:: /images/FRCTools.006.jpeg 
+.. image:: /images/FRCTools/FRCTools.006.jpeg 
 
 .. code-block:: Powershell 
 
@@ -346,7 +346,7 @@ VS Code
 
 You can setup VSCode to push to a remote repository using the following steps.  Click on options and select **Add Remote**.  Get the URL from your GitHub repository and paste it in, then press enter.  You'll be asked to name the remote, call it `origin`. You can then click on **Publish Branch** to update the remote repository.
 
-.. image:: /images/FRCTools.013.jpeg 
+.. image:: /images/FRCTools/FRCTools.013.jpeg 
 
 
 
@@ -358,15 +358,15 @@ VS Code
 
 The primary reason for creating repositories is so that other people can view and edit your code.  The way we do that is to `clone` the repository.  You first need to get the URL of the repository that you want to clone.
 
-.. image:: /images/FRCTools.007a.jpeg 
+.. image:: /images/FRCTools/FRCTools.007a.jpeg 
 
 Then in VSCode, select *File->New Window* and click on the Github icon.  Click Clone Repository and enter the repository URL that you just copied.  You'll be asked to select a local folder in which to save the cloned repository.  The repository will download from Github and you can now open it.
 
-.. image:: /images/FRCTools.033.jpeg 
+.. image:: /images/FRCTools/FRCTools.033.jpeg 
 
 Conceptually, this looks like the following:
 
-.. image:: /images/FRCTools.008.jpeg 
+.. image:: /images/FRCTools/FRCTools.008.jpeg 
 
 Command Line
 ====================================
@@ -406,7 +406,7 @@ A fork is a new repository that shares code and visibility settings with the ori
 
 .. note:: When you **Clone** a repository you are making a copy of the repoitory on your local machine. When you **Fork** a repository, you are copying a repository to a new account in GITHUB! 
 
-.. image:: /images/FRCTools.034.jpeg 
+.. image:: /images/FRCTools/FRCTools.034.jpeg 
 
 
 Branching
@@ -416,7 +416,7 @@ When you want to add new features to the code base it's a good idea to create a 
 
 .. important:: For our team the branch name will be `feature-<new-feature>`, where new-feature is somewhat descriptive of what needs to be added. (For example: feature-intake or feature-lights, or feature-shooter)  
 
-.. image:: /images/FRCTools.035.jpeg 
+.. image:: /images/FRCTools/FRCTools.035.jpeg 
 
 You'll be prompted to publish the branch to GitHub.  You can do this immediatelly or after you have made some changes.
 To delete a remote branch use `git branch -d <branch name>` 
@@ -434,7 +434,7 @@ Once you have created the branch and added your new feature you can merge it bac
 
 The Pull Request will be reviewed by the repository owner, and if everything looks good it will be merged into the `main` branch of the code.  See `Merging a pull request <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/merging-a-pull-request>`_ in the GitHub documentation. The Pull Request process is shown below.
 
-.. image:: /images/FRCTools.036.jpeg 
+.. image:: /images/FRCTools/FRCTools.036.jpeg 
 
 You can link a pull request to an issue.
 

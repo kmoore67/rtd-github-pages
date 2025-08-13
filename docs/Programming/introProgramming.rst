@@ -8,7 +8,7 @@ This is a general introduction to programming.  It covers concepts that apply to
 
 When programming in most modern languages you can break it down into four main categories; **Data Structures, Procedures, Objects,** and **State Machines**.  Data Structures describe the physical attributes of a system and what its current state is.  Procedures are blocks of code that perform tasks when they called.  Objects are created to represent physical things or ideas in the real world.  Objects encapsulate Data Structures and Procedures to describe its attributes and the tasks that it can perform. State Machines represent the state of a system at any point in time.  As time passes a state machine usually transitions from one state to another.  
 
-.. image:: /images/FRCProgramming.007.jpeg 
+.. image:: /images/FRCProgramming/FRCProgramming.007.jpeg 
 
 Let's go over each of these categories in more detail.
 

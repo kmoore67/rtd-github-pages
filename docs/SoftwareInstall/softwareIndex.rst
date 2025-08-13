@@ -15,7 +15,7 @@ There are four major components needed to develop programs for FRC.
 - **Documentation**    
    Documentation is a very important part of a development environment. It explains the syntax of the programming language that you're coding in and how to use the application libraries. Documentation is usually very detailed and extensive, defining every aspect of the language or library. You will need to refer to it constantly when you are working on a project, especially when you're learning.
 
-.. image:: /images/FRCTools.020.jpeg 
+.. image:: /images/FRCTools/FRCTools.020.jpeg 
 
 Helpful Links
 *********************

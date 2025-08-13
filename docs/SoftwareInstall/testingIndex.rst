@@ -26,7 +26,7 @@ Once you have written some code and you are ready to test, there are several pla
 - **Phoenix Tuner** 
     `The Phoenix Tuner <https://docs.ctre-phoenix.com/en/stable/ch03_PrimerPhoenixSoft.html#what-is-phoenix-tuner>`_ is used to configure the motors supplied by *Cross The Road Electronics CTRE*.
 
-.. image:: /images/FRCTools.021.jpeg  
+.. image:: /images/FRCTools/FRCTools.021.jpeg  
 
 
  

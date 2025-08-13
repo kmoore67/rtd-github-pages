@@ -12,7 +12,7 @@ An Integrated Development Environment (IDE) is a software tool that is used to m
 **Visual Studio Code (VSCode)** is the supported IDE for programming an FRC robot. If you don't have VSCode installed on your computer then follow the `WPILib Installation Guide <https://docs.wpilib.org/en/latest/docs/zero-to-robot/step-2/wpilib-setup.html>`_ on the FRC Documentation Website. If you're using Windows, then these instructions will also install the WPI Library which is used for programming the FRC robot.  The link to download the latest software is somewhat hidden, you can find it under `Prerequisites <https://docs.wpilib.org/en/latest/docs/zero-to-robot/step-2/wpilib-setup.html#prerequisites>`_ on the WPILib Installation Guide pages, click on the Github link.  Or try the `Latest Releases <https://github.com/wpilibsuite/allwpilib/releases>`_ page. Scroll down the Github release page to find the downloads.  Additional information is also found at `FRC Documentation VSCode Overview <https://docs.wpilib.org/en/latest/docs/software/vscode-overview/index.html>`_.
 
 
-.. image:: /images/FRCTools.022.jpeg 
+.. image:: /images/FRCTools/FRCTools.022.jpeg 
 
 You should use the online installer as it will dynamically load other modules on the internet all by itself, but if you can use the offline installer to set up a separate copy of VS Code for WPILib development, even if you already have VS Code on your machine. This is done because some of the settings that make the WPILib setup work may break existing workflows if you use VS Code for other projects.
 
@@ -36,7 +36,7 @@ A new version of the WPILib is released each year on the same day that the new c
 
 After upgrading VSCode will import each project to the latest version.  Answer *Yes* to each prompt.
 
-.. image:: /images/FRCTools.011.jpeg 
+.. image:: /images/FRCTools/FRCTools.011.jpeg 
 
 As soon as you open the upgraded project VSCode will start to run a compile.  This will often produce build errors that you need to resolve. You will probably have to import 3rd party software like *Phoenix* and *REVLib*.  Instructions on installing and configuring these libraries is detailed in the next section. Also see `Importing a Gradle Project <https://docs.wpilib.org/en/stable/docs/software/vscode-overview/importing-gradle-project.html>`_ for more details on importing projects from previous season.
 

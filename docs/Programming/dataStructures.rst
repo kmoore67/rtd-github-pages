@@ -3,7 +3,7 @@ Data Structures
 
 Robots are driven by data.  They receive data from external sensors like cameras, internal sensors such as encoders, and from commands sent to it by a controller.  Once they receive the data the robot processes it and may carry out actions based on that data.  Data can be organized in several ways, which we call data structures.  You can think of data structures as containers for storing data.  We'll go over some of the most important data structures using examples in Java.  These examples are from the `Java Tutorial <https://www.w3schools.com/java/default.asp>`_ on the W3 Schools Website.
 
-.. image:: /images/FRCProgramming.010.jpeg 
+.. image:: /images/FRCProgramming/FRCProgramming.010.jpeg 
 
 We use *variables* to hold data in our programs. A variable is a reserved memory location to hold a value. In other words, when we want to store any value and give it a name, that value takes a reserved space in memory and it’s retrieved using the variable name.
 

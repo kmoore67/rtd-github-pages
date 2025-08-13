@@ -5,7 +5,7 @@ In most programs there are tasks that you will need to perform multiple times.  
 
 At a basic level a procedure just compares data, so the first thing you'll learn are the comparison and logical operators.  You'll either be comparing the data to a constant value or between two or more streams of data that the program is inputting.  The comparisons are invoked in an IF-THEN-ELSE structure or within some kind of loop.  
 
-.. image:: /images/FRCProgramming.019.jpeg 
+.. image:: /images/FRCProgramming/FRCProgramming.019.jpeg 
 
 You may notice that the task of driving forward 10 meters is very specific.  What if you wanted to go forward 5 meters, or drive backwards.  In order to make the procedure more useful it can be parameterized.  That way, you can move whatever distance you want either forward or backward.  The ability to pass in `Parameters <https://www.w3schools.com/java/java_methods_param.asp>`_, or data, is a key feature of Procedures that make them so useful.
 

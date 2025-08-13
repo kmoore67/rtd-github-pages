@@ -20,13 +20,13 @@ In order not to duplicate information that already exists there are plenty of re
 
 The subjects that will be covered in this document will include:
 
-.. image:: /images/FRCConcepts.016.jpeg 
+.. image:: /images/FRCConcepts/FRCConcepts.016.jpeg 
 
 First, we'll start out setting up a development environment on your laptop so that you will have something to train with. Next, we'll move on to the main learning path using **Robot Simulation**.  And finally, as you advance, we'll move on to the **Sweet Bench** and the **Programming Team Camera Robot** and finally the **Competition Practice Bot**.  From there we'll link to other parts of the programming resources.
 
-.. image:: /images/FRCConcepts.018.jpeg
+.. image:: /images/FRCConcepts/FRCConcepts.018.jpeg
 
-.. image:: /images/FRCConcepts.019.jpeg
+.. image:: /images/FRCConcepts/FRCConcepts.019.jpeg
 
 
 Acknowledgement 
@@ -79,6 +79,8 @@ References
    Install VSCode and WPILib </SoftwareInstall/vscodeSoftware>  
    Version Control System <SoftwareInstall/git>
    Setup Testing Environment </SoftwareInstall/testingIndex>
+   FRC Testing Environment </SoftwareInstall/frcDev>
+   RoboRio and Device Software </SoftwareInstall/rioSoftware>
 
 
 

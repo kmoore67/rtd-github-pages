@@ -11,7 +11,7 @@ A State Machine operates in the following manner:
 
 3. **Input Update** - This is the process of making repeated calls to the next step.  This will often be carried out by using a programmatic timer.  In an FRC program the input update step will be carried out by the `Command Scheduler <https://docs.wpilib.org/en/latest/docs/software/commandbased/command-scheduler.html>`_ that runs every 20 milliseconds.  The Input process would be responsible for checking on the transitioning event.
 
-.. image:: /images/FRCProgramming.009.jpeg 
+.. image:: /images/FRCProgramming/FRCProgramming.009.jpeg 
 
 State Machine Example
 *****************************
