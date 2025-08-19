@@ -1,3 +1,8 @@
+.. raw:: html 
+   
+   <meta name="robots" content="noindex">
+   
+#####################################   
 FRC Testing Environment
 #####################################
 

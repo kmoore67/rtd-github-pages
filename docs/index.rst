@@ -3,7 +3,20 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-HOT Programmers Guide
+.. Heading Key 
+   ####### - H1 
+   ******* - H2 
+   ======= - H3 
+   ------- - H4 
+   ^^^^^^^ - H5 
+   """"""" - H6 
+   
+.. raw:: html 
+   
+   <meta name="robots" content="noindex">
+
+#############################
+Overview
 #############################
 
 In the early days of computing, there was no internet to look up programming instructions or how to code a particular function. Programmers only had printed manuals to research information. The best two manuals at the time were the reference manual and the programmers guide. 
@@ -55,32 +68,48 @@ References
 .. toctree::
    :maxdepth: 2
    :hidden:
-   :caption: Home
 
    self
-   
+
+
+Programming Basics 
+======================
+
 .. toctree::
    :maxdepth: 2
-   :hidden:
-   :caption: Programming Basics
+   :hidden:  
  
-   Introduction to Programming </Programming/introProgramming>
-   Data Structures </Programming/dataStructures>
-   Procedures </Programming/procedures>
-   Objects </Programming/objects>
-   State Machines </Programming/stateMachines>
+   /Programming/programmingIndex   
+
+
+Setup Development Environment  
+=================================  
 
 .. toctree::
    :maxdepth: 2
    :hidden:
-   :caption: Setup 
 
-   Setup Development Environment </SoftwareInstall/softwareIndex> 
-   Install VSCode and WPILib </SoftwareInstall/vscodeSoftware>  
-   Version Control System <SoftwareInstall/git>
-   Setup Testing Environment </SoftwareInstall/testingIndex>
-   FRC Testing Environment </SoftwareInstall/frcDev>
-   RoboRio and Device Software </SoftwareInstall/rioSoftware>
+   /SoftwareInstall/softwareInstallIndex    
+
+
+Setup Testing Environment 
+===============================
+
+.. toctree::
+   :maxdepth: 2 
+   :hidden:
+
+   /SoftwareInstall/testingIndex    
+
+
+Robot Basics 
+===============================
+
+.. toctree:: 
+   :maxdepth: 2 
+   :hidden:
+
+   /RobotBasics/robotBasicsIndex    
 
 
 

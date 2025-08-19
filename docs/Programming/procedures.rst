@@ -1,5 +1,10 @@
-Procedures
-==================
+.. raw:: html 
+   
+   <meta name="robots" content="noindex">
+   
+##########################   
+   Procedures
+##########################
 
 In most programs there are tasks that you will need to perform multiple times.  This is done using **Procedures** which are blocks of code that perform specific tasks whenever they are called.  An example of a task that a mobile robot may perform is "Drive forward 10 meters".  If a procedure is part of an Object then it's called a `Method <https://www.w3schools.com/java/java_methods.asp>`_.  Don't let this confuse you, a Method is simply a Procedure in the context of Object Oriented Programming.  We'll look at `Objects </Programming/objects>`_ in the next section.
 

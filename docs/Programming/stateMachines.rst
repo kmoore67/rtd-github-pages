@@ -1,5 +1,10 @@
+.. raw:: html 
+   
+   <meta name="robots" content="noindex">
+
+######################
 State Machines
-===================
+######################
 
 State Machines represent the state of a system at any point in time.  As time passes a state machine usually transitions from one state to another.  Its state can change based on inputs to the system or as a result of a specific period of time passing. In programming it usually consists of a finite number of states and is therefore called a Finite State Machine (FSM).
 
@@ -47,7 +52,7 @@ Let's look at the code below to see an example of a State Machine.  This code is
 Other prime examples of State Machines are `PID Controllers </Romi/Control/romiPID.md>`_ used for motion control or `Kalman Filters </Concepts/OptimalEstimation/kalmanFilters.md>`_ used for `*Robot Localization* </Concepts/LocalizationMapping/localization.md>`_.
 
 References
-********************
+***************************
 
 - Wikipedia - `Finite State Machines <https://en.wikipedia.org/wiki/Finite-state_machine>`_ 
 

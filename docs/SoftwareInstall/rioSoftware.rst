@@ -1,3 +1,8 @@
+.. raw:: html 
+   
+   <meta name="robots" content="noindex">
+   
+############################################
 RoboRio and Device Software
 ############################################
 

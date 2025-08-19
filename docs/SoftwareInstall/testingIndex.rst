@@ -1,13 +1,19 @@
-.. Heading Key 
-   ####### - H1 
-   ******* - H2 
-   ======= - H3 
-   ------- - H4 
-   ^^^^^^^ - H5 
-   """"""" - H6 
-
-Testing Introduction
+.. raw:: html 
+   
+   <meta name="robots" content="noindex">
+   
 ###################################
+Setup Testing Environment
+###################################
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+
+   FRC Testing Environment </SoftwareInstall/frcDev>
+   RoboRio and Device Software </SoftwareInstall/rioSoftware>
+   Install Phoenix API Libraries </SoftwareInstall/phoenixSoftware>
+   Install Rev API Libraries </SoftwareInstall/revSoftware>
 
 Once you have written some code and you are ready to test, there are several platforms and software tools on which to test.  
 

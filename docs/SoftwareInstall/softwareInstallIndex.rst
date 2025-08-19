@@ -1,5 +1,18 @@
-Introduction
-==================
+.. raw:: html 
+   
+   <meta name="robots" content="noindex">
+   
+#################################
+Setup Development Environment
+#################################
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+
+   Install VSCode and WPILib </SoftwareInstall/vscodeSoftware>  
+   Version Control System </SoftwareInstall/git>
+
 
 There are four major components needed to develop programs for FRC.
 
@@ -17,8 +30,3 @@ There are four major components needed to develop programs for FRC.
 
 .. image:: /images/FRCTools/FRCTools.020.jpeg 
 
-Helpful Links
-*********************
-
-- `Install VSCode and WPILib </SoftwareInstall/vscodeSoftware>`_ 
-- `The Git Repository and Github </SoftwareInstall/vscodeSoftware>`_ 

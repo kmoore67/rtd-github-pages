@@ -1,3 +1,11 @@
+.. raw:: html 
+   
+   <meta name="robots" content="noindex">
+   
+#############################################
+The Git Repository and Github
+#############################################
+
 .. Heading Key 
    ####### - H1 
    ******* - H2 
@@ -5,11 +13,6 @@
    ------- - H4 
    ^^^^^^^ - H5 
    """"""" - H6 
-
-
-
-The Git Repository and Github
-#############################################
 
 Git is a **Version Control System (VCS)** for keeping track of changes in files. It was open-sourced in 2005 by Linus Torvald to aid in the development of Linux. Using Git:  
 

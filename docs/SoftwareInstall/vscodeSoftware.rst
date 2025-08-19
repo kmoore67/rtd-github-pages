@@ -1,5 +1,10 @@
+.. raw:: html 
+   
+   <meta name="robots" content="noindex">
+   
+####################################
 VSCode and WPILib Install
-=================================
+####################################
 
 An Integrated Development Environment (IDE) is a software tool that is used to make writing code easier. Some of the main things IDEs will help with include:
 
