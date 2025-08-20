@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commands &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Telemetry" href="telemetry.html" />
+    <link rel="prev" title="Subsystems" href="subSystems.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="robotBasicsIndex.html">Robot Basics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="exampleCode.html">Example Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basicStructure.html">Basic Robot Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subSystems.html">Subsystems</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-drivedistance-command">The DriveDistance Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arcadedrive-command">ArcadeDrive Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#instant-commands">Instant Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#command-groups">Command Groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-autonomousdistance-command">The AutonomousDistance Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#viewing-the-robot-pose">Viewing the Robot Pose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lab-commands">Lab - Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-reset-odometry-command">Add Reset Odometry Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-the-command-to-the-sendablechooser">Add the command to the <em>SendableChooser</em>.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implement-slew-rate-limiter-filter">Implement Slew Rate Limiter Filter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="telemetry.html">Telemetry</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="robotBasicsIndex.html">Robot Basics</a></li>
+      <li class="breadcrumb-item active">Commands</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RobotBasics/commands.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="commands">
+<h1>Commands<a class="headerlink" href="#commands" title="Permalink to this heading"></a></h1>
+<p>Commands define high-level robot actions or behaviors that utilize the methods defined by the subsystems. Before looking at the commands that are implemented on the Robot you should be very familiar with Procedures and State Machines from the programming sections.  You should also review the FRC Documentation on <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/commandbased/commands.html">Commands</a> before continuing.</p>
+<p>A command is a simple <strong>State Machine</strong> that is either <em>Initializing</em>, <em>Executing</em>, <em>Ending</em>, or <em>Idle</em>. Users write code specifying which action should be taken in each state.  Commands run when scheduled, or in response to buttons being pressed on a gamepad or from Shuffleboard. After running the <cite>initialize()</cite> function, each command will enter its <cite>execute()</cite> phase where it runs code to accomplish its task.  The method <cite>isFinished()</cite> determines if the task has been completed, after which it runs the <cite>end()</cite> function to clean things up. The <cite>execute()</cite> and <cite>isFinished()</cite> methods are called repeatedly by the main robot loop.</p>
+<img alt="../_images/Commands.001.jpeg" src="../_images/Commands.001.jpeg" />
+<section id="the-drivedistance-command">
+<h2>The DriveDistance Command<a class="headerlink" href="#the-drivedistance-command" title="Permalink to this heading"></a></h2>
+<p>Let’s take a look at the <em>DriveDistance</em> command to see how this all works. This command is used to drive the robot for a specified distance.  This is where <a class="reference external" href="https://www.w3schools.com/java/java_methods_param.asp">Parameters</a> are very useful since we can decide how far to drive when the program runs.  This command demonstrates the classic State Machine programming paradigm where we have an <strong>Initialization Step</strong> <cite>initialize()</cite> followed the <strong>Next Step</strong> <cite>execute()</cite>, and an <strong>Input Update</strong> that repeatedly calls <cite>execute()</cite> until a threshold is met.  The <cite>isFinished()</cite> method transititions it to the next major state <cite>end()</cite>, at which time the command moves to the <em>Idle</em> state.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="nf">DriveDistance</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">speed</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">meters</span><span class="p">,</span><span class="w"> </span><span class="n">Drivetrain</span><span class="w"> </span><span class="n">drive</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">meters</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">speed</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">drive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">drive</span><span class="p">;</span>
+<span class="w">    </span><span class="n">addRequirements</span><span class="p">(</span><span class="n">drive</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Called when the command is initially scheduled.</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initialize</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">drive</span><span class="p">.</span><span class="na">arcadeDrive</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">drive</span><span class="p">.</span><span class="na">resetEncoders</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// Called every time the scheduler runs while the command is scheduled.</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">execute</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">drive</span><span class="p">.</span><span class="na">arcadeDrive</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">speed</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Called once the command ends or is interrupted.</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">end</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">interrupted</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">drive</span><span class="p">.</span><span class="na">arcadeDrive</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Returns true when the command should end.</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isFinished</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Compare distance travelled from start to desired distance</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">drive</span><span class="p">.</span><span class="na">getAverageDistanceInch</span><span class="p">())</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">distance</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="arcadedrive-command">
+<h2>ArcadeDrive Command<a class="headerlink" href="#arcadedrive-command" title="Permalink to this heading"></a></h2>
+<p>The <em>ArcadeDrive</em> command is a simple command that will drive the robot using  values provided by the joysticks. The values are passed in as parameters with a variable type is called a <em>Supplier</em>, which is an interface used for the [Functional Programming Paradigm](<a class="reference external" href="https://en.wikipedia.org/wiki/Functional_programming">https://en.wikipedia.org/wiki/Functional_programming</a>).  This is a more advanced programming concept that we’ll examine later.  The <em>Supplier</em> parameter type needs to be imported and defined before use.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.function.Supplier</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">xaxisSpeedSupplier</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">zaxisRotateSupplier</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The constructor accepts values for speed and angular rotation together with the <em>Drivetrain</em> subsystem.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="nf">ArcadeDrive</span><span class="p">(</span>
+<span class="w">  </span><span class="n">Drivetrain</span><span class="w"> </span><span class="n">drivetrain</span><span class="p">,</span>
+<span class="w">  </span><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">xaxisSpeedSupplier</span><span class="p">,</span>
+<span class="w">  </span><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">zaxisRotateSupplier</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">drivetrain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">drivetrain</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">xaxisSpeedSupplier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xaxisSpeedSupplier</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">zaxisRotateSupplier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zaxisRotateSupplier</span><span class="p">;</span>
+<span class="w">    </span><span class="n">addRequirements</span><span class="p">(</span><span class="n">drivetrain</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <cite>execute()</cite> method calls the <em>Drivetrain</em> subsystem to activate the motors.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">execute</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">this</span><span class="p">.</span><span class="na">drivetrain</span><span class="p">.</span><span class="na">arcadeDrive</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">xaxisSpeedSupplier</span><span class="p">.</span><span class="na">get</span><span class="p">(),</span><span class="k">this</span><span class="p">.</span><span class="na">zaxisRotateSupplier</span><span class="p">.</span><span class="na">get</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <em>ArcadeDrive</em>’s <cite>isFinished()</cite> method always returns <cite>false</cite>, meaning that the command never completes on it’s own. The reason we do this is so that it can be set as the <em>default command</em>. A default command runs whenever the subsystem is not running any other command. If another command is scheduled, it will interrupt the default command and return to it when the scheduled command completes.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isFinished</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <cite>setDefaultCommand()</cite> method sets the default command for the subsystem. The default command will always be running when no other commands are scheduled for that subsystem.  The following statement is called in the <em>RobotContainer</em> class to schedule the default command for the <em>Drivetrain</em>.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="na">drivetrain</span><span class="p">.</span><span class="na">setDefaultCommand</span><span class="p">(</span><span class="n">getArcadeDriveCommand</span><span class="p">());</span>
+</pre></div>
+</div>
+</section>
+<section id="instant-commands">
+<h2>Instant Commands<a class="headerlink" href="#instant-commands" title="Permalink to this heading"></a></h2>
+<p>An <em>Instant Command</em> works similarly to a regular command except that there is no <cite>execute()</cite> method and the <cite>isFinished()</cite> method always returns <cite>true</cite>.  The main purpose of Instant Commands commands is to quickly alter some robot state such as activating, deactivating, or resetting a subsystem.  Instant Commands are used quite often.</p>
+</section>
+<section id="command-groups">
+<h2>Command Groups<a class="headerlink" href="#command-groups" title="Permalink to this heading"></a></h2>
+<p>Simple commands can be composed into <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/commandbased/command-groups.html">Command Groups</a> to accomplish more complicated tasks. There are several ways in which Command Groups can be composed, as shown the documentation.  We’ll look at a full example of a <strong>Sequential</strong> Command Group from the Romi sample code.</p>
+</section>
+<section id="the-autonomousdistance-command">
+<h2>The AutonomousDistance Command<a class="headerlink" href="#the-autonomousdistance-command" title="Permalink to this heading"></a></h2>
+<p>An example of a command group is the <em>AutonomousDistance</em> command, which is used to drive the robot forward, turn 180 degrees, drive back, and turn another 180 degrees.  That’s four commands executed one after another and is a prime candidate for a <em>SequentialCommandGroup</em>.
+The command uses the <em>Drivetrain</em> subsystem,so that needs to be imported together with the <em>SequentialCommandGroup</em> library.</p>
+<p>The four commands are composed in the class constructor using the <cite>addCommands()</cite> method.  The four command are specified using just two procedures since these procedures were parameterized.  The commands are listed in the order in which we would like them to run.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">frc.robot.commands</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">frc.robot.subsystems.Drivetrain</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">edu.wpi.first.wpilibj2.command.SequentialCommandGroup</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AutonomousDistance</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">SequentialCommandGroup</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">  * Creates a new Autonomous Drive based on distance. This will drive out for a specified distance,</span>
+<span class="cm">  * turn around and drive back.</span>
+<span class="cm">  *</span>
+<span class="cm">  * @param drivetrain The drivetrain subsystem on which this command will run</span>
+<span class="cm">  */</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">AutonomousDistance</span><span class="p">(</span><span class="n">Drivetrain</span><span class="w"> </span><span class="n">drivetrain</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">addCommands</span><span class="p">(</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">DriveDistance</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">drivetrain</span><span class="p">),</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">TurnDegrees</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mi">180</span><span class="p">,</span><span class="w"> </span><span class="n">drivetrain</span><span class="p">),</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">DriveDistance</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">drivetrain</span><span class="p">),</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">TurnDegrees</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mi">180</span><span class="p">,</span><span class="w"> </span><span class="n">drivetrain</span><span class="p">));</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="viewing-the-robot-pose">
+<h2>Viewing the Robot Pose<a class="headerlink" href="#viewing-the-robot-pose" title="Permalink to this heading"></a></h2>
+<p>As the robot drives around it might be useful to view its position and orientation on in the Simulator.  We looked at that module previously so you ready’re to go onto the Pose Estimation module.  There are a couple of classes that need to be implemented to do this so review that module next.</p>
+</section>
+<section id="lab-commands">
+<h2>Lab - Commands<a class="headerlink" href="#lab-commands" title="Permalink to this heading"></a></h2>
+<p>This lab continues with the one that you worked on in the Subsystems section of the training guide.  You’ll learn about the following Java programming concepts:</p>
+<ul class="simple">
+<li><p>Create a new Command or Subsystem in VSCode.</p></li>
+<li><p><a class="reference external" href="https://www.w3schools.com/java/java_inheritance.asp">Java Inheritance</a> where a class inherits attributes and methods from one class to another.</p></li>
+<li><p><a class="reference external" href="https://www.w3schools.com/java/java_methods_param.asp">Method Parameters</a> the syntax used to pass parameters to methods.</p></li>
+</ul>
+<p>There are two tasks for this lab:</p>
+<ul class="simple">
+<li><p>Create a command to reset the Odometry.</p></li>
+<li><p>Add the command to the <em>SendableChooser</em>.</p></li>
+</ul>
+</section>
+<section id="add-reset-odometry-command">
+<h2>Add Reset Odometry Command<a class="headerlink" href="#add-reset-odometry-command" title="Permalink to this heading"></a></h2>
+<p>For testing purposes it’s useful to have a command that resets the odometry back to zero.</p>
+<p>We’re going to create an <em>InstantCommand</em> called <em>ResetOdometry</em> from the left files panel in VSCode.  Right mouse-click on the <cite>commands</cite> folder and select «Create a new class/command».  Next, select «InstantCommand» from the dropdown, and enter <em>ResetOdometry</em> for the name of your new command.</p>
+<img alt="../_images/FRCProgramming.023.jpeg" src="../_images/FRCProgramming.023.jpeg" />
+<p>Notice that this command only includes the constructor and the <cite>initialize()</cite> function.  This is because we’re just going to do a single instantaneous task that will execute quickly and then exit.  Your command <a class="reference external" href="https://www.w3schools.com/java/ref_keyword_extends.asp">extends</a> the <em>InstantCommand</em> class, which means that it inherits all of the attributes and methods defined in that class.</p>
+<p>This command is going to call methods in the <em>Drivetrain</em> subsystem, so you must pass that in as a parameter to the <em>ResetOdometry</em> constructor. When passing a parameter you must tell the method what the parameter type is.  In this case, the parameter type is <em>Drivetrain</em>.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="nf">ResetOdometry</span><span class="p">(</span><span class="n">Drivetrain</span><span class="w"> </span><span class="n">drive</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Parameters act as variables inside a method. A constructor is a special method that initializes our <em>ResetOdometry</em> command object.  If we want to use the <em>Drivetrain</em> object with the other <em>ResetOdometry</em> methods, then we’re going need to assign it as an attribute of the command. So, place the following inside the constructor.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">m_drive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">drive</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>We need of course to define the <cite>m_drive</cite> variable, so place this above the contructor but inside of the <em>ResetOdometry</em> class. You’re also going to need to import the <em>Drivetrain</em> class.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Drivetrain</span><span class="w"> </span><span class="n">m_drive</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The <em>Drivetrain</em> is added to the command as a requirement.  This will prevent any other commands from using the <em>Drivetrain</em> subsystem while this command is executing.</p>
+<p>When you’re done your changes should look like this:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Drivetrain</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">drive</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="nf">ResetOdometry</span><span class="p">(</span><span class="n">Drivetrain</span><span class="w"> </span><span class="n">drive</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">drive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">drive</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Use addRequirements() here to declare subsystem dependencies.</span>
+<span class="w">    </span><span class="n">addRequirements</span><span class="p">(</span><span class="n">m_drive</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the <cite>initialize()</cite> function call the following two methods.  You can see now why we made the <em>Drivetrain</em> object an attribute of our <em>ResetOdometry</em> command.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Called when the command is initially scheduled.</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initialize</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_drive</span><span class="p">.</span><span class="na">resetGyro</span><span class="p">();</span>
+<span class="w">    </span><span class="n">m_drive</span><span class="p">.</span><span class="na">resetEncoders</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>That’s all that’s needed to create this command.  The command will just run <cite>initialize()</cite> and then exit since there’s no <cite>execute()</cite> function.  The <cite>isFinished()</cite> function is just set to <cite>true</cite> by default.</p>
+<p>You’re done with this task!</p>
+</section>
+<section id="add-the-command-to-the-sendablechooser">
+<h2>Add the command to the <em>SendableChooser</em>.<a class="headerlink" href="#add-the-command-to-the-sendablechooser" title="Permalink to this heading"></a></h2>
+<p>The <em>ResetOdometry</em> command that you just created should be executable from the dropdown menu in the Simulator or Shuffleboard.  For this we’ll use the <em>SendableChooser</em> class that simplifies the process of managing and selecting between different operational modes or routines in an FRC robot.</p>
+<p>Take the Instant Command that you just created and add it the end of the <em>SendableChooser</em> menu in <em>RobotContainer</em>.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">m_chooser</span><span class="p">.</span><span class="na">addOption</span><span class="p">(</span><span class="s">&quot;Reset Odometry&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ResetOdometry</span><span class="p">(</span><span class="n">m_drivetrain</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>In order to make the command accessible from <em>RobotContainter</em> you’ll need to import the <em>ResetOdometry</em> command.</p>
+<p>You’re now done with this task!</p>
+</section>
+<section id="implement-slew-rate-limiter-filter">
+<h2>Implement Slew Rate Limiter Filter<a class="headerlink" href="#implement-slew-rate-limiter-filter" title="Permalink to this heading"></a></h2>
+<p>You may have noticed that the movements of the robot are very sudden.  So much so that the tires may even skid a little at the start of each motion.  In order to reduce that we can add a SkewRateLimiter filter.  Refer to the FRC <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/advanced-controls/filters/slew-rate-limiter.html">Slew Rate Limiter</a> documentation to learn more about these filters.  In this lab we’ll create a slew rate filter to give more control over the speed of the robot.</p>
+<p>You’ll need a separate filter for the forward and backwards driving and for the turns.  These are defined as member variables in the <em>Drivetrain</em> class.</p>
+<p>We don’t want to use this filter unless we’re very specific about it so create a new method in the <em>Drivetrain</em> class called <cite>rateLimitedArcadeDrive()</cite> to use the filters.  You’ll also need to update the <em>ArcadeDrive</em> command to use the new <cite>rateLimitedArcadeDrive()</cite> method of the Drivetrain.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/commandbased/index.html">Command Based Programming</a></p></li>
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/commandbased/command-scheduler.html">The Command Scheduler</a></p></li>
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/commandbased/command-groups.html">Command Groups</a></p></li>
+<li><p>Java Tutorial on <a class="reference external" href="https://www.w3schools.com/java/default.asp">W3Schools</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="subSystems.html" class="btn btn-neutral float-left" title="Subsystems" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="telemetry.html" class="btn btn-neutral float-right" title="Telemetry" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/es/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

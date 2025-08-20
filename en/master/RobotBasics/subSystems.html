@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subsystems &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Commands" href="commands.html" />
+    <link rel="prev" title="Basic Robot Structure" href="basicStructure.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="robotBasicsIndex.html">Robot Basics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="exampleCode.html">Example Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basicStructure.html">Basic Robot Structure</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Subsystems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subsystem-structure">Subsystem Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#drive-subsystem">Drive Subsystem</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lab-subsystems">Lab - Subsystems</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-heading-method">Create Heading Method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#use-the-this-syntax-for-member-variables">Use the <cite>this.</cite> Syntax for Member Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-comments">Add Comments</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="telemetry.html">Telemetry</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="robotBasicsIndex.html">Robot Basics</a></li>
+      <li class="breadcrumb-item active">Subsystems</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RobotBasics/subSystems.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="subsystems">
+<h1>Subsystems<a class="headerlink" href="#subsystems" title="Permalink to this heading"></a></h1>
+<p>Subsystems are the basic units of functionally for our robot, such as drive trains and mechanical arms.  They encapsulate low-level hardware objects (motor controllers, sensors, etc) and provide methods that can be used by Commands.  We represent subsystems in code by using <strong>Objects</strong>. Objects are composed of Data Structures and Procedures, as explained in <strong>Programming Basics</strong> . You should learn those concepts before we look at the subsystems that are on the Robot.</p>
+<p>For this module the majority of the code implementation can be found in the <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/commandbased/subsystems.html">Subsystems</a> section of the FRC Documentation.</p>
+<img alt="../_images/Subsystems.001.jpeg" src="../_images/Subsystems.001.jpeg" />
+<section id="subsystem-structure">
+<h2>Subsystem Structure<a class="headerlink" href="#subsystem-structure" title="Permalink to this heading"></a></h2>
+<p>In general, each subsystem should be placed in it’s own folder. This keeps things clean and avoids conflict with other developers.</p>
+<p>There should be a single subsystem that controls all the functional logic. When you write subsystem you will not always have the motors available to run your code on. (For example if you are at home writing code.) So we need you to seperate all the motor specific logic and put that in a seperate class. In this case it is called <em>DriveKraken</em>. This class is specifically setup to handle Kraken motors. If we had a drive train that had Falcons installed we would put all of that logic in a <em>DriveFalcon</em> class.</p>
+<p>You should also develop a simulator class that tests all your motor functions without a motor. In this case it is called <em>DriveSim</em>. The actual <em>First</em> Competition is a very fast paced event, so we don’t want a lot of code saying ‘am I doing a simulator?’ or ‘is this a real motor?’. That’s a lot of instuctions that would slow down our robot. So we create an <em>Interface</em> class. In this case it is called <em>DriveIO</em>. Let’s look at an example for the Intake subsystem to see how this would work:</p>
+<img alt="../_images/Structure.005.jpeg" class="align-center" src="../_images/Structure.005.jpeg" />
+<p>The interface class has empty funtions for both the Kraken and Sim classes. So when the <em>Drive</em> class says <em>resetPidgeon</em>. It makes a function call to the <em>DriveIO</em> module and that code sends it to the <em>Sim</em> or <em>Kraken</em> class depending on what we are executing. So let’s take a look at an interface class:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">DriveIO</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="n">DriveIOdata</span><span class="w"> </span><span class="nf">update</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setSwerveRequest</span><span class="p">(</span><span class="n">SwerveRequest</span><span class="w"> </span><span class="n">requestToApply</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setTeamRotation</span><span class="p">(</span><span class="n">DriverStation</span><span class="p">.</span><span class="na">Alliance</span><span class="w"> </span><span class="n">alliance</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">resetPidgeon</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">seedFieldRelative</span><span class="p">(</span><span class="n">Pose2d</span><span class="w"> </span><span class="n">seedling</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">updateVision</span><span class="p">(</span><span class="n">Pose2d</span><span class="w"> </span><span class="n">calculatedPose</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">timestamp</span><span class="p">,</span><span class="w"> </span><span class="n">Matrix</span><span class="o">&lt;</span><span class="n">N3</span><span class="p">,</span><span class="w"> </span><span class="n">N1</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stDevs</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setOperatorPerspective</span><span class="p">(</span><span class="n">Rotation2d</span><span class="p">,</span><span class="w"> </span><span class="n">rotation2d</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setNeutralMode</span><span class="p">(</span><span class="n">NeutralModeValue</span><span class="w"> </span><span class="n">neutralModeValue</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Think of the interface class as a traffic controller. It sends the request to <em>Sim</em> or <em>Kraken</em>. It contains empty prototype functions that do not contain any code. Again we don’t want a lot of code each time saying which way do I go? So we solve that by passing which module we want in the <em>RobotContainer</em> class. For example, remember this code from the <em>basic structure</em> page:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">Utils</span><span class="p">.</span><span class="na">isSimulation</span><span class="p">()){</span>
+<span class="w">    </span><span class="n">drivetrain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Drive</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DriveKraken</span><span class="p">());</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">drivetrain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Drive</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DriveSim</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We are passing in the correct module when the RobotContainer object container is created, so we only test if we are simulating once. We will dive more into depth later in the training, but for now keep in mind the structure of writing a subsystem.</p>
+</section>
+<section id="drive-subsystem">
+<h2>Drive Subsystem<a class="headerlink" href="#drive-subsystem" title="Permalink to this heading"></a></h2>
+<p>The primary job of the <em>Drive</em> subsystem is to send speed commands to its motors.  This is done in the <cite>teleopDrive()</cite> method where we pass in the required speed in the <em>X</em> direction, the <em>Y</em> direction and the rotational rate in the <em>theta</em> direction. The <em>setSwerveRequest</em> object will take care of controlling the speed to the drive motors and the azimuth motors based on the kinematics of the drivetrain.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Theta is the angle of the chassis.</p>
+</div>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">teleopDrive</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">driveX</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">driveY</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">driveTheta</span><span class="p">)</span><span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="n">driveIO</span><span class="p">.</span><span class="na">setSwerveRequest</span><span class="p">(</span><span class="n">FIELD_CENTRIC</span>
+<span class="w">         </span><span class="p">.</span><span class="na">withVelocityX</span><span class="p">((</span><span class="n">driveX</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">-</span><span class="p">(</span><span class="n">driveX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">driveX</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">driveX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">driveX</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">DriveConfig</span><span class="p">.</span><span class="na">MAX_VELOCITY</span><span class="p">())</span>
+<span class="w">         </span><span class="p">.</span><span class="na">withVelocityY</span><span class="p">((</span><span class="n">driveY</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">-</span><span class="p">(</span><span class="n">driveY</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">driveY</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">driveY</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">driveY</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">DriveConfig</span><span class="p">.</span><span class="na">MAX_VELOCITY</span><span class="p">())</span>
+<span class="w">         </span><span class="p">.</span><span class="na">withRotationalRate</span><span class="p">((</span><span class="n">driveTheta</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">-</span><span class="p">(</span><span class="n">driveTheta</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">driveTheta</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">driveTheta</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">driveTheta</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">DriveConfig</span><span class="p">.</span><span class="na">MAX_ANGULAR_VELOCITY</span><span class="p">())</span>
+<span class="w">     </span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Other procedures in the Drive class will take care of resetting and reading the wheel encoders.  It’ll also translate the wheel encoder values into distances, as explained in the Pose Estimation module.</p>
+<section id="lab-subsystems">
+<h3>Lab - Subsystems<a class="headerlink" href="#lab-subsystems" title="Permalink to this heading"></a></h3>
+<p>This lab builds on the lab that you did in the Basic Robot Structure section of the training guide.  You’ll learn about the following Java programming concepts:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="/Programming/objects">Java Objects</a> are programming constructs used to represent physical objects and ideas in the real world.</p></li>
+<li><p><a class="reference external" href="https://www.w3schools.com/java/java_constructors.asp">Java Constructors</a> special methods that are used to initialize objects.</p></li>
+<li><p><a class="reference external" href="https://www.w3schools.com/java/java_methods.asp">Java Methods</a>, are declared within a class, and are used to perform certain actions.</p></li>
+<li><p><a class="reference external" href="https://www.w3schools.com/java/java_abstract.asp">Abstract Classes</a> that show only essential things to the user and hides the internal details.  Abstraction lets you focus on what the object does instead of how it does it.</p></li>
+<li><p><a class="reference external" href="https://www.w3schools.com/java/java_interface.asp">Interfaces</a>, which are used to group together related methods that specify the behavior of a class.</p></li>
+</ul>
+<p>There are two updates for this lab:</p>
+<ul class="simple">
+<li><p>Create a method to get the current heading of the robot.</p></li>
+<li><p>Add comments to divide the <em>Drivetrain</em> class into subsections.</p></li>
+</ul>
+</section>
+<section id="create-heading-method">
+<h3>Create Heading Method<a class="headerlink" href="#create-heading-method" title="Permalink to this heading"></a></h3>
+<p>In later programs we’re going to need to get the current heading of our robot.  The heading is obtained from the <em>RomiGyro</em> class.  The <em>RomiGyro</em> is defined as a subsystem of the <em>Drivetrain</em> class.</p>
+<p>Update the <em>Drivetrain</em> class with a new method called <cite>getHeading()</cite> that will be used to get the current heading of the robot.  You can place this method at around line <cite>132</cite> of the <em>Drivetrain</em> class just after the <cite>getGyroAngleZ()</cite> method.  The method will return a <cite>Rotation2d()</cite> value and be defined as <cite>public</cite>.  When you’re done it should look like this:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="n">Rotation2d</span><span class="w"> </span><span class="nf">getHeading</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">(</span><span class="n">getGyroAngleZ</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">Math</span><span class="p">.</span><span class="na">PI</span><span class="o">/</span><span class="mi">180</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We’re now done creating our new heading method!</p>
+</section>
+<section id="use-the-this-syntax-for-member-variables">
+<h3>Use the <cite>this.</cite> Syntax for Member Variables<a class="headerlink" href="#use-the-this-syntax-for-member-variables" title="Permalink to this heading"></a></h3>
+<p>In most of the code examples used by WPILib the member variables are denoted by using the <cite>m_</cite> syntax.  Our team uses the <cite>this.</cite> convention so we’ll change our code accordingly.  This will give you a chance to learn the <em>Replace</em> function in the VSCode editor.</p>
+<p>Open the <em>Drivetrain</em> class and select one of the occurences of <cite>m_</cite> with the mouse. Make sure that you only select those two characters. Then right mouse click and select <em>Change All Occurences</em>.  Type <cite>this.</cite> to replace all occurences of <cite>m_</cite>.  You’ll see a whole bunch of errors.  This is because the <cite>this.</cite> keyword cannot be used when you first define the member variable.  To fix this, remove the <cite>this.</cite> from all the lines 20 through 36.</p>
+<p>Repeat this process for all of the other files.</p>
+</section>
+<section id="add-comments">
+<h3>Add Comments<a class="headerlink" href="#add-comments" title="Permalink to this heading"></a></h3>
+<p>As you add functionality to your code some of the files may get quite long, so it’s a good idea to divide them into sections by using comment separators.  In the <em>Drivetrain</em> class we’ll add the following comment separators to group together methods that are logically related.  This will make them easier to find.  The comment sections will be:</p>
+<ul class="simple">
+<li><p><strong>Initialization</strong> - Includes everything required to construct and initialize the <em>Drivetrain</em> object.</p></li>
+<li><p><strong>Control Output</strong> - Any method that causes the robot, or subsystem, to react in some way.</p></li>
+<li><p><strong>Sensor Input</strong> - Methods that give information on the current state of the <em>Drivetrain</em>.</p></li>
+<li><p><strong>Process Logic</strong> - Mostly logic that occurs during the <cite>periodic()</cite> loop, or processes/interprets incoming data before performing some kind of <em>Control Output</em> to the robot.  Incoming data will normally be provided by methods found in the <em>System State</em> subsection.</p></li>
+</ul>
+<p>The comments will span most of the line width to form a separator and will look like this:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">// -----------------------------------------------------------</span>
+<span class="c1">// System State</span>
+<span class="c1">// -----------------------------------------------------------</span>
+</pre></div>
+</div>
+<p>Think about where these file separators will go and what code will go in each section.  Here are a couple tips:</p>
+<ul class="simple">
+<li><p>If a method is returning a value, such as <cite>double</cite>, then it’s most likely describing the Sensor Input.</p></li>
+<li><p>If a method return type is declared as <cite>void</cite> then it’s probably some kind of Control Output.</p></li>
+</ul>
+<p>That’s all for this update!</p>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/commandbased/subsystems.html">Subsystems</a></p></li>
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/actuators/wpi-drive-classes.html">Differential Drive Robots</a></p></li>
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/actuators/wpi-drive-classes.html?highlight=speedcontroller#multi-motor-differentialdrive-with-speedcontrollergroups">Using the WPILib Classes to Drive your Robot</a></p></li>
+<li><p>Java Tutorial on <a class="reference external" href="https://www.w3schools.com/java/default.asp">W3Schools</a></p></li>
+<li><p>QUT Robot Academy <a class="reference external" href="https://robotacademy.net.au/masterclass/measuring-motion/">Measuring Motion</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="basicStructure.html" class="btn btn-neutral float-left" title="Basic Robot Structure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="commands.html" class="btn btn-neutral float-right" title="Commands" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

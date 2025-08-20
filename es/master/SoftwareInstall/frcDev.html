@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FRC Testing Environment &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="RoboRio and Device Software" href="rioSoftware.html" />
+    <link rel="prev" title="Setup Testing Environment" href="testingIndex.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="testingIndex.html">Setup Testing Environment</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">FRC Testing Environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-platforms">Hardware Platforms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#software-development-ide-and-the-wpi-plugin">Software Development IDE and the WPI Plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#robot-simulator">Robot Simulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shuffleboard">Shuffleboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#advantage-scope">Advantage Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rioSoftware.html">RoboRio and Device Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="phoenixSoftware.html">Install Phoenix API Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="revSoftware.html">Install Rev API Libraries</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="testingIndex.html">Setup Testing Environment</a></li>
+      <li class="breadcrumb-item active">FRC Testing Environment</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/SoftwareInstall/frcDev.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="frc-testing-environment">
+<h1>FRC Testing Environment<a class="headerlink" href="#frc-testing-environment" title="Permalink to this heading"></a></h1>
+<p>This section explains the testing environment that we’ll be using for the programming tutorials.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>TODO Graphic for Test Environment</p>
+</div>
+<section id="hardware-platforms">
+<h2>Hardware Platforms<a class="headerlink" href="#hardware-platforms" title="Permalink to this heading"></a></h2>
+<p>We’ll be using multiple hardware platforms for our training.  During training we are likely to make some mistakes so we need a platform that will not cause any damage, for this we will be using your laptop and <em>Simulation</em> . Once we feel comfortable with our code, we will move onto testing individual motors with the <em>Sweet Bench</em>. Then we will move onto the <em>Programming Robot</em> to test out your code on a real robot and then finally we move onto the <em>Practice Robot</em> that is very similar to the one used in competition.</p>
+</section>
+<section id="software-development-ide-and-the-wpi-plugin">
+<h2>Software Development IDE and the WPI Plugin<a class="headerlink" href="#software-development-ide-and-the-wpi-plugin" title="Permalink to this heading"></a></h2>
+<p>In order to develop programs for the robot, you have to use an Integrated Development Environment (IDE). An IDE is a piece of software that is used to make writing code easier. Visual Studio Code (VS Code) is the supported IDE for programming an FRC robot.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you don’t have VSCode installed on your computer refer to <a class="reference external" href="/SoftwareIntall/vscodeSoftware">VSCode and WPILib Install</a> section.</p>
+</div>
+<p>As part of the VS Code install, the WPILib Robotics Library (WPILib) is also installed. This is the standard software library provided for teams to write code for thier FRC robot. The install process will also install a <strong>plugin</strong> into VS Code for WPILib. This Plugin allows you to execute WPILib features from within VS Code. For example, you can use the WPILib plugin to <strong>Build Robot Code</strong>, <strong>Simulate Robot Code</strong>, or <strong>Deploy Code to Robot</strong>.</p>
+</section>
+<section id="robot-simulator">
+<h2>Robot Simulator<a class="headerlink" href="#robot-simulator" title="Permalink to this heading"></a></h2>
+<p>Simulating how the robot will perform is done via the <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/wpilib-tools/robot-simulation/index.html">WPILib Simulation</a>.  We’ll learn a lot more about the Robot Simulator shortly.</p>
+<img alt="../_images/FRCTools.038.jpeg" src="../_images/FRCTools.038.jpeg" />
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>You’ll need to make sure that desktop support is enabled to use the Simulator.  This is normally done when you first create your project although it can also be enabled later.</p>
+</div>
+</section>
+<section id="shuffleboard">
+<h2>Shuffleboard<a class="headerlink" href="#shuffleboard" title="Permalink to this heading"></a></h2>
+<p>The <strong>Shuffleboard</strong> is a dashboard that allows you to interact with a robot and display data that is being generated by that robot. This capability is called <strong>Telemetry</strong>.</p>
+<p>To learn more about the Shuffleboard, please use this <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/wpilib-tools/shuffleboard/index.html">link</a></p>
+<img alt="../_images/FRCTools.039.jpeg" src="../_images/FRCTools.039.jpeg" />
+</section>
+<section id="advantage-scope">
+<h2>Advantage Scope<a class="headerlink" href="#advantage-scope" title="Permalink to this heading"></a></h2>
+<p><strong>Advantage Scope</strong> is a robot diagnostics, log review/analysis, and data visualization application for FIRST Robotics Competition teams. It reads logs in WPILOG, DS log, and RLOG file formats, plus live robot data viewing using NT4 or RLOG streaming. Here’s the online documentation of <a class="reference external" href="https://github.com/Mechanical-Advantage/AdvantageScope/blob/main/docs/INDEX.md">AdvantageScope</a>.</p>
+<img alt="../_images/AdvantageKit.003.jpeg" src="../_images/AdvantageKit.003.jpeg" />
+<p>Advantage Scope can also be used while you are simulating robot code. It connects directly with the simulator and can provide a representation of the competition field and the location of your simulated robot on that field in both 2D and 3D views. It will help a lot in your testing. We will learn more about <strong>Advantage Scope</strong> shortly.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To install <em>Advantage Scope</em> go to the <a class="reference external" href="https://github.com/Mechanical-Advantage/AdvantageScope/releases/tag/v3.0.0-beta-5">releases page</a> and download the package for you operation system.</p>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><cite>FRC Documentation Shuffleboard &lt;https://docs.wpilib.org/en/stable/docs/software/wpilib-tools/shuffleboard/index.html&gt;</cite></p></li>
+<li><p><cite>FRC Documentation WPILib Simulation &lt;https://docs.wpilib.org/en/latest/docs/software/wpilib-tools/robot-simulation/index.html&gt;</cite></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="testingIndex.html" class="btn btn-neutral float-left" title="Setup Testing Environment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rioSoftware.html" class="btn btn-neutral float-right" title="RoboRio and Device Software" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/es/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

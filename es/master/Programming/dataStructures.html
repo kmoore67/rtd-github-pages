@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Structures &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Procedures" href="procedures.html" />
+    <link rel="prev" title="Programming Basics" href="programmingIndex.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="programmingIndex.html">Programming Basics</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Data Structures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#primitive-data-type">Primitive Data Type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arrays">Arrays</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#strings">Strings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mutable-and-immutable-data">Mutable and Immutable Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enums">Enums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="procedures.html">Procedures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objects.html">Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stateMachines.html">State Machines</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="programmingIndex.html">Programming Basics</a></li>
+      <li class="breadcrumb-item active">Data Structures</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/Programming/dataStructures.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="data-structures">
+<h1>Data Structures<a class="headerlink" href="#data-structures" title="Permalink to this heading"></a></h1>
+<p>Robots are driven by data.  They receive data from external sensors like cameras, internal sensors such as encoders, and from commands sent to it by a controller.  Once they receive the data the robot processes it and may carry out actions based on that data.  Data can be organized in several ways, which we call data structures.  You can think of data structures as containers for storing data.  We’ll go over some of the most important data structures using examples in Java.  These examples are from the <a class="reference external" href="https://www.w3schools.com/java/default.asp">Java Tutorial</a> on the W3 Schools Website.</p>
+<img alt="../_images/FRCProgramming.010.jpeg" src="../_images/FRCProgramming.010.jpeg" />
+<p>We use <em>variables</em> to hold data in our programs. A variable is a reserved memory location to hold a value. In other words, when we want to store any value and give it a name, that value takes a reserved space in memory and it’s retrieved using the variable name.</p>
+<section id="primitive-data-type">
+<h2>Primitive Data Type<a class="headerlink" href="#primitive-data-type" title="Permalink to this heading"></a></h2>
+<p>The most basic type of data is a single value such as the number 42. This can be stored in a location of memory that is pointed to by a named variable such as <cite>age</cite>. The number 42 is an integer but a number can also have decimal places such as 3.14, which we call a floating point number. All of the primitive data types and the way that they are created in Java are explained on the W3 Schools Website under <a class="reference external" href="https://www.w3schools.com/java/java_variables.asp">Java Variables</a> and <a class="reference external" href="https://www.w3schools.com/java/java_data_types.asp">Java Data Types</a>.</p>
+<p>Most of the primitive data types can be operated on by <a class="reference external" href="https://www.w3schools.com/java/java_operators.asp">Java Operators</a> , which allow you to perform arithmatic operations and comparisons.  There are also functions to carry out common <a class="reference external" href="https://www.w3schools.com/java/java_math.asp">Math</a>.</p>
+<p>There’s a special data type called a <a class="reference external" href="https://www.w3schools.com/java/java_booleans.asp">Boolean</a> that takes only two values either <cite>true</cite> or <cite>false</cite>.</p>
+</section>
+<section id="arrays">
+<h2>Arrays<a class="headerlink" href="#arrays" title="Permalink to this heading"></a></h2>
+<p>Arrays are used to store multiple values that are pointed to by a single variable, instead of declaring separate variables for each value.  They use an index to point to each member (value) of the array.  Here’s more information about <a class="reference external" href="https://www.w3schools.com/java/java_arrays.asp">Arrays</a> in Java.</p>
+<p>When you create an array it will have a fixed length.  If you want the array to change size as you execute your program then you’ll need to use an <a class="reference external" href="https://www.w3schools.com/java/java_arraylist.asp">ArrayList</a>.</p>
+</section>
+<section id="strings">
+<h2>Strings<a class="headerlink" href="#strings" title="Permalink to this heading"></a></h2>
+<p>Strings are variables that contain a collection of characters surrounded by double quotes.  A string is just an array of characters.  A String in Java is actually an object, which contain methods that can perform certain operations on strings. For example, the length of a string can be found with the <cite>length()</cite> method.  Here’s more information about <a class="reference external" href="https://www.w3schools.com/java/java_strings.asp">Strings</a> in Java.</p>
+</section>
+<section id="mutable-and-immutable-data">
+<h2>Mutable and Immutable Data<a class="headerlink" href="#mutable-and-immutable-data" title="Permalink to this heading"></a></h2>
+<p>Most of the data structures that you create will have values that can change during the execution of your program.  These data structures are referred to as <strong>Mutable</strong>.  Because most values will change during the course of a program the default mode of a variable will be Mutable.</p>
+<p>If you know that a value of a variable will not change, such as the value of <strong>Pi</strong>, then you can store it in an <strong>Immutable</strong> variable.  Values held in program variables whose content never changes are known as <strong>Constants</strong> to differentiate them from variables that could be altered during execution.  With most languages you’ll need to explicitly declare a variable as constant if you don’t want it to change.</p>
+</section>
+<section id="enums">
+<h2>Enums<a class="headerlink" href="#enums" title="Permalink to this heading"></a></h2>
+<p>An Enum is a special data type that represents a group of predefined constants. The variable must be equal to one of the values that have been predefined for it. Common examples include compass directions (values of NORTH, SOUTH, EAST, and WEST) and the days of the week.  Here are some examples of how <a class="reference external" href="https://www.w3schools.com/java/java_enums.asp">Enums</a> are used.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<p>Java Tutorial on <a class="reference external" href="https://www.w3schools.com/java/default.asp">W3Schools</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="programmingIndex.html" class="btn btn-neutral float-left" title="Programming Basics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="procedures.html" class="btn btn-neutral float-right" title="Procedures" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/es/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

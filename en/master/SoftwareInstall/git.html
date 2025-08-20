@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Git Repository and Github &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Setup Testing Environment" href="testingIndex.html" />
+    <link rel="prev" title="VSCode and WPILib Install" href="vscodeSoftware.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="softwareInstallIndex.html">Setup Development Environment</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="vscodeSoftware.html">Install VSCode and WPILib</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Version Control System</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#git-vocabulary">Git Vocabulary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#git-structure">Git Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initializing-the-local-repository">Initializing the Local Repository</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#command-line">Command Line</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vs-code">VS Code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-username-and-email">Configuring Username and Email</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hiding-email-address">Hiding Email Address</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#staging-and-committing">Staging and Committing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Command Line</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">VS Code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pushing-to-the-remote-repository">Pushing to the Remote Repository</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Command Line</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">VS Code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cloning-a-repository">Cloning a Repository</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">VS Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">Command Line</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#forking-a-repository">Forking a Repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#branching">Branching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pull-requests">Pull Requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#merging-and-merge-conflicts">Merging and Merge Conflicts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#special-git-files">Special Git Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-readme-md-file">The README.md File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-gitignore-file">The <cite>.gitignore</cite> File</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#advanced-options">Advanced Options</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#changing-the-remote-repository-origin">Changing the Remote Repository Origin</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#lab-git-repository-and-github">Lab - Git Repository and GitHub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="softwareInstallIndex.html">Setup Development Environment</a></li>
+      <li class="breadcrumb-item active">The Git Repository and Github</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/SoftwareInstall/git.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="the-git-repository-and-github">
+<h1>The Git Repository and Github<a class="headerlink" href="#the-git-repository-and-github" title="Permalink to this heading"></a></h1>
+<p>Git is a <strong>Version Control System (VCS)</strong> for keeping track of changes in files. It was open-sourced in 2005 by Linus Torvald to aid in the development of Linux. Using Git:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>You can take snapshots, or versions, of your files at any time by creating a commit.</p></li>
+<li><p>File changes can be reverted back to previous versions.</p></li>
+<li><p>It’s a distributed system meaning that that the repository exists on multiple computers. You can, therefore, have both local and remote versions of your files.</p></li>
+<li><p>Other users can <strong>clone</strong> the repository, which gives them a local version of it that they can work on independently.  Therefore, you can have an entire development team working on the same project.</p></li>
+</ul>
+</div></blockquote>
+<p>If you are on Windows you may need to download <strong>git bash</strong> and <strong>git GUI</strong> from the following URL: <a class="reference external" href="https://gitforwindows.org">Git for Windows</a></p>
+<p>The following sections will step through the process of creating a repository, committing code and pushing it to a remote repository on GitHub.  First, we’ll look at how to do this at the command line (with git Bash) and then within VSCode.</p>
+<section id="git-vocabulary">
+<h2>Git Vocabulary<a class="headerlink" href="#git-vocabulary" title="Permalink to this heading"></a></h2>
+<p>Git revolves around several core data structures and commands:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Repository</strong>: the data structure of your code, including a .git folder in the root directory</p></li>
+<li><p><strong>Commit</strong>: a particular saved state of the repository, which includes all files and additions</p></li>
+<li><p><strong>Branch</strong>: a means of grouping a set of commits. Each branch has a unique history. This is primarily used for separating development and stable branches.</p></li>
+<li><p><strong>Push</strong>: update the remote repository with your local changes</p></li>
+<li><p><strong>Pull</strong>: update your local repository with the remote changes</p></li>
+<li><p><strong>Clone</strong>: retrieve a local copy of a repository to modify</p></li>
+<li><p><strong>Fork</strong>: duplicate a pre-existing repository to modify, and to compare against the original</p></li>
+<li><p><strong>Merge</strong>: combine various changes from different branches/commits/forks into a single history</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="git-structure">
+<h2>Git Structure<a class="headerlink" href="#git-structure" title="Permalink to this heading"></a></h2>
+<p>Git stores your projects in a repository. A Git repository is a data structure containing the structure, history, and files of a project. Git repositories usually consist of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>A .git folder</strong>. This folder contains the various information about the repository.</p></li>
+<li><p><strong>A .gitignore file</strong>. This file contains the files or directories that you do not want included when you commit.</p></li>
+<li><p><strong>Files and folders</strong>. This is the main content of the repository.</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>Git Repositories are normally physically located at GitHub. What is GitHub?</dt><dd><p>GitHub is a cloud-based platform that hosts Git repositories, making it easy for developers to store, manage, and collaborate on code. It acts as a social network for developers, enabling them to share their work, collaborate on projects, and review each other’s code. GitHub simplifies the process of code management and collaboration, making it a popular choice for both open-source and private projects.</p>
+</dd>
+</dl>
+<p>Repositories hosted at GitHub can be <strong>cloned</strong> (copied) to a local computer. Changes can be made on the local computer and when completed and tested, the changes can be bundled together into a <strong>commit</strong>, and commits can be <strong>pushed</strong> up to the Github hosted repository. This distributed system allows many developers to work on the same code simultaneously and provides a disaster recovery capability  (in case one of the local computers is eaten by your dog, along with your homework!) as the source code is stored in the cloud.</p>
+<img alt="../_images/FRCTools.037.jpg" src="../_images/FRCTools.037.jpg" />
+<p>The subsequent sections will drill down further into how the team uses github.</p>
+</section>
+<section id="initializing-the-local-repository">
+<h2>Initializing the Local Repository<a class="headerlink" href="#initializing-the-local-repository" title="Permalink to this heading"></a></h2>
+<section id="command-line">
+<h3>Command Line<a class="headerlink" href="#command-line" title="Permalink to this heading"></a></h3>
+<p>We will start by creating somewhere to hold <strong>All</strong> your project files. Let’s create a new directory (folder) to hold your projects. Let’s call is something really excitin like <strong>Projects</strong>. Open the DOS Command (cmd) window and enter the following:</p>
+<div class="highlight-Powershell notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">C</span><span class="p">:\</span><span class="n">Projects</span>
+</pre></div>
+</div>
+<p>We add it to the root directory (folder). This should make it easy to find.</p>
+<p>Next, lets create a project folder in our new Projects folder. Again, we’ll call it something creative, like <strong>MyProject</strong> and put it into a familiar src folder. (Normally, you see Java code in the source directory so this is normally how it would look.) In your open DOS command window enter the following:</p>
+<div class="highlight-Powershell notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">C</span><span class="p">:\</span><span class="n">Projects</span><span class="p">\</span><span class="n">MyProject</span>
+<span class="nb">cd </span><span class="n">C</span><span class="p">:\</span><span class="n">Projects</span><span class="p">\</span><span class="n">MyProject</span>
+<span class="n">mkdir</span> <span class="n">src</span>
+<span class="nb">cd </span><span class="n">src</span>
+</pre></div>
+</div>
+<p>Now, let’s put something in our new MyProject folder. Let’s create a new Java class using the NotePad editor and enter the following lines:</p>
+<p><cite>In Notepad, create MyProject.java in the c:ProjectsMyProjectsrc folder, enter the lines below and remember to save it!</cite></p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">MyProject</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Hello from MyProject&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now let’s take our new project (MyProject with a single class) and initialize it for use with git. Go back into your DOS CMD window:</p>
+<div class="highlight-Powershell notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">init</span>
+</pre></div>
+</div>
+<p>You should see the following response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Initialized</span> <span class="n">empty</span> <span class="n">Git</span> <span class="n">repository</span> <span class="ow">in</span> <span class="o">/</span><span class="n">Projects</span><span class="o">/</span><span class="n">MyProject</span><span class="o">/.</span><span class="n">git</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>You will see a new directory under the project folder.</p>
+<img alt="../_images/FRCTools.001.jpeg" src="../_images/FRCTools.001.jpeg" />
+</section>
+<section id="vs-code">
+<h3>VS Code<a class="headerlink" href="#vs-code" title="Permalink to this heading"></a></h3>
+<p>You can also initialize a repository in VSCode.  This is usually done after you have created a new project as detailed in <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/vscode-overview/creating-robot-program.html#creating-a-new-wpilib-project">Creating a New WPILib Project</a>. Click on <strong>Initialize Repository</strong> then <strong>Stage</strong> and <strong>Commit</strong> your changes. You now have a local repostitory on your PC.  See a more detailed overview of <strong>Staging and Committing</strong> below.</p>
+<img alt="../_images/FRCTools.012.jpeg" src="../_images/FRCTools.012.jpeg" />
+</section>
+</section>
+<section id="configuring-username-and-email">
+<h2>Configuring Username and Email<a class="headerlink" href="#configuring-username-and-email" title="Permalink to this heading"></a></h2>
+<p>Before continuing with Git you’ll want to do a few things to customize your Git environment. You should only have to do these things only once on any given computer. You can also change them at any time by running through the commands again.</p>
+<p>Git comes with a tool called <cite>git config</cite> that lets you get and set configuration variables that control all aspects of how Git looks and operates.</p>
+<p>The first thing you should do when you install Git is to set your user name and email address. This is important because every Git commit uses this information, and it’s immutably baked into the commits you start creating:</p>
+<div class="highlight-Powershell notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="p">-</span><span class="n">-global</span> <span class="n">user</span><span class="p">.</span><span class="n">name</span> <span class="s1">&#39;John Doe&#39;</span>
+<span class="n">git</span> <span class="n">config</span> <span class="p">-</span><span class="n">-global</span> <span class="n">user</span><span class="p">.</span><span class="n">email</span> <span class="n">johndoe</span><span class="nv">@example</span><span class="p">.</span><span class="n">com</span>
+</pre></div>
+</div>
+<p>To view your configuration you can use:</p>
+<div class="highlight-Powershell notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="p">-</span><span class="n">-list</span>
+</pre></div>
+</div>
+<p>These configuration variables are stored in the <cite>.gitconfig</cite> file that can be found in your HOME directory.</p>
+</section>
+<section id="hiding-email-address">
+<h2>Hiding Email Address<a class="headerlink" href="#hiding-email-address" title="Permalink to this heading"></a></h2>
+<p>If you don’t want to expose your GitHub email address in the commit logs you can hide your email address. In GitHub go to <strong>Settings – Email – Keep my email address private</strong>.</p>
+<img alt="../_images/FRCTools.019.jpeg" src="../_images/FRCTools.019.jpeg" />
+<p>You’ll notice a new email address <cite>&lt;username&gt;&#64;users.noreply.github.com</cite> for you to use for your Git commits.</p>
+<p>Next, you’ll need to update Git to use this new noreply email instead of your real one. From the command line, type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>git config global user.email “&lt;username&gt;@users.noreply.github.com”
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Where &lt;username&gt; is your Git User ID.</p>
+</div>
+<p>This will change your email address globally across all repositories. To verify, type</p>
+<div class="highlight-Powershell notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="p">-</span><span class="n">-global</span> <span class="n">user</span><span class="p">.</span><span class="n">email</span>
+</pre></div>
+</div>
+</section>
+<section id="staging-and-committing">
+<h2>Staging and Committing<a class="headerlink" href="#staging-and-committing" title="Permalink to this heading"></a></h2>
+<section id="id1">
+<h3>Command Line<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p>Now that we have initialized and configured the repository we can now stage and commit our files.  We’re going to move our files to a staging area in preparation for a commit to the repository.</p>
+<img alt="../_images/FRCTools.002.jpeg" src="../_images/FRCTools.002.jpeg" />
+<p>First, let’s get a status from Git by typing the following command:</p>
+<div class="highlight-Powershell notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">status</span>
+</pre></div>
+</div>
+<p>Now let’s review the output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">On</span> <span class="n">branch</span> <span class="n">master</span>
+
+<span class="n">No</span> <span class="n">commits</span> <span class="n">yet</span>
+
+<span class="n">Untracked</span> <span class="n">files</span><span class="p">:</span>
+  <span class="p">(</span><span class="n">use</span> <span class="s2">&quot;git add &lt;file&gt;...&quot;</span> <span class="n">to</span> <span class="n">include</span> <span class="ow">in</span> <span class="n">what</span> <span class="n">will</span> <span class="n">be</span> <span class="n">committed</span><span class="p">)</span>
+
+  <span class="n">src</span><span class="o">/</span>
+
+<span class="n">nothing</span> <span class="n">added</span> <span class="n">to</span> <span class="n">commit</span> <span class="n">but</span> <span class="n">untracked</span> <span class="n">files</span> <span class="n">present</span> <span class="p">(</span><span class="n">use</span> <span class="s2">&quot;git add&quot;</span> <span class="n">to</span> <span class="n">track</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output is telling us that we are on the main branch, we’ll look at branches later, and that there have been no commits. It also lists the untracked files.  These are files that have not yet been added to Gits’ staging area. Let’s do that now:</p>
+<div class="highlight-Powershell notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span>
+</pre></div>
+</div>
+<p>After the add command, here is the response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">On</span> <span class="n">branch</span> <span class="n">master</span>
+
+<span class="n">No</span> <span class="n">commits</span> <span class="n">yet</span>
+
+<span class="n">Changes</span> <span class="n">to</span> <span class="n">be</span> <span class="n">committed</span><span class="p">:</span>
+  <span class="p">(</span><span class="n">use</span> <span class="s2">&quot;git rm --cached &lt;file&gt;...&quot;</span> <span class="n">to</span> <span class="n">unstage</span><span class="p">)</span>
+
+  <span class="n">new</span> <span class="n">file</span><span class="p">:</span>   <span class="n">src</span><span class="o">/</span><span class="n">MyProject</span><span class="o">.</span><span class="n">java</span>
+</pre></div>
+</div>
+<p>Our files are now in the staging area and are ready to be committed to the repository:</p>
+<div class="highlight-Powershell notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="n">-m</span> <span class="s2">&quot;Initial commit&quot;</span>
+</pre></div>
+</div>
+<p>And here is the response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">master</span> <span class="p">(</span><span class="n">root</span><span class="o">-</span><span class="n">commit</span><span class="p">)</span> <span class="mi">8877</span><span class="n">fba</span><span class="p">]</span> <span class="n">Initial</span> <span class="n">commit</span>
+<span class="mi">1</span> <span class="n">file</span> <span class="n">changed</span><span class="p">,</span> <span class="mi">5</span> <span class="n">insertions</span><span class="p">(</span><span class="o">+</span><span class="p">)</span>
+<span class="n">create</span> <span class="n">mode</span> <span class="mi">100644</span> <span class="n">src</span><span class="o">/</span><span class="n">MyProject</span><span class="o">.</span><span class="n">java</span>
+</pre></div>
+</div>
+<p>The output tells us that this is the initial commit to the repository and lists the files that have been committed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The value <cite>8877fba</cite> is the last few characters of a unique commit tag. It might be different for your commit.</p>
+</div>
+<p>We can always see what status the Git repository is in by typing:</p>
+<div class="highlight-Powershell notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">status</span>
+</pre></div>
+</div>
+<p>And the response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">On</span> <span class="n">branch</span> <span class="n">master</span>
+<span class="n">nothing</span> <span class="n">to</span> <span class="n">commit</span><span class="p">,</span> <span class="n">working</span> <span class="n">tree</span> <span class="n">clean</span>
+</pre></div>
+</div>
+<p>We now have no new files to commit. It’s telling us that our working directory is clean.</p>
+</section>
+<section id="id2">
+<h3>VS Code<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<p>The previous process can be done in VSCode by carrying out the steps in the following diagram.</p>
+<img alt="../_images/FRCTools.014.jpeg" src="../_images/FRCTools.014.jpeg" />
+</section>
+</section>
+<section id="pushing-to-the-remote-repository">
+<h2>Pushing to the Remote Repository<a class="headerlink" href="#pushing-to-the-remote-repository" title="Permalink to this heading"></a></h2>
+<section id="id3">
+<h3>Command Line<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<p>Before we can push code to our GitHub account we need to login and create a repository.  Click on the + (plus) icon at the top of the your Github home page and select “Create a Repository”.</p>
+<img alt="../_images/FRCTools.003.jpeg" src="../_images/FRCTools.003.jpeg" />
+<p>Enter the repository name and a description.  Select a Public repository.</p>
+<img alt="../_images/FRCTools.004.jpeg" src="../_images/FRCTools.004.jpeg" />
+<p>Leave the add README and .gitignore unchecked.  We’ll add these later.  Click on “Create repository”.</p>
+<img alt="../_images/FRCTools.005.jpeg" src="../_images/FRCTools.005.jpeg" />
+<p>We now have to connect our local Git repository with the remote GitHub repository.  After the repository is created is displays the commands required to set your local repository to the remote.  Copy and paste these commands one at a time into a terminal on your laptop and execute them.  The <cite>&lt;repository&gt;</cite> part of the remote origin URL should be your Github account name.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You may have to go to settings in VSCode and type <cite>git enable</cite> in the search bar.  Make sure that <em>git enable</em> is checked.</p>
+</div>
+<img alt="../_images/FRCTools.006.jpeg" src="../_images/FRCTools.006.jpeg" />
+<div class="highlight-Powershell notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">HOTProgramming</span><span class="p">/</span><span class="n">MyProject</span><span class="p">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>You can confirm the remote repository location by typing:</p>
+<div class="highlight-Powershell notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="n">-v</span>
+</pre></div>
+</div>
+<p>And now we can push our code to the remote GitHub repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span> <span class="n">main</span>
+</pre></div>
+</div>
+<p>And you should see a response similar to this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Enumerating</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">Counting</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">4</span><span class="p">),</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">Delta</span> <span class="n">compression</span> <span class="n">using</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">8</span> <span class="n">threads</span>
+<span class="n">Compressing</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">Writing</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">4</span><span class="p">),</span> <span class="mi">383</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="mf">383.00</span> <span class="n">KiB</span><span class="o">/</span><span class="n">s</span><span class="p">,</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">Total</span> <span class="mi">4</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">),</span> <span class="n">reused</span> <span class="mi">0</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">To</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">HOTProgramming</span><span class="o">/</span><span class="n">MyProject</span><span class="o">.</span><span class="n">git</span>
+<span class="o">*</span> <span class="p">[</span><span class="n">new</span> <span class="n">branch</span><span class="p">]</span>      <span class="n">master</span> <span class="o">-&gt;</span> <span class="n">master</span>
+<span class="n">Branch</span> <span class="s1">&#39;master&#39;</span> <span class="nb">set</span> <span class="n">up</span> <span class="n">to</span> <span class="n">track</span> <span class="n">remote</span> <span class="n">branch</span> <span class="s1">&#39;master&#39;</span> <span class="kn">from</span> <span class="s1">&#39;origin&#39;</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h3>VS Code<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<p>You can setup VSCode to push to a remote repository using the following steps.  Click on options and select <strong>Add Remote</strong>.  Get the URL from your GitHub repository and paste it in, then press enter.  You’ll be asked to name the remote, call it <cite>origin</cite>. You can then click on <strong>Publish Branch</strong> to update the remote repository.</p>
+<img alt="../_images/FRCTools.013.jpeg" src="../_images/FRCTools.013.jpeg" />
+</section>
+</section>
+<section id="cloning-a-repository">
+<h2>Cloning a Repository<a class="headerlink" href="#cloning-a-repository" title="Permalink to this heading"></a></h2>
+<section id="id5">
+<h3>VS Code<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<p>The primary reason for creating repositories is so that other people can view and edit your code.  The way we do that is to <cite>clone</cite> the repository.  You first need to get the URL of the repository that you want to clone.</p>
+<img alt="../_images/FRCTools.007a.jpeg" src="../_images/FRCTools.007a.jpeg" />
+<p>Then in VSCode, select <em>File-&gt;New Window</em> and click on the Github icon.  Click Clone Repository and enter the repository URL that you just copied.  You’ll be asked to select a local folder in which to save the cloned repository.  The repository will download from Github and you can now open it.</p>
+<img alt="../_images/FRCTools.033.jpeg" src="../_images/FRCTools.033.jpeg" />
+<p>Conceptually, this looks like the following:</p>
+<img alt="../_images/FRCTools.008.jpeg" src="../_images/FRCTools.008.jpeg" />
+</section>
+<section id="id6">
+<h3>Command Line<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<p>You can do this from the command line if you prefer. Create a local directory in which to store the repository and change into that directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">C</span><span class="p">:</span><span class="o">/</span><span class="n">Projects</span><span class="o">/</span><span class="n">MyClonedProject</span>
+<span class="n">cd</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Projects</span><span class="o">/</span><span class="n">MyClonedProject</span>
+</pre></div>
+</div>
+<p>Then clone the repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">HOTProgramming</span><span class="o">/</span><span class="n">MyProject</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>and the respone:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Cloning</span> <span class="n">into</span> <span class="s1">&#39;MyProject&#39;</span><span class="o">...</span>
+<span class="n">remote</span><span class="p">:</span> <span class="n">Enumerating</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">remote</span><span class="p">:</span> <span class="n">Counting</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">6</span><span class="o">/</span><span class="mi">6</span><span class="p">),</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">remote</span><span class="p">:</span> <span class="n">Compressing</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">3</span><span class="p">),</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">remote</span><span class="p">:</span> <span class="n">Total</span> <span class="mi">6</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">),</span> <span class="n">reused</span> <span class="mi">6</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">),</span> <span class="n">pack</span><span class="o">-</span><span class="n">reused</span> <span class="mi">0</span>
+<span class="n">Unpacking</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">6</span><span class="o">/</span><span class="mi">6</span><span class="p">),</span> <span class="n">done</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>The output will tell you how many file objects have been downloaded.</p>
+</section>
+</section>
+<section id="forking-a-repository">
+<h2>Forking a Repository<a class="headerlink" href="#forking-a-repository" title="Permalink to this heading"></a></h2>
+<p>A fork is a new repository that shares code and visibility settings with the original “upstream” repository. The term “upstream” just means the original Github repository.  In most cases you may not have write access to the original repository, so this is useful if you want to update the code and try out ideas without effecting the original repository.  To fork a repository navigate to the Github repository that you want to fork and click the <strong>Fork</strong> button.  On the next screen, select your own Github account as the destination of the fork.  You can keep the same repository name or use a different name.  Click “Create Fork” to copy the repository.  You should now have a copy of the repository in your own account.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When you <strong>Clone</strong> a repository you are making a copy of the repoitory on your local machine. When you <strong>Fork</strong> a repository, you are copying a repository to a new account in GITHUB!</p>
+</div>
+<img alt="../_images/FRCTools.034.jpeg" src="../_images/FRCTools.034.jpeg" />
+</section>
+<section id="branching">
+<h2>Branching<a class="headerlink" href="#branching" title="Permalink to this heading"></a></h2>
+<p>When you want to add new features to the code base it’s a good idea to create a new branch.  A new branch can be created from VSCode as shown in the following graphic. Once the branch is created you’ll be switched over to that branch automatically and you can start making changes.  You can give the branch any name you want, but it should be somewhat descriptive of the new feature.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>For our team the branch name will be <cite>feature-&lt;new-feature&gt;</cite>, where new-feature is somewhat descriptive of what needs to be added. (For example: feature-intake or feature-lights, or feature-shooter)</p>
+</div>
+<img alt="../_images/FRCTools.035.jpeg" src="../_images/FRCTools.035.jpeg" />
+<p>You’ll be prompted to publish the branch to GitHub.  You can do this immediatelly or after you have made some changes.
+To delete a remote branch use <cite>git branch -d &lt;branch name&gt;</cite></p>
+</section>
+<section id="pull-requests">
+<h2>Pull Requests<a class="headerlink" href="#pull-requests" title="Permalink to this heading"></a></h2>
+<p>Pull requests asks the owner of the repository to pull in your requested changes. (i.e. commits) It lets you tell others about changes you’ve pushed to a branch in a repository on GitHub. Once a pull request is opened, you can discuss and review the potential changes with collaborators and add follow-up commits before your changes are merged into the base branch.</p>
+<p>In order to add new features to the existing code base you need to create a new branch. For our team the branch name will be <strong>`feature-&lt;new-feature&gt;`</strong>, where <cite>new-feature</cite> is somewhat descriptive of what needs to be added. You can now add your new feature and possibly test it out on the robot.  Since your branch was created from the <cite>main</cite> branch you should have the basic functionality to test is on a robot.</p>
+<p>Once you have created the branch and added your new feature you can merge it back into the <cite>main</cite> branch by creating a <strong>Pull Request</strong>. See <a class="reference external" href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request">Creating a pull request</a> in the GitHub documentation.</p>
+<p>The Pull Request will be reviewed by the repository owner, and if everything looks good it will be merged into the <cite>main</cite> branch of the code.  See <a class="reference external" href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/merging-a-pull-request">Merging a pull request</a> in the GitHub documentation. The Pull Request process is shown below.</p>
+<img alt="../_images/FRCTools.036.jpeg" src="../_images/FRCTools.036.jpeg" />
+<p>You can link a pull request to an issue.</p>
+<p>When thinking about branches, remember that the base branch is where changes should be applied, the head branch contains what you would like to be applied.</p>
+</section>
+<section id="merging-and-merge-conflicts">
+<h2>Merging and Merge Conflicts<a class="headerlink" href="#merging-and-merge-conflicts" title="Permalink to this heading"></a></h2>
+<p>TODO</p>
+</section>
+<section id="special-git-files">
+<h2>Special Git Files<a class="headerlink" href="#special-git-files" title="Permalink to this heading"></a></h2>
+<section id="the-readme-md-file">
+<h3>The README.md File<a class="headerlink" href="#the-readme-md-file" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>A GitHub README is a file, typically named README.md, that provides documentation and information about a repository or a user’s profile on GitHub. It is written using Markdown, which allows for rich text formatting, including headings, lists, links, images, and code blocks. Here is a <a class="reference external" href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax">Markdown guide</a> to help explain what the Markdown syntax is Typically, a README file contains the following:</dt><dd><ul class="simple">
+<li><p>What the project is and what it does.</p></li>
+<li><p>How to install and use the project.</p></li>
+<li><p>Instructions for contributing to the project.</p></li>
+<li><p>Licensing information.</p></li>
+<li><p>Contact information or links to further resources.</p></li>
+</ul>
+</dd>
+</dl>
+<p>For our team projects, at the very minimum the readme must include a description of what the repository is. Here is an <a class="reference external" href="https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc">example template</a> for a README file</p>
+</section>
+<section id="the-gitignore-file">
+<h3>The <cite>.gitignore</cite> File<a class="headerlink" href="#the-gitignore-file" title="Permalink to this heading"></a></h3>
+<p>A .gitignore file is a plain text file in a Git repository that specifies files and directories that Git should ignore and not track. This means that any files or directories listed in the .gitignore file will not be included when you commit changes to your repository, nor will they be pushed to a remote repository like GitHub.</p>
+<dl class="simple">
+<dt>It helps keep your repository clean by preventing the tracking of files that are not essential to the project’s source code, such as:</dt><dd><ul class="simple">
+<li><p>Compiled binaries and build artifacts (e.g., .exe, .o, target/)</p></li>
+<li><p>Temporary files and log files (e.g., .tmp, .log)</p></li>
+<li><p>Dependency caches (e.g., node_modules/, vendor/)</p></li>
+<li><p>Hidden system files (e.g., .DS_Store)</p></li>
+<li><p>Personal IDE configuration files</p></li>
+</ul>
+</dd>
+<dt><strong>Preventing Exposure of Sensitive Data:</strong></dt><dd><p>It’s crucial for keeping sensitive information like API keys, credentials, or personal notes out of public repositories.</p>
+</dd>
+<dt><strong>Maintaining Consistency:</strong></dt><dd><p>It helps ensure that different developers working on the same project have consistent environments by ignoring local-specific files that shouldn’t be shared.</p>
+</dd>
+<dt><strong>How it Works:</strong></dt><dd><p>The .gitignore file is typically located at the root level of your Git repository.
+Each line in the file represents a pattern for files or directories to ignore.
+Patterns can include wildcards, directory separators, and negation (!) to define specific rules for ignoring or re-including files.</p>
+</dd>
+</dl>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If a file has already been committed and tracked by Git, adding it to .gitignore will not automatically remove it from the repository. You would need to explicitly remove it from Git’s tracking using git rm –cached &lt;filename&gt; before the .gitignore rule takes effect.</p>
+</div>
+</section>
+</section>
+<section id="advanced-options">
+<h2>Advanced Options<a class="headerlink" href="#advanced-options" title="Permalink to this heading"></a></h2>
+<section id="changing-the-remote-repository-origin">
+<h3>Changing the Remote Repository Origin<a class="headerlink" href="#changing-the-remote-repository-origin" title="Permalink to this heading"></a></h3>
+<p>In some cases you might want to change to remote origin of a repository.  To do this follow these steps:</p>
+<ol class="arabic simple">
+<li><p>From VSCode open a New Terminal and execute the following command.  Where <cite>&lt;repository&gt;</cite> is you own repository account name, and <cite>&lt;MyProject&gt;</cite> is the name of your local project.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="nb">set</span><span class="o">-</span><span class="n">url</span> <span class="n">origin</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">repository</span><span class="o">&gt;/&lt;</span><span class="n">MyProject</span><span class="o">&gt;.</span><span class="n">git</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Type in:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="o">-</span><span class="n">v</span>
+</pre></div>
+</div>
+<p>to check that the remote repository has changed to your account.</p>
+<ol class="arabic simple" start="3">
+<li><p>Push the code to new Github repository origin by executing the following command in the terminal:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span> <span class="n">main</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Check your Github repository to ensure that the new code has been pushed.</p></li>
+</ol>
+</section>
+</section>
+<section id="lab-git-repository-and-github">
+<h2>Lab - Git Repository and GitHub<a class="headerlink" href="#lab-git-repository-and-github" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Clone a repository.</p></li>
+<li><p>Create a feature branch and commit some changes.</p></li>
+<li><p>Create a pull request.</p></li>
+<li><p>Merge the pull request.</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/basic-programming/git-getting-started.html">Git Version Control</a></p></li>
+<li><p>GitHub - <a class="reference external" href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request">Creating a pull request</a></p></li>
+<li><p>YouTube video - <a class="reference external" href="https://www.youtube.com/watch?v=Fk12ELJ9Bww">VSCode and Github</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="vscodeSoftware.html" class="btn btn-neutral float-left" title="VSCode and WPILib Install" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="testingIndex.html" class="btn btn-neutral float-right" title="Setup Testing Environment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

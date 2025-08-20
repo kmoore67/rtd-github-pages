@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RoboRio and Device Software &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installing Phoenix API Libraries" href="phoenixSoftware.html" />
+    <link rel="prev" title="FRC Testing Environment" href="frcDev.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="testingIndex.html">Setup Testing Environment</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="frcDev.html">FRC Testing Environment</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">RoboRio and Device Software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-install-the-frc-game-tools">Step 1. Install the FRC Game Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-image-the-roborio">Step 2. Image the RoboRio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-install-phoenix-framework-software">Step 3. Install Phoenix Framework Software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-4-install-phoenix-firmware">Step 4. Install Phoenix Firmware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-5-prepare-the-robot-controller">Step 5. Prepare the Robot Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#programming-the-radio">Programming the Radio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lab-roborio-software">Lab - RoboRIO Software</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#understand-the-roborio-imaging-tool">Understand the roboRIO Imaging Tool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#view-the-roborio-web-dashboard">View the roboRIO Web Dashboard</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#learn-the-frc-radio-configuration-utility">Learn the FRC Radio Configuration Utility</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="phoenixSoftware.html">Install Phoenix API Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="revSoftware.html">Install Rev API Libraries</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="testingIndex.html">Setup Testing Environment</a></li>
+      <li class="breadcrumb-item active">RoboRio and Device Software</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/SoftwareInstall/rioSoftware.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="roborio-and-device-software">
+<h1>RoboRio and Device Software<a class="headerlink" href="#roborio-and-device-software" title="Permalink to this heading"></a></h1>
+<p>The <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/roborio-info/roborio-introduction.html#roborio-introduction">NI-roboRIO</a> is the main robot controller used for FRC. The roboRIO serves as the “brain” for the robot running team-generated code that commands all of the other hardware.  Prior to using the <strong>RoboRio</strong> you have to install, or update, the software stack.  Here are the components that need to be installed.</p>
+<img alt="../_images/FRCTools.016.jpeg" src="../_images/FRCTools.016.jpeg" />
+<p>Here is a step-by-step guide for accomplishing the install.</p>
+<img alt="../_images/FRCTools.017.jpeg" src="../_images/FRCTools.017.jpeg" />
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>RoboRio and Device Software is required for testing your code on the real robot. It is not needed for simulation!</p>
+</div>
+<section id="step-1-install-the-frc-game-tools">
+<h2>Step 1. Install the FRC Game Tools<a class="headerlink" href="#step-1-install-the-frc-game-tools" title="Permalink to this heading"></a></h2>
+<p>The first step is to <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/frc-game-tools.html">Install the FRC Game Tools</a>.  These can be down loaded from the <a class="reference external" href="https://www.ni.com/en-us/support/downloads/drivers/download.frc-game-tools.html#473762">NI FRC Game Tools</a> releases site, and only supports Windows.  After the install it asks you to login to your <strong>NI Activation</strong> account and enter a serial number.  It’s not clear why you need the account, but here’s information on <a class="reference external" href="https://knowledge.ni.com/KnowledgeArticleDetails?id=kA00Z0000019OJTSA2&amp;l=en-US">getting the serial number</a>.  Once you have the serial number you can use the <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/labview-setup.html#ni-activation-wizard">Activation Wizard</a>.</p>
+<p>Installed tools include:</p>
+<ul class="simple">
+<li><p>The RobiRIO Imaging Tool and images</p></li>
+<li><p>FRC Driver Station</p></li>
+</ul>
+</section>
+<section id="step-2-image-the-roborio">
+<h2>Step 2. Image the RoboRio<a class="headerlink" href="#step-2-image-the-roborio" title="Permalink to this heading"></a></h2>
+<p>The <em>Imaging Tool</em> is used to install the roboRIO Firmware and the Image.  The image is the equivalent of the operating system.  The roboRIO 2 must be imaged using the <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/roborio-info/roborio2-imaging.html">roboRIO 2.0 microSD</a> card imaging process.  This also applies if you’re upgrading from a previous year.  Once the image is flashed to a microSD card and inserted the team number will need to be set using the RoboRIO imaging tool. See <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/roborio2-imaging.html#setting-the-roborio-team-number">Setting the roboRIO Team Number</a> in the FRC documentation.  If you have any problems with the install checkout the <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/imaging-your-roborio.html#troubleshooting">Troubleshooting</a> steps.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have the older roboRIO then all of the imaging is done from the <em>Imaging Tool</em>.  If the RoboRio has already been imaged from a previous year and already has an microSD card inserted then the Imaging Tool can be used to update the software. Open the <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/imaging-your-roborio.html#roborio-imaging-tool">RoboRIO Imaging Tool</a> and follow the instructions.</p>
+</div>
+<p>Once the RoboRIO is imaged it sets up the <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/roborio-info/roborio-web-dashboard.html#roborio-web-dashboard">RoboRIO Web Dashboard</a>, which is a webpage built into the roboRIO that can be used for checking status and updating settings of the roboRIO. Use <cite>172.00.67.2</cite> if connected via USB, or <cite>roboRIO-67-FRC.local</cite> if connected over WiFi.</p>
+</section>
+<section id="step-3-install-phoenix-framework-software">
+<h2>Step 3. Install Phoenix Framework Software<a class="headerlink" href="#step-3-install-phoenix-framework-software" title="Permalink to this heading"></a></h2>
+<p>Install the <a class="reference external" href="https://store.ctr-electronics.com/software/">Phoenix Framework Software</a>  onto your PC. Linux and MacOS only includes the C++/Java Phoenix API and CTRE Support of RobotBuilder. The full framework is only supported on Windows and includes the following components.</p>
+<ul class="simple">
+<li><p>The C++/Java Phoenix API.  These libraries get installed into the <cite>~/wpilib/20XX</cite> directory. For Linux and MacOS the C++/Java API can be installed separatelly.</p></li>
+<li><p>Device Firmware Files (that were tested with the release)</p></li>
+<li><p>CTRE Support of RobotBuilder</p></li>
+<li><p>Phoenix Tuner</p></li>
+<li><p>Installs Phoenix Diagnostics Server into the RoboRIO (needed for CAN diagnostics).</p></li>
+<li><p>Plotter/Control features</p></li>
+<li><p>Self-test Snapshot</p></li>
+<li><p>Device ID and field-upgrade</p></li>
+</ul>
+</section>
+<section id="step-4-install-phoenix-firmware">
+<h2>Step 4. Install Phoenix Firmware<a class="headerlink" href="#step-4-install-phoenix-firmware" title="Permalink to this heading"></a></h2>
+<p>Once you have the <strong>Phoenix Tuner</strong> installed you can install/update the firmware on the CTRE hardware devices.  The firmware can be found in the directory <cite>C:UsersPublicDocumentsFRC</cite>.  Or can be downloaded from the <a class="reference external" href="https://store.ctr-electronics.com/software/">Phoenix Framework Software</a> releases page.  The firmware is documented in the <a class="reference external" href="https://docs.ctre-phoenix.com/en/stable/ch22_SoftReleaseNote.html#ch22-softreleasenote">Firmware Release Notes</a>.</p>
+<p>Start the <a class="reference external" href="https://docs.ctre-phoenix.com/en/stable/ch05_PrepWorkstation.html#frc-windows-open-phoenix-tuner">Phoenix Tuner X</a>. Refer to the <a class="reference external" href="https://docs.ctre-phoenix.com/en/stable/ch08_BringUpCAN.html#field-upgrade-devices">Field Upgrade Devices</a> section of the CTRE documentation.</p>
+</section>
+<section id="step-5-prepare-the-robot-controller">
+<h2>Step 5. Prepare the Robot Controller<a class="headerlink" href="#step-5-prepare-the-robot-controller" title="Permalink to this heading"></a></h2>
+<p>If no FRC Robot Application has been deployed to the RobiRIO then deploy the <em>Temporary Diagnostic Server</em> from the Phoenix Tuner.  Refer to <a class="reference external" href="https://docs.ctre-phoenix.com/en/stable/ch06_PrepRobot.html#how-to-prepare-robot-controller">How to prepare Robot Controller</a>.</p>
+</section>
+<section id="programming-the-radio">
+<h2>Programming the Radio<a class="headerlink" href="#programming-the-radio" title="Permalink to this heading"></a></h2>
+<p>You can download the latest <em>FRC Radio Configuration Utility Installer</em> from the <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/radio-programming.html#prerequisites">Prerequisites</a> link.  See <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/radio-programming.html">Programming your Radio</a> in the FRC documentation.</p>
+</section>
+<section id="lab-roborio-software">
+<h2>Lab - RoboRIO Software<a class="headerlink" href="#lab-roborio-software" title="Permalink to this heading"></a></h2>
+<p>This lab will get you familiar with how the software is installed and configured on the roboRIO.  There are three tasks for this lab:</p>
+<ul class="simple">
+<li><p>Understand the roboRIO Imaging Tool</p></li>
+<li><p>View the roboRIO Web Dashboard</p></li>
+<li><p>Learn about the FRC Radio Configuration Utility</p></li>
+</ul>
+<section id="understand-the-roborio-imaging-tool">
+<h3>Understand the roboRIO Imaging Tool<a class="headerlink" href="#understand-the-roborio-imaging-tool" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Start the roboRIO robot and connect to it’s IP address from your laptop.</p></li>
+<li><p>Launch the roboRIO Imaging Tool by clicking on the desktop icon. Once the tool starts make sure that it has connected to a <em>roboRIO Target</em>, top left panel. Also check the team number to see that it’s correct.</p></li>
+<li><p>Take a note of the current <em>Firmware Version</em> and <em>Image Version</em>. You’ll need these in the next task. It’s important that the firmware and image software is kept up-to-date.</p></li>
+</ol>
+<img alt="../_images/FRCroboRIO.001.jpeg" src="../_images/FRCroboRIO.001.jpeg" />
+<ol class="arabic simple" start="4">
+<li><p>Answer the folling questions:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Is the Firmware version up-to-date?  The firmware should be at the required minimum version. See <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/imaging-your-roborio.html#updating-firmware">Updating Firmware</a> to answer this question.</p></li>
+<li><p>Is the Image version up-to-date?  The image software should reflect the year that we are currently in.  If it’s not up-to-date, read <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/imaging-your-roborio.html#imaging-the-roborio">Imaging the roboRIO</a> to learn how to update the Image software.  Work with a mentor or senior student programming lead to do the update.</p></li>
+</ul>
+<ol class="arabic simple" start="5">
+<li><p>Read the <cite>roboRIO Imaging Tool &lt;https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/imaging-your-roborio.html#roborio-imaging-tool</cite>&gt;_ documentation and make sure that you understand each part of the tool.</p></li>
+</ol>
+</section>
+<section id="view-the-roborio-web-dashboard">
+<h3>View the roboRIO Web Dashboard<a class="headerlink" href="#view-the-roborio-web-dashboard" title="Permalink to this heading"></a></h3>
+<p>The <em>roboRIO Web Dashboard</em> gives detailed information on the configuration of the roboRIO.</p>
+<ol class="arabic simple">
+<li><p>Open a web browser and enter the address of the roboRIO into the address bar <cite>172.22.11.2</cite> for USB, or <cite>roboRIO-67-FRC.local</cite>.  Or try <cite>10.00.67.2</cite> if you are connected to the OM5P-AN radio.</p></li>
+<li><p>Compare the <em>Firmware Version</em> and the <em>Image Version</em> with what you recorded in the last task. They should be the same if you’re connected to the same robot. Read the documentation on <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/roborio-info/roborio-web-dashboard.html#system-configuration-tab">System Configuration Tab</a> and understand the purpose of each setting. Do NOT change any of the settings.</p></li>
+<li><p>Click on the Network icon in the left sidebar to view the network settings.  Read the <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/roborio-info/roborio-web-dashboard.html#network-configuration">Network Settings Tab</a> documentation to understand the purpose of each setting. Do NOT change any of the settings.</p></li>
+</ol>
+</section>
+<section id="learn-the-frc-radio-configuration-utility">
+<h3>Learn the FRC Radio Configuration Utility<a class="headerlink" href="#learn-the-frc-radio-configuration-utility" title="Permalink to this heading"></a></h3>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>TODO Task to be written.</p>
+</div>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>FRC Documentation <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/imaging-your-roborio.html">Imaging your roboRIO</a></p></li>
+<li><p>FRC Documentation <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/radio-programming.html">Programming your Radio</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="frcDev.html" class="btn btn-neutral float-left" title="FRC Testing Environment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="phoenixSoftware.html" class="btn btn-neutral float-right" title="Installing Phoenix API Libraries" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VSCode and WPILib Install &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Git Repository and Github" href="git.html" />
+    <link rel="prev" title="Setup Development Environment" href="softwareInstallIndex.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="softwareInstallIndex.html">Setup Development Environment</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Install VSCode and WPILib</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#notes-for-macos">Notes for MacOS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#upgrading-software">Upgrading Software</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="git.html">Version Control System</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="softwareInstallIndex.html">Setup Development Environment</a></li>
+      <li class="breadcrumb-item active">VSCode and WPILib Install</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/SoftwareInstall/vscodeSoftware.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="vscode-and-wpilib-install">
+<h1>VSCode and WPILib Install<a class="headerlink" href="#vscode-and-wpilib-install" title="Permalink to this heading"></a></h1>
+<p>An Integrated Development Environment (IDE) is a software tool that is used to make writing code easier. Some of the main things IDEs will help with include:</p>
+<ul class="simple">
+<li><p>Check the syntax of your code to ensure you don’t have any errors.</p></li>
+<li><p>Organize your files and give you a convenient way to view them.</p></li>
+<li><p>Allow you to navigate through your code easily.</p></li>
+<li><p>Applies colour schemes to your code so it’s easier to interpret.</p></li>
+<li><p>Some will have code completion, which will actually fill in some code for you.</p></li>
+</ul>
+<p><strong>Visual Studio Code (VSCode)</strong> is the supported IDE for programming an FRC robot. If you don’t have VSCode installed on your computer then follow the <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/zero-to-robot/step-2/wpilib-setup.html">WPILib Installation Guide</a> on the FRC Documentation Website. If you’re using Windows, then these instructions will also install the WPI Library which is used for programming the FRC robot.  The link to download the latest software is somewhat hidden, you can find it under <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/zero-to-robot/step-2/wpilib-setup.html#prerequisites">Prerequisites</a> on the WPILib Installation Guide pages, click on the Github link.  Or try the <a class="reference external" href="https://github.com/wpilibsuite/allwpilib/releases">Latest Releases</a> page. Scroll down the Github release page to find the downloads.  Additional information is also found at <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/vscode-overview/index.html">FRC Documentation VSCode Overview</a>.</p>
+<img alt="../_images/FRCTools.022.jpeg" src="../_images/FRCTools.022.jpeg" />
+<p>You should use the online installer as it will dynamically load other modules on the internet all by itself, but if you can use the offline installer to set up a separate copy of VS Code for WPILib development, even if you already have VS Code on your machine. This is done because some of the settings that make the WPILib setup work may break existing workflows if you use VS Code for other projects.</p>
+<section id="notes-for-macos">
+<h2>Notes for MacOS<a class="headerlink" href="#notes-for-macos" title="Permalink to this heading"></a></h2>
+<p>Ensure that you eject the WPILib Installer after install, otherwise you will run into problems when a new release is published and you run the new installer.</p>
+<p>You will need to install the <em>XCode Command Line Tools</em> in order to run the simulator.  To check if you have them installed type <cite>xcode-select -p</cite>.  It should display <cite>/Library/Developer/CommandLineTools</cite> if you already have them installed.</p>
+<p>If you don’t have the <em>XCode Command Line Tools</em> on your machine then enter the command <cite>xcode-select –install</cite> to install. The package is about 1.2 GB.  For additional information see <a class="reference external" href="https://www.freecodecamp.org/news/install-xcode-command-line-tools/">How to Install Xcode Command Line Tools on a Mac</a>.</p>
+<p>If the simulator crashes try <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/yearly-overview/known-issues.html#simulation-crashes-on-mac-after-updating-wpilib">Simulation crashes on Mac after updating WPILib</a> to resolve the issue.  If that doesn’t work then try the solution in <a class="reference external" href="https://docs.wpilib.org/en/2020/docs/software/wpilib-overview/known-issues.html#macos-simulation-fails-to-launch-in-visual-studio-code">macOS Simulation fails to launch in Visual Studio Code</a>.</p>
+<p>Occasionally, the system will throw a <strong>Killed: 9</strong> when trying to start the Simulator.  In most cases, rebooting your Mac will solve the issue.</p>
+</section>
+<section id="upgrading-software">
+<h2>Upgrading Software<a class="headerlink" href="#upgrading-software" title="Permalink to this heading"></a></h2>
+<p>A new version of the WPILib is released each year on the same day that the new competition is announced. It’s important that everyone has the latest software.  Upgrading to the new version is essentially the same as doing a new install.  Here’s a direct link to the latest  <a class="reference external" href="https://github.com/wpilibsuite/allwpilib/releases">Release down load page</a>.  Follow the instructions for <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/zero-to-robot/step-2/wpilib-setup.html#running-the-installer">Running the Installer</a>.</p>
+<p>After upgrading VSCode will import each project to the latest version.  Answer <em>Yes</em> to each prompt.</p>
+<img alt="../_images/FRCTools.011.jpeg" src="../_images/FRCTools.011.jpeg" />
+<p>As soon as you open the upgraded project VSCode will start to run a compile.  This will often produce build errors that you need to resolve. You will probably have to import 3rd party software like <em>Phoenix</em> and <em>REVLib</em>.  Instructions on installing and configuring these libraries is detailed in the next section. Also see <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/vscode-overview/importing-gradle-project.html">Importing a Gradle Project</a> for more details on importing projects from previous season.</p>
+<p>To upgrade from the kickoff release simply download and run the new installer and it will update your current installation. If you already have the latest WPILib vscode installed, it will detect it and you can simply click “next” for that installation step. After installation, vscode will prompt you when opening your robot project whether you want to upgrade it to this version. During the build season there will most likely be new sub-releases published that require the use of the WPILib installer.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="softwareInstallIndex.html" class="btn btn-neutral float-left" title="Setup Development Environment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="git.html" class="btn btn-neutral float-right" title="The Git Repository and Github" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/es/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

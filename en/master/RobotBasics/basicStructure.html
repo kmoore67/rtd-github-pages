@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic Robot Structure &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Subsystems" href="subSystems.html" />
+    <link rel="prev" title="Example Code" href="exampleCode.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="robotBasicsIndex.html">Robot Basics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="exampleCode.html">Example Code</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Basic Robot Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-main-class">The Main Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#robot-class">Robot Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#robotcontainer-class">RobotContainer Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-constants-file">The Constants File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#joystick-controllers">Joystick Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="subSystems.html">Subsystems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="telemetry.html">Telemetry</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="robotBasicsIndex.html">Robot Basics</a></li>
+      <li class="breadcrumb-item active">Basic Robot Structure</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RobotBasics/basicStructure.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="basic-robot-structure">
+<h1>Basic Robot Structure<a class="headerlink" href="#basic-robot-structure" title="Permalink to this heading"></a></h1>
+<p>Programs based on the WPILib library are organized around two fundamental concepts: <strong>Subsystems</strong> and <strong>Commands</strong>. Subsystems and Commands run within the context of an FRC Robot program that is built using four basic components.  Each component is kept in separate java files called <cite>Main.java, Robot.java, RobotContainer.java</cite>, and <cite>Constants.java</cite>.</p>
+<img alt="../_images/Structure.001.jpeg" src="../_images/Structure.001.jpeg" />
+<section id="the-main-class">
+<h2>The Main Class<a class="headerlink" href="#the-main-class" title="Permalink to this heading"></a></h2>
+<p>The <cite>Main.java</cite> file is the starting point for the entire program and calls the Robot class to start building the robot. To learn more about the <cite>Main</cite> class refer to the <a class="reference external" href="https://www.w3schools.com/java/java_syntax.asp">W3 Schools</a> tutorial.  In our code you should never need to change this file.</p>
+</section>
+<section id="robot-class">
+<h2>Robot Class<a class="headerlink" href="#robot-class" title="Permalink to this heading"></a></h2>
+<p>The <cite>Robot.java</cite> file defines the Robot class and its purpose is to maintain the overall state of the robot.  It is implemented as a <strong>State Machine</strong> that represents the state of the robot at various points in time.  We touched on State Machines in Programming Basics but we’ll learn a lot more about them later.</p>
+<p>During a competition a robot will first <strong>Initialize</strong> and then go into <strong>Autonomous</strong> mode (state) for the first 15 seconds.  In this mode it will run <strong>Autonomous Commands</strong> which tell it what to do during this time period.  We’ll be looking at Autonomous Commands in a later turorial.  After 15 seconds, the robot will switch into <strong>Teleoperated</strong> mode.  During this time the driver will operate the robot using a joystick controller.  At the end of the competition the robot will go into <strong>Disabled</strong> mode.  During each of these modes a <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/commandbased/command-scheduler.html">Command Scheduler</a> will run that is responsible for running commands.</p>
+<img alt="../_images/Structure.002.jpeg" src="../_images/Structure.002.jpeg" />
+</section>
+<section id="robotcontainer-class">
+<h2>RobotContainer Class<a class="headerlink" href="#robotcontainer-class" title="Permalink to this heading"></a></h2>
+<p>The <cite>RobotContainer.java</cite> file is where the main structure of the robot is built.  It defines Subsystems and their Default Commands.  It sets up Autonomous Commands that are run during the Autonomous mode of the competition.  The RobotContainer is also where mappings between the Joystick and various Commands are defined.  In our ProgTrain1 example project this class will also define Shuffleboard options that allow you to control what happens during the Autonomous mode of the competition.  We’ll learn a lot more about Shuffleboard later.</p>
+<img alt="../_images/Structure.003.jpeg" src="../_images/Structure.003.jpeg" />
+</section>
+<section id="the-constants-file">
+<h2>The Constants File<a class="headerlink" href="#the-constants-file" title="Permalink to this heading"></a></h2>
+<p>The <cite>Constants.java</cite> file provides a central location for defining constants.  Constants are values assigned to variables that <strong>do not change</strong> throughout the execution of the program.</p>
+<p>Our team uses the <em>Constants</em> file toefine a constant for what robot we are running our code on. Take a look at this block of code:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">RobotType</span><span class="w"> </span><span class="n">robotType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RobotType</span><span class="p">.</span><span class="na">CAMERABOT</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This <em>Robot Type</em> is tied to an enumeration (enum) a little farther down that defines the allowable values:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">RobotType</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">SIMBOT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">DEVBOT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">CAMERABOT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">COMPBOT</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>As you can imagine we have lots of different robots, and we do not want to have a seperate set of Java code for each of them. So they all share the same code. But they may have different parts or capabilities such as motor port numbers, or different game-spec elements (i.e. Comprobot has a shooter, the CameraRobot does not). By having a RobotType defined we can test in our code what robot we are working with and adjust the code as needed.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>You are responsible for setting this value and setting up your code to run on ALL of our robots.</p>
+</div>
+<p>Notice that there are four keywords before the constant variables. So let’s learn what they mean:</p>
+<ul class="simple">
+<li><p>The <a class="reference external" href="https://www.w3schools.com/java/ref_keyword_private.asp">private</a> keyword makes the variable accessible only within the declared class. If you want to make them accessible by all classes, your going to have to change the keyword to <a class="reference external" href="https://www.w3schools.com/java/ref_keyword_public.asp">public</a>.</p></li>
+<li><p>The <a class="reference external" href="https://www.w3schools.com/java/ref_keyword_static.asp">static</a> keyword creates attributes that can be accessed without creating an object of a class.  In the <em>Constants</em> file we’re not going to create any objects so we need to define the variables as <cite>static</cite>.</p></li>
+<li><p>The <a class="reference external" href="https://www.w3schools.com/java/ref_keyword_final.asp">final</a> keyword in Java means that the variable doesn’t change it’s value during the execution of the program.</p></li>
+<li><p>The <a class="reference external" href="https://www.w3schools.com/java/ref_keyword_double.asp">double</a> is a variable data type that can store large fractional numbers.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Take a look at the function inside the <em>Constants</em> file. You are never supposed to put functional code inside the Constants file, so what gives? In this case the function will abort if you have a SIMBOT defined and your are trying to deploy it to a physical robot. In effect it is a safety measure.</p>
+</div>
+</section>
+<section id="joystick-controllers">
+<h2>Joystick Controllers<a class="headerlink" href="#joystick-controllers" title="Permalink to this heading"></a></h2>
+<p>A joystick/gamepad can be connected to your laptop via a USB port or Bluetooth.  The WPI Library provides all of the necessary software to interface with XBox, PS3/4, or Logitech game controllers. Detailed information on <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/basic-programming/joystick.html">Joysticks</a> can be found in the FRC Documentation.</p>
+<p>Our team uses Command Programming which means we want to fire off a command when a button or trigger is pressed. To do this we want to ensure that we <em>bind</em> our button presses to triggers that fire off commands. For more information on binding tiggers to commands see  <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/commandbased/binding-commands-to-triggers.html#binding-commands-to-triggers">command based bindings</a>.</p>
+<img alt="../_images/Structure.004.jpeg" src="../_images/Structure.004.jpeg" />
+<p>The Controller object is created in the <em>RobotContainer</em> class.</p>
+<p>To use the Xbox controller use this initialization:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">XboxController</span><span class="w"> </span><span class="n">driver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">XboxController</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You pass the port number to the XboxController, so in this example port 0 is for the Driver Controller. Port 1 would most likely be the operator controller.</p>
+</div>
+<p>We create a drivetrain object to instantiate the drive subsystem and give us a reference to it.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">Utils</span><span class="p">.</span><span class="na">isSimulation</span><span class="p">()){</span>
+<span class="w">    </span><span class="n">drivetrain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Drive</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DriveKraken</span><span class="p">());</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">drivetrain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Drive</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DriveSim</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Utils class tests for the robot running in simulation. If not simulation fire up the drive object with a Kraken class otherwise use the simulator class. More on this configuration later.</p>
+</div>
+<p>A default command is created in the class that uses the joystick to control the robot:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">drivetrain</span><span class="p">.</span><span class="na">setDefaultCommand</span>
+<span class="w">    </span><span class="p">(</span><span class="n">drivetrain</span><span class="p">.</span><span class="na">run</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">drivetrain</span><span class="p">.</span><span class="na">teleopDrive</span><span class="p">(</span>
+<span class="w">            </span><span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="n">river</span><span class="p">.</span><span class="na">getLeftY</span><span class="p">())</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">-</span><span class="n">driver</span><span class="p">.</span><span class="na">getLeftY</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="n">river</span><span class="p">.</span><span class="na">getLeftX</span><span class="p">())</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">-</span><span class="n">driver</span><span class="p">.</span><span class="na">getLeftX</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="n">river</span><span class="p">.</span><span class="na">getRightX</span><span class="p">())</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0.015</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">-</span><span class="n">driver</span><span class="p">.</span><span class="na">getRightX</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">    </span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/commandbased/structuring-command-based-project.html?highlight=RobotContainer">Structuring a Command-Based Robot Project</a></p></li>
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/basic-programming/joystick.html">Joysticks</a></p></li>
+<li><p>Java Tutorial on <a class="reference external" href="https://www.w3schools.com/java/default.asp">W3Schools</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="exampleCode.html" class="btn btn-neutral float-left" title="Example Code" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="subSystems.html" class="btn btn-neutral float-right" title="Subsystems" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

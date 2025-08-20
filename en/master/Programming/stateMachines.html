@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>State Machines &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Setup Development Environment" href="../SoftwareInstall/softwareInstallIndex.html" />
+    <link rel="prev" title="Objects" href="objects.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="programmingIndex.html">Programming Basics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dataStructures.html">Data Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="procedures.html">Procedures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objects.html">Objects</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">State Machines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#state-machine-example">State Machine Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="programmingIndex.html">Programming Basics</a></li>
+      <li class="breadcrumb-item active">State Machines</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/Programming/stateMachines.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="state-machines">
+<h1>State Machines<a class="headerlink" href="#state-machines" title="Permalink to this heading"></a></h1>
+<p>State Machines represent the state of a system at any point in time.  As time passes a state machine usually transitions from one state to another.  Its state can change based on inputs to the system or as a result of a specific period of time passing. In programming it usually consists of a finite number of states and is therefore called a Finite State Machine (FSM).</p>
+<p>A State Machine operates in the following manner:</p>
+<ol class="arabic simple">
+<li><p><strong>Initial State</strong> - This where inputs to the system are often zero’ed out or saved to data structure for later comparison.  Timers are either reset or saved to a timestamp.  In code, this is often carried out in an initialization routine.</p></li>
+<li><p><strong>Next Step</strong> - Receives and processes new input to the system. It takes the current state applies new input data and produces a new state.  This incremental change of state maybe done via some kind of summation of integration function.  Eventually it may cause the system to a transition to new major state, such as a terminal or idle state, when some threshold is met.</p></li>
+<li><p><strong>Input Update</strong> - This is the process of making repeated calls to the next step.  This will often be carried out by using a programmatic timer.  In an FRC program the input update step will be carried out by the <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/commandbased/command-scheduler.html">Command Scheduler</a> that runs every 20 milliseconds.  The Input process would be responsible for checking on the transitioning event.</p></li>
+</ol>
+<img alt="../_images/FRCProgramming.009.jpeg" src="../_images/FRCProgramming.009.jpeg" />
+<section id="state-machine-example">
+<h2>State Machine Example<a class="headerlink" href="#state-machine-example" title="Permalink to this heading"></a></h2>
+<p>Let’s look at the code below to see an example of a State Machine.  This code is from a <strong>Command</strong> object.  It starts in the <cite>initialize()</cite> state that runs procedures to stop the motors and zero out the encoder values.  Stopping the motors ensures that we are at some initially known state.  After initialization it transitions to the <cite>execute()</cite> state that performs the <strong>Next Step</strong>.  It’ll continue in that state, driven by the <strong>Input Update</strong> process (CommandScheduler) until it reaches some threshold, at which point is transitions into the state controlled by the <cite>end()</cite> method.  The threshold is defined and triggered by the <cite>isFinished()</cite> method.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Called when the command is initially scheduled.</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initialize</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_drive</span><span class="p">.</span><span class="na">arcadeDrive</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">m_drive</span><span class="p">.</span><span class="na">resetEncoders</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="c1">// Called every time the scheduler runs while the command is scheduled.</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">execute</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">m_drive</span><span class="p">.</span><span class="na">arcadeDrive</span><span class="p">(</span><span class="n">m_speed</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Called once the command ends or is interrupted.</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">end</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">interrupted</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">m_drive</span><span class="p">.</span><span class="na">arcadeDrive</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Returns true when the command should end.</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isFinished</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Compare distance travelled from start to desired distance</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="n">m_drive</span><span class="p">.</span><span class="na">getAverageDistanceInch</span><span class="p">())</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">m_distance</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Other prime examples of State Machines are PID Controllers used for motion control or Kalman Filters used for <em>Robot Localization</em>.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Wikipedia - <a class="reference external" href="https://en.wikipedia.org/wiki/Finite-state_machine">Finite State Machines</a></p></li>
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/commandbased/command-scheduler.html">The Command Scheduler</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="objects.html" class="btn btn-neutral float-left" title="Objects" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../SoftwareInstall/softwareInstallIndex.html" class="btn btn-neutral float-right" title="Setup Development Environment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

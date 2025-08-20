@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example Code &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basic Robot Structure" href="basicStructure.html" />
+    <link rel="prev" title="Robot Basics" href="robotBasicsIndex.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="robotBasicsIndex.html">Robot Basics</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Example Code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#robot-simulator">Robot Simulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#advantage-scope">Advantage Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lab-example-code">Lab - Example Code</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#complete-the-lab-steps">Complete the Lab Steps</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="basicStructure.html">Basic Robot Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subSystems.html">Subsystems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="telemetry.html">Telemetry</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="robotBasicsIndex.html">Robot Basics</a></li>
+      <li class="breadcrumb-item active">Example Code</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RobotBasics/exampleCode.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="example-code">
+<h1>Example Code<a class="headerlink" href="#example-code" title="Permalink to this heading"></a></h1>
+<p>Now it is time to give you some example code to work with. We will be using a <em>swerve drive</em> program as our example program. This will allow you to move your virtual robot around a virtual field. Let’s take a look at how all of this fits together:</p>
+<img alt="../_images/ExampleCode.001.jpeg" src="../_images/ExampleCode.001.jpeg" />
+<p>Our first step is to clone the current Github repository to your local machine. Then we will compile it to generate the java byte code for the simulator. Then we will fire up the simulator and fire up Advantage scope. And finally, we point Advantage Scope at the simulator. Then plug in your joystick and you can drive the robot just like the drive team!</p>
+<section id="robot-simulator">
+<h2>Robot Simulator<a class="headerlink" href="#robot-simulator" title="Permalink to this heading"></a></h2>
+<p>In order to drive the robot we’ll be using the <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/wpilib-tools/robot-simulation/introduction.html">Robot Simulator</a>.  The Robot Simulator was developed to enable teams to test their code without having an actual robot available.</p>
+<img alt="../_images/ExampleCode.007.jpeg" src="../_images/ExampleCode.007.jpeg" />
+</section>
+<section id="advantage-scope">
+<h2>Advantage Scope<a class="headerlink" href="#advantage-scope" title="Permalink to this heading"></a></h2>
+<p>Driving a robot in the simulator would be pretty lame if all you could see was the data (X,Y,Theta) of the robot moving to a different position on the field. To solve this, we will be using Advantage Scope to display the competition field and watch the virtual robot move across the filed in response to joystick movements.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To execute this example on your local computer you will need an Xbox controller plugged into the USB port on your computer.</p>
+</div>
+</section>
+<section id="lab-example-code">
+<h2>Lab - Example Code<a class="headerlink" href="#lab-example-code" title="Permalink to this heading"></a></h2>
+<p>This lab has a number of goals:</p>
+<ul class="simple">
+<li><p>Clone a Github repository on your laptop</p></li>
+<li><p>Compile a robot program</p></li>
+<li><p>Deploy a robot program to the simulator</p></li>
+<li><p>Connect Advantage Scope to the simulator to see the robot move</p></li>
+<li><p>Operate the virtual robot from your laptop.</p></li>
+</ul>
+<section id="complete-the-lab-steps">
+<h3>Complete the Lab Steps<a class="headerlink" href="#complete-the-lab-steps" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For your first Lab, I will guide you through the steps, next time you need to do it. :-)</p>
+</div>
+<ol class="arabic">
+<li><dl>
+<dt>Clone the <strong>*ProgTrain1*</strong> respository from the team Github Website</dt><dd><ol class="loweralpha simple">
+<li><p>In a browser, navigate to <em>&lt;team repository&gt;</em>/ProgTrain1</p></li>
+<li><p>Go to the ProgTrain1 respository.</p></li>
+<li><p>Click on the green Code Button.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../_images/ExampleCode.002.jpeg" src="../_images/ExampleCode.002.jpeg" />
+</div></blockquote>
+<ol class="loweralpha simple" start="4">
+<li><p>Make sure the tab is on HTTPS, then click the <em>copy to clip board</em> button</p></li>
+</ol>
+<img alt="../_images/ExampleCode.003.jpeg" src="../_images/ExampleCode.003.jpeg" />
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Clone the repository on your local machine</dt><dd><ol class="loweralpha simple">
+<li><p>Open a command window</p></li>
+<li><p>Change directory to your project directory: Enter the following:</p></li>
+</ol>
+<div class="highlight-PowerShell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd </span><span class="n">c</span><span class="p">:/</span><span class="n">Projects</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="p">***&lt;</span><span class="n">paste</span> <span class="k">in</span> <span class="n">the</span> <span class="n">url</span><span class="p">&gt;***</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p>Open Visual Studio Code</p></li>
+</ol>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Make sure that you use the VS Code with 2025 WPILib plugin!!!</p>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>In VS Code, Open folder c:/project/ProgTrain1 (under <em>File</em> go to <em>Open Folder</em>)</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you receive a VS Code message asking if you trust the authors, you should click Yes - you trust the authors!!!</p>
+</div>
+<ol class="arabic" start="5">
+<li><p>Find the WPI Plugin Icon and click it to open the menu:</p>
+<img alt="../_images/ExampleCode.004.jpeg" src="../_images/ExampleCode.004.jpeg" />
+</li>
+<li><p>In the WPILib menu, navigate to <em>Simulate Robot Code</em> item and select it:</p>
+<img alt="../_images/ExampleCode.005.jpeg" src="../_images/ExampleCode.005.jpeg" />
+</li>
+<li><p>The compiler will compile your code and when complete will display which extension to use in simulation. Make sure that the <em>Sim GUI</em> checkbox is checked.</p>
+<img alt="../_images/ExampleCode.006.jpeg" src="../_images/ExampleCode.006.jpeg" />
+</li>
+<li><p>When the Simulation has started you should see a screen similar to this:</p>
+<img alt="../_images/ExampleCode.007.jpeg" src="../_images/ExampleCode.007.jpeg" />
+</li>
+<li><p>Now that the simulator is up and running, it is time to start Advantage Scope. In the windows search bar, key in AdvantageScope, and then open it when Windows finds it:</p>
+<img alt="../_images/ExampleCode.011.jpeg" src="../_images/ExampleCode.011.jpeg" />
+</li>
+</ol>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If you have multiple versions of Advantage Scope installed on your machine, make sure that you select the 2025 version. This ensures that you get the correct field displayed in your simulation.</p>
+</div>
+<ol class="arabic simple" start="10">
+<li><p>When Advantage Scope opens it will display the 2025 field like this:</p></li>
+</ol>
+<blockquote>
+<div><img alt="../_images/ExampleCode.012.jpeg" src="../_images/ExampleCode.012.jpeg" />
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you do not see the field like the image above, please ensure you are on the odometry tab. Advantage Scope tries to be helpful and will startup on the last screen that was used. This screen may not be the odometery screen, simply click on the tab.</p>
+</div>
+<ol class="arabic" start="11">
+<li><p>Click on <em>File</em> on the menu bar to display the dropdown menu:</p>
+<img alt="../_images/ExampleCode.013.jpeg" src="../_images/ExampleCode.013.jpeg" />
+</li>
+<li><p>Select <em>Connect to Simulator</em> from the drop down menu:</p></li>
+<li><p>Once Advantage Scope connects to the simulator, it will display all the folders in Network Tables:</p>
+<img alt="../_images/ExampleCode.016.jpeg" src="../_images/ExampleCode.016.jpeg" />
+</li>
+<li><p>Open the <em>Shuffleoard</em> dropdown.</p>
+<ol class="loweralpha simple">
+<li><p>Then open the <em>Drive Dropdown</em>.</p></li>
+<li><p>Then Open the <em>Pose</em> Dropdown.</p></li>
+</ol>
+<ol class="upperalpha simple" start="3">
+<li><p>You should see a screen similar to the following:</p></li>
+</ol>
+<img alt="../_images/ExampleCode.014.jpeg" src="../_images/ExampleCode.014.jpeg" />
+</li>
+<li><p>Drag the <em>Pose</em> entry and drop it on the <em>Poses</em> Area. The robot will appear on the field similar to the following:</p></li>
+</ol>
+<ol class="arabic" start="16">
+<li><p>Go back to the Robot Simulator Screen.  You should see:</p>
+<img alt="../_images/ExampleCode.018.jpeg" src="../_images/ExampleCode.018.jpeg" />
+</li>
+<li><p>Now lets connect your joysitck to the simulation.</p>
+<ol class="loweralpha simple">
+<li><p>Plug in your Joystick onto a USB port on your computer.</p></li>
+<li><p>Find the System Joysticks on the simulator window. This displays the available joysticks plugged into your computer.</p></li>
+<li><p>Drag the <em>Xbox Controller</em> from the <em>System Joysticks</em> window to the <em>Joysticks</em> window. This connects your joystick to the simulation.</p></li>
+</ol>
+<img alt="../_images/ExampleCode.010.jpeg" src="../_images/ExampleCode.010.jpeg" />
+</li>
+<li><p>Click on the <em>Teleoperated</em> in <em>Robot State</em>.</p></li>
+<li><p>If you move the joysticks on the controller you should see your robot move on the Advantage Scope window. Enjoy!!!!</p></li>
+</ol>
+<section id="operating-the-simulated-robot">
+<h4>Operating the Simulated Robot<a class="headerlink" href="#operating-the-simulated-robot" title="Permalink to this heading"></a></h4>
+<p>You will be operating a <em>swerve drive</em> robot which requires two joysticks.</p>
+<p>The left joystick controls direction and speed. The simulation is in <em>Field Oriented</em> mode. Which means pushing the joystick forward makes the robot go down the field from the blue side to the red side. Pulling back on the joystick makes the robot travel in the opposite direction. Pushing the left joystick from side to side will make the robot go from side to side on the field.</p>
+<p>The right joystick is to control <em>spin</em>. It rotates the robot 360 degrees either to the left or to the right. This is to allow the robot to spin while moving a specific direction.</p>
+<p>It is not as simple as it looks. That’s why the drive team needs to practice to be able to drive the robot efficiently.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The arrow on the robot points to front.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Please notice where your robot is on the field. The robot starts out on the lower right hand side of the blue side of the field. If your robot travels off the field, it is really hard to get it back. You might want to restart the simulation to get your robot back on the field, if you lose it.</p>
+</div>
+</section>
+<section id="references">
+<h4>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h4>
+<ul class="simple">
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/wpilib-tools/robot-simulation/introduction.html">Robot Simulator</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="robotBasicsIndex.html" class="btn btn-neutral float-left" title="Robot Basics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="basicStructure.html" class="btn btn-neutral float-right" title="Basic Robot Structure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/es/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
