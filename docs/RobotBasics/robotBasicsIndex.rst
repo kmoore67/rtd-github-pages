@@ -14,6 +14,7 @@ Robot Basics
    Basic Robot Structure </RobotBasics/basicStructure>
    Subsystems </RobotBasics/subSystems>
    Commands </RobotBasics/commands>
+   Telemetry </RobotBasics/telemetry>
 
 
 Once the new FRC game is announced, our engineering teams will begin the process of designing and constructing a robot to execute the game requirements. As such, it might be a few weeks before the first competition robot (commonly known as the Practice Robot) will be available for our use. Typically, the programming team needs every day it can get in the short 6-week build season to write the robot controls, so waiting for the robot to be completed before we start coding is not an option. This is where robot simulation can really be a benefit to the programming team.

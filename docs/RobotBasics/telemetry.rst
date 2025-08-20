@@ -34,7 +34,7 @@ For simple data structures however, you can directly output values to the *Smart
 AdvantageKit is a logging framework that records all of the data flowing into the robot code. After a match, these values can be replayed to the robot code in a simulator. The log needs to be replayed using the same version of code that generated the log. More detailed logging can be done with AdvantageKit, which we'll cover in a later section.
 
 ## Lab - Telemetry
-This lab builds on the code that you wrote in the [Commands](romiCommands.md) section of the training guide.  You'll learn about the following Java programming concepts:
+This lab builds on the code that you wrote in the Commands section of the training guide.  You'll learn about the following Java programming concepts:
 
 - [static](https://www.w3schools.com/java/ref_keyword_static.asp) methods that can be accessed without creating an object of the class first.
 

@@ -49,7 +49,7 @@ Let's look at the code below to see an example of a State Machine.  This code is
 
 
 
-Other prime examples of State Machines are `PID Controllers </Romi/Control/romiPID.md>`_ used for motion control or `Kalman Filters </Concepts/OptimalEstimation/kalmanFilters.md>`_ used for `*Robot Localization* </Concepts/LocalizationMapping/localization.md>`_.
+Other prime examples of State Machines are PID Controllers used for motion control or Kalman Filters used for *Robot Localization*. 
 
 References
 ***************************

@@ -6,34 +6,89 @@
 Subsystems
 ###############################
 
-Subsystems are the basic units of functionally for our robot, such as drive trains and mechanical arms.  They encapsulate low-level hardware objects (motor controllers, sensors, etc) and provide methods that can be used by Commands.  We represent subsystems in code by using `Objects </Programming/objects>`_. Objects are composed of `Data Structures </Programming/dataStructures>`_ and `Procedures </Programming/procedures>`_, as explained in `Introduction to Programming </Programming/programmingIndex>`_. You should learn those concepts before we look at the subsystems that are on the Robot.  
+Subsystems are the basic units of functionally for our robot, such as drive trains and mechanical arms.  They encapsulate low-level hardware objects (motor controllers, sensors, etc) and provide methods that can be used by Commands.  We represent subsystems in code by using **Objects**. Objects are composed of Data Structures and Procedures, as explained in **Programming Basics** . You should learn those concepts before we look at the subsystems that are on the Robot.  
 
- For this module the majority of the code implementation can be found in the `Subsystems <https://docs.wpilib.org/en/latest/docs/software/commandbased/subsystems.html>`_ section of the FRC Documentation.  
+For this module the majority of the code implementation can be found in the `Subsystems <https://docs.wpilib.org/en/latest/docs/software/commandbased/subsystems.html>`_ section of the FRC Documentation.  
 
 .. image:: /images/RobotBasics/Subsystems.001.jpeg 
 
-DriveTrain Subsystem
-==============================
 
-.. important:: TODO Define drive train & graphic 
+Subsystem Structure
+***************************************
 
-The primary job of the *Drivetrain* subsystem is to send speed commands to its motors.  This is done in the `arcadeDrive()` method where we pass in the required translational and rotational speed.  The *DifferentialDrive* object will take care of controlling the speed to the left and right motors based on the kinematics of the drivetrain type. 
+In general, each subsystem should be placed in it's own folder. This keeps things clean and avoids conflict with other developers. 
+
+There should be a single subsystem that controls all the functional logic. When you write subsystem you will not always have the motors available to run your code on. (For example if you are at home writing code.) So we need you to seperate all the motor specific logic and put that in a seperate class. In this case it is called *DriveKraken*. This class is specifically setup to handle Kraken motors. If we had a drive train that had Falcons installed we would put all of that logic in a *DriveFalcon* class. 
+
+You should also develop a simulator class that tests all your motor functions without a motor. In this case it is called *DriveSim*. The actual *First* Competition is a very fast paced event, so we don't want a lot of code saying 'am I doing a simulator?' or 'is this a real motor?'. That's a lot of instuctions that would slow down our robot. So we create an *Interface* class. In this case it is called *DriveIO*. Let's look at an example for the Intake subsystem to see how this would work: 
+
+
+.. image:: /images/RobotBasics/Structure.005.jpeg 
+    :align: center 
+
+
+The interface class has empty funtions for both the Kraken and Sim classes. So when the *Drive* class says *resetPidgeon*. It makes a function call to the *DriveIO* module and that code sends it to the *Sim* or *Kraken* class depending on what we are executing. So let's take a look at an interface class: 
+
+.. code-block:: java 
+
+    public interface DriveIO {
+
+        default DriveIOdata update() {
+            return null;
+        }
+
+        default void setSwerveRequest(SwerveRequest requestToApply) {}
+
+        default void setTeamRotation(DriverStation.Alliance alliance) {}
+
+        default void resetPidgeon() {}
+
+        default void seedFieldRelative(Pose2d seedling) {}
+
+        default void updateVision(Pose2d calculatedPose, double timestamp, Matrix<N3, N1> stDevs) {}
+
+        default void setOperatorPerspective(Rotation2d, rotation2d) {}
+
+        default void setNeutralMode(NeutralModeValue neutralModeValue) {}
+
+    }
+
+Think of the interface class as a traffic controller. It sends the request to *Sim* or *Kraken*. It contains empty prototype functions that do not contain any code. Again we don't want a lot of code each time saying which way do I go? So we solve that by passing which module we want in the *RobotContainer* class. For example, remember this code from the *basic structure* page: 
 
 .. code-block:: Java 
 
-    public void arcadeDrive(double xaxisSpeed, double zaxisRotate) {
-        m_diffDrive.arcadeDrive(xaxisSpeed, zaxisRotate);
-      }
+   if(!Utils.isSimulation()){
+       drivetrain = new Drive(new DriveKraken());
+   } else {
+       drivetrain = new Drive(new DriveSim());
+   }            
 
-Other procedures in the Drivetrain class will take care of resetting and reading the wheel encoders.  It'll also translate the wheel encoder values into distances, as explained in the Pose Estimation (../../Concepts/OptimalEstimation/poseEstimation.md) module.  Also checkout `Using the WPILib Classes to Drive your Robot <https://docs.wpilib.org/en/stable/docs/software/actuators/wpi-drive-classes.html?highlight=speedcontroller#multi-motor-differentialdrive-with-speedcontrollergroups>`_ for more information on implementing a drive train in FRC.
+We are passing in the correct module when the RobotContainer object container is created, so we only test if we are simulating once. We will dive more into depth later in the training, but for now keep in mind the structure of writing a subsystem. 
 
-Gyro Subsystem
-============================
-The RomiGyro subsystem reads values from its gyro in order to perform [Pose Estimation](../../Concepts/OptimalEstimation/poseEstimation.md). The raw data that comes from gyros is very complex and difficult to intepret.  The RomiGyro subsystem translates the data into simple angles and rates-of-turn that are much easier to understand.
+
+Drive Subsystem
+*******************************************
+
+The primary job of the *Drive* subsystem is to send speed commands to its motors.  This is done in the `teleopDrive()` method where we pass in the required speed in the *X* direction, the *Y* direction and the rotational rate in the *theta* direction. The *setSwerveRequest* object will take care of controlling the speed to the drive motors and the azimuth motors based on the kinematics of the drivetrain.  
+
+.. note:: Theta is the angle of the chassis. 
+
+.. code-block:: Java 
+
+   public void teleopDrive(double driveX, double driveY, double driveTheta)  {
+       driveIO.setSwerveRequest(FIELD_CENTRIC
+            .withVelocityX((driveX <= 0 ? -(driveX * driveX) : (driveX * driveX)) * DriveConfig.MAX_VELOCITY())
+            .withVelocityY((driveY <= 0 ? -(driveY * driveY) : (driveY * driveY)) * DriveConfig.MAX_VELOCITY())
+            .withRotationalRate((driveTheta <= 0 ? -(driveTheta * driveTheta) : (driveTheta * driveTheta)) * DriveConfig.MAX_ANGULAR_VELOCITY())
+        );
+
+Other procedures in the Drive class will take care of resetting and reading the wheel encoders.  It'll also translate the wheel encoder values into distances, as explained in the Pose Estimation module.  
+
+
 
 Lab - Subsystems
 =============================
-This lab builds on the lab that you did in the [Basic Robot Structure](romiStructure.md) section of the training guide.  You'll learn about the following Java programming concepts:
+This lab builds on the lab that you did in the Basic Robot Structure section of the training guide.  You'll learn about the following Java programming concepts:
 
 - `Java Objects </Programming/objects>`_ are programming constructs used to represent physical objects and ideas in the real world.
 
@@ -101,7 +156,8 @@ Think about where these file separators will go and what code will go in each se
 That's all for this update!
 
 References
-=========================
+********************************
+
 - FRC Documentation - `Subsystems <https://docs.wpilib.org/en/latest/docs/software/commandbased/subsystems.html>`_ 
   
 - FRC Documentation - `Differential Drive Robots <https://docs.wpilib.org/en/stable/docs/software/actuators/wpi-drive-classes.html>`_ 

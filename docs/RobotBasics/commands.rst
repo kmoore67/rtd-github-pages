@@ -6,15 +6,15 @@
 Commands
 ################################
 
-Commands define high-level robot actions or behaviors that utilize the methods defined by the subsystems. Before looking at the commands that are implemented on the Robot you should be very familiar with `Procedures </Programming/procedures>`_ and `State Machines </Programming/stateMachines>`_ from the programming sections.  You should also review the FRC Documentation on `Commands <https://docs.wpilib.org/en/latest/docs/software/commandbased/commands.html>`_ before continuing.
+Commands define high-level robot actions or behaviors that utilize the methods defined by the subsystems. Before looking at the commands that are implemented on the Robot you should be very familiar with Procedures and State Machines from the programming sections.  You should also review the FRC Documentation on `Commands <https://docs.wpilib.org/en/latest/docs/software/commandbased/commands.html>`_ before continuing.
 
-A command is a simple **State Machine** that is either *Initializing*, *Executing*, *Ending*, or *Idle*. Users write code specifying which action should be taken in each state.  Commands run when scheduled, or in response to buttons being pressed on a gamepad or from [Shuffleboard](../../Tools/shuffleboard.md). After running the `initialize()` function, each command will enter its `execute()` phase where it runs code to accomplish its task.  The method `isFinished()` determines if the task has been completed, after which it runs the `end()` function to clean things up. The `execute()` and `isFinished()` methods are called repeatedly by the main robot loop.
+A command is a simple **State Machine** that is either *Initializing*, *Executing*, *Ending*, or *Idle*. Users write code specifying which action should be taken in each state.  Commands run when scheduled, or in response to buttons being pressed on a gamepad or from Shuffleboard. After running the `initialize()` function, each command will enter its `execute()` phase where it runs code to accomplish its task.  The method `isFinished()` determines if the task has been completed, after which it runs the `end()` function to clean things up. The `execute()` and `isFinished()` methods are called repeatedly by the main robot loop.
 
 .. image:: /images/RobotBasics/Commands.001.jpeg 
 
 The DriveDistance Command
 ===============================
-Let's take a look at the *DriveDistance* command to see how this all works. This command is used to drive the robot for a specified distance.  This is where `Parameters <https://www.w3schools.com/java/java_methods_param.asp>`_ are very useful since we can decide how far to drive when the program runs.  This command demonstrates the classic [State Machine](../../Programming/stateMachines.md) programming paradigm where we have an **Initialization Step** `initialize()` followed the **Next Step** `execute()`, and an **Input Update** that repeatedly calls `execute()` until a threshold is met.  The `isFinished()` method transititions it to the next major state `end()`, at which time the command moves to the *Idle* state.
+Let's take a look at the *DriveDistance* command to see how this all works. This command is used to drive the robot for a specified distance.  This is where `Parameters <https://www.w3schools.com/java/java_methods_param.asp>`_ are very useful since we can decide how far to drive when the program runs.  This command demonstrates the classic State Machine programming paradigm where we have an **Initialization Step** `initialize()` followed the **Next Step** `execute()`, and an **Input Update** that repeatedly calls `execute()` until a threshold is met.  The `isFinished()` method transititions it to the next major state `end()`, at which time the command moves to the *Idle* state.
 
 .. code-block:: Java 
 
@@ -142,12 +142,12 @@ The four commands are composed in the class constructor using the `addCommands()
 Viewing the Robot Pose
 =============================
 
-As the robot drives around it might be useful to view its position and orientation on in the Simulator.  We looked at that module previously so you ready're to go onto the [Pose Estimation](../../Concepts/OptimalEstimation/poseEstimation.md) module.  There are a couple of classes that need to be implemented to do this so review that module next. 
+As the robot drives around it might be useful to view its position and orientation on in the Simulator.  We looked at that module previously so you ready're to go onto the Pose Estimation module.  There are a couple of classes that need to be implemented to do this so review that module next. 
 
 Lab - Commands
 ======================
 
-This lab continues with the one that you worked on in the [Subsystems](romiSubsystems.md) section of the training guide.  You'll learn about the following Java programming concepts:
+This lab continues with the one that you worked on in the Subsystems section of the training guide.  You'll learn about the following Java programming concepts:
 
 - Create a new Command or Subsystem in VSCode.
 
@@ -233,7 +233,6 @@ In order to make the command accessible from *RobotContainter* you'll need to im
 
 You're now done with this task!
 
-<!-- [Reset Odometry solution](solutionResetOdometry.md) -->
 
 Implement Slew Rate Limiter Filter
 =========================================
@@ -244,7 +243,7 @@ You'll need a separate filter for the forward and backwards driving and for the 
 
 We don't want to use this filter unless we're very specific about it so create a new method in the *Drivetrain* class called `rateLimitedArcadeDrive()` to use the filters.  You'll also need to update the *ArcadeDrive* command to use the new `rateLimitedArcadeDrive()` method of the Drivetrain.
 
-[Slew Rate Filter solution](solutionSlewRateFilter.md) 
+.. [Slew Rate Filter solution](solutionSlewRateFilter.md) 
 
 References
 =========================
