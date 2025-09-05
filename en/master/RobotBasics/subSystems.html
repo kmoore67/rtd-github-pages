@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subsystems &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Commands" href="commands.html" />
+    <link rel="prev" title="Basic Robot Structure" href="basicStructure.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="robotBasicsIndex.html">Robot Basics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="exampleCode.html">Example Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basicStructure.html">Basic Robot Structure</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Subsystems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#lab-example-code">Lab - Example Code</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#complete-the-lab-steps">Complete the Lab Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#subsystem-structure">Subsystem Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#code-walk-through">Code Walk Through</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#intakeconstants">IntakeConstants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#intake">Intake</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#intakekraken">IntakeKraken</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#enabling-simulation">Enabling Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="telemetry.html">Telemetry</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="robotBasicsIndex.html">Robot Basics</a></li>
+      <li class="breadcrumb-item active">Subsystems</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RobotBasics/subSystems.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="subsystems">
+<h1>Subsystems<a class="headerlink" href="#subsystems" title="Permalink to this heading"></a></h1>
+<p>Subsystems are the basic units of functionally for our robot, such as drive trains and mechanical arms.  They encapsulate low-level hardware objects (motor controllers, sensors, etc) and provide methods that can be used by Commands.  We represent subsystems in code by using <strong>Objects</strong>. Objects are composed of Data Structures and Procedures, as explained in <strong>Programming Basics</strong>. You should learn those concepts before we look at the subsystems that are on the Robot.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For this module the majority of the code implementation can be found in the <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/commandbased/subsystems.html">Subsystems</a> section of the FRC Documentation.</p>
+</div>
+<img alt="../_images/Subsystems.002.jpeg" src="../_images/Subsystems.002.jpeg" />
+<section id="lab-example-code">
+<h2>Lab - Example Code<a class="headerlink" href="#lab-example-code" title="Permalink to this heading"></a></h2>
+<p>The <strong>ProgTrain1</strong> example code that we used in the previous session, is a bit complicated to teach to new developers. We need a very easy example to pick apart and explain what it is doing. Remember that is it better to walk first rather than run. So we have updated the <strong>Progtrain1</strong> repository with a new subsystem. Take a minute and <strong>Pull</strong> down the repository to your laptop.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It you are struggling to <strong>Pull</strong> a Github repository, you might want to reference the steps in the previous Lab!</p>
+</div>
+<section id="complete-the-lab-steps">
+<h3>Complete the Lab Steps<a class="headerlink" href="#complete-the-lab-steps" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>In VS Code, Open folder c:/projects/ProgTrain1 (under <em>File</em> go to <em>Open Folder</em>)</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you receive a VS Code message asking if you trust the authors, you should click Yes - you trust the authors!!!</p>
+</div>
+<p>The subsequent sections will be based on the <strong>ProgTrain1</strong> example code.</p>
+</section>
+</section>
+<section id="subsystem-structure">
+<h2>Subsystem Structure<a class="headerlink" href="#subsystem-structure" title="Permalink to this heading"></a></h2>
+<p>In general, each subsystem should be placed in it’s own folder. This keeps things clean and avoids conflict with other developers. Taking a look at the <em>Intake</em> susbsystem inside the <strong>ProgTrain1</strong> example code, it is organized as follows:</p>
+<img alt="../_images/Structure.006.jpeg" class="align-center" src="../_images/Structure.006.jpeg" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Subsystems folder can be found as a subfolder under Robot.</p>
+</div>
+<p>In the Subsystems folder we have a new folder called <strong>Intake</strong>. This folder holds all the components to make the Intake mechanism work. Inside the Intake Folder we have a java class also called <strong>Intake</strong>. This class contains all the processing logic (some would call it business logic) to make the Intake work. When you want to analyze what a subsystem does this is where you should start.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Normally, this class is called <strong>IntakeSubsystem</strong> to help everyone understand what it is at a glance. However, many programmers shorten this name to <em>Intake</em> even though is causes some minor confusion with the folder name.</p>
+</div>
+<p>The <strong>Intake</strong> subsystem may need some constants that can be shared with other classes in the folder. For example, the motor ID numbers or the setpoints for the mechanism to travel would be examples of constants. Constants, by definition, are things that never change! We put these constants in a seperate <strong>Constants</strong> class (rather than bury them inside the subsystem class) to make them easy to find and change as needed.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Never put magic numbers in your code. (A <strong>Magic Number</strong> is any number that is placed in code without any definition what the number does.) Many programmers take shortcuts and insert a number into the robot logic only to find a few weeks later that they do not remember what the number represents. If you need to put a number in the robot code, make it a variable or constant with a descriptive name so that you will remember what it does!</p>
+</div>
+<p>Our team wants to seperate the lower level motor logic from the higher level functional logic to make the intake work. This is for a number of reasons:</p>
+<ol class="arabic simple">
+<li><p>If the mechanical team decides to swap the type of motor to another vendor, for example swap out a <em>Kraken</em> motor with a <em>Neo</em> motor, all of the logic to change out the motor is in one place. The business logic of running the subsystem is unchanged. This makes it much simpiler <em>and faster</em> to change out motors.</p></li>
+<li><p>By keeping the business logic seperate from the motor logic you can focus on making the subsysem work, rather than the details of operating the motor.</p></li>
+<li><p>It allows multiple programmers to work on the same subsystem. One programmer can focus on the processing logic and the other can work on the details of getting the motor working.</p></li>
+<li><p>It allows us to have mutiple robots using the same subsystem program with different motors. The business logic is exactly the same only the motor logic is different. For example, if the <em>Competition</em> robot uses Kraken motors and the <em>Practice</em> robot use Neos and the <em>Programming</em> Robot uses bag motors. You would have a subsystem folder that contained <em>Intake</em>, <em>IntakeConstants</em>, <em>IntakeKraken</em>, <em>IntakeNEO</em> and <em>IntakeBag</em> classes.</p></li>
+</ol>
+<p>When you write a subsystem you will not always have the motors available to run your code on. (For example if you are at home writing code.) So, for all the reasons we listed previously, we need you to seperate all the motor specific logic and put that in a seperate class. In the <strong>ProgTrain1</strong> example code, we created a class called <strong>IntakeKraken</strong> after the motor that we are using. If we were using a NEO motor we would have called it <strong>IntakeNEO</strong>. (I know it is a very clever naming convention!)</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>As a subsystem developer you are responsible to ensure that your subsystem can run in simulation. Programming time on the physical robots is usually in very short supply. That means we need to be able to test the majority of our code in simulation-without a robot.</p>
+</div>
+</section>
+<section id="code-walk-through">
+<h2>Code Walk Through<a class="headerlink" href="#code-walk-through" title="Permalink to this heading"></a></h2>
+<section id="intakeconstants">
+<h3>IntakeConstants<a class="headerlink" href="#intakeconstants" title="Permalink to this heading"></a></h3>
+<p>We begin the constants class by defining any <strong>Magic Numbers</strong> such as the motor ID numbers, what speed we want the Intake to Intake with or what speed we want to eject stuck items in the Intake.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">IntakeConstants</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">kRollerMotorID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">23</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">kRollerEncoderID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">24</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">kReduction</span><span class="w"> </span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="mf">1.0</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">kIntakeSpeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2000.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">kEjectSpeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3000.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">kBusName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sim&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Next, we define the motor configuration. Our team uses the <strong>.with</strong> convention to explicity define all the motor configuration items.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Define configuration for Intake Roller Motor</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">TalonFXConfiguration</span><span class="w"> </span><span class="n">intakeRollerConfigs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TalonFXConfiguration</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="na">withCurrentLimits</span><span class="p">(</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">CurrentLimitsConfigs</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withStatorCurrentLimit</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withStatorCurrentLimitEnable</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withSupplyCurrentLimit</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withSupplyCurrentLimitEnable</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withSupplyCurrentLowerLimit</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withSupplyCurrentLowerTime</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="p">).</span><span class="na">withTorqueCurrent</span><span class="p">(</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">TorqueCurrentConfigs</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withPeakForwardTorqueCurrent</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withPeakReverseTorqueCurrent</span><span class="p">(</span><span class="o">-</span><span class="mi">40</span><span class="p">)</span>
+<span class="w">    </span><span class="p">).</span><span class="na">withMotorOutput</span><span class="p">(</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">MotorOutputConfigs</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withInverted</span><span class="p">(</span><span class="n">InvertedValue</span><span class="p">.</span><span class="na">CounterClockwise_Positive</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withNeutralMode</span><span class="p">(</span><span class="n">NeutralModeValue</span><span class="p">.</span><span class="na">Coast</span><span class="p">)</span>
+<span class="w">    </span><span class="p">).</span><span class="na">withMotionMagic</span><span class="p">(</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">MotionMagicConfigs</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withMotionMagicCruiseVelocity</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withMotionMagicAcceleration</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Next, we define the PID parameters. In this case we are using 2 of the 3 available slots to show the difference between voltage control and torque control. The PID values are very different. Keep in mind the fundamental differences in units when establishing a PID. Voltage control is in units of <strong>Volts</strong>. Torque Control is in units of <strong>AMPS</strong>. Torque Control can give you a 15% performance increase over voltage control in most circumstances. It is the preferred control method.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>You must set the PID values appopriately for the type of motor control you will be using in your subsystem.</p>
+</div>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="p">).</span><span class="na">withSlot0</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Slot0Configs</span><span class="p">()</span><span class="w">      </span><span class="cm">/* Voltage-based velocity requires a velocity feed forward to account for the back-emf of the motor */</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withKP</span><span class="p">(</span><span class="mf">0.11</span><span class="p">)</span><span class="w">       </span><span class="c1">// An error of 1 rotation per second results in 0.11 V output</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withKI</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span><span class="w">        </span><span class="c1">// No output for integrated error</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withKD</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span><span class="w">        </span><span class="c1">// No output for error derivative</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withKS</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span><span class="w">        </span><span class="c1">// To account for friction, add 0.1 V of static feedforward</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withKV</span><span class="p">(</span><span class="mf">0.12</span><span class="p">)</span><span class="w">       </span><span class="c1">// Kraken X60 is a 500 kV motor, 500 rpm per V = 8.333 rps per V, 1/8.33 = 0.12 volts / rotation per second</span>
+<span class="p">).</span><span class="na">withSlot1</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Slot1Configs</span><span class="p">()</span><span class="w">      </span><span class="cm">/* Torque-based velocity does not require a velocity feed forward, as torque will accelerate the rotor up to the desired velocity by itself */</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withKP</span><span class="p">(</span><span class="mf">5.0</span><span class="p">)</span><span class="w">        </span><span class="c1">// An error of 1 rotation per second results in 5 A output</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withKI</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span><span class="w">        </span><span class="c1">// No output for integrated error</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withKD</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span><span class="w">        </span><span class="c1">// No output for error derivative</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withKS</span><span class="p">(</span><span class="mf">2.5</span><span class="p">)</span><span class="w">        </span><span class="c1">// To account for friction, add 2.5 A of static feedforward</span>
+<span class="w">    </span><span class="p">);</span>
+</pre></div>
+</div>
+<p>And finally, we load the <strong>IntakeConfigs</strong> object with the <em>IntakeRollerConfigs</em> based on which robot we are using.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>To keep things simple, this example only shows motor configurations for a single robot. Later on we will explain how to have a single constants file that supports multiple robots.</p>
+</div>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/********************************************************</span>
+<span class="cm">* Based on the robot selected, load Intake configs with</span>
+<span class="cm">*   the selected robot configuration</span>
+<span class="cm">********************************************************/</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">IntakeConfigs</span><span class="w"> </span><span class="n">IntakeConfigs</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">Constants</span><span class="p">.</span><span class="na">getRobot</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">COMPBOT</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IntakeConfigs</span><span class="p">(</span>
+<span class="w">            </span><span class="n">intakeRollerConfigs</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">SIMBOT</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IntakeConfigs</span><span class="p">(</span>
+<span class="w">            </span><span class="n">intakeRollerConfigs</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">DEVBOT</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IntakeConfigs</span><span class="p">(</span>
+<span class="w">            </span><span class="n">intakeRollerConfigs</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">CAMERABOT</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IntakeConfigs</span><span class="p">(</span>
+<span class="w">            </span><span class="n">intakeRollerConfigs</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="intake">
+<h3>Intake<a class="headerlink" href="#intake" title="Permalink to this heading"></a></h3>
+<p>We start out by defining the subsystem class and indicate that is is <em>extending</em> the existing WPILIB SubsystemBase class. Next we list any vaiables we are going to use in the class sucj as:</p>
+<ol class="arabic simple">
+<li><p>ioStats - which is a class to pass variables bwtween the <strong>Intake</strong> class and the <strong>IntakeKraken</strong> class.</p></li>
+<li><p>intakeShuffleboard - defines a new tab to add to the Shuffleboard</p></li>
+<li><p>m_IntakeKraken - is the instance of the IntakeKraken class. The getInstance() method returns an instance of the class.</p></li>
+</ol>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Intake</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">SubsystemBase</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">IntakeStats</span><span class="w"> </span><span class="n">ioStats</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IntakeStats</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ShuffleboardTab</span><span class="w"> </span><span class="n">intakeShuffleboard</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">IntakeKraken</span><span class="w"> </span><span class="n">m_IntakeKraken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IntakeKraken</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Next, we define the varibles we want to put on the Shuffleboard:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Shuffleboard entrys */</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">GenericEntry</span><span class="w"> </span><span class="n">intakePosition</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">GenericEntry</span><span class="w"> </span><span class="n">intakeVelocity</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">GenericEntry</span><span class="w"> </span><span class="n">intakeAppliedVolts</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">GenericEntry</span><span class="w"> </span><span class="n">intakeSupplyCurrent</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">GenericEntry</span><span class="w"> </span><span class="n">intakeTorqueCurrent</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">GenericEntry</span><span class="w"> </span><span class="n">intakeTemp</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">GenericEntry</span><span class="w"> </span><span class="n">intakeState</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Now we define the states used in this subsystem:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="cm">/* Define the Valid States for the Intake Subsystem  */</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">State</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">IDLE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">INTAKE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">RUNNING</span><span class="p">,</span>
+<span class="w">    </span><span class="n">CHARACTERIZE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">EJECT</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now, we define a variable to hold the current state and initalize it to the <em>Idle</em> state:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Variable to hold the current state of the state machine  */</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">State</span><span class="w"> </span><span class="n">currentState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">IDLE</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Next up, we define a class to hold the data to pass between the <strong>Intake</strong> and <strong>IntakeKraken</strong> classes. That way we are only returning one single variable(the class).</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/* a Generic class for handling the IO stats generated in the Kraken module  */</span>
+<span class="kd">class</span> <span class="nc">IntakeStats</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//Stats for the Intake/Expel Motor</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">MotorConnected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rollerPositionRads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rollerVelocityRpm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rollerAppliedVolts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rollerSupplyCurrentAmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rollerTorqueCurrentAmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rollerTempCelsius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now for the <strong>Constructor</strong>. First, we create a new shuffleboard tab (named <em>Intake</em>) and add a number of widgets to the tab. Give each widget a window title and we also connect these widgets to the variable names we created earlier:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/** Constructor - Creates a new IntakeSubsystem. */</span>
+<span class="kd">public</span><span class="w"> </span><span class="nf">Intake</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">//Define Suffleboard Tab for this Subsystem</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">intakeShuffleboard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Shuffleboard</span><span class="p">.</span><span class="na">getTab</span><span class="p">(</span><span class="s">&quot;Intake&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">intakeVelocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">intakeShuffleboard</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Velocity (rot per s)&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">).</span><span class="na">getEntry</span><span class="p">();</span>
+<span class="w">    </span><span class="n">intakePosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">intakeShuffleboard</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Position (rot)&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">).</span><span class="na">getEntry</span><span class="p">();;</span>
+<span class="w">    </span><span class="n">intakeSupplyCurrent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">intakeShuffleboard</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Supply Current&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">).</span><span class="na">getEntry</span><span class="p">();</span>
+<span class="w">    </span><span class="n">intakeTorqueCurrent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">intakeShuffleboard</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Torque Current&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">).</span><span class="na">getEntry</span><span class="p">();</span>
+<span class="w">    </span><span class="n">intakeTemp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">intakeShuffleboard</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Motor Temp&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">).</span><span class="na">getEntry</span><span class="p">();</span>
+<span class="w">    </span><span class="n">intakeAppliedVolts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">intakeShuffleboard</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Applied Volts&quot;</span><span class="p">,</span><span class="mf">0.0</span><span class="p">).</span><span class="na">getEntry</span><span class="p">();</span>
+<span class="w">    </span><span class="n">intakeState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">intakeShuffleboard</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;State&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">).</span><span class="na">getEntry</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now, we create a private function to handle changing states:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">flipState</span><span class="p">(</span><span class="n">State</span><span class="w"> </span><span class="n">inState</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Setting state....&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">inState</span><span class="p">.</span><span class="na">name</span><span class="p">());</span>
+<span class="w">    </span><span class="n">currentState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inState</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now for the good part, we get down to the state processing in our subsystem. Notice that this method is an override. That means it is overriding a method in the WPILIB <em>SubSystemBase</em> class. In this case, the <strong>periodic()</strong> method will be called automatically by the robot controller approximately every 20 milliseconds. Which is very helpful, we do not need to write any code to keep looping over the state, it will just happen automatically.</p>
+<p>The first thing we do is get the updated statistics from the motor. Then we have a switch statement that defines an anonymous function for each of the states. The m_IntakeKraken variable holds the instance of our <em>IntakeKraken</em> class. So if you look at the <em>IDLE</em> state, we are calling the <em>Stop()</em> method in the <em>IntakeKraken</em> class. You will also notice that we advance to the next state by calling the <em>flipState()</em> method that we defined earlier and passing the new state we want. Once we are done processing the current state we update the shuffleboard with our motor statistics and we are done.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The -&gt; instruction creates an anonomous function for java code within the curly brackets.</p>
+</div>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Override</span>
+<span class="cm">/* This method will be called once per scheduler run */</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">periodic</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//go update the signal data</span>
+<span class="w">    </span><span class="n">m_IntakeKraken</span><span class="p">.</span><span class="na">updateStats</span><span class="p">(</span><span class="n">ioStats</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">currentState</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">IDLE</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">m_IntakeKraken</span><span class="p">.</span><span class="na">stop</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">INTAKE</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//run intaking motoring forward</span>
+<span class="w">            </span><span class="n">m_IntakeKraken</span><span class="p">.</span><span class="na">runVelocity</span><span class="p">(</span><span class="n">IntakeConstants</span><span class="p">.</span><span class="na">kIntakeSpeed</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+<span class="w">            </span><span class="n">flipState</span><span class="p">(</span><span class="n">State</span><span class="p">.</span><span class="na">RUNNING</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">RUNNING</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">EJECT</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Run the intake rollers backwards</span>
+<span class="w">            </span><span class="n">m_IntakeKraken</span><span class="p">.</span><span class="na">runVelocity</span><span class="p">(</span><span class="o">-</span><span class="n">IntakeConstants</span><span class="p">.</span><span class="na">kEjectSpeed</span><span class="p">,</span><span class="mf">0.0</span><span class="p">);</span>
+<span class="w">            </span><span class="n">flipState</span><span class="p">(</span><span class="n">State</span><span class="p">.</span><span class="na">RUNNING</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">CHARACTERIZE</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="c1">// End of Switch</span>
+
+<span class="w">    </span><span class="c1">//Update Dashboard with Telementry Data</span>
+<span class="w">    </span><span class="n">UpdateTelemetry</span><span class="p">();</span>
+<span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Next we have a method for moving the data from the stats class we defined to the Shuffleboard widgets:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/************************************************</span>
+<span class="cm">* Update the Shuffleboard with Motor Statistics</span>
+<span class="cm">************************************************/</span>
+<span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">UpdateTelemetry</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">intakeVelocity</span><span class="p">.</span><span class="na">setDouble</span><span class="p">(</span><span class="n">ioStats</span><span class="p">.</span><span class="na">rollerVelocityRpm</span><span class="p">);</span>
+<span class="w">    </span><span class="n">intakePosition</span><span class="p">.</span><span class="na">setDouble</span><span class="p">(</span><span class="n">ioStats</span><span class="p">.</span><span class="na">rollerPositionRads</span><span class="p">);</span>
+<span class="w">    </span><span class="n">intakeSupplyCurrent</span><span class="p">.</span><span class="na">setDouble</span><span class="p">(</span><span class="n">ioStats</span><span class="p">.</span><span class="na">rollerSupplyCurrentAmps</span><span class="p">);</span>
+<span class="w">    </span><span class="n">intakeTorqueCurrent</span><span class="p">.</span><span class="na">setDouble</span><span class="p">(</span><span class="n">ioStats</span><span class="p">.</span><span class="na">rollerTorqueCurrentAmps</span><span class="p">);</span>
+<span class="w">    </span><span class="n">intakeAppliedVolts</span><span class="p">.</span><span class="na">setDouble</span><span class="p">(</span><span class="n">ioStats</span><span class="p">.</span><span class="na">rollerAppliedVolts</span><span class="p">);</span>
+<span class="w">    </span><span class="n">intakeTemp</span><span class="p">.</span><span class="na">setDouble</span><span class="p">(</span><span class="n">ioStats</span><span class="p">.</span><span class="na">rollerTempCelsius</span><span class="p">);</span>
+<span class="w">    </span><span class="n">intakeState</span><span class="p">.</span><span class="na">setValue</span><span class="p">(</span><span class="n">currentState</span><span class="p">.</span><span class="na">name</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We could have added this Shuffleboard code to the end of our <strong>periodic()</strong> method, but to keep things clean we split it out to a seperate method.</p>
+</div>
+<p>Now we define some methods to be used by the old style command language. More on those later:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/************************************************</span>
+<span class="cm">* External functions for Old Command Style</span>
+<span class="cm">************************************************/</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">runVelocity</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">speed</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_IntakeKraken</span><span class="p">.</span><span class="na">runVelocity</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span><span class="mf">0.0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">stop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_IntakeKraken</span><span class="p">.</span><span class="na">stop</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And finally, at the end our of class we define any commands that can be fired off by other classes on the robot, or by button presses in the <strong>RobotContainer</strong>. These are very simple commands that just run the <strong>FlipState()</strong> method we defined earlier. These are commands that are fired off by the <strong>WPILIB Command Scheduler</strong>. We will talk about these a lot more in the next section on <strong>Commands</strong>.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm">* Set command to Intake</span>
+<span class="cm">*</span>
+<span class="cm">* @return a command</span>
+<span class="cm">*/</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="nf">IntakeCommand</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Subsystem::RunOnce implicitly requires `this` subsystem.</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">runOnce</span><span class="p">(</span>
+<span class="w">        </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/* one-time action goes here */</span>
+<span class="w">        </span><span class="n">flipState</span><span class="p">(</span><span class="n">State</span><span class="p">.</span><span class="na">INTAKE</span><span class="p">);</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm">* Set command to Stow</span>
+<span class="cm">*</span>
+<span class="cm">* @return a command</span>
+<span class="cm">*/</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="nf">IdleCommand</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Subsystem::RunOnce implicitly requires `this` subsystem.</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">runOnce</span><span class="p">(</span>
+<span class="w">        </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/* one-time action goes here */</span>
+<span class="w">        </span><span class="n">flipState</span><span class="p">(</span><span class="n">State</span><span class="p">.</span><span class="na">IDLE</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm">* Set Command to Eject</span>
+<span class="cm">*</span>
+<span class="cm">* @return a command</span>
+<span class="cm">*/</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="nf">EjectCommand</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Subsystem::RunOnce implicitly requires `this` subsystem.</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">runOnce</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="n">flipState</span><span class="p">(</span><span class="n">State</span><span class="p">.</span><span class="na">EJECT</span><span class="p">);</span><span class="w"> </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="intakekraken">
+<h3>IntakeKraken<a class="headerlink" href="#intakekraken" title="Permalink to this heading"></a></h3>
+<p>The IntakeKraken class contains all of the technical logic necessaray to operate any motors and/or sensors needed in the subsystem. It this example there is only a single <strong>Kraken</strong> motor that is being used. But the concepts in this example will scale to multiple motors and multiple sensors.</p>
+<p>First, we define the class and any variables that we need in the class:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">IntakeKraken</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">IntakeKraken</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">appliedVolts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isSimulation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">useTorque</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Next, we define any physical hardware being used in the class. We get the Motor ID and the name of the CAN bus from the <strong>IntakeConstants</strong> file.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Hardware</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">TalonFX</span><span class="w"> </span><span class="n">m_talonFX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TalonFX</span><span class="p">(</span><span class="n">IntakeConstants</span><span class="p">.</span><span class="na">kRollerMotorID</span><span class="p">,</span><span class="w"> </span><span class="n">IntakeConstants</span><span class="p">.</span><span class="na">kBusName</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Next, we define the <em>status signals</em> that we are going get from the motor. We must use the correct data type for each varible:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Status Signals</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">StatusSignal</span><span class="o">&lt;</span><span class="n">Angle</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rollerPosition</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">StatusSignal</span><span class="o">&lt;</span><span class="n">AngularVelocity</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rollerVelocity</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">StatusSignal</span><span class="o">&lt;</span><span class="n">Voltage</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rollerAppliedVolts</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">StatusSignal</span><span class="o">&lt;</span><span class="n">Current</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rollerSupplyCurrent</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">StatusSignal</span><span class="o">&lt;</span><span class="n">Current</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rollerTorqueCurrent</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">StatusSignal</span><span class="o">&lt;</span><span class="n">Temperature</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rollerTempCelsius</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Now, we define the constructor. The first task is to run the configuration aqgainst the motor we defined previously. The configuration comes from the <strong>IntakeConstants</strong> class. Make sure to test for success and if not print out a message on the console.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Constructor</span>
+<span class="kd">public</span><span class="w"> </span><span class="nf">IntakeKraken</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="cm">/**********************************</span>
+<span class="cm">  * Configure the Roller Motor</span>
+<span class="cm">  ***********************************/</span>
+<span class="w">  </span><span class="c1">// Apply Configuration from Intake Constants to motor</span>
+<span class="w">  </span><span class="n">StatusCode</span><span class="w"> </span><span class="n">statuscode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">getConfigurator</span><span class="p">().</span><span class="na">apply</span><span class="p">(</span><span class="n">IntakeConstants</span><span class="p">.</span><span class="na">IntakeConfigs</span><span class="p">.</span><span class="na">intakeRollerConfigs</span><span class="p">(),</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">statuscode</span><span class="p">.</span><span class="na">isOK</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Configuration Failed on Intake Roller Motor &quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Now, we connect the status signal variables we defined earlier to the motor functions to get the data. So for the <em>Position</em> data, we call the <em>getPosition</em> method on the <em>m_talonFX</em> motor and put the data in the <em>Status Signal</em> variable <em>rollerPosition</em>.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Set signals</span>
+<span class="n">rollerPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">getPosition</span><span class="p">();</span>
+<span class="n">rollerVelocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">getVelocity</span><span class="p">();</span>
+<span class="n">rollerAppliedVolts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">getMotorVoltage</span><span class="p">();</span>
+<span class="n">rollerSupplyCurrent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">getSupplyCurrent</span><span class="p">();</span>
+<span class="n">rollerTorqueCurrent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">getTorqueCurrent</span><span class="p">();</span>
+<span class="n">rollerTempCelsius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">getDeviceTemp</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The next code snippet is very important. The code that gets the status signals in the previous code block sends a command on the CAN bus every time it is executed, and then the motor sends a response message with the requested data. This process can flood the CAN bus with these status messages-the same CAN bus that is used for sending motor instructions. And remember that the loop on the <strong>periodic()</strong> method is running every 20ms or <strong>50 times per second!</strong> To avoid flooding the bus with these informational messages, we want to synchronize the messsages to happen at the same time. Let’s request them all at once and get the response all at once. Even better, let’s tell the motor to send them to us automatically every <strong>100ms (10 times per second)</strong>. This will reduce the traffic on the CAN bus that will in turn allow other traffic to pass. You <strong>must</strong> set a <em>BaseStatusSignal</em> configuration in every subsystem to avoid killing the robot.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">BaseStatusSignal</span><span class="p">.</span><span class="na">setUpdateFrequencyForAll</span><span class="p">(</span>
+<span class="w">    </span><span class="mf">100.0</span><span class="p">,</span>
+<span class="w">    </span><span class="n">rollerPosition</span><span class="p">,</span>
+<span class="w">    </span><span class="n">rollerVelocity</span><span class="p">,</span>
+<span class="w">    </span><span class="n">rollerAppliedVolts</span><span class="p">,</span>
+<span class="w">    </span><span class="n">rollerSupplyCurrent</span><span class="p">,</span>
+<span class="w">    </span><span class="n">rollerTorqueCurrent</span><span class="p">,</span>
+<span class="w">    </span><span class="n">rollerTempCelsius</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Do not set an update frequency lower than 100ms. The CANivore hardware can only communicate at 100ms. Any time shorter than that returns the same response. This floods the CAN bus with duplicate status messages and can literally bring down the robot.</p>
+</div>
+<p>This code block sends the motor definition in your subystem (in this case m_talonFX) to the <em>Physics Simulator</em>. But only if the code is running in simulation. As this code is in the <strong>Constructor</strong> of the class it only runs a single time when the class is instantiated. It also sets a boolean variable to true, so that we do not have to call the <em>Utils.isSimulation()</em> method again.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Defines the motor to the Physics Simulation-only in Simulation */</span>
+<span class="k">if</span><span class="p">(</span><span class="n">Utils</span><span class="p">.</span><span class="na">isSimulation</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">isSimulation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="n">PhysicsSim</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">addTalonFX</span><span class="p">(</span><span class="n">m_talonFX</span><span class="p">,</span><span class="w"> </span><span class="mf">0.001</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Next, we set up the communication for the motor to return the statistics back to your subsystem. The <strong>updateStats</strong> method provides a way for the <strong>Intake</strong> class to request data from the motor. It passes in the <strong>IntakeStats</strong> class to hold the data. It also runs the <em>Physics Simulator</em> if we are running in <strong>Simulation Mode</strong>.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/****************************************************************************************</span>
+<span class="cm"> * Get the IO statictics from the motor and put them into the passed in IntakeStats class</span>
+<span class="cm">*****************************************************************************************/</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">updateStats</span><span class="p">(</span><span class="n">IntakeStats</span><span class="w"> </span><span class="n">stats</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/* Only run the Physics Simulator in Simulation */</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">isSimulation</span><span class="p">){</span>
+<span class="w">      </span><span class="n">PhysicsSim</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">run</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">stats</span><span class="p">.</span><span class="na">MotorConnected</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">BaseStatusSignal</span><span class="p">.</span><span class="na">refreshAll</span><span class="p">(</span>
+<span class="w">                </span><span class="n">rollerPosition</span><span class="p">,</span>
+<span class="w">                </span><span class="n">rollerVelocity</span><span class="p">,</span>
+<span class="w">                </span><span class="n">rollerAppliedVolts</span><span class="p">,</span>
+<span class="w">                </span><span class="n">rollerSupplyCurrent</span><span class="p">,</span>
+<span class="w">                </span><span class="n">rollerTorqueCurrent</span><span class="p">,</span>
+<span class="w">                </span><span class="n">rollerTempCelsius</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">isOK</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">stats</span><span class="p">.</span><span class="na">rollerPositionRads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rollerPosition</span><span class="p">.</span><span class="na">getValueAsDouble</span><span class="p">();</span>
+<span class="w">    </span><span class="n">stats</span><span class="p">.</span><span class="na">rollerVelocityRpm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rollerVelocity</span><span class="p">.</span><span class="na">getValueAsDouble</span><span class="p">();</span>
+<span class="w">    </span><span class="n">stats</span><span class="p">.</span><span class="na">rollerAppliedVolts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rollerAppliedVolts</span><span class="p">.</span><span class="na">getValueAsDouble</span><span class="p">();</span>
+<span class="w">    </span><span class="n">stats</span><span class="p">.</span><span class="na">rollerSupplyCurrentAmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rollerSupplyCurrent</span><span class="p">.</span><span class="na">getValueAsDouble</span><span class="p">();</span>
+<span class="w">    </span><span class="n">stats</span><span class="p">.</span><span class="na">rollerTorqueCurrentAmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rollerTorqueCurrent</span><span class="p">.</span><span class="na">getValueAsDouble</span><span class="p">();</span>
+<span class="w">    </span><span class="n">stats</span><span class="p">.</span><span class="na">rollerTempCelsius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rollerTempCelsius</span><span class="p">.</span><span class="na">getValueAsDouble</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And finally, we add in the methods that are called by the Intake class to process specific motor functions, like run the motor based on a voltage input, run the motor with a certain velocity (in rotations per minute), stop the motor, or <em>Characterize</em> the motor (more on that later)</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">runVolts</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">Voltage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">appliedVolts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MathUtil</span><span class="p">.</span><span class="na">clamp</span><span class="p">(</span><span class="n">Voltage</span><span class="p">,</span><span class="o">-</span><span class="mf">12.0</span><span class="p">,</span><span class="w"> </span><span class="mf">12.0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">setControl</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">VoltageOut</span><span class="p">(</span><span class="n">appliedVolts</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="cm">/*********************</span>
+<span class="cm">* The runVelocity function can run either:</span>
+<span class="cm">* --CTRE Velocity Voltage Mode (The Velocity is accomplished using voltage)</span>
+<span class="cm">* or</span>
+<span class="cm">* --CTRE Velocity Torque Mode (the Velocity is accomplished using Torque)</span>
+<span class="cm">*</span>
+<span class="cm">* The Configuration of the motor is different based on which option you choose (See IntakeConfig)</span>
+<span class="cm">* Simply set the useTorque boolean for the option you want</span>
+<span class="cm">*********************/</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">runVelocity</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">RPM</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Feedforward</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//Convert rotations per minute into rotations per second</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">desiredRotationsPerSecond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">RPM</span><span class="o">/</span><span class="mf">60.0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">useTorque</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/* Use velocity voltage */</span>
+<span class="w">        </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">setControl</span><span class="p">(</span><span class="n">m_velocityVoltage</span><span class="p">.</span><span class="na">withVelocity</span><span class="p">(</span><span class="n">desiredRotationsPerSecond</span><span class="p">).</span><span class="na">withSlot</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/* Use velocity torque */</span>
+<span class="w">        </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">setControl</span><span class="p">(</span><span class="n">m_velocityTorque</span><span class="p">.</span><span class="na">withVelocity</span><span class="p">(</span><span class="n">desiredRotationsPerSecond</span><span class="p">).</span><span class="na">withSlot</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">stop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* tell the motor to brake */</span>
+<span class="w">    </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">setControl</span><span class="p">(</span><span class="n">m_brake</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">runCharacterization</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="enabling-simulation">
+<h2>Enabling Simulation<a class="headerlink" href="#enabling-simulation" title="Permalink to this heading"></a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>As the subsystem developer you are responsible for ensuring that any subsystem that you develop is capable of running in simulation.</p>
+</div>
+<p>It is very important that the subsystem you develop is capable of running in simulation. As explained previously, simulation is the ability to test your code without a robot. The good news it that is realtively easy to do.</p>
+<p>If you take a look at the <strong>IntakeKraken</strong> class in the <strong>ProgTrain1</strong> example, you will note that the exact same code works for both simulation and the physical robot. To make this work there are two specific features of this code that you <strong>must</strong> include in your subsystems. Let’s look at them one at a time:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Defines the motor to the Physics Simulation-only in Simulation */</span>
+<span class="k">if</span><span class="p">(</span><span class="n">Utils</span><span class="p">.</span><span class="na">isSimulation</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">isSimulation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="n">PhysicsSim</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">addTalonFX</span><span class="p">(</span><span class="n">m_talonFX</span><span class="p">,</span><span class="w"> </span><span class="mf">0.001</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This code block sends the motor definition in your subystem (in this case m_talonFX) to the Physics simulator. But only if the code is running in simulation. As this code is only in the <strong>Constructor</strong> of the class it only runs a single time when the class is instantiated. It also sets a boolean variable to true, so that we do not have to call the Utils.isSimulation() method again.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Only run the Physics Simulator in Simulation */</span>
+<span class="k">if</span><span class="p">(</span><span class="n">isSimulation</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">PhysicsSim</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">run</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This code block is part of the <strong>UpdateStats</strong> method, so each time updates stats is called, the Physics Simulator will advance the model.</p>
+<p>These are the only code changes needed to aloow the <strong>IntakeKraken</strong> class to run both in simulation and with the physical robot.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You must also include the PhysicsSim.java and TalonFXSimProfile.java in your robot project. These modules can be found in the sim folder under the <em>robot</em> folder.</p>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/commandbased/subsystems.html">Subsystems</a></p></li>
+<li><p>Java Tutorial on <a class="reference external" href="https://www.w3schools.com/java/default.asp">W3Schools</a></p></li>
+<li><p>QUT Robot Academy <a class="reference external" href="https://robotacademy.net.au/masterclass/measuring-motion/">Measuring Motion</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="basicStructure.html" class="btn btn-neutral float-left" title="Basic Robot Structure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="commands.html" class="btn btn-neutral float-right" title="Commands" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

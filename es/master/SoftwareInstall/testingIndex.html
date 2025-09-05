@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setup Testing Environment &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="FRC Testing Environment" href="frcDev.html" />
+    <link rel="prev" title="The Git Repository and Github" href="git.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setup Testing Environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="frcDev.html">FRC Testing Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rioSoftware.html">RoboRio and Device Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="phoenixSoftware.html">Install Phoenix API Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="revSoftware.html">Install Rev API Libraries</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Setup Testing Environment</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/SoftwareInstall/testingIndex.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="setup-testing-environment">
+<h1>Setup Testing Environment<a class="headerlink" href="#setup-testing-environment" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p>Once you have written some code and you are ready to test, there are several platforms and software tools on which to test.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Robot Simulator</strong></dt><dd><p>The Robot Simulator allows you to test your code without a physical robot. Simulators are used extensively in the robotics industry to work out issues before deploying code that could severely damage expensive robots.  They are also useful for detecting code bugs, since an issue such as a divide-by-zero that will crash the code on a robot will also crash the code in the simulator. Detailed information about the <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/wpilib-tools/robot-simulation/introduction.html">Robot Simulator</a> can be found in the FRC documentation.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Sweet Bench</strong></dt><dd><p>The Sweet Bench is an FRC robot in a box. It has a RoboRio, FRC Radio and many of the motors we use in competitions. All on a benchtop chassis that does not move. It allows you to test your code using real motors, and try out new ideas and practice your programming skills without causing too much damage.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Programming Test Robot</strong></dt><dd><p>Once you have your code working in the simulator and on the sweet bench, you can start <em>porting</em> it onto the programming team practice robot. (The Practice robot is the first build of the competition robot-built very quickly so it may not have all the features and finishes of the competition robot, but it allows the programming team to verify thier code will work on the competition robot.) In software the word <em>Porting</em> generally means to adapt code to a different hardware platform.  Code that worked in simulation may need changes to work on the practice robot. (Such as different motor ID’s and motor tuning such as PID’s.) However, the structure and logic of your code will remain the same we just need to be sure that it is connected to the right hardware.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Shuffleboard</strong></dt><dd><p>When you are running code on a robot it’s very useful to view how data is passing through the system as it operates.  This is referred to as <em>Telemetry</em>.  Telemetry is the science of using automatic equipment to make measurements and transmit them to a receiving station.  Telemetry is critical to fine tuning a system and figuring out what went wrong in the event of a crash. The main FRC tool for visualizing telemetry is <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/dashboards/shuffleboard/index.html">Shuffleboard</a>. It is important that you do not put every variable in your code on the Shuffleboard. Transmitting data to the receiving station takes time and in a competition time is critical, so it is very important that you only put data that you need to improve you programming on the Shunffleboard!</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Phoenix Tuner</strong></dt><dd><p><a class="reference external" href="https://docs.ctre-phoenix.com/en/stable/ch03_PrimerPhoenixSoft.html#what-is-phoenix-tuner">The Phoenix Tuner</a> is used to configure the motors supplied by <em>Cross The Road Electronics CTRE</em>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<img alt="../_images/FRCTools.021.jpeg" src="../_images/FRCTools.021.jpeg" />
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="git.html" class="btn btn-neutral float-left" title="The Git Repository and Github" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="frcDev.html" class="btn btn-neutral float-right" title="FRC Testing Environment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/es/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

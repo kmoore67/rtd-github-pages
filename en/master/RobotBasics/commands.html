@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commands &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Telemetry" href="telemetry.html" />
+    <link rel="prev" title="Subsystems" href="subSystems.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="robotBasicsIndex.html">Robot Basics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="exampleCode.html">Example Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basicStructure.html">Basic Robot Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subSystems.html">Subsystems</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-intake-command">The Intake Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#embedded-commands">Embedded Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#binding-commands-to-buttons">Binding Commands to Buttons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-command-scheduler">The Command Scheduler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-setdefault-command">The setDefault Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#instant-commands">Instant Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#command-groups">Command Groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#complex-commands">Complex Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lab-commands">Lab - Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="telemetry.html">Telemetry</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="robotBasicsIndex.html">Robot Basics</a></li>
+      <li class="breadcrumb-item active">Commands</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RobotBasics/commands.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="commands">
+<h1>Commands<a class="headerlink" href="#commands" title="Permalink to this heading"></a></h1>
+<p>Commands define high-level robot actions or behaviors that utilize the methods defined by the subsystems. Before looking at the commands that are implemented on the Robot you should be very familiar with Procedures and State Machines from the programming sections.  You should also review the FRC Documentation on <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/commandbased/commands.html">Commands</a> before continuing.</p>
+<p>A command is a simple <strong>State Machine</strong> that is either <em>Initializing</em>, <em>Executing</em>, <em>Ending</em>, or <em>Idle</em>. Users write code specifying which action should be taken in each state.  Commands run when scheduled, or in response to buttons being pressed on a gamepad or from Shuffleboard. After running the <cite>initialize()</cite> function, each command will enter its <cite>execute()</cite> phase where it runs code to accomplish its task.  The method <cite>isFinished()</cite> determines if the task has been completed, after which it runs the <cite>end()</cite> function to clean things up. The <cite>execute()</cite> and <cite>isFinished()</cite> methods are called repeatedly by the main robot loop.</p>
+<img alt="../_images/Commands.001.jpeg" src="../_images/Commands.001.jpeg" />
+<section id="the-intake-command">
+<h2>The Intake Command<a class="headerlink" href="#the-intake-command" title="Permalink to this heading"></a></h2>
+<p>Let’s begin by taking a look at the Intake Command. The <strong>IntakeCommand</strong> <em>extends</em> the WPILIB <em>Command</em>. This gives us all the default methods that come with a WPILIB <em>Command</em>. We include a Joystick object to allow us to test if a button is being held down. Then we add a variable for an instance of the Intake subsystem and finally we add a variable to set when we are done with the command.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You would normally <strong>NOT</strong> include a Joystick object in a command. This is just for training purposes and would be considered a <strong>Bad Practice</strong> to do so in your robot code. This is a shortcut for illustration purposes only!</p>
+</div>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/** An Intake command that uses the Intake subsystem. */</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">IntakeCommand</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@SuppressWarnings</span><span class="p">({</span><span class="s">&quot;PMD.UnusedPrivateField&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;PMD.SingularField&quot;</span><span class="p">})</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Joystick</span><span class="w"> </span><span class="n">driverJoystick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Joystick</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Intake</span><span class="w"> </span><span class="n">m_subsystem</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isFinishedFlag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Next we define the constructor. Notice that whoever calls this command is passing in an instance of the <strong>Intake Subsystem</strong>. The <em>addRequirements(subsystem)</em> method stops any other command from executing with the subsystem. You would not want multiple commands to the same motor going on at the same time.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="nf">IntakeCommand</span><span class="p">(</span><span class="n">Intake</span><span class="w"> </span><span class="n">subsystem</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_subsystem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subsystem</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Use addRequirements() here to declare subsystem dependencies.</span>
+<span class="w">    </span><span class="n">addRequirements</span><span class="p">(</span><span class="n">subsystem</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now we add the methods that are specific to Commands, these are automatically called ny the <strong>Command Scheduler</strong> (more about that in a few minutes). As mentions previously, the functions are:</p>
+<ul class="simple">
+<li><p>Initialize - What do you want to do when the command starts up.</p></li>
+<li><p>Execute - What do you want to happen each loop (approximately every 20ms)</p></li>
+<li><p>End - What do you want to happen at the end of your command</p></li>
+<li><p>isFinished - A test for if you want to end the command</p></li>
+</ul>
+<p>Let’s look at the <em>Initalize</em> and <em>End</em> methods:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Called when the command is initially scheduled.</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initialize</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="c1">// Called once the command ends or is interrupted.</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">end</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">interrupted</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+</pre></div>
+</div>
+<p>These are very boring as nothing is happening. So for the <strong>Intake Command</strong> there is nothing that we want to do on Command Startup or Shutdown. Ok, let’s take a look at the <em>execute</em> method:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Called every time the scheduler runs while the command is scheduled.</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">execute</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">driverJoystick</span><span class="p">.</span><span class="na">getRawButton</span><span class="p">(</span><span class="mi">3</span><span class="p">)){</span>
+<span class="w">        </span><span class="n">m_subsystem</span><span class="p">.</span><span class="na">runVelocity</span><span class="p">(</span><span class="n">IntakeConstants</span><span class="p">.</span><span class="na">kIntakeSpeed</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Intaking...&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">isFinishedFlag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">        </span><span class="n">m_subsystem</span><span class="p">.</span><span class="na">stop</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Intake Idle...&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">isFinishedFlag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The only thing this method does is to check and see if the <strong>X</strong> button is being pressed on the controller. If it is, then it calls the <strong>Intake Subsystem</strong> and runs the <em>runVelocity</em> method passing in a constant from the <strong>IntakeConstants File</strong>. If the <strong>X</strong> button is not being pressed, then it calls the <strong>Intake Subsystem</strong> and runs to <em>stop</em> method to stop the motor and sets the <em>isFinishedFlag</em> variable to true, indicating that we want to end the command.</p>
+<p>Now, let look at the <em>isFinished</em> method:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Returns true when the command should end.</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isFinished</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">isFinishedFlag</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Notice that this code block is returning a boolean. That boolean is sent to <strong>Command Scheduler</strong> indicating that we want to stop the command.</p>
+<p>That’s it. You have walked through your first command. <strong>ALL</strong> commands follow this format.</p>
+</section>
+<section id="embedded-commands">
+<h2>Embedded Commands<a class="headerlink" href="#embedded-commands" title="Permalink to this heading"></a></h2>
+<p>Another way to define a command is to embed them within the subsystem they are using. For example if we look to the <strong>Intake Subsystem</strong> you will find an <strong>Intake Command</strong> that is functionally equivalent to the one described above:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm">* Set command to Intake</span>
+<span class="cm">*</span>
+<span class="cm">* @return a command</span>
+<span class="cm">*/</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="nf">IntakeCommand</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Subsystem::RunOnce implicitly requires `this` subsystem.</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">runOnce</span><span class="p">(</span>
+<span class="w">        </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/* one-time action goes here */</span>
+<span class="w">        </span><span class="n">flipState</span><span class="p">(</span><span class="n">State</span><span class="p">.</span><span class="na">INTAKE</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>There is nothing to do on Initialize() or End(), so the command runs a single time and then finishes. This is much shorter to code that an entire Java class.</p>
+</section>
+<section id="binding-commands-to-buttons">
+<h2>Binding Commands to Buttons<a class="headerlink" href="#binding-commands-to-buttons" title="Permalink to this heading"></a></h2>
+<p>In the <em>RobotContainer</em> you can set up button presses to fire off commands through the <em>Command Scheduler</em>. Let’s take a look at the code:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">configureBindings</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">//New Command Format</span>
+<span class="w">  </span><span class="n">driver</span><span class="p">.</span><span class="na">a</span><span class="p">().</span><span class="na">toggleOnTrue</span><span class="p">(</span><span class="n">m_intake</span><span class="p">.</span><span class="na">IntakeCommand</span><span class="p">());</span>
+<span class="w">  </span><span class="n">driver</span><span class="p">.</span><span class="na">a</span><span class="p">().</span><span class="na">toggleOnFalse</span><span class="p">(</span><span class="n">m_intake</span><span class="p">.</span><span class="na">IdleCommand</span><span class="p">());</span>
+<span class="w">  </span><span class="n">driver</span><span class="p">.</span><span class="na">b</span><span class="p">().</span><span class="na">toggleOnTrue</span><span class="p">(</span><span class="n">m_intake</span><span class="p">.</span><span class="na">EjectCommand</span><span class="p">());</span>
+<span class="w">  </span><span class="n">driver</span><span class="p">.</span><span class="na">b</span><span class="p">().</span><span class="na">toggleOnFalse</span><span class="p">(</span><span class="n">m_intake</span><span class="p">.</span><span class="na">IdleCommand</span><span class="p">());</span>
+
+<span class="w">  </span><span class="c1">//Old Command Format</span>
+<span class="w">  </span><span class="n">driver</span><span class="p">.</span><span class="na">x</span><span class="p">().</span><span class="na">toggleOnTrue</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">IntakeCommand</span><span class="p">(</span><span class="n">m_intake</span><span class="p">));</span>
+<span class="w">  </span><span class="n">driver</span><span class="p">.</span><span class="na">y</span><span class="p">().</span><span class="na">toggleOnTrue</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">EjectCommand</span><span class="p">(</span><span class="n">m_intake</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The first code block is the newer format where the <em>Command</em> is included as part of the subsystem. The second code block is for <em>Commands</em> that are in seperate classes where you must pass in the substem you want the <em>command</em> to run against.</p>
+</section>
+<section id="the-command-scheduler">
+<h2>The Command Scheduler<a class="headerlink" href="#the-command-scheduler" title="Permalink to this heading"></a></h2>
+<p>The CommandScheduler is the class responsible for actually running commands. Each iteration (ordinarily once per 20ms), the scheduler polls all registered buttons, schedules commands for execution accordingly, runs the command bodies of all scheduled commands, and ends those commands that have finished or are interrupted.</p>
+<p>The CommandScheduler also runs the periodic() method of each registered Subsystem.</p>
+<p>You must include the Command Scheduler in your robot code, usually in the <em>robotPeriodic</em> method. This will ensure that the Command Scheduler is run on each loop.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="nf">robotPeriodic</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* Run the command Scheduler */</span>
+<span class="w">    </span><span class="n">CommandScheduler</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">run</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="the-setdefault-command">
+<h2>The setDefault Command<a class="headerlink" href="#the-setdefault-command" title="Permalink to this heading"></a></h2>
+<p>The <cite>setDefaultCommand()</cite> method sets the default command for the subsystem. The default command will always be running when no other commands are scheduled for that subsystem.  The following statement is called in the <em>RobotContainer</em> class to schedule the default command for the <em>Drivetrain</em>.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">drivetrain</span><span class="p">.</span><span class="na">setDefaultCommand</span>
+<span class="w">  </span><span class="p">(</span><span class="n">drivetrain</span><span class="p">.</span><span class="na">run</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">drivetrain</span><span class="p">.</span><span class="na">teleopDrive</span><span class="p">(</span>
+<span class="w">      </span><span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="n">driver</span><span class="p">.</span><span class="na">getLeftY</span><span class="p">())</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">-</span><span class="n">driver</span><span class="p">.</span><span class="na">getLeftY</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="n">driver</span><span class="p">.</span><span class="na">getLeftX</span><span class="p">())</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">-</span><span class="n">driver</span><span class="p">.</span><span class="na">getLeftX</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="n">driver</span><span class="p">.</span><span class="na">getRightX</span><span class="p">())</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0.015</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">-</span><span class="n">driver</span><span class="p">.</span><span class="na">getRightX</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+<section id="instant-commands">
+<h2>Instant Commands<a class="headerlink" href="#instant-commands" title="Permalink to this heading"></a></h2>
+<p>An <em>Instant Command</em> works similarly to a regular command except that there is no <cite>execute()</cite> method and the <cite>isFinished()</cite> method always returns <cite>true</cite>.  The main purpose of Instant Commands commands is to quickly alter some robot state such as activating, deactivating, or resetting a subsystem.  Instant Commands are used quite often.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RobotContainer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">HatchSubsystem</span><span class="w"> </span><span class="n">m_hatchSubsystem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HatchSubsystem</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">RobotContainer</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Bind a button to grab the hatch instantly</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">JoystickButton</span><span class="p">(</span><span class="n">m_driverController</span><span class="p">,</span><span class="w"> </span><span class="n">Button</span><span class="p">.</span><span class="na">kA</span><span class="p">.</span><span class="na">value</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">whenPressed</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">InstantCommand</span><span class="p">(</span><span class="n">m_hatchSubsystem</span><span class="p">::</span><span class="n">grabHatch</span><span class="p">,</span><span class="w"> </span><span class="n">m_hatchSubsystem</span><span class="p">));</span>
+
+<span class="w">        </span><span class="c1">// Bind another button to release the hatch instantly</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">JoystickButton</span><span class="p">(</span><span class="n">m_driverController</span><span class="p">,</span><span class="w"> </span><span class="n">Button</span><span class="p">.</span><span class="na">kB</span><span class="p">.</span><span class="na">value</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">whenPressed</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">InstantCommand</span><span class="p">(</span><span class="n">m_hatchSubsystem</span><span class="p">::</span><span class="n">releaseHatch</span><span class="p">,</span><span class="w"> </span><span class="n">m_hatchSubsystem</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="command-groups">
+<h2>Command Groups<a class="headerlink" href="#command-groups" title="Permalink to this heading"></a></h2>
+<p>Simple commands can be composed into <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/commandbased/command-groups.html">Command Groups</a> to accomplish more complicated tasks. There are several ways in which Command Groups can be composed, as shown the documentation.  Here is an example:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PlaceSoda</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">SequentialCommandGroup</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="nf">PlaceSoda</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">addCommands</span><span class="p">(</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">SetElevatorSetpoint</span><span class="p">(</span><span class="n">Elevator</span><span class="p">.</span><span class="na">TABLE_HEIGHT</span><span class="p">),</span><span class="w"> </span><span class="c1">// Sets elevator to table height</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">SetWristSetpoint</span><span class="p">(</span><span class="n">Wrist</span><span class="p">.</span><span class="na">PICKUP</span><span class="p">),</span><span class="w">             </span><span class="c1">// Sets wrist to pickup position</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">OpenClaw</span><span class="p">()</span><span class="w">                                  </span><span class="c1">// Opens the claw to release</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="complex-commands">
+<h2>Complex Commands<a class="headerlink" href="#complex-commands" title="Permalink to this heading"></a></h2>
+<p>Using the short cuts to write <em>Commands</em> can result in very fast, but very complex code. Here is an example from our 2024 Competition robot. This command would move the robot arm and elevator to level 4, Score the Coral, retract the arm and elevator to move away from the reef. Then deploy the ground intake, move the elevator and arm to intake position until the intake beam break sensor indicates that we have a new coral. A lot of action for a few lines of code.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="nf">autonShootIntake</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span>
+<span class="w">    </span><span class="n">Commands</span><span class="p">.</span><span class="na">sequence</span><span class="p">(</span>
+<span class="w">        </span><span class="n">runOnce</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="n">doneScoring</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;}),</span>
+<span class="w">        </span><span class="n">armSubsystem</span><span class="p">.</span><span class="na">L4Score</span><span class="p">().</span><span class="na">withTimeout</span><span class="p">(</span><span class="mf">0.75</span><span class="p">),</span>
+<span class="w">        </span><span class="n">Commands</span><span class="p">.</span><span class="na">parallel</span><span class="p">(</span>
+<span class="w">          </span><span class="n">manipulatorSubsystem</span><span class="p">.</span><span class="na">L4Spit</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="na">andThen</span><span class="p">(</span><span class="n">Commands</span><span class="p">.</span><span class="na">waitSeconds</span><span class="p">(</span><span class="mf">.5</span><span class="p">))</span>
+<span class="w">            </span><span class="p">.</span><span class="na">andThen</span><span class="p">(</span><span class="n">manipulatorSubsystem</span><span class="p">.</span><span class="na">zero</span><span class="p">())</span>
+<span class="w">            </span><span class="p">.</span><span class="na">andThen</span><span class="p">(</span><span class="n">manipulatorSubsystem</span><span class="p">.</span><span class="na">goScore</span><span class="p">()),</span>
+<span class="w">          </span><span class="n">armSubsystem</span><span class="p">.</span><span class="na">horizontal</span><span class="p">(),</span>
+<span class="w">          </span><span class="n">intakeSubsystem</span><span class="p">.</span><span class="na">deploy</span><span class="p">(),</span>
+<span class="w">          </span><span class="n">elevatorSubsystem</span><span class="p">.</span><span class="na">intakeCoral</span><span class="p">()</span>
+<span class="w">        </span><span class="p">).</span><span class="na">until</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">intakeSubsystem</span><span class="p">.</span><span class="na">getBeamBreak</span><span class="p">())</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="lab-commands">
+<h2>Lab - Commands<a class="headerlink" href="#lab-commands" title="Permalink to this heading"></a></h2>
+<p>This lab continues with the one that you worked on in the Subsystems section of the training guide.  You’ll learn about the following Java programming concepts:</p>
+<ul class="simple">
+<li><p>Create a new Command or Subsystem in VSCode.</p></li>
+<li><p><a class="reference external" href="https://www.w3schools.com/java/java_inheritance.asp">Java Inheritance</a> where a class inherits attributes and methods from one class to another.</p></li>
+<li><p><a class="reference external" href="https://www.w3schools.com/java/java_methods_param.asp">Method Parameters</a> the syntax used to pass parameters to methods.</p></li>
+</ul>
+<p>There are two tasks for this lab:</p>
+<ul class="simple">
+<li></li>
+<li><p>???</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/commandbased/index.html">Command Based Programming</a></p></li>
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/commandbased/command-scheduler.html">The Command Scheduler</a></p></li>
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/commandbased/command-groups.html">Command Groups</a></p></li>
+<li><p>Java Tutorial on <a class="reference external" href="https://www.w3schools.com/java/default.asp">W3Schools</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="subSystems.html" class="btn btn-neutral float-left" title="Subsystems" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="telemetry.html" class="btn btn-neutral float-right" title="Telemetry" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
