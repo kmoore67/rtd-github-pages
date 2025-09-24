@@ -112,6 +112,17 @@ Robot Basics
    /RobotBasics/robotBasicsIndex    
 
 
+Robot Control  
+===============================
+
+.. toctree:: 
+   :maxdepth: 2 
+   :hidden:
+
+   /RobotControl/robotControlIndex    
+
+
+
 
 Indices and tables
 ==================

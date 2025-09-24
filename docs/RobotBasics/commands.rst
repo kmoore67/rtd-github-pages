@@ -251,12 +251,6 @@ This lab continues with the one that you worked on in the Subsystems section of 
 
 - `Method Parameters <https://www.w3schools.com/java/java_methods_param.asp>`_ the syntax used to pass parameters to methods.
 
-There are two tasks for this lab:
-
-- ????
-- ???
-
-
 
 
 References
