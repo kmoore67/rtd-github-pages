@@ -135,7 +135,7 @@ Motion Magic functions by generating a trapezoidal/S-Curve velocity profile that
 Example Motion Magic - Velocity  
 **************************************
 
-.. note:: For this example we will be referencing the ProgTrain2 project. You should download the project from the team GitHub.
+.. note:: For this example we will be referencing the ProgTrain3 project. You should download the project from the team GitHub.
 
 ShooterConstants 
 ----------------------------

@@ -121,8 +121,43 @@ Robot Control
 
    /RobotControl/robotControlIndex    
 
+Robot Concepts  
+===============================
+
+.. toctree:: 
+   :maxdepth: 2 
+   :hidden:
+
+   /RobotConcepts/robotConceptsIndex   
 
 
+RoboRIO Robots
+===============================
+
+.. toctree:: 
+   :maxdepth: 2 
+   :hidden:
+
+   /RoboRIORobots/roboRIORobotsIndex    
+
+Machine Learning  
+===============================
+
+.. toctree:: 
+   :maxdepth: 2 
+   :hidden:
+
+   /MachineLearning/machineLearningIndex   
+
+
+Reference  
+===============================
+
+.. toctree:: 
+   :maxdepth: 2 
+   :hidden:
+
+   /Reference/referenceIndex   
 
 Indices and tables
 ==================

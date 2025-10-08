@@ -32,7 +32,7 @@ There are two distinct types of PID Control implementations. The first implement
 Lab - Example Code
 ******************************
 
-To help illustrate how to use a PID controller in our robot code it is best to use an example. You should download **ProgTrain2** from the teams github respository. The subsequent section will reference this code. 
+To help illustrate how to use a PID controller in our robot code it is best to use an example. You should download **ProgTrain3** from the teams github respository. The subsequent section will reference this code. 
 
 
 Position PID Control
