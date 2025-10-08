@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pose Estimation &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Kalman Filters" href="kalmanFilters.html" />
+    <link rel="prev" title="Dynamical Systems" href="dynamicalSystems.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotControl/robotControlIndex.html">Robot Control</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="robotConceptsIndex.html">Robot Concepts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="robotSystems.html">Robot Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensors.html">Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actuators.html">Actuators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controlAlgo.html">Control Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="communications.html">Communication Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kinematics.html">Robot Kinematics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">Robot Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coordinate.html">Coordinate System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamicalSystems.html">Dynamical Systems</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Pose Estimation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#robot-odometry">Robot Odometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-pose-estimator">The Pose Estimator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pose-estimation-lab">Pose Estimation Lab</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#odometry-class">Odometry Class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pose-estimator-class">Pose Estimator Class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reset-odometry">Reset Odometry</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kalmanFilters.html">Kalman Filters</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RoboRIORobots/roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../MachineLearning/machineLearningIndex.html">Machine Learning</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="robotConceptsIndex.html">Robot Concepts</a></li>
+      <li class="breadcrumb-item active">Pose Estimation</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RobotConcepts/poseEstimation.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="pose-estimation">
+<h1>Pose Estimation<a class="headerlink" href="#pose-estimation" title="Permalink to this heading"></a></h1>
+<p>A basic requirement for a mobile robot is to measure its own motion. This allows a robot to determine which way to go and if it ever got there. It’ll use its <em>Pose</em> which is defined as its <strong>Position and Orientation</strong> from some reference frame. (See <strong>Geometry</strong> in this document)</p>
+<p>This module will explore two methods for determining the robot’s pose, Odometry and Pose Estimation.  The WPILib classes <em>DifferentialDriveOdometry</em> and <em>DifferentialDrivePoseEstimator</em> are used for this purpose.</p>
+<section id="robot-odometry">
+<h2>Robot Odometry<a class="headerlink" href="#robot-odometry" title="Permalink to this heading"></a></h2>
+<p>Odometry involves using sensors on the robot to create an estimate of the position of the robot on the field. In FRC, these sensors are typically encoders to measure position together with a gyro to measure robots’ heading. It’s important to understand the difference between odometry and kinematics; kinematics deals with movement so we are concerned with speeds, odometry deals with position so we are looking at distance.</p>
+<p>The following diagram shows our objective.  The FRC field is our <em>Global Frame</em>.  We want to know what our <strong>X</strong> and <strong>Y</strong> position is relative to the global frame where the <strong>X</strong> position is represented by the length of the field and the <strong>Y</strong> position is represented by its width.  What we’re using here is the <em>Cartesian Coordinate System</em> that you may be familiar with from Algebra.</p>
+<p>We also need to know what our heading is, which is represented by the angle between the 𝒙 axis of our coordinate system and the current heading angle of the robot.</p>
+<img alt="../_images/FRCKinematics%26Odometry.009.jpeg" src="../_images/FRCKinematics%26Odometry.009.jpeg" />
+<p>So what algorithm is required to compute the robots’ odometry?  We can implement this by the following three steps that will require input from the encoders and the gyro (IMU). Remember that our robot code runs in a loop which means that these three steps will execute over and over at about 20 times per second. Each iteration of the loop we will call a <em>time step</em>.</p>
+<img alt="../_images/FRCKinematics%26Odometry.010.jpeg" src="../_images/FRCKinematics%26Odometry.010.jpeg" />
+<p>The encoders will send the total linear distance that has been covered by each wheel since the was robot started, or the wheel encoders were reset.  The linear distance is calculated as shown in the following diagram.  <strong>Step 1</strong> of our algorithm will take the total distance covered by the left and right wheel and compute the <em>delta distance</em> travelled by each wheel since the last <em>time step</em>.</p>
+<img alt="../_images/FRCKinematics%26Odometry.011.jpeg" src="../_images/FRCKinematics%26Odometry.011.jpeg" />
+<p>In <strong>step 2</strong> we calculate the distance travelled by the chassis of the robot since the last time step.  This is done by simply taking the delta distance travelled by each wheel and averaging them.</p>
+<p><strong>Step 3</strong> is where the real work is done to compute our odometry.  From the internal reference frame of the robot it can only travel in the direction parallel to its wheels.  It cannot travel instantainously sideways so in effect the robot has only one direction, which we’ll call 𝒙.  However, within the global frame, the FRC field, it can assume a position in both the <strong>X</strong> and <strong>Y</strong> directions.  In order to calculate this we make use of the trigonomic <em>Sine</em> and <em>Cosine</em> functions.  To compute the <strong>X</strong> position we multiple the distance travelled by the <em>Sin</em> of the current heading angle.  The <strong>Y</strong> position is computed using the <em>Cos</em> of the current heading angle.</p>
+<p>It’s important that this calculation is done based on the change in heading since the last time step. That’s why we go to the trouble of computing the delta distance travelled instead of using the total distance.  Consider that the heading will most likely be changing continuouly during our journey.  If we computed the position based solely on our current heading then the calculation would be way off.</p>
+<img alt="../_images/FRCKinematics%26Odometry.012.jpeg" src="../_images/FRCKinematics%26Odometry.012.jpeg" />
+</section>
+<section id="the-pose-estimator">
+<h2>The Pose Estimator<a class="headerlink" href="#the-pose-estimator" title="Permalink to this heading"></a></h2>
+<p>Pose estimators are designed to be drop-in replacements for odometry classes, and can behave identically to their corresponding odometry classes if only update is called on these estimators.  Pose estimators utilize an <strong>Unscented Kalman Filter</strong> (See Kalman Filters in this document) to fuse latency-compensated robot pose estimates with encoder and gyro measurements. These estimators can account for encoder drift and noisy vision data.</p>
+</section>
+<section id="pose-estimation-lab">
+<h2>Pose Estimation Lab<a class="headerlink" href="#pose-estimation-lab" title="Permalink to this heading"></a></h2>
+<p>We’re going to setup the robot with two methods of esitmating its Pose.  The first uses the <em>DifferentialDriveOdometry</em> class and the second uses the <em>DifferentialDrivePoseEstimator</em>.</p>
+<section id="odometry-class">
+<h3>Odometry Class<a class="headerlink" href="#odometry-class" title="Permalink to this heading"></a></h3>
+<p>Setup the Odometry class.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">DifferentialDriveOdometry</span><span class="w"> </span><span class="n">m_odometry</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This is initialized in the Drivetrain’s constructor:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="nf">Drivetrain</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="p">...</span>
+<span class="w">  </span><span class="n">m_odometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DifferentialDriveOdometry</span><span class="p">(</span><span class="n">m_gyro</span><span class="p">.</span><span class="na">getRotation2d</span><span class="p">());</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Update the odometry in the <cite>periodic()</cite> block, and populate the Field2D object so that we can visualize this in the Simulator.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">m_odometry</span><span class="p">.</span><span class="na">update</span><span class="p">(</span><span class="n">m_gyro</span><span class="p">.</span><span class="na">getRotation2d</span><span class="p">(),</span>
+<span class="w">                  </span><span class="n">m_leftEncoder</span><span class="p">.</span><span class="na">getDistance</span><span class="p">(),</span>
+<span class="w">                  </span><span class="n">m_rightEncoder</span><span class="p">.</span><span class="na">getDistance</span><span class="p">());</span>
+
+<span class="n">m_field2d</span><span class="p">.</span><span class="na">setRobotPose</span><span class="p">(</span><span class="n">getPose</span><span class="p">());</span>
+</pre></div>
+</div>
+</section>
+<section id="pose-estimator-class">
+<h3>Pose Estimator Class<a class="headerlink" href="#pose-estimator-class" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>Pose estimator State Space way for tracking the robot pose</dt><dd><ul class="simple">
+<li><p>State measurement standard deviations. X, Y, theta.</p></li>
+<li><p>Local measuement standard deviations. Left encoder, right encoder, gyro.</p></li>
+<li><p>Global measurement standard deviations. X, Y, and theta.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="n">DifferentialDrivePoseEstimator</span><span class="w"> </span><span class="n">m_estimator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DifferentialDrivePoseEstimator</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Pose2d</span><span class="p">(),</span>
+<span class="w">      </span><span class="k">new</span><span class="w"> </span><span class="n">MatBuilder</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Nat</span><span class="p">.</span><span class="na">N5</span><span class="p">(),</span><span class="w"> </span><span class="n">Nat</span><span class="p">.</span><span class="na">N1</span><span class="p">()).</span><span class="na">fill</span><span class="p">(</span><span class="mf">0.02</span><span class="p">,</span><span class="w"> </span><span class="mf">0.02</span><span class="p">,</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span><span class="w"> </span><span class="mf">0.02</span><span class="p">,</span><span class="w"> </span><span class="mf">0.02</span><span class="p">),</span>
+<span class="w">      </span><span class="k">new</span><span class="w"> </span><span class="n">MatBuilder</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Nat</span><span class="p">.</span><span class="na">N3</span><span class="p">(),</span><span class="w"> </span><span class="n">Nat</span><span class="p">.</span><span class="na">N1</span><span class="p">()).</span><span class="na">fill</span><span class="p">(</span><span class="mf">0.02</span><span class="p">,</span><span class="w"> </span><span class="mf">0.02</span><span class="p">,</span><span class="w"> </span><span class="mf">0.01</span><span class="p">),</span>
+<span class="w">      </span><span class="k">new</span><span class="w"> </span><span class="n">MatBuilder</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Nat</span><span class="p">.</span><span class="na">N3</span><span class="p">(),</span><span class="w"> </span><span class="n">Nat</span><span class="p">.</span><span class="na">N1</span><span class="p">()).</span><span class="na">fill</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.01</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Update the estimator in the <strong>periodic()</strong> block, and populate the Field2D object so that we can visualize this in the Simulator.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">m_estimator</span><span class="p">.</span><span class="na">update</span><span class="p">(</span><span class="n">m_gyro</span><span class="p">.</span><span class="na">getRotation2d</span><span class="p">(),</span>
+<span class="w">                    </span><span class="n">getWheelSpeeds</span><span class="p">(),</span>
+<span class="w">                    </span><span class="n">m_leftEncoder</span><span class="p">.</span><span class="na">getDistance</span><span class="p">(),</span>
+<span class="w">                    </span><span class="n">m_rightEncoder</span><span class="p">.</span><span class="na">getDistance</span><span class="p">());</span>
+
+<span class="n">m_estimatedField2d</span><span class="p">.</span><span class="na">setRobotPose</span><span class="p">(</span><span class="n">getEstimatedPose</span><span class="p">());</span>
+</pre></div>
+</div>
+</section>
+<section id="reset-odometry">
+<h3>Reset Odometry<a class="headerlink" href="#reset-odometry" title="Permalink to this heading"></a></h3>
+<p>Finally, we’ll add a command to reset the odometry.  This will come in useful as we test and retest our commands.  That command is quite short and looks like this:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ResetOdometry</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">InstantCommand</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Drivetrain</span><span class="w"> </span><span class="n">m_drive</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ResetOdometry</span><span class="p">(</span><span class="n">Drivetrain</span><span class="w"> </span><span class="n">drive</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Use addRequirements() here to declare subsystem dependencies.</span>
+<span class="w">        </span><span class="n">m_drive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">drive</span><span class="p">;</span>
+<span class="w">        </span><span class="n">addRequirements</span><span class="p">(</span><span class="n">drive</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Called when the command is initially scheduled.</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initialize</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">m_drive</span><span class="p">.</span><span class="na">arcadeDrive</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">        </span><span class="n">m_drive</span><span class="p">.</span><span class="na">resetGyro</span><span class="p">();</span>
+<span class="w">        </span><span class="n">m_drive</span><span class="p">.</span><span class="na">resetEncoders</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Add that to your list of Autonomous commands in the <em>RobotContainer</em> class:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">m_chooser</span><span class="p">.</span><span class="na">addOption</span><span class="p">(</span><span class="s">&quot;Reset Odometry&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ResetOdometry</span><span class="p">(</span><span class="n">m_drivetrain</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>FRC Documentation <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/kinematics-and-odometry/differential-drive-odometry.html">Odometry</a></p></li>
+<li><p>FRC Documentation <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/advanced-controls/state-space/state-space-pose_state-estimators.html">WPILib Pose Estimators</a></p></li>
+<li><p>QUT Robot Academy <a class="reference external" href="https://robotacademy.net.au/masterclass/measuring-motion/">Measuring Motion</a></p></li>
+<li><p>Tyler Veness <a class="reference external" href="https://file.tavsys.net/control/controls-engineering-in-frc.pdf">Controls Engineering in the FIRST Robotics Competition</a> Chapter 6.</p></li>
+<li><p>Alonzo Kelly <a class="reference external" href="https://www.cambridge.org/core/books/mobile-robotics/5BF238489F9BC337C0736432C87B3091">Mobile Robotics</a> Chapter 6</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dynamicalSystems.html" class="btn btn-neutral float-left" title="Dynamical Systems" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="kalmanFilters.html" class="btn btn-neutral float-right" title="Kalman Filters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

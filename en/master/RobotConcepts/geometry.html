@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robot Geometry &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Coordinate System" href="coordinate.html" />
+    <link rel="prev" title="Robot Kinematics" href="kinematics.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotControl/robotControlIndex.html">Robot Control</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="robotConceptsIndex.html">Robot Concepts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="robotSystems.html">Robot Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensors.html">Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actuators.html">Actuators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controlAlgo.html">Control Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="communications.html">Communication Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kinematics.html">Robot Kinematics</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Robot Geometry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#d-geometry">2D Geometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#translation-change-in-position">Translation - Change in Position</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#robot-pose">Robot Pose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">3D Geometry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#understanding-the-rotations">Understanding the Rotations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-they-define-orientation">How They Define Orientation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#order-matters">Order Matters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#euler-angles-and-rotation">Euler Angles and Rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="coordinate.html">Coordinate System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamicalSystems.html">Dynamical Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="poseEstimation.html">Pose Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kalmanFilters.html">Kalman Filters</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RoboRIORobots/roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../MachineLearning/machineLearningIndex.html">Machine Learning</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="robotConceptsIndex.html">Robot Concepts</a></li>
+      <li class="breadcrumb-item active">Robot Geometry</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RobotConcepts/geometry.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="robot-geometry">
+<h1>Robot Geometry<a class="headerlink" href="#robot-geometry" title="Permalink to this heading"></a></h1>
+<p>In order to control a robot it’s necessary to know its position and orientation — where it is at any particular time.  Its position in 3-D space is defined using the set of coordinates X, Y, and Z.  This coordinate system is called the <strong>Cartesian Coordinate System</strong>.  When the robot moves from one position to another it’s referred to as a translation.  When it rotates about its center point then it has changed orientation.</p>
+<p>For the mobile robots that we use for competition we are mostly concerned 2D space so most of this section will focus on that. There will however be times when we would need to know our pose on 3D space so that will be covered later.</p>
+<img alt="../_images/FRCGeometry.001.jpeg" src="../_images/FRCGeometry.001.jpeg" />
+<p>Moreover, the position needs to be specifed relative to a suitable reference frame.  When we are navigating in a car using a GPS system our reference frame is the Earth.  In the case of FRC, a suitable reference frame is the competition field.</p>
+<section id="d-geometry">
+<h2>2D Geometry<a class="headerlink" href="#d-geometry" title="Permalink to this heading"></a></h2>
+<img alt="../_images/FRCGeometry.006.jpeg" src="../_images/FRCGeometry.006.jpeg" />
+<p>Let’s start by examining the orientation or rotation of the robot.  This is commonly done by using <em>Euler Angles</em>.</p>
+<img alt="../_images/FRCGeometry.003.jpeg" src="../_images/FRCGeometry.003.jpeg" />
+<p>In <em>First Robotics</em> we don’t use flying robots so we usually don’t need to keep track of objects in 3D space.  The <em>WPI Library</em> therefore has a set of data structures that keeps track of things in 2D space. Since we’re looking at Euler Angles let’s first examine the <em>Rotation2d</em> class that keeps track of rotations in 2D space.  When creating an object from this class you can pass it a starting angle that describes a rotation offset from the (𝑥, 𝑦) orientation of the game field. This offset represents the orientation at which you placed the robot down on the field.  If no starting angle is passed then it’s assumed that you aligned the robot with the fields’ (𝑥, 𝑦) orientation.</p>
+<img alt="../_images/FRCGeometry.014.jpeg" src="../_images/FRCGeometry.014.jpeg" />
+<p>Once you have a <em>Rotation2d</em> object you can continuously track the robots’ orientation by adding or subtracting changes that are sensed from the gyro. This is done using the rotation matrixes shown in a previous diagram.</p>
+<img alt="../_images/FRCGeometry.015.jpeg" src="../_images/FRCGeometry.015.jpeg" />
+</section>
+<section id="translation-change-in-position">
+<h2>Translation - Change in Position<a class="headerlink" href="#translation-change-in-position" title="Permalink to this heading"></a></h2>
+<p>Translation is the change in position of an object. It’s also referred to as <em>displacment</em> - how far has the object moved from the last position relative to a fixed frame of reference.  In our case, the fixed reference frame would be the competition field.  In order to represent how a robot changes its position we use the <em>Translation2d</em> data structure. When creating an object from this class you can pass in a starting position for the robot, which represents its (𝑥, 𝑦) displacement from the origin.  If no starting position is defined then it’s assumed that the robot starts at the origin (0, 0).  Note that the origin of the reference frame can be different in various cases.  For the FRC field it’s placed at the top left corner as you look down on the field.</p>
+<img alt="../_images/FRCGeometry.010.jpeg" src="../_images/FRCGeometry.010.jpeg" />
+<p>When the robot moves from one position to another you can update the <em>Translation2d</em> data structure by sending it the change in position since the last update. The change is added to the current position to represent the robots’ new location.</p>
+<img alt="../_images/FRCGeometry.008.jpeg" src="../_images/FRCGeometry.008.jpeg" />
+</section>
+<section id="robot-pose">
+<h2>Robot Pose<a class="headerlink" href="#robot-pose" title="Permalink to this heading"></a></h2>
+<p>The common way to keep track of the position and orientation of a robot is to create a class called a <em>Pose</em>.  This class comprises the two subclasses described previously, namely <em>Translation2d</em> and <em>Rotation2d</em>.  The translation class keeps track of the robot’s position whereas the rotation keeps track of its orientation.  Why use translation and rotation instead of position and orientation?  We want to know where the robot is as it travels from one position to another.  We also want to know the robot’s heading as is rotates from one orientation to another.</p>
+<img alt="../_images/FRCGeometry.017.jpeg" src="../_images/FRCGeometry.017.jpeg" />
+</section>
+<section id="id1">
+<h2>3D Geometry<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p>Robot orientation is described with roll, pitch, and yaw as sequential rotations around the robot’s X, Y, and Z axes, respectively, in a specific order (like ZYX or XYZ) to define a 3D orientation. Roll rotates the tool about its center axis, pitch tilts it up and down, and yaw turns it left and right, analogous to a vehicle’s movements.</p>
+<section id="understanding-the-rotations">
+<h3>Understanding the Rotations<a class="headerlink" href="#understanding-the-rotations" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Roll: Rotation around the tool’s own axis, like turning a doorknob or spinning a screwdriver.</p></li>
+<li><p>Pitch: Tilting the tool up and down, like nodding “yes”.</p></li>
+<li><p>Yaw: Turning the tool left and right, like shaking your head “no”.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="how-they-define-orientation">
+<h3>How They Define Orientation<a class="headerlink" href="#how-they-define-orientation" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul>
+<li><p>Coordinate Frames: Start with a base coordinate frame (space frame) and the robot’s body frame.</p></li>
+<li><p>Sequence of Rotations: The orientation is defined by a series of three rotations around the axes, typically denoted as {X, Y, Z} for the axes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>First, rotate around one axis (e.g., Z for yaw).</p></li>
+<li><p>Then, rotate around a second axis of the now-rotated frame (e.g., Y for pitch).</p></li>
+<li><p>Finally, rotate around a third axis of the twice-rotated frame (e.g., X for roll).</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="order-matters">
+<h3>Order Matters<a class="headerlink" href="#order-matters" title="Permalink to this heading"></a></h3>
+<p>The result of the rotations depends on the sequence in which they are performed. For example, roll-pitch-yaw gives a different orientation than pitch-roll-yaw.</p>
+</section>
+<section id="euler-angles-and-rotation">
+<h3>Euler Angles and Rotation<a class="headerlink" href="#euler-angles-and-rotation" title="Permalink to this heading"></a></h3>
+<p>The Euler angles are three angles introduced by Leonhard Euler to describe the orientation of an object with respect to a fixed coordinate system. The order in which you specify a change in orientation is <em>Yaw, Pitch, Roll</em>.  One way to remember this is to think of plane about to take off from an airport.  While it’s on the ground it can only change its heading, which is done by a Yaw rotation.  At take-off the pilot will pull up the nose, changing its Pitch.  Finally, once the plane is in the air it’s free to execute a Roll.  Moving from one orientation to another is called a <em>Rotation</em>.</p>
+<p>A robot that can move in all three dimensions of space and can orient itself about all three axis would have 6-degrees-of-freedom (6-DOF).  An object in space can have at most only 6-degrees-of-freedom.  An example of such a robot would be a drone or aircraft.</p>
+<img alt="../_images/FRCGeometry.002.jpeg" src="../_images/FRCGeometry.002.jpeg" />
+<p>Each Yaw, Pitch, Roll maneuver can be represented by a rotation matrix that uses sines and cosines to describe the offset from the previous orientation.</p>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>FRC Documentation <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/advanced-controls/geometry/index.html">Geometry</a></p></li>
+<li><p>QUT Robot Academy <a class="reference external" href="https://robotacademy.net.au/masterclass/2d-geometry/">2D Geometry</a></p></li>
+<li><p>QUT Robot Academy <a class="reference external" href="https://robotacademy.net.au/masterclass/3d-geometry/">3D Geometry</a></p></li>
+<li><p>FRC Documentation  <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/advanced-controls/video-walkthrough.html">A Video Walkthrough of Model Based Validation of Autonomous in FRC</a></p></li>
+<li><p>Angela Sodemann <a class="reference external" href="https://www.youtube.com/watch?v=lVjFhNv2N8o">Rotation Matrix Video</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="kinematics.html" class="btn btn-neutral float-left" title="Robot Kinematics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="coordinate.html" class="btn btn-neutral float-right" title="Coordinate System" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

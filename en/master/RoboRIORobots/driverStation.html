@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Driver Station &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Robot Structure" href="structure.html" />
+    <link rel="prev" title="RoboRIO Robots" href="roboRIORobotsIndex.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotControl/robotControlIndex.html">Robot Control</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotConcepts/robotConceptsIndex.html">Robot Concepts</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="roboRIORobotsIndex.html">RoboRIO Robots</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Driver Station</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#lab-driver-station">Lab - Driver Station</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#understand-the-driver-station">Understand the Driver Station</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deploy-code-to-the-roborio">Deploy Code to the roboRIO</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="structure.html">Robot Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="joysticks.html">Joysticks and Game Controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motorConfig.html">Configuring Motors and Feedback Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pneumatics.html">Pneumatics Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swervedrive.html">Swerve Drive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulation.html">Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PathPlanner.html">Path Planner</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../MachineLearning/machineLearningIndex.html">Machine Learning</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+      <li class="breadcrumb-item active">Driver Station</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RoboRIORobots/driverStation.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="driver-station">
+<h1>Driver Station<a class="headerlink" href="#driver-station" title="Permalink to this heading"></a></h1>
+<p>The <em>FRC Driver Station</em> is used to control the competition robot during tournaments. It can be launched by double-clicking the icon on the Desktop. The first time that you launch the Driver Station it should be set to your team number in order to connect to your robot. See <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station.html#setting-up-the-driver-station">Setting Up the Driver Station</a> in the FRC documentation.</p>
+<p>The main display is the <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station.html#operation-tab">Operation Tab</a> where you’ll spend most of the time during the competition.  This tab allows you to enable the robot and select the robot mode.</p>
+<p>The <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station.html#status-pane">Status Pane</a> tells you if the Driver Station is connected to the robot and if your robot code is currently running.  It also gives you the battery level and the status of the joysticks.</p>
+<p>The <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station.html#diagnostics-tab">Diagnostics Tab</a> contains additional status indicators that teams can use to diagnose issues with their robot.  Here you can check software versions, restart the roboRIO, and diagnose connection issues.</p>
+<p>You’ll want to make sure that the gamepads and joysticks are connected and configured correctly.  This is done via the <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station.html#usb-devices-tab">USB Devices Tab</a>.</p>
+<p>The last tab on the left side of the Driver Station is the <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station.html#can-power-tab">CAN/Robot Power Tab</a>. This tab contains information about the power status of the roboRIO and the status of the CAN bus.</p>
+<p>The <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station.html#messages-tab">Messages Tab</a> displays diagnostic messages from the Driver Station, WPILib, User Code, and/or the roboRIO. This tab will be used extensively during testing to help eliminate errors and reduce warnings generated by your user program.  You can also view diagnostic <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station.html#charts-tab">Charts</a> to help tune and optimize the robot.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Firewall Configuration - In order for the Driver Station to communicate with the robot you may need to disable the firewall on your laptop. If the <strong>Communications</strong> indicator is red then the Driver Station is not connecting to the robot.  See <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/networking/networking-introduction/windows-firewall-configuration.html?highlight=firewall#windows-firewall-configuration">Windows Firewall Configuration</a> to fix this issue.</p>
+</div>
+<section id="lab-driver-station">
+<h2>Lab - Driver Station<a class="headerlink" href="#lab-driver-station" title="Permalink to this heading"></a></h2>
+<p>There are two tasks for this lab:</p>
+<ul class="simple">
+<li><p>Understand the Driver Station layout and controls.</p></li>
+<li><p>Deploy code to the roboRIO.</p></li>
+</ul>
+<section id="understand-the-driver-station">
+<h3>Understand the Driver Station<a class="headerlink" href="#understand-the-driver-station" title="Permalink to this heading"></a></h3>
+<p>This task is designed to get you familiar with the Driver Station.  The Driver Station is required to control the competition robot and is only available on Windows.</p>
+<ol class="arabic simple">
+<li><p>Connect to the roboRIO robot and launch the Driver Station by double-clicking the icon on the Desktop.</p></li>
+<li><p>Look at the <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station.html#status-pane">Status Pane</a> on the Driver Station and check the battery level.  Ask one of the senior students what the minimum battery level should be prior to a match and what level is acceptable during testing.</p></li>
+<li><p>Check that the <strong>Communications</strong> and <strong>Robot Code</strong> lights are green. This indicates that the Driver Station is connected to the robot and that the team developed robot code is running.</p></li>
+<li><p>Connect a gamepad to the Driver Station laptop and check that the <strong>Joysticks</strong> light turns green.</p></li>
+<li><p>On the <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station.html#operation-tab">Operation Tab</a> ensure that the robot is set to <strong>teleOperated</strong>.  Click on the <strong>Enable</strong> button to enable the robot.  You should hear the pnuematic controllers on the transmission start up.</p></li>
+<li><p>The robot should now be drivable from the gamepad.  After testing disable the robot from the <strong>Disable</strong> button.</p></li>
+</ol>
+<p>You’re now done with this task!</p>
+</section>
+<section id="deploy-code-to-the-roborio">
+<h3>Deploy Code to the roboRIO<a class="headerlink" href="#deploy-code-to-the-roborio" title="Permalink to this heading"></a></h3>
+<p>This task demonstrates how to upload your robot code to the roboRIO.</p>
+<ol class="arabic simple">
+<li><p>Connect to the roboRIO robot and launch the Driver Station by double-clicking the icon on the Desktop.</p></li>
+<li><p>Open your project in VSCode and run <strong>Deploy Robot Code</strong> from the command pallet.  The roboRIO log view should pop-up in VSCode and show the upload.  See <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/vscode-overview/deploying-robot-code.html#building-and-deploying-robot-code">Building and Deploying Robot Code</a> in the FRC documentation.</p></li>
+<li><p>Look at the console output log to see if there are any errors during the upload.  See <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/vscode-overview/viewing-console-output.html#viewing-console-output">Viewing Console Output</a> for more information.</p></li>
+<li><p>If the upload is successful you will see a green light next to <strong>Robot Code</strong> in the Driver Station’s <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station.html#status-pane">Status Pane</a>.</p></li>
+</ol>
+<p>If the upload is NOT successful then check the following things:</p>
+<ul class="simple">
+<li><p>Not yet done.</p></li>
+</ul>
+<p>Once the upload is successful you’re done with this task!</p>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station.html#frc-driver-station-powered-by-ni-labview">Driver Station</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="roboRIORobotsIndex.html" class="btn btn-neutral float-left" title="RoboRIO Robots" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="structure.html" class="btn btn-neutral float-right" title="Robot Structure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

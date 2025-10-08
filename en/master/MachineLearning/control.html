@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Machine Learning-Based Control &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Reference" href="../Reference/referenceIndex.html" />
+    <link rel="prev" title="USB Camera Deployment for Jetson Nano" href="jetsonDeployment.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotControl/robotControlIndex.html">Robot Control</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotConcepts/robotConceptsIndex.html">Robot Concepts</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RoboRIORobots/roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="machineLearningIndex.html">Machine Learning</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="processImages.html">Preparing Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training.html">Training the Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="colabTraining.html">Colab Model Training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="axonTraining.html">Axon Model Training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploymentIndex.html">Deploying the Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploymentScript.html">Inference Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usbDeployment.html">USB Deployment for Raspberry Pi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jetsonDeployment.html">USB Deployment for Jetson Nano</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Machine Learning-Based Control</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="machineLearningIndex.html">Machine Learning</a></li>
+      <li class="breadcrumb-item active">Machine Learning-Based Control</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/MachineLearning/control.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="machine-learning-based-control">
+<h1>Machine Learning-Based Control<a class="headerlink" href="#machine-learning-based-control" title="Permalink to this heading"></a></h1>
+<p>At this point you should have the USB camera deployed on the Jetson and sending object detection data to your WPILib program via the Network Tables.  In order to use the data to control the robot you first have to pull it out of the tables.  The <strong>detections</strong> entry of the <strong>ML</strong> Network Table is where data about the detected objects-of-interest are stored.  This entry contains a JSON string that will need to get parsed in your WPILib program.  The structure of the Network Table and JSON string looks like this:</p>
+<img alt="../_images/FRCMachineLearning.012.jpeg" src="../_images/FRCMachineLearning.012.jpeg" />
+<p>WPILib uses the <strong>Jackson &lt;https://github.com/FasterXML/jackson&gt;</strong> JSON parser so these libraries must be imported:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.core.JsonProcessingException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>You have to create a Java class that exactly matches the JSON string that you want to parse (see the graphic above).  Once you have that class then parsing the JSON string is very simple.  Here’s an example method:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">parseDetections</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">json</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//create ObjectMapper instance</span>
+<span class="w">    </span><span class="n">ObjectMapper</span><span class="w"> </span><span class="n">mapper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ObjectMapper</span><span class="p">();</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//JSON string to Java Object</span>
+<span class="w">        </span><span class="n">m_detections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mapper</span><span class="p">.</span><span class="na">readValue</span><span class="p">(</span><span class="n">json</span><span class="p">,</span><span class="w"> </span><span class="n">Detections</span><span class="o">[]</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">JsonProcessingException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And the <strong>m_detections</strong> variable looks like this:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">Detections</span><span class="o">[]</span><span class="w"> </span><span class="n">m_detections</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Now you can separate everything out like this:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Get bounding box components</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Double</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getBox</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">m_detections</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">.</span><span class="na">box</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="n">Double</span><span class="w"> </span><span class="nf">getXMin</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">getBox</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;xmin&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>A full code example showing how to parse the JSON string can be found <a class="reference external" href="https://github.com/FRC-2928/RomiExamples/blob/main/BasicML/src/main/java/frc/robot/subsystems/Vision.java">here</a></p>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/FasterXML/jackson">Jackson JSON Faster XML</a>  parser</p></li>
+<li><p><a class="reference external" href="https://www.journaldev.com/2324/jackson-json-java-parser-api-example-tutorial">Jackson JSON</a> Java Tutorial</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="jetsonDeployment.html" class="btn btn-neutral float-left" title="USB Camera Deployment for Jetson Nano" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Reference/referenceIndex.html" class="btn btn-neutral float-right" title="Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

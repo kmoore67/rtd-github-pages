@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pneumatics Control &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Swerve Drive" href="swervedrive.html" />
+    <link rel="prev" title="Configuring Motors and Feedback Sensors" href="motorConfig.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotControl/robotControlIndex.html">Robot Control</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotConcepts/robotConceptsIndex.html">Robot Concepts</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="roboRIORobotsIndex.html">RoboRIO Robots</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="driverStation.html">Driver Station</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structure.html">Robot Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="joysticks.html">Joysticks and Game Controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motorConfig.html">Configuring Motors and Feedback Sensors</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Pneumatics Control</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-compressor">The Compressor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-solenoids">The Solenoids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swervedrive.html">Swerve Drive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulation.html">Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PathPlanner.html">Path Planner</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../MachineLearning/machineLearningIndex.html">Machine Learning</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+      <li class="breadcrumb-item active">Pneumatics Control</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RoboRIORobots/pneumatics.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="pneumatics-control">
+<h1>Pneumatics Control<a class="headerlink" href="#pneumatics-control" title="Permalink to this heading"></a></h1>
+<p>Pneumatics are used extensively in FRC in cases where linear motion is required.  This is in contrast to motors that provide rotational motion. Pneumatic actuators work on compressed air, and are used for fast on/off tasks with a high amount of applied force . This makes them ideal for robot mechanisims that must be quickly switched between two states, such as shifting gears on the drivetrain.  A conceptual diagram of a pneumatic device is shown below.</p>
+<img alt="../_images/FRCConcepts.010.jpeg" src="../_images/FRCConcepts.010.jpeg" />
+<p>Pheumatic Controllers are sold by two vendors <a class="reference external" href="https://store.ctr-electronics.com">CTR Electronics</a> and <a class="reference external" href="https://www.revrobotics.com">Rev Robotics</a>. The <em>Compressor</em> and <em>Solenoid</em> classes, that we’ll look at next, accept a hardware type parameter when constructing their objects.</p>
+<img alt="../_images/FRCroboRIO.005.jpeg" src="../_images/FRCroboRIO.005.jpeg" />
+<section id="the-compressor">
+<h2>The Compressor<a class="headerlink" href="#the-compressor" title="Permalink to this heading"></a></h2>
+<p>Before using the pneumatics you need to start the compressor.  This is usually done in the <cite>robotInit()</cite> method of the <em>Robot</em> class, and should be done prior to creating the <em>RobotContainer</em>.  The following code uses the <strong>REV Pneumatic Hub (PH)</strong> controller and specifies its Node ID on the CAN bus. The default Node ID for PHs is 1.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">robotInit</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_compressor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Compressor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">PneumaticsModuleType</span><span class="p">.</span><span class="na">REVPH</span><span class="p">);</span>
+<span class="w">    </span><span class="n">m_robotContainer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RobotContainer</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <strong>CTRE Pneumatics Control Module (PCM)</strong> is defined in a similar way. The default Node ID for PCMs is 0. If the Node ID isn’t specified it defaults to the Node ID for the hardware type.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">robotInit</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_compressor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Compressor</span><span class="p">(</span><span class="n">PneumaticsModuleType</span><span class="p">.</span><span class="na">CTREPCM</span><span class="p">);</span>
+<span class="w">    </span><span class="n">m_robotContainer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RobotContainer</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For more information see <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/hardware-apis/pneumatics/pneumatics.html#using-the-frc-control-system-to-control-pneumatics">Using the FRC Control System to control Pneumatics</a> in the FRC documentation.</p>
+</section>
+<section id="the-solenoids">
+<h2>The Solenoids<a class="headerlink" href="#the-solenoids" title="Permalink to this heading"></a></h2>
+<p>The pneumatic solenoids are defined in the subsystem in which they are used.  The example below sets up a solenoid on channel 0 of the CAN bus.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">m_shiftPiston</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Solenoid</span><span class="p">(</span><span class="n">PneumaticsModuleType</span><span class="p">.</span><span class="na">CTREPCM</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The solenoid position is set by sending a boolean value to the <cite>set()</cite> function of the <em>Solenoid</em> class.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setTrue</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_shiftPiston</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setFalse</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_shiftPiston</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note, that the older solenoids require separate channels to switch between positions.  These can be defined as shown below with the switching functions toggling between <cite>true</cite> and <cite>false</cite>.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">m_shiftPistonHigh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Solenoid</span><span class="p">(</span><span class="n">PneumaticsModuleType</span><span class="p">.</span><span class="na">REVPH</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="n">m_shiftPistonLow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Solenoid</span><span class="p">(</span><span class="n">PneumaticsModuleType</span><span class="p">.</span><span class="na">REVPH</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+
+<span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setTrue</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_shiftPistonHigh</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="w">    </span><span class="n">m_shiftPistonLow</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setFalse</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_shiftPistonHigh</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="w">    </span><span class="n">m_shiftPistonLow</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For more information see <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/hardware-apis/pneumatics/pneumatics.html#solenoid-control">Solenoid control</a> in the FRC documentation.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>FRC Documentation  <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/hardware-apis/pneumatics/index.html">Pheumatics APIs</a></p></li>
+<li><p>FRC Video on <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/hardware/hardware-tutorials/pneumatics.html">Pneumatics</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="motorConfig.html" class="btn btn-neutral float-left" title="Configuring Motors and Feedback Sensors" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="swervedrive.html" class="btn btn-neutral float-right" title="Swerve Drive" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/es/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

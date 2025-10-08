@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live Share &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Slew Rate Filter" href="slewRateFilter.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotControl/robotControlIndex.html">Robot Control</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotConcepts/robotConceptsIndex.html">Robot Concepts</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RoboRIORobots/roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../MachineLearning/machineLearningIndex.html">Machine Learning</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="referenceIndex.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="slewRateFilter.html">Slew Rate Filter</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">VS Code Live Share</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-install-the-live-share-extention">Step 1. Install the Live Share Extention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-start-a-live-share-session">Step 2. Start a Live Share Session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-verify-your-account">Step 3. Verify your Account</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-4-start-shared-session-on-remote-computer">Step 4. Start Shared Session on Remote Computer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-5-end-live-share-session">Step 5. End Live Share Session</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="referenceIndex.html">Reference</a></li>
+      <li class="breadcrumb-item active">Live Share</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/Reference/liveShare.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="live-share">
+<h1>Live Share<a class="headerlink" href="#live-share" title="Permalink to this heading"></a></h1>
+<p>VS Code Live Share enables you to quickly collaborate with a friend, classmate, or professor on the same code without the need to sync code or to configure the same development tools, settings, or environment.</p>
+<section id="step-1-install-the-live-share-extention">
+<h2>Step 1. Install the Live Share Extention<a class="headerlink" href="#step-1-install-the-live-share-extention" title="Permalink to this heading"></a></h2>
+<img alt="../_images/LiveShareInstall.png" src="../_images/LiveShareInstall.png" />
+</section>
+<section id="step-2-start-a-live-share-session">
+<h2>Step 2. Start a Live Share Session<a class="headerlink" href="#step-2-start-a-live-share-session" title="Permalink to this heading"></a></h2>
+<p>You will be asked to share your Visual Studio screen via either a Microsoft or GitHub account. If you have one of these accounts then pick it.  Otherwise you will need to create an account with one of these organizations.  Github is also owned by Microsoft.</p>
+<img alt="../_images/FRCTools.009.jpeg" src="../_images/FRCTools.009.jpeg" />
+</section>
+<section id="step-3-verify-your-account">
+<h2>Step 3. Verify your Account<a class="headerlink" href="#step-3-verify-your-account" title="Permalink to this heading"></a></h2>
+<p>If you are using Live Share via Github you will be asked to authorize sharing.  Click on <em>Authorize VisualStudioLiveShare</em>.  You will only need to do this the first time that you use Live Share.</p>
+<img alt="../_images/LSUseGithub.png" src="../_images/LSUseGithub.png" />
+<p>Then click on <em>Open Visual Studio Code</em>.  A URL will automatically get saved in you clip board. You will need this to send to the person you are sharing with.</p>
+<img alt="../_images/LSVerifyGithub.png" src="../_images/LSVerifyGithub.png" />
+<p>Allow the extension to open the URL.</p>
+<img alt="../_images/LSAllowShare.png" src="../_images/LSAllowShare.png" />
+</section>
+<section id="step-4-start-shared-session-on-remote-computer">
+<h2>Step 4. Start Shared Session on Remote Computer<a class="headerlink" href="#step-4-start-shared-session-on-remote-computer" title="Permalink to this heading"></a></h2>
+<p>Once you have received the URL for the shared session, click on the Live Share Icon and select <em>Join</em>.</p>
+<img alt="../_images/LSStartSession.png" src="../_images/LSStartSession.png" />
+<p>A box will pop up for you to enter in the URL that you have received from your classmate or mentor. Paste in the URL and press enter.  You will be given the choice to join Anonymously or through your Microsoft/Github account.  If you join Anonymously, you won’t be able to edit the other person’s code.</p>
+<img alt="../_images/LSJoin.png" src="../_images/LSJoin.png" />
+<p>The person sharing their session will receive the following message.  Click &lt;i&gt;Accept&lt;/i&gt; to share your screen.</p>
+<img alt="../_images/LSAcceptSession.png" src="../_images/LSAcceptSession.png" />
+</section>
+<section id="step-5-end-live-share-session">
+<h2>Step 5. End Live Share Session<a class="headerlink" href="#step-5-end-live-share-session" title="Permalink to this heading"></a></h2>
+<p>To end a Live Share session click on the <strong>X</strong> next to the participants name.</p>
+<img alt="../_images/LSEndSession.png" src="../_images/LSEndSession.png" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There is an issue where a project created on a Windows laptop would not compile on the Mac.  Need to investigate further.</p>
+</div>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/vscode-overview/index.html">VSCode Overview</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=MlIzFUI1QGA">Install and Use Visual Studio Code on Windows 10</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=tCfbi5PF1y0">How to Install Visual Studio Code on Mac</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=WPqXP_kLzpo">VSCode Crash Course</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="slewRateFilter.html" class="btn btn-neutral float-left" title="Slew Rate Filter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/es/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

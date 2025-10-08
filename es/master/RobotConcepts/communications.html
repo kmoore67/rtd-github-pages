@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Communication Protocols &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Robot Kinematics" href="kinematics.html" />
+    <link rel="prev" title="Control Algorithms" href="controlAlgo.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotControl/robotControlIndex.html">Robot Control</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="robotConceptsIndex.html">Robot Concepts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="robotSystems.html">Robot Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensors.html">Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actuators.html">Actuators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controlAlgo.html">Control Algorithms</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Communication Protocols</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#controller-area-network-can">Controller Area Network (CAN)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#can">CAN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#can-fd">CAN FD</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#frc-radio">FRC Radio</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#key-characteristics">Key Characteristics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#evolution">Evolution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#network-tables">Network Tables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-it-works">How it works:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common-uses">Common Uses:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#driverstation">DriverStation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#key-functions">Key Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">How it Works</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#included-components">Included Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c">I2C</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">How it Works:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-it-s-used-in-frc">Why it’s Used in FRC</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kinematics.html">Robot Kinematics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">Robot Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coordinate.html">Coordinate System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamicalSystems.html">Dynamical Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="poseEstimation.html">Pose Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kalmanFilters.html">Kalman Filters</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RoboRIORobots/roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../MachineLearning/machineLearningIndex.html">Machine Learning</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="robotConceptsIndex.html">Robot Concepts</a></li>
+      <li class="breadcrumb-item active">Communication Protocols</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RobotConcepts/communications.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="communication-protocols">
+<h1>Communication Protocols<a class="headerlink" href="#communication-protocols" title="Permalink to this heading"></a></h1>
+<section id="controller-area-network-can">
+<h2>Controller Area Network (CAN)<a class="headerlink" href="#controller-area-network-can" title="Permalink to this heading"></a></h2>
+<section id="can">
+<h3>CAN<a class="headerlink" href="#can" title="Permalink to this heading"></a></h3>
+<img alt="../_images/FRCConcepts.069.jpeg" class="align-center" src="../_images/FRCConcepts.069.jpeg" />
+<p>CAN refers to the <strong>Controller Area Network</strong> bus, a high-speed, two-wire communication system used in the FIRST Robotics Competition to connect various robot components like motor controllers, sensors, and the roboRIO. It provides reliable, daisy-chained communication with built-in error handling, reducing wiring complexity and enabling features like motor controller chaining and remote sensor data access. The FRC CAN bus operates at <strong>1 Megabit per second</strong> and uses a specific addressing scheme for devices to interact efficiently.</p>
+</section>
+<section id="can-fd">
+<h3>CAN FD<a class="headerlink" href="#can-fd" title="Permalink to this heading"></a></h3>
+<img alt="../_images/FRCConcepts.070.jpeg" class="align-center" src="../_images/FRCConcepts.070.jpeg" />
+<p>CAN FD is the next iteration of the CAN bus data link layer. The FD stand for Flexible Data-Rate, meaning that portions of the frame is transmitted at <strong>higher data rates (up to 10Mbps)</strong>. This means less bus time for more data. Additionally, a single frame can now hold up to 64 data bytes.</p>
+<p>This is critical for many reasons:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Lower bus utilizations because of less frame overhead and higher bitrates.</p></li>
+<li><p>More devices before hitting maximum bus utilization.</p></li>
+<li><p>Less time spent designing how to split signals across multiple frames</p></li>
+<li><p>Larger frames mean potential firmware features that were not previously possible with CAN 2.0B.</p></li>
+</ul>
+</div></blockquote>
+<section id="performance-so-how-much-better-is-it">
+<h4>Performance - So how much better is it?<a class="headerlink" href="#performance-so-how-much-better-is-it" title="Permalink to this heading"></a></h4>
+<p>Calculating the improvement can be tricky since it depends on frame design and which CAN FD bitrate is used. Our research and testing indicate the bus utilization will drop from using CANivore vs the original CAN 2.0 bus by 2X to 8X depending on these details. This improvement will also increase over time as framing changes are made to take greater advantage of the new bus across the product line.</p>
+<p>Testing with the 2022 release firmware (CANivore and supported devices) has shown that a typical bus at 80% (as reported by the driver station) will be 35% when used with a CANivore (as reported by Phoenix Tuner). That’s an <strong>effective gain of 2.3X</strong>. With each season this will continue to be improved with newer device firmware.</p>
+<p>Reference the CAN bus utilization page for more insight.</p>
+</section>
+</section>
+</section>
+<section id="frc-radio">
+<h2>FRC Radio<a class="headerlink" href="#frc-radio" title="Permalink to this heading"></a></h2>
+<img alt="../_images/FRCConcepts.071.jpeg" class="align-center" src="../_images/FRCConcepts.071.jpeg" />
+<p>An FRC radio is a specialized network radio, most recently the VIVID Hosting VH-109 FRC Radio, used in the FIRST Robotics Competition (FRC) to provide robust wireless communication between a team’s robot and the driver station. These devices are ruggedized, offer high-speed Wi-Fi 6E connectivity for reliable performance, and feature multiple Ethernet ports, eliminating the need for separate network switches on the robot.</p>
+<section id="key-characteristics">
+<h3>Key Characteristics<a class="headerlink" href="#key-characteristics" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>High-Speed Wi-Fi: The current generation of FRC radios supports Wi-Fi 6E for improved speed and reduced interference compared to older models.</p></li>
+<li><p>Rugged Design: They are built to withstand the demanding conditions of FRC, including unfiltered power input for flexible power options.</p></li>
+<li><p>Ethernet Ports: Multiple Ethernet ports are built into the radio, simplifying the process of connecting the roboRIO and other onboard electronics.</p></li>
+<li><p>Configurable for Field and Home Use: The radios can function as an access point for practice at home or a bridge when connected to the FRC field’s network infrastructure.</p></li>
+<li><p>Software Configuration: The FRC Radio Configuration Utility is used to set up the radio’s network settings, power over Ethernet (PoE) outputs, and other parameters required for competition.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="evolution">
+<h3>Evolution<a class="headerlink" href="#evolution" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Older FRC robots used OpenMesh radios, which had performance issues like poor RF links, slow connection times, and susceptibility to field-wide drops.</p></li>
+<li><p>The newer VIVID Hosting VH-109 radio serves as a drop-in replacement, offering a significantly more stable and superior wireless experience.</p></li>
+</ul>
+</div></blockquote>
+<p>For more information refer to <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/radio-programming.html">Programming the Radio</a> for detailed instructions on loading the firmware and configuration.</p>
+</section>
+</section>
+<section id="network-tables">
+<h2>Network Tables<a class="headerlink" href="#network-tables" title="Permalink to this heading"></a></h2>
+<p>In FRC (FIRST Robotics Competition), NetworkTables is a distributed data structure and communication protocol that allows different robot components (like the robot, driver station, and coprocessors) to share data in real-time. It functions like a shared online dictionary where values are assigned to specific keys, and these key-value pairs are automatically synchronized across all connected devices on the robot’s local network.</p>
+<section id="how-it-works">
+<h3>How it works:<a class="headerlink" href="#how-it-works" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Key-Value Pairs: Data is stored in «tables» with hierarchical keys, similar to nested folders. For example, goalPosition could be a table with keys goal x coord and goal y coord.</p></li>
+<li><p>Data Synchronization: When a value is written to a key on one device (e.g., the robot), it’s automatically replicated and can be read by any other connected device (e.g., the driver’s laptop or a Raspberry Pi vision processor) almost instantly.</p></li>
+<li><p>Data Types: Values can be of different data types, including numbers, strings, booleans, and arrays.</p></li>
+<li><p>Network Communication: NetworkTables handles the underlying network communication, simplifying the process of sharing data between different hardware and software components.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="common-uses">
+<h3>Common Uses:<a class="headerlink" href="#common-uses" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Driver Station Dashboards: Data is published to the dashboard (like Shuffleboard) to be viewed by drivers and mentors.</p></li>
+<li><p>Computer Vision: A vision processor can publish detected targets (like goal position and distance) to NetworkTables, which the robot can then read and use for autonomous control.</p></li>
+<li><p>Data Logging: NetworkTables can be used to log robot data for analysis and debugging purposes.</p></li>
+<li><p>Cooperative Control: Different robot mechanisms can share information and coordinate their actions through NetworkTables.</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+<section id="driverstation">
+<h2>DriverStation<a class="headerlink" href="#driverstation" title="Permalink to this heading"></a></h2>
+<p>An FRC Driver Station is the software interface that connects human operators to their robot during a FIRST Robotics Competition (FRC) match. It takes input from joysticks, gamepads, and custom devices, allowing the robot’s code to receive commands, and also provides tools for monitoring robot status, selecting autonomous modes, and creating diagnostic log files.</p>
+<section id="key-functions">
+<h3>Key Functions<a class="headerlink" href="#key-functions" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Robot Control: The Driver Station acts as the conduit for control signals from input devices to the robot’s controller (the RoboRIO).</p></li>
+<li><p>Human Input: It interprets signals from joysticks and other input devices, translating them into commands for the robot.</p></li>
+<li><p>Diagnostic Tools: The Driver Station provides status indicators for the robot, allows for the selection of autonomous routines, and generates log files for debugging and review after a match.</p></li>
+<li><p>Communication: It communicates with both the robot and the Field Management System (FMS) to manage the robot’s state during a competition.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id1">
+<h3>How it Works<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Input: Human operators use joysticks, gamepads, or custom devices connected to the Driver Station computer.</p></li>
+<li><p>Software Processing: The FRC Driver Station software, which runs on a Windows computer and is powered by National Instruments (NI) LabVIEW, processes these inputs.</p></li>
+<li><p>Data Transmission: The software sends the processed data to the robot over the network.</p></li>
+<li><p>Robot Response: The robot’s code receives these commands and performs the corresponding actions, controlling its motors and mechanisms.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="included-components">
+<h3>Included Components<a class="headerlink" href="#included-components" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>FRC Game Tools: The Driver Station is a key component of the FRC Game Tools, a software bundle required for all FRC participants.</p></li>
+<li><p>Dashboards: The Driver Station can launch various dashboards, such as the LabVIEW Dashboard, SmartDashboard, or Shuffleboard, to provide visual feedback and controls.</p></li>
+<li><p>Log File Viewer: A separate tool to analyze the diagnostic logs generated by the Driver Station.</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+<section id="i2c">
+<h2>I2C<a class="headerlink" href="#i2c" title="Permalink to this heading"></a></h2>
+<p>An «FRC I2C» is the Inter-Integrated Circuit (I2C) communication protocol used in the FIRST Robotics Competition, specifically with the NI roboRIO controller. I2C allows a single master controller (like the roboRIO) to communicate with multiple «slave» peripheral devices (such as sensors) using just two data lines: one for serial data (SDA) and one for serial clock (SCL). This enables the robot’s software to read data from sensors, control actuators, and manage other integrated components efficiently over a single bus.</p>
+<section id="id2">
+<h3>How it Works:<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul>
+<li><p>Master/Slave: In an FRC context, the roboRIO acts as the master controller, sending instructions and clock signals to the slave devices.</p></li>
+<li><p>Two Wires: Communication occurs on two main lines:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>SCL (Serial Clock): The master provides the clock signal to synchronize data transfer.</p></li>
+<li><p>SDA (Serial Data): This line transmits the actual data between devices.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Unique Addresses: Each I2C device on the bus has a unique address. The roboRIO uses these addresses to select a specific device for communication.</p></li>
+<li><p>Daisy-Chaining: Multiple I2C devices can be connected in a «daisy-chain» on the same bus, sharing the SDA and SCL lines, which simplifies wiring for complex systems.</p></li>
+<li><p>Typical Use: FRC teams use I2C to connect various sensors, including color sensors, gyroscopes, and other specialized peripherals, to the roboRIO’s I2C port or MXP port.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="why-it-s-used-in-frc">
+<h3>Why it’s Used in FRC<a class="headerlink" href="#why-it-s-used-in-frc" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Simplicity: I2C requires fewer wires than some other communication protocols, leading to less complex wiring on the robot.</p></li>
+<li><p>Versatility: It allows for communication with a large number of different peripheral devices, all managed by a single controller.</p></li>
+<li><p>Standardization: I2C is a well-established protocol used by many FRC-compatible hardware manufacturers, ensuring interoperability.</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/networktables/index.html">Network Tables</a></p></li>
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/wpilib-tools/outlineviewer/index.html">Outline Viewer</a></p></li>
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/radio-programming.html">Programming the Radio</a></p></li>
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/networking/networking-introduction/roborio-network-troubleshooting.html#disabling-network-adapters">RoboRIO Network Troubleshooting</a></p></li>
+<li><p>FRC Documetation - <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station.html">DriverStation</a></p></li>
+<li><p>What is CAN FD - <a class="reference external" href="https://store.ctr-electronics.com/pages/can-fd?srsltid=AfmBOoqtvzg1ZGFxZxLU9dMdEh2129ynNLecbX6ivqXYCpXrnuBYt7Am">CAN FD CTRE Electronics</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="controlAlgo.html" class="btn btn-neutral float-left" title="Control Algorithms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="kinematics.html" class="btn btn-neutral float-right" title="Robot Kinematics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/es/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

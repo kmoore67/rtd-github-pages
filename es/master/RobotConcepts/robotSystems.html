@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robot Systems &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Sensors" href="sensors.html" />
+    <link rel="prev" title="Robot Concepts" href="robotConceptsIndex.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotControl/robotControlIndex.html">Robot Control</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="robotConceptsIndex.html">Robot Concepts</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Robot Systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mechanical-structure">Mechanical Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sensors">Sensors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#actuators">Actuators</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#motors">Motors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pneumatic-actuators">Pneumatic Actuators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#robot-control">Robot Control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sensors.html">Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actuators.html">Actuators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controlAlgo.html">Control Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="communications.html">Communication Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kinematics.html">Robot Kinematics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">Robot Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coordinate.html">Coordinate System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamicalSystems.html">Dynamical Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="poseEstimation.html">Pose Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kalmanFilters.html">Kalman Filters</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RoboRIORobots/roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../MachineLearning/machineLearningIndex.html">Machine Learning</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="robotConceptsIndex.html">Robot Concepts</a></li>
+      <li class="breadcrumb-item active">Robot Systems</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RobotConcepts/robotSystems.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="robot-systems">
+<h1>Robot Systems<a class="headerlink" href="#robot-systems" title="Permalink to this heading"></a></h1>
+<p>We can define a robot as <strong>a goal oriented machine that can sense, plan, and act</strong>.  A robot is largely classified into hardware and software. Mechanical components, motors, gears, circuits, sensors are categorized as hardware. The processes that perceive the environment from sensor data, makes plans, and drives or controls the robot’s hardware to act is the software.</p>
+<img alt="../_images/FRCConcepts.001.jpeg" src="../_images/FRCConcepts.001.jpeg" />
+<p>The actuators, sensors, and control systems work together to carry out the robots” mission.  The control system will accept the mission commands and calculate a path and trajectory from it’s current location to the target location.  It will the determine the control signals it needs to send to the actuators.  The sensors will feed back raw data that the control system will interpret to determine where it is in the path.</p>
+<img alt="../_images/FRCConcepts.008.jpeg" src="../_images/FRCConcepts.008.jpeg" />
+<section id="mechanical-structure">
+<h2>Mechanical Structure<a class="headerlink" href="#mechanical-structure" title="Permalink to this heading"></a></h2>
+<p>The mechanical structure enables the robot to physically interact with the world. It provides an appropriate framework, or skeleton, to traverse the environment in which it’s suppose to operate, ground, air, water, smooth or rough terrain.  It enables it to interact with the world using actuators.  And provides sensors to perceive where it is and plan its actions.</p>
+<img alt="../_images/FRCConcepts.002.jpeg" src="../_images/FRCConcepts.002.jpeg" />
+</section>
+<section id="sensors">
+<h2>Sensors<a class="headerlink" href="#sensors" title="Permalink to this heading"></a></h2>
+<p>One of the most important tasks of robots is to acquire knowledge about its environment. This is done by taking measurements using various kinds of sensors and then extracting meaningful information from those measurements. This information is used to decide what actions the robot should take and how those actions should be carried out.  For some actions it may be necessary to take and process measurements multiple times per second.</p>
+<section id="actuators">
+<h3>Actuators<a class="headerlink" href="#actuators" title="Permalink to this heading"></a></h3>
+<p>An actuator is a device that takes energy and converts it into mechanical form. For example, a DC motor will convert electrical energy into angular motion, and a pneumatic device will take compressed air and covert it into linear motion.  The command signal for the actuator will come from the controller.  Actuators are the muscles of the robot allowing it to interact with the world around it.</p>
+<img alt="../_images/FRCConcepts.004.jpeg" src="../_images/FRCConcepts.004.jpeg" />
+</section>
+</section>
+<section id="motors">
+<h2>Motors<a class="headerlink" href="#motors" title="Permalink to this heading"></a></h2>
+<p>There are three main types of motor:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Servo Motor</strong></dt><dd><p>Based on feedback control.  Fast, high torque, very accurate rotation within a limited angle. Suited for robotic arms/legs etc. Servos use a feedback mechanism and other circuitry for positioning.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Stepper Motor</strong></dt><dd><p>Precise angular motion in small steps. Quite slow but easy to control. They have high holding torque. Stepper motors are suited for robot arms, 3D printers and other devices where precise position is critical.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>DC Motor</strong></dt><dd><p>Use direct current.  Fast, continuous rotation. Used for anything that needs to spin at a high RPM e.g. car wheels, fans, drills etc.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<img alt="../_images/FRCConcepts.007.jpeg" src="../_images/FRCConcepts.007.jpeg" />
+</section>
+<section id="pneumatic-actuators">
+<h2>Pneumatic Actuators<a class="headerlink" href="#pneumatic-actuators" title="Permalink to this heading"></a></h2>
+<p>Pneumatic actuators work on compressed air.  Used for fast on/off tasks with a high amount of force applied.  No oil leaks as might be the case with hydraulic devices.</p>
+<img alt="../_images/FRCConcepts.0101.jpeg" src="../_images/FRCConcepts.0101.jpeg" />
+<section id="robot-control">
+<h3>Robot Control<a class="headerlink" href="#robot-control" title="Permalink to this heading"></a></h3>
+<p>The programming team is primarily tasked with controlling the robot.  On the competition robot the control software runs on the <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/roborio-info/roborio-introduction.html">RoboRIO</a> that is a controller made specifically for FRC.</p>
+<p>Robot control can be grouped into a few broad categories some of which are explained below.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Motion Control</strong></dt><dd><p>In order to ensure a smooth transition from one physical state to the next it’s important to ensure that the robot does not undergo any sudden accelerations and decelerations.  Severe sudden movements of the robot will over time require more maintenance and could cause damage.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>PID Control</strong></dt><dd><p>PID control is at the core of many control algorithms.  PID control ensures that the robot arrives at its target state in the most efficient manner while observing all of its physical contraints.  PID stands for <strong>Proportional, Integral, Devirative</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Localization</strong></dt><dd><p>In order to control a robot we always need to know what its position and orientation in space is at all times. Localization routines deal with this task and are also referred to as <em>State Estimation</em>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Mapping</strong></dt><dd><p>Mapping is a process that a robot might undertake in order to know what its working environment is.  Mapping is done using laser range finders and/or cameras.  The resulting map is stored in memory for contiuous use.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Path Planning</strong></dt><dd><p>In order for a robot to get from its current physical state to its target state it needs to plan a path. This path may not nessicarily be a straight line since it may need to route around objects as described in a map of its environment.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Recovery Routines</strong></dt><dd><p>At some point the robot is going to be confronted with an unexpected situation that gets in the way of completing its mission.  For instance, some obstical like a person might step into its planned path.  In this situation a recovery algorithm might kick in to route around the person.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<img alt="../_images/FRCConcepts.005.jpeg" src="../_images/FRCConcepts.005.jpeg" />
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>FRC Documentation <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/roborio-info/roborio-introduction.html">RoboRIO</a></p></li>
+<li><p>QUT Robotics Academy <a class="reference external" href="https://robotacademy.net.au/masterclass/introduction-to-robotics/">Introduction to Robotics</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="robotConceptsIndex.html" class="btn btn-neutral float-left" title="Robot Concepts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sensors.html" class="btn btn-neutral float-right" title="Sensors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/es/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

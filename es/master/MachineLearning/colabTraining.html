@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Training a Model in Colab &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Training a Model with Axon" href="axonTraining.html" />
+    <link rel="prev" title="Training and Validating the Model" href="training.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotControl/robotControlIndex.html">Robot Control</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotConcepts/robotConceptsIndex.html">Robot Concepts</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RoboRIORobots/roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="machineLearningIndex.html">Machine Learning</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="processImages.html">Preparing Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training.html">Training the Model</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Colab Model Training</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#training-an-ssd-mobilenet-model">Training an SSD MobileNet Model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installing-the-tensorflow-models-and-api">Installing the Tensorflow Models and API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#import-the-annotated-dataset">Import the Annotated Dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setup-configuration-files-for-training">Setup Configuration Files for Training</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#train-the-model">Train the Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#run-inference-to-test-the-model">Run Inference to Test the Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#save-the-model">Save the Model</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#training-a-yolo-model">Training a Yolo Model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#install-the-darknet-api">Install the Darknet API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#import-the-dataset">Import the Dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Setup Configuration Files for Training</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Train the Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Run Inference to Test the Model</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#saving-the-model">Saving the Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#training-model-in-roboflow">Training Model in Roboflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#desktop-deployment">Desktop Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="axonTraining.html">Axon Model Training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploymentIndex.html">Deploying the Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploymentScript.html">Inference Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usbDeployment.html">USB Deployment for Raspberry Pi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jetsonDeployment.html">USB Deployment for Jetson Nano</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control.html">Machine Learning-Based Control</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="machineLearningIndex.html">Machine Learning</a></li>
+      <li class="breadcrumb-item active">Training a Model in Colab</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/MachineLearning/colabTraining.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="training-a-model-in-colab">
+<h1>Training a Model in Colab<a class="headerlink" href="#training-a-model-in-colab" title="Permalink to this heading"></a></h1>
+<p>Once you have a dataset of the images that you’re happy with it can be used to train a detection model. A detection model is used to identify objects of interest in the field-of-view of the camera.  The model will be trained to recognize these objects, for example, the red and blue balls in the Rapid React competition.  The trained model will be deployed to <em>Single Board Computer (SBC)</em> such as a Raspberry Pi or Jetson Nano for competition.</p>
+<p>In order to deploy a model on the competition robot it can be trained using <em>Google Colab</em>.  Google Colab uses Jupyter Notebooks that are run directly Google’s online servers.  The Colab platform has GPU processors available that significantly speed up the training process.  Colab is free to use, which makes it a good option since it can be expensive to setup a comparable training environment on a PC.</p>
+<p>Make sure that you’re familiar with how Google Colab works. For a quick introduction watch this <a class="reference external" href="https://www.youtube.com/watch?v=RLYoEyIHL6A&amp;ab_channel=CodewithDogaOzgon">Google Colab</a> YouTube video. Also see the <a class="reference external" href="https://colab.research.google.com/github/pycroscopy/AICrystallographer/blob/master/Tutorials/ColabNotebooks_BasicOperations.ipynb#scrollTo=hkcI78C4Sybk">Basic operations in Colaboratory notebook</a> tutorial page.</p>
+<p>You can use various model types for training.  You need a model that’s very fast at processing the streamed video coming from your robot’s camera.  Two of the most popular models for this are <em>Yolo Darknet</em> and <em>SSD MobilNet</em>. During the training process you’ll import your annotated dataset, train the model, and validate it.  The end result will be a binary file that you’ll need to deploy to your target platform.</p>
+<img alt="../_images/FRCMachineLearning.019.jpeg" src="../_images/FRCMachineLearning.019.jpeg" />
+<p>In order to train our models we use Jupyter Notebooks that are run on the Google Colab online server.  Here are the Roboflow notebooks that can be used to train each of the model types:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://colab.research.google.com/drive/1PWOwg038EOGNddf6SXDG5AsC8PIcAe-G#scrollTo=Cdj4tmT5Cmdl">YoloV4 Tiny Darknet</a></p></li>
+<li><p><a class="reference external" href="https://colab.research.google.com/drive/1wTMIrJhYsQdq_u7ROOkf0Lu_fsX5Mu8a">SSD MobileNet</a></p></li>
+</ul>
+<p>The first thing to do once the notebook loads in Colab is to save a copy of it into your Google Drive. At the top left of the Colab page go to <strong>File -&gt; Save a copy in Drive</strong>.  Once the copy is created you should rename it, i.e. you might change <strong>«Copy of Roboflow-TensorFlow2-Object-Detection.ipynb»</strong> to <strong>«Rapid-React-Roboflow-TensorFlow2-Object-Detection.ipynb»</strong>.</p>
+<p>When you execute the first cell it will allocate a GPU for you. You should try and complete all of the training steps in a single session.  If your page is inactive for more than an hour the session will disconnect and you will have to start over.  Once you have the Colab notebook loaded it will guide you through the steps to train, validate, and export the model.  The next sections will walk you through the training process for the <em>SSD MobileNet</em> and <em>Yolov4 Tiny Darknet</em> models.</p>
+<section id="training-an-ssd-mobilenet-model">
+<h2>Training an SSD MobileNet Model<a class="headerlink" href="#training-an-ssd-mobilenet-model" title="Permalink to this heading"></a></h2>
+<section id="installing-the-tensorflow-models-and-api">
+<h3>Installing the Tensorflow Models and API<a class="headerlink" href="#installing-the-tensorflow-models-and-api" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Install the Tensorflow models from the Model Zoo</p></li>
+<li><p>Install the Object Detection API</p></li>
+</ul>
+</section>
+<section id="import-the-annotated-dataset">
+<h3>Import the Annotated Dataset<a class="headerlink" href="#import-the-annotated-dataset" title="Permalink to this heading"></a></h3>
+</section>
+<section id="setup-configuration-files-for-training">
+<h3>Setup Configuration Files for Training<a class="headerlink" href="#setup-configuration-files-for-training" title="Permalink to this heading"></a></h3>
+</section>
+<section id="train-the-model">
+<h3>Train the Model<a class="headerlink" href="#train-the-model" title="Permalink to this heading"></a></h3>
+</section>
+<section id="run-inference-to-test-the-model">
+<h3>Run Inference to Test the Model<a class="headerlink" href="#run-inference-to-test-the-model" title="Permalink to this heading"></a></h3>
+</section>
+<section id="save-the-model">
+<h3>Save the Model<a class="headerlink" href="#save-the-model" title="Permalink to this heading"></a></h3>
+<p>A Saved Model contains a complete TensorFlow program, including trained parameters (i.e, tf.Variables) and computation. It does not require the original model building code to run, which makes it useful for sharing or deploying with TFLite</p>
+</section>
+</section>
+<section id="training-a-yolo-model">
+<h2>Training a Yolo Model<a class="headerlink" href="#training-a-yolo-model" title="Permalink to this heading"></a></h2>
+<section id="install-the-darknet-api">
+<h3>Install the Darknet API<a class="headerlink" href="#install-the-darknet-api" title="Permalink to this heading"></a></h3>
+<p>This requires three steps:</p>
+<ul class="simple">
+<li><p>Configure a GPU environment on Google Colab</p></li>
+<li><p>Install the <a class="reference external" href="https://github.com/pjreddie/darknet">Darknet</a> YOLOv4 training environment.  The darknet software is cloned from GitHub and then compiled.  After install you’ll see the <strong>darknet</strong> directory structure in the <em>Files</em> sidebar menu.</p></li>
+<li><p>Download the YOLOv4 <em>Convolution Network</em> weights. These weights are the starting point for training the model.  We will be using <a class="reference external" href="https://en.wikipedia.org/wiki/Transfer_learning">Transfer Learning</a>, which is a machine learning method where a model developed for a task is reused as the starting point for a model on a related task.</p></li>
+</ul>
+</section>
+<section id="import-the-dataset">
+<h3>Import the Dataset<a class="headerlink" href="#import-the-dataset" title="Permalink to this heading"></a></h3>
+<p>In order to train the dataset in Colab it has to be exported to a format compatible with the training model.  In our case, we’ll be using the YoloV4 training model, so we’ll export it in <em>YOLO Darknet</em> format. The export process generates a <strong>.txt</strong> file along with each image that describe the bounding boxes and the label identifier. The txt file will have the same name as the image and contains one line per bounding box.</p>
+<p>Once the export is complete you will be displayed a token that can be used to import the dataset into Colab.</p>
+<img alt="../_images/FRCMachineLearning.006.jpeg" src="../_images/FRCMachineLearning.006.jpeg" />
+<p>Download your custom dataset for YOLOv4 and set up directories. This is where you get your dataset from Roboflow into the Colab notebook.  Copy the export key from the Roboflow export and paste it into the notebook.  Your key should look something like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">roboflow</span>
+
+<span class="kn">from</span> <span class="nn">roboflow</span> <span class="kn">import</span> <span class="n">Roboflow</span>
+<span class="n">rf</span> <span class="o">=</span> <span class="n">Roboflow</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;yourkey&quot;</span><span class="p">)</span>
+<span class="n">project</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">workspace</span><span class="p">(</span><span class="s2">&quot;your-name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="s2">&quot;rapid-react&quot;</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">version</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;darknet&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The next step sets up training file directories for your custom dataset.</p>
+</section>
+<section id="id1">
+<h3>Setup Configuration Files for Training<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p>The weights file for YoloV4-tiny is downloaded in order to generate a custom training configuration file for Darknet.</p>
+<p>Next, we write a specialized training configuration file based on our type of an object detection model. The configuration file contains a set of parameters for the training process. These parameters are customized for your dataset that will contain good default values so there shouldn’t be much need to change them.</p>
+</section>
+<section id="id2">
+<h3>Train the Model<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<p>The next step is to train a custom YOLOv4 object detector.</p>
+<p>As the training progresses files with the suffix <strong>.weights</strong> will show up in the <strong>darknet/backup</strong> directory.  As soon as you have a file with a name of <strong>&lt;dataset&gt;_best.weights</strong> you can stop the training process.</p>
+</section>
+<section id="id3">
+<h3>Run Inference to Test the Model<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<p>The process of validating an image with a model is called <em>Inference</em>. This step will load the YOLOv4 trained weights and do inference on the validation image set.</p>
+</section>
+</section>
+<section id="saving-the-model">
+<h2>Saving the Model<a class="headerlink" href="#saving-the-model" title="Permalink to this heading"></a></h2>
+<p>When you are satisfied with the model’s testing results you can convert it to a file format that’s suitable for your deployment platform.</p>
+<img alt="../_images/FRCMachineLearning.017.jpeg" src="../_images/FRCMachineLearning.017.jpeg" />
+</section>
+<section id="training-model-in-roboflow">
+<h2>Training Model in Roboflow<a class="headerlink" href="#training-model-in-roboflow" title="Permalink to this heading"></a></h2>
+<p>During the testing phase you can train and validate your model in <em>Roboflow</em>. To train a model in Roboflow watch the <a class="reference external" href="https://www.youtube.com/watch?v=njWwmKLWVyE">Training</a> YouTube Video and read the <a class="reference external" href="https://docs.roboflow.com/train">Train</a> documentation. Once you have a trained model it can be validated directly on the Roboflow site by uploading a test image. It’s very important that the test image was never used in the training or validation set.</p>
+<p>To validate, go to the <strong>Versions</strong> section of your Roboflow account, select an image of the objects that you want to run inference on and upload it to the site.  If your model is properly trained you should see bounding boxes around the objects of interest.</p>
+<img alt="../_images/FRCMachineLearning.011.jpeg" src="../_images/FRCMachineLearning.011.jpeg" />
+<p>See the next section on <strong>Testing the Model</strong> for more testing options.</p>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this heading"></a></h2>
+</section>
+<section id="desktop-deployment">
+<h2>Desktop Deployment<a class="headerlink" href="#desktop-deployment" title="Permalink to this heading"></a></h2>
+<p>In order to make the training and validation workflow more efficient it’s useful to have a desktop enviroment setup into which you can plug the OAK-D camera.  Here is a list of options that you can employ for that purpose.</p>
+<p>(see Desktop Deployment Options)</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Roboflow Blog <a class="reference external" href="https://blog.roboflow.com/training-yolov4-on-a-custom-dataset/">How to Train YOLOv4 on a Custom Dataset</a></p></li>
+<li><p>Roboflow <a class="reference external" href="https://www.youtube.com/watch?v=njWwmKLWVyE">Training</a>  - Youtube Video</p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=RLYoEyIHL6A&amp;ab_channel=CodewithDogaOzgon">Google Colab</a> - YouTube Video</p></li>
+<li><p>Roboflow <a class="reference external" href="https://models.roboflow.com">Computer Vision Model Library</a> - Colab Notebooks</p></li>
+<li><p>Thomas Gamauf - <a class="reference external" href="https://medium.com/mostly-ai/tensorflow-records-what-they-are-and-how-to-use-them-c46bc4bbb564">Tensorflow Records? What they are and how to use them</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="training.html" class="btn btn-neutral float-left" title="Training and Validating the Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="axonTraining.html" class="btn btn-neutral float-right" title="Training a Model with Axon" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/es/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

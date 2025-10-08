@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sensors &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Actuators" href="actuators.html" />
+    <link rel="prev" title="Robot Systems" href="robotSystems.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotControl/robotControlIndex.html">Robot Control</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="robotConceptsIndex.html">Robot Concepts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="robotSystems.html">Robot Systems</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Sensors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sensor-interaction">Sensor Interaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#encoders">Encoders</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-they-work">How they work</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#types-of-frc-encoders">Types of FRC Encoders</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-they-are-used-in-frc">Why they are used in FRC</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gyros">Gyros</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-does-a-gyro-do">What Does a Gyro Do?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#types-of-gyros-in-frc">Types of Gyros in FRC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inertial-measurement-units-imus">Inertial Measurement Units (IMUs)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-they-are-used">How they are used?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#accelerometers">Accelerometers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-frc-accelerometers-work">How FRC Accelerometers Work</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#types-of-accelerometers-in-frc">Types of Accelerometers in FRC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common-uses-in-frc">Common Uses in FRC</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cameras">Cameras</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#uses-in-frc">Uses in FRC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#types-of-frc-cameras">Types of FRC Cameras</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#distance-sensors">Distance Sensors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#laser-distance-sensors-lds">Laser Distance Sensors (LDS)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="actuators.html">Actuators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controlAlgo.html">Control Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="communications.html">Communication Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kinematics.html">Robot Kinematics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">Robot Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coordinate.html">Coordinate System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamicalSystems.html">Dynamical Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="poseEstimation.html">Pose Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kalmanFilters.html">Kalman Filters</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RoboRIORobots/roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../MachineLearning/machineLearningIndex.html">Machine Learning</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="robotConceptsIndex.html">Robot Concepts</a></li>
+      <li class="breadcrumb-item active">Sensors</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RobotConcepts/sensors.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="sensors">
+<h1>Sensors<a class="headerlink" href="#sensors" title="Permalink to this heading"></a></h1>
+<p>There are two broad categories of sensors used in robotics:</p>
+<ul class="simple">
+<li><p><strong>Proprioceptive</strong> sensors measure values internal to the robot; e.g. motor speed, acceleration, direction, battery voltage.</p></li>
+<li><p><strong>Exteroceptive</strong> sensors acquire information from the robot’s environment; e g. distance measurements, light intensity, sound amplitude. Exteroceptive sensor measurements are interpreted by the robot in order to extract meaningful features from its surroundings.</p></li>
+</ul>
+<img alt="../_images/FRCConcepts.003.jpeg" src="../_images/FRCConcepts.003.jpeg" />
+<section id="sensor-interaction">
+<h2>Sensor Interaction<a class="headerlink" href="#sensor-interaction" title="Permalink to this heading"></a></h2>
+<p>There are two main ways in which sensors interact with the surrounding world:</p>
+<ul class="simple">
+<li><p><strong>Passive</strong> sensors measure ambient environmental energy entering the sensor. Examples of passive sensors include temperature probes, microphones, contact switches, compasses, and cameras.</p></li>
+<li><p><strong>Active</strong> sensors emit energy into the environment, then measure the environmental reaction.  Examples would be ultrasonic sensors, laser rangefinders, and optical encoders.</p></li>
+</ul>
+<img alt="../_images/FRCConcepts.006.jpeg" src="../_images/FRCConcepts.006.jpeg" />
+</section>
+<section id="encoders">
+<h2>Encoders<a class="headerlink" href="#encoders" title="Permalink to this heading"></a></h2>
+<a class="reference internal image-reference" href="../_images/encoder.001.webp"><img alt="../_images/encoder.001.webp" src="../_images/encoder.001.webp" style="width: 398.25px; height: 280.5px;" /></a>
+<p>In FIRST Robotics Competition (FRC), encoders are sensors that measure rotational motion, like how far a robot’s wheels have turned, which allows the robot to track distance, speed, and position. FRC robots commonly use two main types of encoders: Quadrature Encoders, which count pulses to measure relative movement and direction, and Absolute Encoders, which report their current absolute position (like angle) even after a power cycle.</p>
+<section id="how-they-work">
+<h3>How they work<a class="headerlink" href="#how-they-work" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Rotary Motion: Encoders are attached to a rotating shaft, such as a wheel axle or a motor.</p></li>
+<li><p>Light/Magnetic Detection: Inside the encoder, a rotating disk with patterns or magnets interacts with a light source and a photosensor, or with a magnetic sensor.</p></li>
+<li><p>Signal Output: This interaction creates digital pulses or a continuous signal that is sent to the robot’s controller.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="types-of-frc-encoders">
+<h3>Types of FRC Encoders<a class="headerlink" href="#types-of-frc-encoders" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul>
+<li><dl class="simple">
+<dt>Quadrature Encoders:</dt><dd><ul class="simple">
+<li><p>These are incremental encoders that produce two channels of square-wave signals (Phase A and Phase B).</p></li>
+<li><p>By comparing when each phase gets a pulse, the software can determine the direction and amount of rotation.</p></li>
+<li><p>The main drawback is they only track relative distance; if power is lost, the robot doesn’t know its position without another sensor or reset.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Absolute Encoders:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>These encoders maintain their recorded position and report a consistent angle, even after the robot loses power.</p></li>
+<li><p>They are crucial for systems like swerve drives, where each wheel needs a known starting orientation when the robot powers on.</p></li>
+<li><p>Absolute Position Encoders can output information as a voltage signal, a digital pulse-width modulation (PWM) signal, or a duty cycle signal.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="why-they-are-used-in-frc">
+<h3>Why they are used in FRC<a class="headerlink" href="#why-they-are-used-in-frc" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Measuring Distance: Encoders are vital for a robot’s autonomous movement, letting the robot know how far it has traveled.</p></li>
+<li><p>Controlling Speed: By tracking rotations over time, the software can calculate speed and maintain it for a mechanism or the robot’s drive train.</p></li>
+<li><p>Positioning Mechanisms: They provide information on the angle or position of moving parts, such as an arm, allowing for precise autonomous control.</p></li>
+<li><p>Field-Oriented Control: For advanced swerve drive systems, absolute encoders are used to ensure each wheel is correctly aligned at startup, enabling precise control.</p></li>
+</ul>
+</div></blockquote>
+<p>For more information see the FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/hardware-apis/sensors/encoders-software.html">Encoders</a></p>
+</section>
+</section>
+<section id="gyros">
+<h2>Gyros<a class="headerlink" href="#gyros" title="Permalink to this heading"></a></h2>
+<img alt="../_images/Gyro.001.jpeg" src="../_images/Gyro.001.jpeg" />
+<p>An FRC gyro is a sensor, also known as a gyroscope or Inertial Measurement Unit (IMU), used in the FIRST Robotics Competition to measure a robot’s rate of rotation around one or more axes, enabling it to maintain a heading, turn accurately, and provide stable driving performance. Gyros are essential for tasks like driving in a straight line or making precise turns and are often integrated with accelerometers in IMUs to provide a comprehensive picture of the robot’s motion.</p>
+<section id="what-does-a-gyro-do">
+<h3>What Does a Gyro Do?<a class="headerlink" href="#what-does-a-gyro-do" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Measures rotational rate: A gyro’s primary function is to detect how fast the robot is spinning around an axis.</p></li>
+<li><p>Measures heading: By integrating the rotational rate, the gyro can calculate the robot’s current heading (angle).</p></li>
+<li><p>Stabilizes driving: The gyro provides data that allows the robot’s software to make real-time corrections to steering, keeping it on a straight path, according to ScreenSteps.</p></li>
+<li><p>Enables autonomous movements: Gyros help robots turn to a specific angle, allowing for more precise autonomous routines.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="types-of-gyros-in-frc">
+<h3>Types of Gyros in FRC<a class="headerlink" href="#types-of-gyros-in-frc" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Single-axis gyros: Measure rotation about one axis.</p></li>
+<li><p>Three-axis gyros: Measure rotation around all three spatial axes (pitch, yaw, and roll), providing more complete motion data.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="inertial-measurement-units-imus">
+<h3>Inertial Measurement Units (IMUs)<a class="headerlink" href="#inertial-measurement-units-imus" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>IMUs are multi-sensor devices that combine a gyroscope with other sensors, such as accelerometers and magnetometers.</p></li>
+<li><p>These integrated units provide a more comprehensive understanding of the robot’s motion than a standalone gyro.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="how-they-are-used">
+<h3>How they are used?<a class="headerlink" href="#how-they-are-used" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Calibration: Gyros require a brief calibration period when the robot powers on to establish a baseline for the “zero” heading.</p></li>
+<li><p>Software Integration: The WPILib software library provides classes and functions for creating, configuring, and reading data from gyros.</p></li>
+</ul>
+</div></blockquote>
+<p>For more information see the FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/hardware-apis/sensors/gyros-software.html">Gyros</a></p>
+</section>
+</section>
+<section id="accelerometers">
+<h2>Accelerometers<a class="headerlink" href="#accelerometers" title="Permalink to this heading"></a></h2>
+<img alt="../_images/accelerometer.001.jpeg" src="../_images/accelerometer.001.jpeg" />
+<p>An FRC accelerometer is a sensor that measures the rate of change of velocity (acceleration) for a FIRST Robotics Competition (FRC) robot, often used to detect collisions, falls, or to help estimate motion in three axes (X, Y, Z). It can be the built-in accelerometer on the roboRIO or a peripheral device, sometimes combined with gyroscopes in an Inertial Measurement Unit (IMU), which may connect to the roboRIO via analog inputs or serial buses like I2C or SPI.</p>
+<section id="how-frc-accelerometers-work">
+<h3>How FRC Accelerometers Work<a class="headerlink" href="#how-frc-accelerometers-work" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Measurement: Accelerometers detect motion and impact by measuring the inertial force on a small internal mass.</p></li>
+<li><p>Output: This force is converted into an electrical signal, which is read by the robot’s control system.</p></li>
+<li><p>Three-Axis: Most FRC accelerometers are three-axis, providing data for forward/backward (X), left/right (Y), and up/down (Z) movement.</p></li>
+<li><p>Units: The data is returned in units of “g’s,” where 1 g is approximately 9.81 m/s².</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="types-of-accelerometers-in-frc">
+<h3>Types of Accelerometers in FRC<a class="headerlink" href="#types-of-accelerometers-in-frc" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Built-in Accelerometer: The roboRIO microcontroller comes with its own three-axis accelerometer that requires no external connections.</p></li>
+<li><p>Peripheral Accelerometers: Teams can purchase external single-axis or multi-axis accelerometers that connect to the roboRIO’s analog input ports or serial buses.</p></li>
+<li><p>Inertial Measurement Units (IMUs): These devices combine an accelerometer with a gyroscope, allowing for more advanced motion tracking. Popular examples include the CTRE Pigeon IMU and the Kauai Labs NavX.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="common-uses-in-frc">
+<h3>Common Uses in FRC<a class="headerlink" href="#common-uses-in-frc" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Detecting collisions: The impact of a collision causes a sudden change in acceleration.</p></li>
+<li><p>Identifying falls: An accelerometer can tell if the robot has fallen or tipped over.</p></li>
+<li><p>Motion estimation: By double-integrating accelerometer data, a robot’s position can be estimated, though this is challenging with the noisy data from FRC-class accelerometers.</p></li>
+<li><p>Autonomous behaviors: Accelerometer data can be used for simple motion detection or more complex tasks like controlling robot speed and orientation.</p></li>
+</ul>
+</div></blockquote>
+<p>For more information see the FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/hardware-apis/sensors/accelerometers-software.html">Accelerometers</a></p>
+</section>
+</section>
+<section id="cameras">
+<h2>Cameras<a class="headerlink" href="#cameras" title="Permalink to this heading"></a></h2>
+<img alt="../_images/camera.001.jpeg" src="../_images/camera.001.jpeg" />
+<p>An FRC Camera is a camera integrated into a FIRST Robotics Competition (FRC) robot to provide either a direct view to the driver or to be used for automated vision processing. It can stream video to the driver station for situational awareness or process images on the robot or a connected coprocessor to identify game objects, calculate their distance and position, and help the robot autonomously score or navigate. Specialized cameras, like the Limelight, combine a camera, LEDs, and a co-processor for advanced targeting and object detection.</p>
+<p>The camera corresponds to the eye in the robot. The images obtained from the camera are very useful for recognizing the environment around the robot. For example, object recognition using a camera image, facial recognition, a distance value obtained from the difference between two different images using two cameras (stereo camera), mono camera visual SLAM, color recognition using information obtained from an image and object tracking are very useful.</p>
+<section id="uses-in-frc">
+<h3>Uses in FRC<a class="headerlink" href="#uses-in-frc" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul>
+<li><p>Driver Vision (Streaming): Teams often use cameras to stream the robot’s perspective to the driver station, providing a wider view and helping the driver see what the robot sees.</p></li>
+<li><p>Automated Vision Processing: More complex systems process images to extract data about targets and game pieces. This information is used for:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Targeting: Aiming to score game objects.</p></li>
+<li><p>Object Detection: Identifying the position, distance, and orientation of game pieces.</p></li>
+<li><p>Autonomous Navigation: Guiding the robot to specific points on the field.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="types-of-frc-cameras">
+<h3>Types of FRC Cameras<a class="headerlink" href="#types-of-frc-cameras" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Standard USB/Ethernet Cameras: These are the most basic type, offering a single image output and are managed by the CameraServer for use in the robot code.</p></li>
+<li><p>Specialized Vision Cameras: Devices like the Limelight are designed specifically for FRC, integrating a camera, LED ring light, and a co-processor for advanced vision tasks.</p></li>
+<li><p>Coprocessors: Powerful single-board computers, such as a Raspberry Pi or Jetson, can be used to run computer vision programs like OpenCV, GRIP or Photon Vision, process video from multiple cameras, and perform advanced machine learning.</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+<section id="distance-sensors">
+<h2>Distance Sensors<a class="headerlink" href="#distance-sensors" title="Permalink to this heading"></a></h2>
+<img alt="../_images/distanceSensor.001.jpeg" src="../_images/distanceSensor.001.jpeg" />
+<p>Robots rely heavily on <em>Active Ranging</em> for obstacle detection and avoidance.  Common active ranging sensors are ultrasonic sensors and laser rangefinders. Active ranging sensors are also used extensively for mapping and localization.  The physics behind these types of sensors is <em>Time of Flight</em>. Time of Flight is a measurement of the time it takes for a sound or light wave to travel from a emitter and back to a receiver after bouncing off of an object. The time taken is used to calculate the distance, or range, to the object.</p>
+<img alt="../_images/FRCConcepts.009.jpeg" src="../_images/FRCConcepts.009.jpeg" />
+<section id="laser-distance-sensors-lds">
+<h3>Laser Distance Sensors (LDS)<a class="headerlink" href="#laser-distance-sensors-lds" title="Permalink to this heading"></a></h3>
+<img alt="../_images/distanceSensor.002.jpeg" src="../_images/distanceSensor.002.jpeg" />
+<p>Laser Distance Sensors (LDS) are referred to various names such as Light Detection And Ranging (LiDAR), Laser Range Finder (LRF) and Laser Scanner. LDS is a sensor used to measure the distance to an object using a laser as its source. The LDS sensor has the advantage of high performance, high speed, real time data acquisition, so it has a wide range of applications in relation to distance measurement. This is a sensor widely used in the field of robots for recognition of objects and people, and distance sensor based SLAM (distance-based sensor), and also widely used in unmanned vehicles due to its real time data acquisition.</p>
+<p>The LDS sensor calculates the difference of the wavelength when the laser source is reflected by the object. A typical LDS consists of a single laser source, a reflective mirror, and a motor. When you drive the LDS, you can hear the sound of the rotating motor, because it rotates the inner mirror and scans the laser in a horizontal plane. Typically measures from 180 to 360 degrees, depending on the product.</p>
+<p>Because it measures the return of the laser source, therefore, is useless if nothing is reflected. In other words, transparent glass, plastic bottles, glass cups are tend to reflect or scatter the laser source in many directions. And for mirrors, lights are reflected back to the mirror making it inaccurate measurement.</p>
+<p>Also, because the horizontal plane is scanned, only objects on the horizontal plane are detected by the sensor. In other words, you need to know that it is 2D data.</p>
+<p>There are infinite usages of LDS, and SLAM (Simultaneous Localization And Mapping) is one of the most well known examples of using LDS. SLAM creates a map by recognizing obstacles around the robot and estimates current position of the robot within a map. As another example of using LDS, the robot is able to detect various objects in the surroundings and react based on the current environment.</p>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/hardware-apis/sensors/index.html">Sensors</a></p></li>
+<li><p>QUT Robot Academy - <a class="reference external" href="https://robotacademy.net.au/masterclass/measuring-motion/">Measuring Motion</a></p></li>
+<li><p>Alonzo Kelly - <a class="reference external" href="https://www.cambridge.org/core/books/mobile-robotics/5BF238489F9BC337C0736432C87B3091">Mobile Robotics</a> Chapter 6.2</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="robotSystems.html" class="btn btn-neutral float-left" title="Robot Systems" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="actuators.html" class="btn btn-neutral float-right" title="Actuators" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

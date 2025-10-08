@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joysticks and Game Controllers &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Configuring Motors and Feedback Sensors" href="motorConfig.html" />
+    <link rel="prev" title="Robot Structure" href="structure.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotControl/robotControlIndex.html">Robot Control</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotConcepts/robotConceptsIndex.html">Robot Concepts</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="roboRIORobotsIndex.html">RoboRIO Robots</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="driverStation.html">Driver Station</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structure.html">Robot Structure</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Joysticks and Game Controllers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-driveroi-class">The <em>DriverOI</em> Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lab-joysticks-and-game-controllers">Lab - Joysticks and Game Controllers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-the-operatoroi-class">Create the <em>OperatorOI</em> Class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing-the-operatoroi-class">Testing the OperatorOI Class</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="motorConfig.html">Configuring Motors and Feedback Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pneumatics.html">Pneumatics Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swervedrive.html">Swerve Drive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulation.html">Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PathPlanner.html">Path Planner</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../MachineLearning/machineLearningIndex.html">Machine Learning</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+      <li class="breadcrumb-item active">Joysticks and Game Controllers</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RoboRIORobots/joysticks.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="joysticks-and-game-controllers">
+<h1>Joysticks and Game Controllers<a class="headerlink" href="#joysticks-and-game-controllers" title="Permalink to this heading"></a></h1>
+<p>This tutorial shows how to map keys on a game controller to commands that will be run on the robot. On the competition robot you’ll be using two game controllers one for the driver and the other for the operator.  Each controller will map to a set of commands that are appropriate for the robot driver and operator.  The mapping is determined by the nature of the competition game rules and how tasks are divided between the driver and operator.  Some commands will be duplicated on both controllers.</p>
+<p>It can become difficult to keep track of this key mapping, especially as more commands are added, so there needs to be a good way of organizing them.</p>
+<section id="the-driveroi-class">
+<h2>The <em>DriverOI</em> Class<a class="headerlink" href="#the-driveroi-class" title="Permalink to this heading"></a></h2>
+<p>The <em>DriverOI</em> class is used to accept Operator Input (OI) from game controllers.  It’s main purpose is to map keys on the game controller to function names that describe the operation that’s to be performed.  It somewhat follows a functional programming paradigm which describes <em>what</em> the function is doing rather than <em>how</em> to do it.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Talk about inline commands…</p>
+</div>
+</section>
+<section id="lab-joysticks-and-game-controllers">
+<h2>Lab - Joysticks and Game Controllers<a class="headerlink" href="#lab-joysticks-and-game-controllers" title="Permalink to this heading"></a></h2>
+<p>There’s one task for the lab:</p>
+<ul class="simple">
+<li><p>Create the <em>OperatorOI</em> class to map keys to the commands that will be initiated from the operator’s game controller.</p></li>
+</ul>
+<section id="create-the-operatoroi-class">
+<h3>Create the <em>OperatorOI</em> Class<a class="headerlink" href="#create-the-operatoroi-class" title="Permalink to this heading"></a></h3>
+<p>Create a new empty class from the files panel in VSCode.  Right mouse-click on the <cite>oi</cite> folder and select «Create a new class/command».  Select «Empty Class» from the dropdown and enter <em>OperatorOI</em> for the name of your new class.</p>
+<p>This class will be using the <em>XboxController</em>, so inside of the curly braces create a member variable for it:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="n">XboxController</span><span class="w"> </span><span class="n">m_controller</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Every class needs a constructor so create one for this class.  It must have the same name as the class.  Capture the <em>XboxController</em> and assign it to the method variable.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="nf">OperatorOI</span><span class="p">(</span><span class="n">XboxController</span><span class="w"> </span><span class="n">controller</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Create two buttons to shift the transmission gears. The methods that return the buttons should be descriptive of the function that they will perform, such as <cite>getShiftLowButton()</cite>. When prompted to import the Button class make sure that you select the <cite>edu.wpi.first.wpilibj2.command.button.Button</cite>. The buttons will be assigned to the <strong>X</strong> and <strong>Y</strong> buttons of the game controller.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="n">Button</span><span class="w"> </span><span class="nf">getShiftLowButton</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JoystickButton</span><span class="p">(</span><span class="n">m_controller</span><span class="p">,</span><span class="w"> </span><span class="n">XboxController</span><span class="p">.</span><span class="na">Button</span><span class="p">.</span><span class="na">kX</span><span class="p">.</span><span class="na">value</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="n">Button</span><span class="w"> </span><span class="nf">getShiftHighButton</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JoystickButton</span><span class="p">(</span><span class="n">m_controller</span><span class="p">,</span><span class="w"> </span><span class="n">XboxController</span><span class="p">.</span><span class="na">Button</span><span class="p">.</span><span class="na">kY</span><span class="p">.</span><span class="na">value</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You should now have a functional <em>OperatorOI</em> class.  To test it you’ll need to add it to the RobotContainer. In the <em>RobotContainer</em> class create a new method variable called <cite>m_operatorController</cite> of type <em>XboxController</em> that will get assigned to the operators game controller.  Assign it to port <cite>1</cite> since the driver’s controller is already assigned to port <cite>0</cite>.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">XboxController</span><span class="w"> </span><span class="n">m_operatorController</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">XboxController</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Create a method variable called <cite>m_operatorOI</cite> and assign the new <cite>m_operatorController</cite> to it.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">OperatorOI</span><span class="w"> </span><span class="n">m_operatorOI</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OperatorOI</span><span class="p">(</span><span class="n">m_operatorController</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In the <cite>configureDrivetrain()</cite> method add the button commands to shift the <em>Transmission</em> gears.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">m_operatorOI</span><span class="p">.</span><span class="na">getShiftLowButton</span><span class="p">().</span><span class="na">whenPressed</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">InstantCommand</span><span class="p">(</span><span class="n">m_transmission</span><span class="p">::</span><span class="n">setLow</span><span class="p">,</span><span class="w"> </span><span class="n">m_transmission</span><span class="p">));</span>
+<span class="n">m_operatorOI</span><span class="p">.</span><span class="na">getShiftHighButton</span><span class="p">().</span><span class="na">whenPressed</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">InstantCommand</span><span class="p">(</span><span class="n">m_transmission</span><span class="p">::</span><span class="n">setHigh</span><span class="p">,</span><span class="w"> </span><span class="n">m_transmission</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+<section id="testing-the-operatoroi-class">
+<h3>Testing the OperatorOI Class<a class="headerlink" href="#testing-the-operatoroi-class" title="Permalink to this heading"></a></h3>
+<p>Start the DriveStation application and connect to the roboRIO robot.</p>
+<p>Plug two game controllers into the laptop and view the <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station.html#usb-devices-tab">USB Devices Tab</a> to ensure that the driver’s controller is assigned to port <cite>0</cite> and the operator’s controller is assigned to port <cite>1</cite>.</p>
+<p>Test that both the driver’s and operator’s controller can change the Transmission gears.</p>
+<p>You’re now done with this task!</p>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>FRC Documentation -  <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/basic-programming/joystick.html#joysticks">Joysticks</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="structure.html" class="btn btn-neutral float-left" title="Robot Structure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="motorConfig.html" class="btn btn-neutral float-right" title="Configuring Motors and Feedback Sensors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/es/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

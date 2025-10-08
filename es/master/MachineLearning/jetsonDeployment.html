@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>USB Camera Deployment for Jetson Nano &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Machine Learning-Based Control" href="control.html" />
+    <link rel="prev" title="USB Camera Deployment for Raspberry Pi" href="usbDeployment.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotControl/robotControlIndex.html">Robot Control</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotConcepts/robotConceptsIndex.html">Robot Concepts</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RoboRIORobots/roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="machineLearningIndex.html">Machine Learning</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="processImages.html">Preparing Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training.html">Training the Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="colabTraining.html">Colab Model Training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="axonTraining.html">Axon Model Training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploymentIndex.html">Deploying the Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploymentScript.html">Inference Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usbDeployment.html">USB Deployment for Raspberry Pi</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">USB Deployment for Jetson Nano</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installing-required-packages">Installing Required Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-the-frc-detection-scripts">Installing the FRC Detection Scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#doing-the-conversion">Doing the Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-inference">Running Inference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-inference-script">The Inference Script</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="control.html">Machine Learning-Based Control</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="machineLearningIndex.html">Machine Learning</a></li>
+      <li class="breadcrumb-item active">USB Camera Deployment for Jetson Nano</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/MachineLearning/jetsonDeployment.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="usb-camera-deployment-for-jetson-nano">
+<h1>USB Camera Deployment for Jetson Nano<a class="headerlink" href="#usb-camera-deployment-for-jetson-nano" title="Permalink to this heading"></a></h1>
+<p>Since the Jetson has a GPU we can use a regular Pi or USB camera to detect the objects of interest.  The deployment below uses Jetpack 4.6 as the base Jetson installation.  In order to run on the Jetson’s CUDA GPU you need to convert the <strong>.weights</strong> file, that was created when you trained the Yolo model, into a TensorRT <strong>.trt</strong> file format.  To setup the environment we need to do the following:</p>
+<ul class="simple">
+<li><p>Install required packages for file convertion and inference.</p></li>
+<li><p>Install the FRC deployment scripts for the Jetson Nano.</p></li>
+<li><p>Convert the <strong>.weights</strong> file to a TensorRT file that will run on the Jetson GPU.</p></li>
+<li><p>Run the inference script.</p></li>
+</ul>
+<img alt="../_images/FRCMachineLearning.014.jpeg" src="../_images/FRCMachineLearning.014.jpeg" />
+<section id="installing-required-packages">
+<h2>Installing Required Packages<a class="headerlink" href="#installing-required-packages" title="Permalink to this heading"></a></h2>
+<p>Install tensorrt_demos.  This set of demos is maintained by JK Jung.  See his <a class="reference external" href="https://jkjung-avt.github.io/trt-yolo-custom-updated/">TensorRT YOLO For Custom Trained Models</a> blog post for more information.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/jkjung-avt/tensorrt_demos.git
+cd ${HOME}/tensorrt_demos
+</pre></div>
+</div>
+<p>Install pycuda:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd ${HOME}/tensorrt_demos/yolo
+./install_pycuda.sh
+</pre></div>
+</div>
+<p>Install protobuf by running this installation <a class="reference external" href="https://github.com/jkjung-avt/jetson_nano/blob/master/install_protobuf-3.8.0.sh">script</a> or installing with pip:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip3</span> <span class="n">install</span> <span class="n">protobuf</span>
+</pre></div>
+</div>
+<p>Install onnx version «1.4.1» (not the latest version) of python3 «onnx» module. Note that the «onnx» module would depend on «protobuf».</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip3</span> <span class="n">install</span> <span class="n">onnx</span><span class="o">==</span><span class="mf">1.4.1</span>
+</pre></div>
+</div>
+<p>Go to the «plugins/» subdirectory and build the «yolo_layer» plugin. When done, a «libyolo_layer.so» would be generated.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd ${HOME}/tensorrt_demos/plugins
+make
+</pre></div>
+</div>
+</section>
+<section id="installing-the-frc-detection-scripts">
+<h2>Installing the FRC Detection Scripts<a class="headerlink" href="#installing-the-frc-detection-scripts" title="Permalink to this heading"></a></h2>
+<p>In order to run the OAK-D camera and display the detected objects you need to deploy a custom python script that is specific to the type of detection model that you want to deploy.  In our case, we’re going to use the <strong>YoloV4-Tiny</strong> model.  The script will use a default model that detects various common objects and display the output to a Web URL. It’ll also place information about objects that have been detected into Network Tables so a it can be used by your WPILib java program.</p>
+<p>To deploy the script follow these steps:</p>
+<ul class="simple">
+<li><p>Clone the FRC models and python scripts from GitHub:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd ${HOME}/tensorrt_demos
+git lfs clone https://github.com/FRC-2928/FRC-Jetson-Deployment-Models.git
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Install the python requirements for the FRC scripts. The requirements are <cite>pkgconfig</cite>, <cite>robotpy-cscore</cite>, and <cite>Pillow</cite>. <cite>robotpy-cscore</cite> installs the <em>WPI Network Tables</em>. This can take 10-15 minutes to install.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd ${HOME}/tensorrt_demos/FRC-Jetson-Deployment-Models
+python3 -m pip install -r requirements.txt
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Move the FRC inference script to the parent directory:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd ${HOME}/tensorrt_demos
+cp FRC-Jetson-Deployment-Models/trt_yolo_wpi.py .
+cp FRC-Jetson-Deployment-Models/wpi_helpers.py .
+</pre></div>
+</div>
+</section>
+<section id="doing-the-conversion">
+<h2>Doing the Conversion<a class="headerlink" href="#doing-the-conversion" title="Permalink to this heading"></a></h2>
+<p>The conversion scripts are in the following directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd ${HOME}/tensorrt_demos/yolo
+</pre></div>
+</div>
+<p>Convert weights file to ONNX:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">yolo_to_onnx</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">yolov4</span>
+</pre></div>
+</div>
+<p>Convert ONNX file to TensorRT:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">onnx_to_tensorrt</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">yolov4</span><span class="o">-</span><span class="mi">416</span>
+</pre></div>
+</div>
+</section>
+<section id="running-inference">
+<h2>Running Inference<a class="headerlink" href="#running-inference" title="Permalink to this heading"></a></h2>
+<p>A default model is supplied in the <em>FRC-Jetson-Deployment-Models</em> package that detects the <em>Rapid-React</em> balls from the 2022 competition.  To use that model run the following commands.  Make sure that the inference scripts have been moved to the <strong>${HOME}/tensorrt_demos</strong> directory as stated above.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd ${HOME}/tensorrt_demos
+</pre></div>
+</div>
+<p>To run the inference using an attached Raspberry Pi camera.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd ${HOME}tensorrt_demos
+python3 trt_yolo_wpi.py --onboard 0 -m rapid-react
+</pre></div>
+</div>
+<p>For a USB camera:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">trt_yolo_wpi</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">usb</span> <span class="mi">1</span> <span class="o">-</span><span class="n">m</span> <span class="n">rapid</span><span class="o">-</span><span class="n">react</span>
+</pre></div>
+</div>
+<p>You can display the output stream in a desktop gui window like this:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">trt_yolo_wpi</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">usb</span> <span class="mi">1</span> <span class="o">-</span><span class="n">m</span> <span class="n">rapid</span><span class="o">-</span><span class="n">react</span> <span class="o">--</span><span class="n">gui</span>
+</pre></div>
+</div>
+<section id="the-inference-script">
+<h3>The Inference Script<a class="headerlink" href="#the-inference-script" title="Permalink to this heading"></a></h3>
+<p>This script connects to the USB camera and passes images to the inference model.  If an object-of-interest is detected a bounding box is drawn on the image together with positional data.  The positional data is put into the Network Tables so as it can be made use of by the WPILib robot program.  The overlayed images can be viewed in a Web browser.</p>
+<p>The <a class="reference external" href="https://github.com/FRC-2928/FRC-Jetson-Deployment-Models/blob/main/trt_yolo_wpi.py">python inference script</a> can be found on FRC-2928 GitHub account. For a descripton of how this script works see <strong>The Inference Script Explained</strong> in this document.</p>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.luxonis.com/projects/api/en/latest/install/#jetson">Depthai Jetson Install</a></p></li>
+<li><p>JK Jung <a class="reference external" href="https://github.com/jkjung-avt/tensorrt_demos">Tensorrt Demos</a> -  Github</p></li>
+<li><p>JK Jung <a class="reference external" href="https://jkjung-avt.github.io/trt-yolo-custom-updated/">TensorRT YOLO For Custom Trained Models</a> blog post</p></li>
+<li><p><a class="reference external" href="https://neuralet.com/article/deploying-a-custom-ssd-mobilenet-model-on-the-nvidia-jetson-nano?id=0">SSD MobileNet to TensorRT Conversion</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="usbDeployment.html" class="btn btn-neutral float-left" title="USB Camera Deployment for Raspberry Pi" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.html" class="btn btn-neutral float-right" title="Machine Learning-Based Control" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/es/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robot Kinematics &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Robot Geometry" href="geometry.html" />
+    <link rel="prev" title="Communication Protocols" href="communications.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotControl/robotControlIndex.html">Robot Control</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="robotConceptsIndex.html">Robot Concepts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="robotSystems.html">Robot Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensors.html">Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actuators.html">Actuators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controlAlgo.html">Control Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="communications.html">Communication Protocols</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Robot Kinematics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#swerve-drive-robots">Swerve Drive Robots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inverse-kinematics">Inverse Kinematics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-are-they-calculated">How are they Calculated?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">Robot Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coordinate.html">Coordinate System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamicalSystems.html">Dynamical Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="poseEstimation.html">Pose Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kalmanFilters.html">Kalman Filters</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RoboRIORobots/roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../MachineLearning/machineLearningIndex.html">Machine Learning</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="robotConceptsIndex.html">Robot Concepts</a></li>
+      <li class="breadcrumb-item active">Robot Kinematics</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RobotConcepts/kinematics.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="robot-kinematics">
+<h1>Robot Kinematics<a class="headerlink" href="#robot-kinematics" title="Permalink to this heading"></a></h1>
+<p>In FIRST Robotics Competition (FRC), kinematics is the study of how a robot’s drivetrain moves, relating the robot’s overall movement (like speed and turning) to the speeds of its individual wheels. It’s crucial for calculating how to move the robot and for estimating its position on the field, with key classes like SwerveDriveKinematics and MecanumDriveKinematics used in the WPILib software library to manage the complex translations between robot and field-relative speeds for different drive types.</p>
+<p>Kinematics is the study of the geometry of motion. Kinematics is the branch of classical mechanics that describes various aspects of motion such as velocity, acceleration, displacement, time, and trajectory.  There is no description of the forces that cause the motion to happen. The word “kinematics” comes from a Greek word “kinesis” meaning motion, and is related to other English words such as “cinema” (movies) and “kinesiology” (the study of human motion).</p>
+<p>In robotics we are mostly interested in the motion of groups of objects that are connected, or jointed, together into a system.  When objects are connected together they can be subject to certain constraints that restrict their movement.  For wheeled robots we are interested in determining how the robot can move with reference to the constraints imposed by the motion of the wheels. So that’s where we’ll start.</p>
+<p>We want to examine the constraints that exist by the connection of the wheels to the robot.  A wheel is connected to an axel which is typically driven by a motor.  The motor causes the wheel to rotate which produces forward, or backward, motion of the robot.  Nothing too suprising there!  What is of note though, is that the wheel cannot move sideways to its direction of motion, so here’s where we find our first constraint.</p>
+<p>Our next constraint comes in when we have more than one wheel on the robot, which is of course the common configuration.  When we have multiple wheels we must ensure that they have a common <em>Instantaineous Center of Curvature (ICC)</em>.  This means that the wheels must be connected in a way that they are all aligned towards the same point.  If this is not the case then the wheels will slip in a sideways direction making it extremely difficult to control the motion of the robot.  This is illustrated below.  Typically, there are two wheels on the same axel which causes them to be aligned towards the same center point.  However, with a 4-wheeled robot there are two sets of wheels and two axels which means that the back wheels will always slip.  These are called skid drive robots.</p>
+<img alt="../_images/FRCKinematics%26Odometry.001.jpeg" src="../_images/FRCKinematics%26Odometry.001.jpeg" />
+<section id="swerve-drive-robots">
+<h2>Swerve Drive Robots<a class="headerlink" href="#swerve-drive-robots" title="Permalink to this heading"></a></h2>
+<p>The function <cite>toSwerveModuleStates()</cite> performs inverse kinematics to get the module states from a desired chassis velocity.</p>
+<p>The function <cite>toChassisSpeeds()</cite> performs forward kinematics to return the resulting chassis state from the given module states. This method is often used for odometry – determining the robot’s position on the field using data from the real-world speed and angle of each module on the robot.</p>
+<p>The function <cite>desaturateWheelSpeeds()</cite> renormalizes the wheel speeds if any individual speed is above the specified maximum. Sometimes, after inverse kinematics, the requested speed from one or more modules may be above the max attainable speed for the driving motor on that module. To fix this issue, one can reduce all the wheel speeds to make sure that all requested module speeds are at-or-below the absolute threshold, while maintaining the ratio of speeds between modules.</p>
+</section>
+<section id="inverse-kinematics">
+<h2>Inverse Kinematics<a class="headerlink" href="#inverse-kinematics" title="Permalink to this heading"></a></h2>
+<p>FRC Inverse Kinematics is a robotic system where the desired target position and orientation of the robot’s end-effector are given, and the system calculates the necessary joint angles (or motor rotations) to reach that target. It involves finding the appropriate configuration of joints to achieve a specific goal, such as reaching for an object, and is crucial for controlling robotic arms in the FIRST Robotics Competition (FRC).</p>
+</section>
+<section id="how-are-they-calculated">
+<h2>How are they Calculated?<a class="headerlink" href="#how-are-they-calculated" title="Permalink to this heading"></a></h2>
+<p>FRC kinematics are calculated by defining a system to represent robot motion (like the ChassisSpeeds class in WPILib), and then using either forward or inverse kinematic equations to relate the robot’s desired movement to the motor speeds and module angles required. Forward kinematics calculates the robot’s overall movement (linear and angular) from individual wheel speeds, while inverse kinematics calculates the wheel speeds needed for a desired robot movement. The specific equations depend on the drivetrain type (e.g., tank or swerve), with WPILib providing a powerful abstraction for common FRC drivetrains.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/kinematics-and-odometry/index.html">Kinematics and Odometry</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="communications.html" class="btn btn-neutral float-left" title="Communication Protocols" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="geometry.html" class="btn btn-neutral float-right" title="Robot Geometry" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

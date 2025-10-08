@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>State Space Control &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Linear Quadractic Regulator LQR" href="LQR.html" />
+    <link rel="prev" title="Motion Profiling" href="motionProfiling.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="robotControlIndex.html">Robot Control</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="motorControl.html">Motor Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classicalControl.html">Classical Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pidControl.html">PID Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pidTuning.html">PID Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SysIDTuning.html">Tuning using SysID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motionProfiling.html">Motion Profiling</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">State Space Control</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#state-and-output-equations">State and Output Equations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-linearsystem-class">The LinearSystem Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kalman-filter">Kalman Filter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linear-quadratic-regulator-lqr">Linear Quadratic Regulator (LQR)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linear-system-loop">Linear System Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="LQR.html">Linear Quadractic Regulator</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotConcepts/robotConceptsIndex.html">Robot Concepts</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RoboRIORobots/roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../MachineLearning/machineLearningIndex.html">Machine Learning</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="robotControlIndex.html">Robot Control</a></li>
+      <li class="breadcrumb-item active">State Space Control</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RobotControl/stateSpaceControl.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="state-space-control">
+<h1>State Space Control<a class="headerlink" href="#state-space-control" title="Permalink to this heading"></a></h1>
+<p><em>State Space Control</em> is based on the idea that if you know the internal physics of your system and can predict how it’ll react to a given input then you can tune the system in a way that’s similar to tuning PID controllers. State Space Control tries to control the system by developing an accurate model of the system that we are trying to control.  It can be an alternative to PID control and is more flexible.  PID control does not use any knowledge of the internal physics of the system and therefore allows only limited control.  State Space control does require an initial state of the system, which is not required with PID control.</p>
+<p>State Space Control starts with a <em>State Space Model</em> that describes the relationship between input and output. This is also referred to as the <em>Dynamic Model</em>. The state of a dynamic system refers to a minimum set of variables, known as state variables, that fully describe the system and its response to any given set of inputs. The basic idea is that each distinct situation for the world is called a state, denoted by <cite>x</cite>, and the set of all possible states is called a State Space <cite>X</cite>.</p>
+<img alt="../_images/StateSpace.001.jpeg" src="../_images/StateSpace.001.jpeg" />
+<p>Rather than use an arbitrary <em>Proportional</em> gain derived through testing, you’ll need to develop an accurate physical model of the Drivetrain (system) and then use it to pick gains for the feedback controller.  This allows you not only to predict ahead of time how a system will react but also test the controllers without a physical robot.</p>
+<p>WPILib provides code libraries used for state space control that are described in the <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/advanced-controls/state-space/state-space-intro.html">State Space Controllers</a> section of the FRC documentation.  As you can see from the above diagram, there are three main components for creating a State Space controlled system with WPILib, a <em>Linear System</em>, a <em>Kalman Filter</em>, and a <em>Linear Quadratic Regulator</em> LQR.  These components are placed in a <em>Linear System Loop</em> to drive the robot.</p>
+<p>Refer to the references below for a more in-depth explaination of the topic.  The following brief overview should be enough to get you started on writing programs based on State Space.</p>
+<section id="state-and-output-equations">
+<h2>State and Output Equations<a class="headerlink" href="#state-and-output-equations" title="Permalink to this heading"></a></h2>
+<p>State equations are represented in a vector form, in which the set of <em>n</em> state variables is written as a state vector <em>x</em> , and the set of inputs is written as an input vector <em>u</em> . Each state variable is a time varying component of the column vector <em>x</em>.  The system dynamics are described by the <strong>A</strong> and <strong>B</strong> matricies.  The <strong>A</strong> matrix descibes how the system will act if no force is applied. The <strong>B</strong> matrix describes how our input will change the state.</p>
+<p>A system output is defined to be any system variable of interest. A description of a physical system in terms of a set of state variables does not necessarily include all of the variables of direct engineering interest. In the output equation <em>y</em> is a column vector of the output variables, <strong>C</strong> is a matrix of the constant coefficients that weight the state variables, and <strong>D</strong> is a matrix of the constant coefficients that weight the system inputs. For many physical systems the matrix D is a null matrix, and the output equation reduces to just <em>y = Cx</em>.</p>
+<p>An important property of the linear state equation description is that all system variables may be represented by a linear combination of the state variables <strong>x</strong> and the system inputs <strong>u</strong>.</p>
+</section>
+<section id="the-linearsystem-class">
+<h2>The LinearSystem Class<a class="headerlink" href="#the-linearsystem-class" title="Permalink to this heading"></a></h2>
+<p>In control theory the system that we’re modelling is called the <em>Plant</em> or <em>System</em>.  To setup a system with the WPI Libraries you create a <em>LinearSystem</em>.  In our case we’re going to model a Drivetrain system that will have the left and right wheel velocities as its system dynamics, the <strong>A</strong> matrix.  The input to the system will be the voltage to the left and right motors and that will be descibed by the <strong>B</strong> matrix.  The <strong>C</strong> matrix weights our measured outputs <em>y</em>, which we’ll just pass through unchanged so multiple by 1.  We won’t use the <strong>D</strong> matrix at all so everything is set to zero.  The job of the <em>LinearSystem</em> class is to calculate the next state of the system.  This state can be measured by sensors as our observed outputs.  These measured outputs can be used as feedback to determine the next required inputs.</p>
+<img alt="../_images/StateSpace.002.jpeg" src="../_images/StateSpace.002.jpeg" />
+<p>More information on the notation used can be found in the  <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/advanced-controls/state-space/state-space-intro.html#what-is-state-space-notation">State Space Notation</a> section of the FRC documetation.</p>
+</section>
+<section id="kalman-filter">
+<h2>Kalman Filter<a class="headerlink" href="#kalman-filter" title="Permalink to this heading"></a></h2>
+<p>After creating a model of our Linear System we’ll need to create a Kalman Filter.  There are entire books written on these filters but an overview of their use and function can be found in the <strong>Kalman Filters</strong> section of this training guide.</p>
+<img alt="../_images/StateSpace.003.jpeg" src="../_images/StateSpace.003.jpeg" />
+</section>
+<section id="linear-quadratic-regulator-lqr">
+<h2>Linear Quadratic Regulator (LQR)<a class="headerlink" href="#linear-quadratic-regulator-lqr" title="Permalink to this heading"></a></h2>
+<p>Linear Quadratic Regulators work by finding trade-off that drives our system to its desired setpoint while using the minumum control effort. For example, a spaceship might want to minimize the fuel it expends to reach a given reference, while a high-speed robotic arm might need to react quickly to disturbances and reach the setpoint quickly.  To get an overview of <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/advanced-controls/state-space/state-space-intro.html#the-linear-quadratic-regulator">Linear Quadratic Regulators</a> see the FRC documentation or read the <strong>LQR</strong> section of this training guide.</p>
+</section>
+<section id="linear-system-loop">
+<h2>Linear System Loop<a class="headerlink" href="#linear-system-loop" title="Permalink to this heading"></a></h2>
+<p>The <em>LinearSystemLoop</em> class constructs a state-space loop with the given plant, controller, and observer.</p>
+<img alt="../_images/StateSpace.004.jpeg" src="../_images/StateSpace.004.jpeg" />
+<img alt="../_images/FRCControlSystems.003.jpeg" src="../_images/FRCControlSystems.003.jpeg" />
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>FRC Documentation <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/advanced-controls/state-space/state-space-intro.html">State Space Controllers</a></p></li>
+<li><p>Tyler Veness <a class="reference external" href="https://file.tavsys.net/control/controls-engineering-in-frc.pdf">Controls Engineering in the FIRST Robotics Competition</a> Chapter 6.</p></li>
+<li><p>MIT <a class="reference external" href="http://web.mit.edu/2.14/www/Handouts/StateSpace.pdf">State-Space Representation of LTI Systems</a></p></li>
+<li><p>MATLAB <a class="reference external" href="https://www.youtube.com/playlist?list=PLn8PRpmsu08podBgFw66-IavqU2SqPg_w">State Space Control</a></p></li>
+<li><p>MATLAB <a class="reference external" href="https://www.youtube.com/playlist?list=PLn8PRpmsu08qFLMfgTEzR8DxOPE7fBiin">Robust Control</a></p></li>
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/advanced-controls/state-space/index.html">State-Space and Model Based Control with WPILib</a></p></li>
+<li><p>Alonzo Kelly <a class="reference external" href="https://www.cambridge.org/core/books/mobile-robotics/5BF238489F9BC337C0736432C87B3091">Mobile Robotics</a> Chapter 7.2</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="motionProfiling.html" class="btn btn-neutral float-left" title="Motion Profiling" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="LQR.html" class="btn btn-neutral float-right" title="Linear Quadractic Regulator LQR" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/es/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

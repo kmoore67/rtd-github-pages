@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motor Control &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Classical Control" href="classicalControl.html" />
+    <link rel="prev" title="Robot Control" href="robotControlIndex.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="robotControlIndex.html">Robot Control</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Motor Control</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#open-loop-modes">Open Loop Modes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#control-output-types">Control Output Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dutycycle">DutyCycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#voltage">Voltage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#torquecurrentfoc">TorqueCurrentFOC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-case-for-torque-control">The Case for Torque Control</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#closed-loop-modes">Closed Loop Modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setting-pid-gain-values">Setting PID Gain Values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#status-signals">Status Signals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#intake-subsystem">Intake Subsystem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#intakekraken">IntakeKraken</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-attached-simulation">Hardware Attached Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classicalControl.html">Classical Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pidControl.html">PID Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pidTuning.html">PID Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SysIDTuning.html">Tuning using SysID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motionProfiling.html">Motion Profiling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stateSpaceControl.html">State Space Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LQR.html">Linear Quadractic Regulator</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotConcepts/robotConceptsIndex.html">Robot Concepts</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RoboRIORobots/roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../MachineLearning/machineLearningIndex.html">Machine Learning</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="robotControlIndex.html">Robot Control</a></li>
+      <li class="breadcrumb-item active">Motor Control</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RobotControl/motorControl.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="motor-control">
+<h1>Motor Control<a class="headerlink" href="#motor-control" title="Permalink to this heading"></a></h1>
+<p>There are several control modes used to drive a motor. The control mode used will depend on the application.  The modes fall into two larger categories <em>Open-Loop</em> and <em>Closed-Loop</em>.  Open-Loop control is often used with feedforward to set an arbitrary amount of power to drive the motor.  Closed-Loop modes will alter the motor power based on sensor feedback.</p>
+<img alt="../_images/FRCControlSystems.014.jpeg" src="../_images/FRCControlSystems.014.jpeg" />
+<p>The following picture shows the most commonly used Phoenix control modes.  Each control mode is represented by a data structure class that gets applied to the motor when requested. The <em>DutyCycleOut</em> and <em>VoltageOut</em> modes are would be used with direct input from a game controller. <em>VoltageOut</em> can also be used with a PID loop that was implemented in the user program.</p>
+<p>The <em>PositionVoltage</em> and <em>VelocityVoltage</em> requests will run the PID loop inside of the Pheonix controller.  One of four <em>Slots</em> can be choosen that hold the PID gain values.  A <em>FeedForward</em> value can also be submitted with the control request.</p>
+<img alt="../_images/FRCroboRIO.0111.jpeg" src="../_images/FRCroboRIO.0111.jpeg" />
+<section id="open-loop-modes">
+<h2>Open Loop Modes<a class="headerlink" href="#open-loop-modes" title="Permalink to this heading"></a></h2>
+<p>Open-Loop modes are usually used in combination with a game controller.  The setup is very simple since there’s no feedback sensor required.  A percentage power output is sent to the motor using the <em>DutyCycleOut</em> class.  Percentage power is the proportion of supply voltage to apply in fractional units between -1 and +1.  See <a class="reference external" href="https://pro.docs.ctr-electronics.com/en/latest/docs/api-reference/device-specific/talonfx/open-loop-requests.html#open-loop-control">Open Loop Control</a> in the Phoenix6 documentation.</p>
+<section id="control-output-types">
+<h3>Control Output Types<a class="headerlink" href="#control-output-types" title="Permalink to this heading"></a></h3>
+<p>The TalonFX currently supports three base control output types: DutyCycle, Voltage, and TorqueCurrentFOC.</p>
+</section>
+<section id="dutycycle">
+<h3>DutyCycle<a class="headerlink" href="#dutycycle" title="Permalink to this heading"></a></h3>
+<p>A DutyCycle control request outputs a proportion of the supply voltage, which typically ranges from -1.0 to 1.0, inclusive. This control output type is typically used in systems where it is important to be capable of running at the maximum speed possible, such as in a typical robot drivetrain.</p>
+</section>
+<section id="voltage">
+<h3>Voltage<a class="headerlink" href="#voltage" title="Permalink to this heading"></a></h3>
+<p>A Voltage control request directly controls the output voltage of the motor. The output voltage is capped by the supply voltage to the device. Since the output of a Voltage control request is typically unaffected by the supply voltage, this control output type results in more stable and reproducible behavior than a DutyCycle control request.</p>
+</section>
+<section id="torquecurrentfoc">
+<h3>TorqueCurrentFOC<a class="headerlink" href="#torquecurrentfoc" title="Permalink to this heading"></a></h3>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This feature requires the device to be Pro licensed.</p>
+</div>
+<p>A TorqueCurrentFOC control request uses Field Oriented Control to directly control the output torque current of the motor. Unlike the other control output types, where output roughly controls the velocity of the motor, a TorqueCurrentFOC request directly controls the acceleration of the motor.</p>
+</section>
+<section id="the-case-for-torque-control">
+<h3>The Case for Torque Control<a class="headerlink" href="#the-case-for-torque-control" title="Permalink to this heading"></a></h3>
+<p>A disadvantage with both DutyCycle and Voltage control output types is that they control acceleration indirectly and require a velocity feedforward to hold a constant velocity. On the other hand, torque-based control output types, such as TorqueCurrentFOC, directly control acceleration, which has several advantages:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Since the torque request is directly proportional to acceleration, is generally unnecessary. A torque output of 0 corresponds to a constant velocity, assuming no external forces.</p></li>
+<li><p>Can be tuned independently of all the other closed-loop gains by comparing the measured acceleration with the requested acceleration.</p></li>
+<li><p>Because the output is in units of torque, the units of the gains more closely match those of forces in the real world.</p></li>
+</ul>
+</div></blockquote>
+<p>As a result, torque-based control output types offer more stable and reproducible behavior that can be easier to tune compared to the other control output types.</p>
+<p>Using torque control increases peak power by ~15%.</p>
+</section>
+</section>
+<section id="closed-loop-modes">
+<h2>Closed Loop Modes<a class="headerlink" href="#closed-loop-modes" title="Permalink to this heading"></a></h2>
+<p>On the roboRIO robot the motor controllers will implement the necessary PID loops, so we don’t have to use the WPILib PID controllers as we did on the Romi.  We still have to write a few lines of code to specify the control mode and a setpoint target, but the motor controller will mostly do the rest.  The following Closed-Loop modes can be used with the Talon FX and SPX motors. For more details see the Phoenix6 <a class="reference external" href="https://pro.docs.ctr-electronics.com/en/latest/docs/api-reference/device-specific/talonfx/closed-loop-requests.html#closed-loop-control">Closed Loop Control</a> documentation.</p>
+<ul class="simple">
+<li><p><strong>Position</strong> - The Position Closed-Loop control mode can be used to abruptly servo to and maintain a target position.  Mainly used for mechanisms like elevators and arms that are subject to gravitational forces. See <a class="reference external" href="https://pro.docs.ctr-electronics.com/en/latest/docs/api-reference/device-specific/talonfx/closed-loop-requests.html#position-control">Position Closed-Loop Control</a> in the Phoenix6 documentation.</p></li>
+<li><p><strong>Velocity</strong> - Velocity Closed-Loop logic is used to maintain a target velocity. Often used for mechanisms like flywheels that need to be kept at a constant speed.  It’s also used for the drivetrain where a continuous stream of velocity setpoints are sent drive a desired trajectory. In this mode the controller will try and maintain the velocity regardless of the torque put on the motor.  See <a class="reference external" href="https://pro.docs.ctr-electronics.com/en/latest/docs/api-reference/device-specific/talonfx/closed-loop-requests.html#velocity-control">Velocity Closed-Loop Control</a> in the Phoenix6 documentation.</p></li>
+<li><p><strong>Motion Magic</strong> - Motion Magic is a control mode for Talon SRX that provides the benefits of Motion Profiling without needing to generate motion profile trajectory points. When using Motion Magic, Talon SRX / Victor SPX will move to a set target position using a motion profile, while honoring the user specified acceleration, maximum velocity (cruise velocity), and optional S-Curve smoothing.  See <a class="reference external" href="https://pro.docs.ctr-electronics.com/en/latest/docs/api-reference/device-specific/talonfx/closed-loop-requests.html#motion-magic">Motion Magic</a> in the Phoenix6 documentation.</p></li>
+<li><p><strong>Continuous Mechanism Wrap</strong> - A continuous mechanism is a mechanism with unlimited travel in any direction, and whose rotational position can be represented with multiple unique position values. Some examples of continuous mechanisms are swerve drive steer mechanisms or turrets (without cable management). See <a class="reference external" href="https://pro.docs.ctr-electronics.com/en/latest/docs/api-reference/device-specific/talonfx/closed-loop-requests.html#continuous-mechanism-wrap">Continuous Mechanism Wrap</a> in the Phoenix6 documentation.</p></li>
+</ul>
+<p>The sensors used for closed-loop control are designated during motor configuration.  The most common sensor used with the FalconFX/SRX controller is the <em>RotorSensor</em>, formally referred to as the <em>Integrated Sensor</em>, which is an encoder that is physically attached to the motor.  We only need to pass in the Control-Mode and setpoint in order to run our closed loop.</p>
+<img alt="../_images/FRCroboRIO.009.jpeg" src="../_images/FRCroboRIO.009.jpeg" />
+</section>
+<section id="setting-pid-gain-values">
+<h2>Setting PID Gain Values<a class="headerlink" href="#setting-pid-gain-values" title="Permalink to this heading"></a></h2>
+<p>All of the built-in <em>Closed Loop Control</em> modes require PID values configured into the motor controller.  You can set up multiple PID gain values and put them into memory slots within the Talon’s motor controller.  You can then assign the gain values from a selected slot when you make the control request to the motor. There are four slots to choose from, so you can configure up to four sets of PID gain values.</p>
+<img alt="../_images/FRCroboRIO.007.jpeg" src="../_images/FRCroboRIO.007.jpeg" />
+<p>The following code sets up the PID values for Slot0 of the drivetrain’s front wheels.  The PID values should be determined by experimentation.</p>
+<p>We can switch between the PID slots in our code when we make the velocity request to the motor. Most <em>Closed Loop Control</em> requests also allow you to add a <em>FeedForward</em> value.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">// create a velocity closed-loop request, voltage output, slot 0 configs</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">VelocityVoltage</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">withSlot</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="c1">// set velocity to 8 rps, add 0.5 V to overcome gravity</span>
+<span class="n">talonFX</span><span class="p">.</span><span class="na">setControl</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">withVelocity</span><span class="p">(</span><span class="mi">8</span><span class="p">).</span><span class="na">withFeedForward</span><span class="p">(</span><span class="mf">0.5</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://pro.docs.ctr-electronics.com/en/latest/docs/api-reference/device-specific/talonfx/closed-loop-requests.html#gain-slots">Closed-Loop Gain Slots</a> in the Phoenix6 documentation for details.</p>
+</section>
+<section id="status-signals">
+<h2>Status Signals<a class="headerlink" href="#status-signals" title="Permalink to this heading"></a></h2>
+<p>Signals represent live data reported by a device; these can be yaw, position, etc. To make use of the live data, users need to know the value, timestamp, latency, units, and error condition of the data. See <a class="reference external" href="https://pro.docs.ctr-electronics.com/en/latest/docs/api-reference/api-usage/status-signals.html">Status Signals</a> for a detailed explaination.</p>
+<p>The best beneift of using status signals is to significantly reduce CAN buss utilization. This is accomplished by eliminating all request messages on the CAN Buss. And by combining all response message into a single message executed on a reugular frequency. Let’s take an example for make this easier to understand.</p>
+<p>Typically we write our code to ask the motor the current position and the current velocity. We can then display these values in our code to make decisions and to display on the driver dashboard. To do this we would sent a getPosition message to the motor and receive a single response. Then we would send a getVelocity messsage from the motor and then get a response. Thats four message on the CAN buss. Some inexperienced programmers would also call this multiple times in thier code to get the most current and up to date values.</p>
+<p>Compare this to status signals which sends the request to set up a status signal on a periodic basis a single time at when the object is instantiated. Then at the appropriate time is send the status signle response contaol BOTH the position and the velocity in a single message. This reduces the messages from 4 down to 1-a <strong>75% savings!</strong> Now lets assume that we run this code every loop, so every 20 milliseconds, that’s 50 times per second. So without status signals thats 200 messages versus with status signals 50 messages. Now, if we have 15 motors on the robot, that’s 3,000 without status signals and 750 message with. And that is every second!!!! 3,000 messsages on the CAN buss only getting motor status and not doing anything to run the robot motors!</p>
+<p>Let’s take a look at how you do this in code. Using our <strong>ProgTain1</strong> example code.</p>
+<section id="intake-subsystem">
+<h3>Intake Subsystem<a class="headerlink" href="#intake-subsystem" title="Permalink to this heading"></a></h3>
+<p>First, we define a variable to contain all our statictics.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">IntakeStats</span><span class="w"> </span><span class="n">ioStats</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IntakeStats</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Next, we define a class to hold all of our statictics becuase it is much easier to pass a single variable (containing the class) between classes than it is to return individual values.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/* a Generic class for handling the IO stats generated in the Kraken module  */</span>
+<span class="kd">class</span> <span class="nc">IntakeStats</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//Stats for the Intake/Expel Motor</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">MotorConnected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rollerPositionRads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rollerVelocityRpm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rollerAppliedVolts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rollerSupplyCurrentAmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rollerTorqueCurrentAmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rollerTempCelsius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Next, we add a function to our state procesing loop to go get the statictics from the intakeKraken motor control class-passing in our statictics class so that intakeKraken has somewhere to pass them back to us.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">//go update the signal data</span>
+<span class="n">m_IntakeKraken</span><span class="p">.</span><span class="na">updateStats</span><span class="p">(</span><span class="n">ioStats</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Next we take the data we got back and put it on the shuffleboard to thell the drivers what is going on with the intake motor.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="o">************************************************</span>
+<span class="o">*</span><span class="w"> </span><span class="n">Update</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">Shuffleboard</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">Motor</span><span class="w"> </span><span class="n">Statistics</span>
+<span class="o">************************************************/</span>
+<span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">UpdateTelemetry</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">intakeVelocity</span><span class="p">.</span><span class="na">setDouble</span><span class="p">(</span><span class="n">ioStats</span><span class="p">.</span><span class="na">rollerVelocityRpm</span><span class="p">);</span>
+<span class="w">    </span><span class="n">intakePosition</span><span class="p">.</span><span class="na">setDouble</span><span class="p">(</span><span class="n">ioStats</span><span class="p">.</span><span class="na">rollerPositionRads</span><span class="p">);</span>
+<span class="w">    </span><span class="n">intakeSupplyCurrent</span><span class="p">.</span><span class="na">setDouble</span><span class="p">(</span><span class="n">ioStats</span><span class="p">.</span><span class="na">rollerSupplyCurrentAmps</span><span class="p">);</span>
+<span class="w">    </span><span class="n">intakeTorqueCurrent</span><span class="p">.</span><span class="na">setDouble</span><span class="p">(</span><span class="n">ioStats</span><span class="p">.</span><span class="na">rollerTorqueCurrentAmps</span><span class="p">);</span>
+<span class="w">    </span><span class="n">intakeAppliedVolts</span><span class="p">.</span><span class="na">setDouble</span><span class="p">(</span><span class="n">ioStats</span><span class="p">.</span><span class="na">rollerAppliedVolts</span><span class="p">);</span>
+<span class="w">    </span><span class="n">intakeTemp</span><span class="p">.</span><span class="na">setDouble</span><span class="p">(</span><span class="n">ioStats</span><span class="p">.</span><span class="na">rollerTempCelsius</span><span class="p">);</span>
+<span class="w">    </span><span class="n">intakeState</span><span class="p">.</span><span class="na">setValue</span><span class="p">(</span><span class="n">currentState</span><span class="p">.</span><span class="na">name</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="intakekraken">
+<h3>IntakeKraken<a class="headerlink" href="#intakekraken" title="Permalink to this heading"></a></h3>
+<p>First, we have to define our status signal variables to receive the data from the motor on a periodic based. We must ensure that the unit types are correct for each of the signals we are requesting. The reason that you needto declare seperate variables for the status signals is becuse the motor is returning values on a periodic basis-whether your code is running or not! And it needs somewhere to put the data that your program can access.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Status Signals</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">StatusSignal</span><span class="o">&lt;</span><span class="n">Angle</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rollerPosition</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">StatusSignal</span><span class="o">&lt;</span><span class="n">AngularVelocity</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rollerVelocity</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">StatusSignal</span><span class="o">&lt;</span><span class="n">Voltage</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rollerAppliedVolts</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">StatusSignal</span><span class="o">&lt;</span><span class="n">Current</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rollerSupplyCurrent</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">StatusSignal</span><span class="o">&lt;</span><span class="n">Current</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rollerTorqueCurrent</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">StatusSignal</span><span class="o">&lt;</span><span class="n">Temperature</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rollerTempCelsius</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>In the constructor of the intakeKraken class, we tell the TalonFX where to put the statitics we are looking for (which is into the variables we declared previously) and what specific motor function to call to get the statistic we are looking for. Please remember that this is in the constructor-which only runs once at class instantiation.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Set signals</span>
+<span class="n">rollerPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">getPosition</span><span class="p">();</span>
+<span class="n">rollerVelocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">getVelocity</span><span class="p">();</span>
+<span class="n">rollerAppliedVolts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">getMotorVoltage</span><span class="p">();</span>
+<span class="n">rollerSupplyCurrent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">getSupplyCurrent</span><span class="p">();</span>
+<span class="n">rollerTorqueCurrent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">getTorqueCurrent</span><span class="p">();</span>
+<span class="n">rollerTempCelsius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">getDeviceTemp</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Also in the constuctor, we need to tell what frequency we want that data returned-in this case 100hz or 100 times per second. We also pass in the variable names.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">BaseStatusSignal</span><span class="p">.</span><span class="na">setUpdateFrequencyForAll</span><span class="p">(</span>
+<span class="w">    </span><span class="mf">100.0</span><span class="p">,</span>
+<span class="w">    </span><span class="n">rollerPosition</span><span class="p">,</span>
+<span class="w">    </span><span class="n">rollerVelocity</span><span class="p">,</span>
+<span class="w">    </span><span class="n">rollerAppliedVolts</span><span class="p">,</span>
+<span class="w">    </span><span class="n">rollerSupplyCurrent</span><span class="p">,</span>
+<span class="w">    </span><span class="n">rollerTorqueCurrent</span><span class="p">,</span>
+<span class="w">    </span><span class="n">rollerTempCelsius</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>100 times per second is as fast as most hardware can physically reply. Setting any lower value will substantially add more messages to the Can buss that contain exactly the same data (because the hardware has not yet refreshed the value). As it is, the robot code is running at 50 times per second and the hardware at 100 times per second. So the hardware is refreshing faster than the roborio can process it.</p>
+</div>
+<p>And finally, we create an updateStats method that takes the data from the base signal variables and puts it into the IOStats class when requested.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/****************************************************************************************</span>
+<span class="cm">* Get the IO statictics from the motor and put them into the passed in IntakeStats class</span>
+<span class="cm">*****************************************************************************************/</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">updateStats</span><span class="p">(</span><span class="n">IntakeStats</span><span class="w"> </span><span class="n">stats</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">stats</span><span class="p">.</span><span class="na">MotorConnected</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">BaseStatusSignal</span><span class="p">.</span><span class="na">refreshAll</span><span class="p">(</span>
+<span class="w">            </span><span class="n">rollerPosition</span><span class="p">,</span>
+<span class="w">            </span><span class="n">rollerVelocity</span><span class="p">,</span>
+<span class="w">            </span><span class="n">rollerAppliedVolts</span><span class="p">,</span>
+<span class="w">            </span><span class="n">rollerSupplyCurrent</span><span class="p">,</span>
+<span class="w">            </span><span class="n">rollerTorqueCurrent</span><span class="p">,</span>
+<span class="w">            </span><span class="n">rollerTempCelsius</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">isOK</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">stats</span><span class="p">.</span><span class="na">rollerPositionRads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rollerPosition</span><span class="p">.</span><span class="na">getValueAsDouble</span><span class="p">();</span>
+<span class="w">    </span><span class="n">stats</span><span class="p">.</span><span class="na">rollerVelocityRpm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rollerVelocity</span><span class="p">.</span><span class="na">getValueAsDouble</span><span class="p">();</span>
+<span class="w">    </span><span class="n">stats</span><span class="p">.</span><span class="na">rollerAppliedVolts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rollerAppliedVolts</span><span class="p">.</span><span class="na">getValueAsDouble</span><span class="p">();</span>
+<span class="w">    </span><span class="n">stats</span><span class="p">.</span><span class="na">rollerSupplyCurrentAmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rollerSupplyCurrent</span><span class="p">.</span><span class="na">getValueAsDouble</span><span class="p">();</span>
+<span class="w">    </span><span class="n">stats</span><span class="p">.</span><span class="na">rollerTorqueCurrentAmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rollerTorqueCurrent</span><span class="p">.</span><span class="na">getValueAsDouble</span><span class="p">();</span>
+<span class="w">    </span><span class="n">stats</span><span class="p">.</span><span class="na">rollerTempCelsius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rollerTempCelsius</span><span class="p">.</span><span class="na">getValueAsDouble</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>That’s it. This is all the code you need. Now your robot program in getting statistics from the motor at 100 times per second.</p>
+</section>
+</section>
+<section id="hardware-attached-simulation">
+<h2>Hardware Attached Simulation<a class="headerlink" href="#hardware-attached-simulation" title="Permalink to this heading"></a></h2>
+<p>CANivore supports hardware-attached simulation when used in an FRC robot program. This allows a CANivore to be used with real devices from a PC. See <a class="reference external" href="https://pro.docs.ctr-electronics.com/en/latest/docs/canivore/canivore-hardware-attached.html">Hardware Attached Simulation</a> in the Phoenix 6 documentation.  The devices must be independently powered since the USB cable will not supply enough power.</p>
+<img alt="../_images/FRCroboRIO.013.jpeg" src="../_images/FRCroboRIO.013.jpeg" />
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>CTRE - <a class="reference external" href="https://pro.docs.ctr-electronics.com/en/latest/docs/api-reference/device-specific/talonfx/index.html">Phoenix6 Control</a></p></li>
+<li><p>CTRE - <a class="reference external" href="https://github.com/CrossTheRoadElec/Phoenix6-Examples/tree/main/java">Phoenix6 Examples</a></p></li>
+<li><p>CTRE - <a class="reference external" href="https://docs.ctre-phoenix.com/en/latest/ch14_MCSensor.html?highlight=configSelectedFeedbackSensor#bring-up-talon-fx-srx-sensors">Talon FX/SRX Sensors</a>- Phoenix documentation.</p></li>
+<li><p>CTRE - <a class="reference external" href="https://store.ctr-electronics.com/content/user-manual/Talon%20SRX%20User's%20Guide.pdf">Talon SRX - User’s Guide</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="robotControlIndex.html" class="btn btn-neutral float-left" title="Robot Control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="classicalControl.html" class="btn btn-neutral float-right" title="Classical Control" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/es/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

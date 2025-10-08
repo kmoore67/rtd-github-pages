@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalman Filters &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="RoboRIO Robots" href="../RoboRIORobots/roboRIORobotsIndex.html" />
+    <link rel="prev" title="Pose Estimation" href="poseEstimation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotControl/robotControlIndex.html">Robot Control</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="robotConceptsIndex.html">Robot Concepts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="robotSystems.html">Robot Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensors.html">Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actuators.html">Actuators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controlAlgo.html">Control Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="communications.html">Communication Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kinematics.html">Robot Kinematics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">Robot Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coordinate.html">Coordinate System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamicalSystems.html">Dynamical Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="poseEstimation.html">Pose Estimation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Kalman Filters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#unscented-kalman-filters">Unscented Kalman Filters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-it-works">How it Works</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#key-advantages-over-ekf">Key Advantages over EKF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#when-to-use-the-ukf">When to Use the UKF</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RoboRIORobots/roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../MachineLearning/machineLearningIndex.html">Machine Learning</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="robotConceptsIndex.html">Robot Concepts</a></li>
+      <li class="breadcrumb-item active">Kalman Filters</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RobotConcepts/kalmanFilters.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="kalman-filters">
+<h1>Kalman Filters<a class="headerlink" href="#kalman-filters" title="Permalink to this heading"></a></h1>
+<p><em>Kalman Filters</em> fuse measurements from one or more sensors with a State Space model of the system to optimally estimate a system’s state. Kalman filters have two parts: prediction and correction. Prediction projects our state estimate forward in time according to our system’s dynamics, and correct steers the estimated state towards the measured state.</p>
+<p>If you think all that sounds confusing then you’re not alone.  Kalman Filters can be difficult to understand and explain, however the site <a class="reference external" href="https://www.kalmanfilter.net/default.aspx">KalmanFilters.net</a> by Alex Becker does an excelent job of it, so you should go there first.  The following diagrams will serve as a quick reference for later use.</p>
+<p>Here’s all five steps of the Kalman Filter.</p>
+<img alt="../_images/FRCOptimalEstimation.001.jpeg" src="../_images/FRCOptimalEstimation.001.jpeg" />
+<p>In prediction, our state estimate is updated according to the linear system dynamics.</p>
+<img alt="../_images/FRCOptimalEstimation.002.jpeg" src="../_images/FRCOptimalEstimation.002.jpeg" />
+<img alt="../_images/FRCOptimalEstimation.003.jpeg" src="../_images/FRCOptimalEstimation.003.jpeg" />
+<img alt="../_images/FRCOptimalEstimation.004.jpeg" src="../_images/FRCOptimalEstimation.004.jpeg" />
+<img alt="../_images/FRCOptimalEstimation.005.jpeg" src="../_images/FRCOptimalEstimation.005.jpeg" />
+<img alt="../_images/FRCOptimalEstimation.006.jpeg" src="../_images/FRCOptimalEstimation.006.jpeg" />
+<section id="unscented-kalman-filters">
+<h2>Unscented Kalman Filters<a class="headerlink" href="#unscented-kalman-filters" title="Permalink to this heading"></a></h2>
+<p>An Unscented Kalman Filter (UKF) is a state estimation algorithm for non-linear systems that uses the unscented transform to approximate the probability distribution of the state through a set of sigma points. Unlike the Extended Kalman Filter (EKF), which relies on linearization and Jacobian calculations, the UKF uses a sampling-based method to capture the effects of non-linear transformations on the state, making it more robust and accurate for highly non-linear systems.</p>
+<section id="how-it-works">
+<h3>How it Works<a class="headerlink" href="#how-it-works" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Sigma Point Generation: The UKF starts by generating a small set of sigma points around the current state estimate. These points are chosen to represent the mean and covariance of the Gaussian distribution of the state.</p></li>
+<li><p>Transformation through Nonlinearity: These sigma points are then passed through the system’s non-linear state transition and measurement functions.</p></li>
+<li><p>Mean and Covariance Reconstruction: The unscented transform reconstructs a new mean and covariance from the transformed sigma points. This captures how the non-linear functions affect the distribution, rather than relying on linear approximations.</p></li>
+<li><p>Prediction and Correction: Using these new mean and covariance estimates, the UKF performs its prediction and correction steps to update the state estimate of the system.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="key-advantages-over-ekf">
+<h3>Key Advantages over EKF<a class="headerlink" href="#key-advantages-over-ekf" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>No Jacobian Calculations: The UKF does not require the analytical derivation of complex Jacobians for the non-linear functions.</p></li>
+<li><p>Better Accuracy: It achieves higher accuracy by capturing the non-linear propagation of the distribution through the system, especially in cases of high non-linearity.</p></li>
+<li><p>Handles Non-Additive Noise: The UKF can handle non-additive process and measurement noise, unlike the basic Kalman filter.</p></li>
+<li><p>Models as «Black Boxes»: The non-linear functions can be treated as black boxes, meaning they don’t need to be continuous or differentiable.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="when-to-use-the-ukf">
+<h3>When to Use the UKF<a class="headerlink" href="#when-to-use-the-ukf" title="Permalink to this heading"></a></h3>
+<p>The UKF is ideal for tracking and estimating the states of systems where the relationships between variables are non-linear. This is common in fields such as robotics, autonomous navigation, and other applications where sensors and motion models are complex.</p>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>FRC Documentation <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/advanced-controls/state-space/state-space-observers.html">State Observers and Kalman Filters</a></p></li>
+<li><p>Tyler Veness <a class="reference external" href="https://file.tavsys.net/control/controls-engineering-in-frc.pdf">Controls Engineering in the FIRST Robotics Competition</a> Chapter 10.</p></li>
+<li><p>Alonzo Kelly <a class="reference external" href="https://www.cambridge.org/core/books/mobile-robotics/5BF238489F9BC337C0736432C87B3091">Mobile Robotics</a> Chapter 5.3</p></li>
+<li><p>Roger Labbe <a class="reference external" href="https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python">Kalman and Bayesian Filters in Python</a></p></li>
+<li><p>Alex Becker <a class="reference external" href="https://www.kalmanfilter.net/default.aspx">Kalman Filters</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="poseEstimation.html" class="btn btn-neutral float-left" title="Pose Estimation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../RoboRIORobots/roboRIORobotsIndex.html" class="btn btn-neutral float-right" title="RoboRIO Robots" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/es/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

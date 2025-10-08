@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Machine Learning &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Preparing Images" href="processImages.html" />
+    <link rel="prev" title="Path Planner" href="../RoboRIORobots/PathPlanner.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotControl/robotControlIndex.html">Robot Control</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotConcepts/robotConceptsIndex.html">Robot Concepts</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RoboRIORobots/roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Machine Learning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="processImages.html">Preparing Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training.html">Training the Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="colabTraining.html">Colab Model Training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="axonTraining.html">Axon Model Training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploymentIndex.html">Deploying the Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploymentScript.html">Inference Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usbDeployment.html">USB Deployment for Raspberry Pi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jetsonDeployment.html">USB Deployment for Jetson Nano</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control.html">Machine Learning-Based Control</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Machine Learning</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/MachineLearning/machineLearningIndex.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="machine-learning">
+<h1>Machine Learning<a class="headerlink" href="#machine-learning" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p><em>Machine Learning</em> has greatly expanded what is possible in the field of robotics. Robots have traditionally operated in very controlled environments using well defined algorithms.  These algorithms must be written to anticipate every scenario that may occur during the robot’s operation. This has limited the type of operations that the robot can perform and has largely prevented the widespread use of robots in uncontrolled environments.</p>
+<p>In the FIRST Robotics Competition, machine learning can be used to detect game pieces, scoring locations, or even other robots.  In order to implement machine learning on an FRC robot you don’t need to know all of the details about the technology behind it, but if you’d like to learn more there are some resources in the page reference section.</p>
+<p>In order to implement a Machine Learning application we need to setup an efficient workflow. Creating a successful machine learning application is an iterative process that is continued until you have a satisfactory outcome.  This workflow will generally conform to the following set of processes:</p>
+<ul class="simple">
+<li><p>Collect and load images into an application for annotation.  The collection process will normally involve taking a video of the objects that you are interested in tracking.</p></li>
+<li><p>Annotating the images, which involves drawing bounding boxes around objects of interest and labelling them.</p></li>
+<li><p>Preprocessing and augmenting the images to increase the amount and variability of the training dataset.</p></li>
+<li><p>Training a deep learning model and validating it against a validation dataset. Two commonly used deep learning models for object detection are <em>MobileNet</em> and <em>Yolo</em>.</p></li>
+<li><p>Placing the trained model in an environment where it can be easily tested using a camera stream or set of images.</p></li>
+<li><p>Once we are satisfied with how the model performs it can be deployed to an edge device such as a robot.  The model is converted to format that has a small memory footprint that runs efficiently on the edge device.</p></li>
+<li><p>Finally we can use data coming from the trained model to control the robot.</p></li>
+</ul>
+<img alt="../_images/FRCMachineLearning.001.jpeg" src="../_images/FRCMachineLearning.001.jpeg" />
+<p>There are multiple ways to carry out the machine learning process.  FRC has a tool called <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/wpilib-tools/axon/introduction.html">Axon</a> that implements the training, testing, and exporting of the machine learning model. The model is then deployed to a Raspberry Pi using a <a class="reference external" href="https://coral.ai/products/accelerator">Coral USB Accelerator</a> or a Jetson for real-time processing of the images.</p>
+<p>An alternative process, and the one that will be documented in the next sections, is to use the <a class="reference external" href="https://roboflow.com">Roboflow</a> platform to upload video, annotate, preprocess, and augment the images in preparation for training. Once we have a good dataset of prepared images we’ll use it to train a deep learning model. For our example we’ll a <a class="reference external" href="https://pjreddie.com/darknet/yolo/">Yolo</a> model for training.</p>
+<p>We’ll be using <a class="reference external" href="https://colab.research.google.com/?utm_source=scs-index">Google Colab</a> to train the model.  The trained model can then be moved to a PC or your final deployment platform for testing.  At the end of the training process this document details the use of an <a class="reference external" href="https://shop.luxonis.com/products/1098obcenclosure">OAK-D Stereo Depth Camera</a> connected to a Raspberry Pi as our deployment platform.  This camera can be connected to your PC while testing.</p>
+<p>The OAK-D camera has an onboard Tensor Processing Unit (TPU) that runs the model and processes the images before sending it to the Raspberry Pi. Most of these steps are still applicable if you have a different camera.  The only change will be the final model file format used for deployment.  For instance, if you’re using a Raspberry Pi with a <em>Coral USB Accelerator</em> you will use a <em>Tensorflow Lite</em> model format.</p>
+<img alt="../_images/FRCMachineLearning.002.jpeg" src="../_images/FRCMachineLearning.002.jpeg" />
+<p>The deployment process for <em>Roboflow</em>, <em>Google Colab</em>, with the <em>OAK-D Camera</em> and <em>Raspberry Pi</em> will be documented in the following sections.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../RoboRIORobots/PathPlanner.html" class="btn btn-neutral float-left" title="Path Planner" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="processImages.html" class="btn btn-neutral float-right" title="Preparing Images" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/es/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

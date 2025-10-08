@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motion Profiling &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="State Space Control" href="stateSpaceControl.html" />
+    <link rel="prev" title="SysID PID Tuning" href="SysIDTuning.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="robotControlIndex.html">Robot Control</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="motorControl.html">Motor Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classicalControl.html">Classical Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pidControl.html">PID Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pidTuning.html">PID Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SysIDTuning.html">Tuning using SysID</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Motion Profiling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#trapezoidal-motion-profile">Trapezoidal Motion Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#s-curve-motion-profile">S-curve Motion Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-motion-profile-path">Example Motion Profile Path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#motion-magic">Motion Magic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-motion-magic-velocity">Example Motion Magic - Velocity</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#shooterconstants">ShooterConstants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-determine-kv">How to determine KV</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-determine-ka">How to determine kA?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shooter-subsystem">Shooter Subsystem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shooter-kraken">Shooter Kraken</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#motion-magic-expo">Motion Magic Expo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-motion-magic-expo-position">Example Motion Magic Expo - Position</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#turret-constants">Turret Constants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#turret-subsystem">Turret Subsystem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#turret-kraken">Turret Kraken</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="stateSpaceControl.html">State Space Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LQR.html">Linear Quadractic Regulator</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotConcepts/robotConceptsIndex.html">Robot Concepts</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RoboRIORobots/roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../MachineLearning/machineLearningIndex.html">Machine Learning</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="robotControlIndex.html">Robot Control</a></li>
+      <li class="breadcrumb-item active">Motion Profiling</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RobotControl/motionProfiling.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex">
+
+<style>
+    table th, table td {
+        text-align: center;
+    }
+</style><section id="motion-profiling">
+<h1>Motion Profiling<a class="headerlink" href="#motion-profiling" title="Permalink to this heading"></a></h1>
+<p><strong>Motion Profiling</strong> is a control algorithm that generates a detailed trajectory, or “path”  for a robot’s movement by defining its desired position, velocity, and acceleration over a specific time period. It allows for smoother, more precise motion by controlling factors like speed and acceleration, often using profiles like trapezoidal or S-curve, to ensure the robot reaches a goal efficiently while minimizing abrupt changes in acceleration (jerk). More simply put, a motion profile is a predefined path that a mechanism follows to achieve specific motion.</p>
+<section id="trapezoidal-motion-profile">
+<h2>Trapezoidal Motion Profile<a class="headerlink" href="#trapezoidal-motion-profile" title="Permalink to this heading"></a></h2>
+<p>While feedforward and feedback (PID) control offer convenient ways to achieve a given setpoint, we are often still faced with the problem of generating setpoints for our mechanisms. While the naive approach of immediately commanding a mechanism to its desired state <em>may</em> work, it is often suboptimal. To improve the handling of our mechanisms, we often wish to command mechanisms to a sequence of setpoints that smoothly interpolate between its current state, and its desired goal state.</p>
+<p>A Trapezoidal Motion Profile is a type of motion profile used in control systems characterized by three distinct phases: acceleration, constant velocity, and deceleration. It is defined by a trapezodial shape in its velocity-time graph which consists of the following phases:</p>
+<ol class="arabic simple">
+<li><p>Acceleration Phase - The system accelerates from rest to a maximum velocity. This phase is characterized by a constant acceleration.</p></li>
+<li><p>Constant Velocity Phase - The system moves at a constant maximum velocity for a specified duration or distance. This phase allows for efficient movement without changing speed.</p></li>
+<li><p>Deceleration Phase - The system decelerates from the maximum velocity back to rest. Similar to the acceleration phase, this phase also feature constant deceleration.</p></li>
+</ol>
+<p>The benefits of trapezodial motion profiles are:</p>
+<ul class="simple">
+<li><p>Smooth Motion - the trapezodial profile provides smooth acceleration and deceleration, reducing the risk of jerky movements and vibrations.</p></li>
+<li><p>High Precision - It allows for precise control over the movement of mechanical systems, making it ideal for applications that require high accuracy.</p></li>
+<li><p>Flexibility - The profile can be easily adjusted to suit different applications and requirements.</p></li>
+<li><p>Energy Efficiency - By optimizing the movement of mechanical systems, trapezodial profiles can help reduce energy consupmtions.</p></li>
+</ul>
+<img alt="../_images/MotionProfile.001.jpeg" src="../_images/MotionProfile.001.jpeg" />
+<p>Taking a look at the graph above you can see the distinct trapezoidal shape of velocity. (The blue line). This shows the constant acceleration to a maximum velocity and then the constant deceleration to zero.</p>
+<p>Now take a look at the Position. (The red line) It shows starting at zero and slowly going faster until the position is changing at a constant rate and then slowing down to precisely hit the setpoint. (In this example 10 units)</p>
+<p>And finally, take a look at the Acceleration. (The yellow line) It starts out applying full power to the motor then it turns off the acceleration once we hit maximum velocity. And then it’s acceration goes negative (applying the brakes) to slow the robot down to zero.</p>
+</section>
+<section id="s-curve-motion-profile">
+<h2>S-curve Motion Profile<a class="headerlink" href="#s-curve-motion-profile" title="Permalink to this heading"></a></h2>
+<p>An S-curve motion profile is a motion control technique that creates a smooth, gradual “S” shape on a velocity-time graph, achieved by modulating the acceleration over time. Unlike trapezoidal profiles with abrupt changes in acceleration, the S-curve profile minimizes “jerk” (the rate of change of acceleration), which reduces mechanical vibration, increases component lifespan, prevents overshoot, and ensures smoother motion for sensitive applications. This results in a more accurate, efficient, and comfortable motion for the system.</p>
+<img alt="../_images/MotionProfile.002.jpeg" src="../_images/MotionProfile.002.jpeg" />
+<p>An S-curve profile progresses through several phases, gradually changing acceleration to create a smooth curve:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Initial Acceleration: Acceleration increases linearly from zero to a maximum rate.</p></li>
+<li><p>Maximum Acceleration: The system maintains a constant maximum acceleration until it approaches the peak velocity.</p></li>
+<li><p>Decreasing Acceleration: Acceleration begins to decrease linearly until it reaches zero.</p></li>
+<li><p>Constant Velocity: The system moves at a constant velocity.</p></li>
+<li><p>Deceleration: A symmetrical process to the acceleration phases, where deceleration gradually increases and then decreases.</p></li>
+<li><p>Constant Deceleration: The profile then maintains a constant deceleration rate.</p></li>
+<li><p>Final Deceleration: The acceleration decreases to zero, bringing the system to a smooth stop.</p></li>
+</ol>
+</div></blockquote>
+<p>What makes S-curve profiles so powerful is that they inject dramatically less vibrational energy into the connecting mechanisms and the load. Just as importantly, compared to trapezodial profiles, S-curves provide an additional control mechanism for cancelling oscillations in the load by adjusting the ratio of the profile’s transistion phases to the constant acceleration phases. These features can have a dramatic impact on the effective transfer time. (The effective transfer time is the time from when the load begins moving to when it finally actually settles.) For high-speed point-to-point moves a tuned S-curve can reduce the effective transfer time by <em>25%</em> or more depending on the nature of the mechanism being controlled.</p>
+</section>
+<section id="example-motion-profile-path">
+<h2>Example Motion Profile Path<a class="headerlink" href="#example-motion-profile-path" title="Permalink to this heading"></a></h2>
+<p>This example represents a motion profile where the mechanism accelerated uniformly to a maximum velocity of 5 m/s and then maintains that velocity. elow is a list of the trajectory points in the path.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Time (s)</strong></p></th>
+<th class="head"><p><strong>Position (m)</strong></p></th>
+<th class="head"><p>Velocity (m/s)</p></th>
+<th class="head"><p>Acceleration (m/s^2)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.1</p></td>
+<td><p>0.05</p></td>
+<td><p>0.5</p></td>
+<td><p>5.0</p></td>
+</tr>
+<tr class="row-even"><td><p>0.2</p></td>
+<td><p>0.15</p></td>
+<td><p>1.0</p></td>
+<td><p>5.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.3</p></td>
+<td><p>0.30</p></td>
+<td><p>1.5</p></td>
+<td><p>5.0</p></td>
+</tr>
+<tr class="row-even"><td><p>0.4</p></td>
+<td><p>0.50</p></td>
+<td><p>2.0</p></td>
+<td><p>5.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.5</p></td>
+<td><p>0.75</p></td>
+<td><p>2.5</p></td>
+<td><p>5.0</p></td>
+</tr>
+<tr class="row-even"><td><p>0.6</p></td>
+<td><p>1.05</p></td>
+<td><p>3.0</p></td>
+<td><p>5.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.7</p></td>
+<td><p>1.40</p></td>
+<td><p>3.5</p></td>
+<td><p>5.0</p></td>
+</tr>
+<tr class="row-even"><td><p>0.8</p></td>
+<td><p>1.80</p></td>
+<td><p>4.0</p></td>
+<td><p>5.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.9</p></td>
+<td><p>2.25</p></td>
+<td><p>4.5</p></td>
+<td><p>5.0</p></td>
+</tr>
+<tr class="row-even"><td><p>1.0</p></td>
+<td><p>2.75</p></td>
+<td><p>5.0</p></td>
+<td><p>0.0</p></td>
+</tr>
+</tbody>
+</table>
+<p>Key:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Time (s) - The time elapsed since the start of the motion</p></li>
+<li><p>Position (m) - The position of the component at the given time</p></li>
+<li><p>Velocity (m/s) - The velocity of the componenet at the given time</p></li>
+<li><p>Acceleration (m/s^2) - The acceleration of the component at a given time</p></li>
+</ol>
+</div></blockquote>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Motion Profile Path playback mechanisms include a PID controller. This controller looks at each time step and determines if the robot is exactly where the path expects it to be. Then the PID values are applied to adjust the next time increment to help the robot remain exactly on path.</p>
+</div>
+</section>
+<section id="motion-magic">
+<h2>Motion Magic<a class="headerlink" href="#motion-magic" title="Permalink to this heading"></a></h2>
+<p><strong>Motion Magic</strong> is a control mode that provides the benefit of Motion Profiling without needing to generate motion profile trajectory points. When using Motion Magic®, the motor will move to a target position using a motion profile, while honoring the user specified acceleration, maximum velocity (cruise velocity), and optional jerk.</p>
+<p>The benefits of this control mode over “simple” PID position closed-looping are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Control of the mechanism throughout the entire motion (as opposed to racing to the end target position)</p></li>
+<li><p>Control of the mechanism’s inertia to ensure smooth transitions between setpoints</p></li>
+<li><p>Improved repeatability despite changes in battery load</p></li>
+<li><p>Improved repeatability despite changes in motor load</p></li>
+</ul>
+</div></blockquote>
+<p>After gain/settings are determined, the robot controller only needs to periodically set the target position.</p>
+<p>There is no general requirement to “wait for the profile to finish”. However, the robot application can poll the sensor position and determine when the motion is finished if need be.</p>
+<p>Motion Magic functions by generating a trapezoidal/S-Curve velocity profile that does not exceed the specified cruise velocity, acceleration, or jerk. This is done automatically by the motor controller.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If the Motion Magic jerk is set to a nonzero value, the generated velocity profile is no longer trapezoidal, but instead is a continuous S-Curve (corner points are smoothed).</p>
+</div>
+</section>
+<section id="example-motion-magic-velocity">
+<h2>Example Motion Magic - Velocity<a class="headerlink" href="#example-motion-magic-velocity" title="Permalink to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For this example we will be referencing the ProgTrain3 project. You should download the project from the team GitHub.</p>
+</div>
+<section id="shooterconstants">
+<h3>ShooterConstants<a class="headerlink" href="#shooterconstants" title="Permalink to this heading"></a></h3>
+<p>First, let’s take a look at the Constants file. We define a new slot for the PID Values. The terms are the same as in the prvious example, with the exception of two new terms; kV and kA. kV is the voltage required for 1 revolution of the motor, in the case 0.12. kA is the acceleration and is based on the rate of rotations per second per second. SO in this case we are adding 0.01 volts per to get a 0.01 rotation per second per second increase.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>kV and kA terms are determined through PID Tuning. See the sections below on how to determine kV &amp; kA.</p>
+</div>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="p">).</span><span class="na">withSlot2</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Slot2Configs</span><span class="p">()</span><span class="w">            </span><span class="cm">/* Motion Magic Velocity  */</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withKS</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span><span class="w">             </span><span class="c1">// Add 0.25 V output to overcome static friction</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withKV</span><span class="p">(</span><span class="mf">.12</span><span class="p">)</span><span class="w">              </span><span class="c1">// A velocity target of 1 rps results in 0.12 V output</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withKA</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span><span class="w">             </span><span class="c1">// An acceleration of 1 rps/s requires 0.01 V output</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withKP</span><span class="p">(</span><span class="mf">4.8</span><span class="p">)</span><span class="w">              </span><span class="c1">// A position error of 2.5 rotations results in 12 V output</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withKI</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w">                </span><span class="c1">// no output for integrated error</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withKD</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span><span class="w">              </span><span class="c1">// A velocity error of 1 rps results in 0.1 V output</span>
+<span class="p">).</span><span class="na">withMotionMagic</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">MotionMagicConfigs</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withMotionMagicCruiseVelocity</span><span class="p">(</span><span class="mf">80.0</span><span class="p">)</span><span class="w">     </span><span class="c1">// Target cruise velocity of 80 rps</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withMotionMagicAcceleration</span><span class="p">(</span><span class="mi">160</span><span class="p">)</span><span class="w">        </span><span class="c1">// Target acceleration of 160 rps/s (0.5 seconds)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withMotionMagicJerk</span><span class="p">(</span><span class="mi">1600</span><span class="p">)</span><span class="w">               </span><span class="c1">// Target jerk of 1600 rps/s/s (0.1 seconds))</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Notice that we also added a motion magic configuration. For motion magic, we want a constant velocity of 80 rotations per second. We will use an acceleration of 160 rotations per second per second to get to our cruise velocity and to decelerate from our cruise velocity to full stop. <strong>Jerk</strong> is rate of change of the acceleration and controls how smoothly the motor accelerates. Think of it as easing into acceleration instead of slamming on the gas pedal. A higher <strong>Jerk</strong> will take longer for the motor to accelerate. A lower <strong>Jerk</strong> will be faster, but will result is ‘stilted’ motion with sudden movements.</p>
+<p>These are all the changes to the constants class.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The way to reduce Jerk is to reduce acceleration.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>A Jerk of 0.0 indicates no limit on acceleration.</p>
+</div>
+</section>
+<section id="how-to-determine-kv">
+<h3>How to determine KV<a class="headerlink" href="#how-to-determine-kv" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>To find KV:</dt><dd><ul class="simple">
+<li><p>Run your motor at several steady velocities.</p></li>
+<li><p>Record the voltage required to maintain each velocity.</p></li>
+<li><p>Plot voltage vs. velocity.</p></li>
+<li><p>The slope of the line is your KV.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Example: If 0.12 V is needed for 1 rps, then KV = 0.12 V/rps</p>
+</section>
+<section id="how-to-determine-ka">
+<h3>How to determine kA?<a class="headerlink" href="#how-to-determine-ka" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>To find KA:</dt><dd><ul class="simple">
+<li><p>This is trickier since acceleration is transient.</p></li>
+<li><p>Use a motion profile that includes acceleration (e.g., trapezoidal).</p></li>
+<li><p>Measure the voltage spike during acceleration.</p></li>
+<li><p>Subtract the steady-state voltage (from KV) to isolate the acceleration component.</p></li>
+<li><p>Divide by the acceleration to get KA.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Example: If an extra 0.06 V is needed during 2 rps² acceleration, KA = 0.03 V/rps²</p>
+</section>
+<section id="shooter-subsystem">
+<h3>Shooter Subsystem<a class="headerlink" href="#shooter-subsystem" title="Permalink to this heading"></a></h3>
+<p>There are no changes to the Shooter Subsystem for <strong>Motion Magic</strong>. That is one of the key benefits to seperating the <em>business</em> logic from the <em>motor</em> logic. As <strong>Motion Magic</strong> is a motor control feature, all of the changes are in the <strong>ShooterKraken</strong> class.</p>
+</section>
+<section id="shooter-kraken">
+<h3>Shooter Kraken<a class="headerlink" href="#shooter-kraken" title="Permalink to this heading"></a></h3>
+<p>The first thing we change in <strong>ShooterKraken</strong> is to define two new motion controls. The first uses <strong>Motion Magic</strong> with voltage. This means that the control will adjust the motor voltage. Note that it uses PID Slot 2 to include the new settings we defined in constants.</p>
+<p>The second <strong>Motion Magic</strong> control uses Torque. It uses the same torque PID setting that we defined in the previous section.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">MotionMagicVoltage</span><span class="w"> </span><span class="n">m_mmVelocityVoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MotionMagicVoltage</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">withSlot</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">MotionMagicTorqueCurrentFOC</span><span class="w"> </span><span class="n">m_mmVelocityTorque</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">MotionMagicTorqueCurrentFOC</span><span class="p">(</span><span class="mf">0.0</span><span class="p">).</span><span class="na">withSlot</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Next, we modify our variabe to determine which of the motor controls we want to run. Last time we used a boolean to select between two control modes. Now that we have four control modes we change the variable to an integer.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/****************************************************************</span>
+<span class="cm">* Change this variable to select which motor control feature runs</span>
+<span class="cm">*     0-means run Velocity Voltage Control Mode</span>
+<span class="cm">*     1-means run Velocity Torque Control Mode</span>
+<span class="cm">*     2-means run Motion Magic Voltage Control Mode</span>
+<span class="cm">*     3-means run Motion Magic Torque Control mode</span>
+<span class="cm">*****************************************************************/</span>
+<span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">controlMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>And finally, we change our control mode depending on the value of the controlMode variable.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">controlMode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="w">      </span><span class="cm">/* Use velocity voltage */</span>
+<span class="w">    </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">setControl</span><span class="p">(</span><span class="n">m_velocityVoltage</span><span class="p">.</span><span class="na">withVelocity</span><span class="p">(</span><span class="n">desiredRotationsPerSecond</span><span class="p">));</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w">      </span><span class="cm">/* Use velocity torque */</span>
+<span class="w">    </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">setControl</span><span class="p">(</span><span class="n">m_velocityTorque</span><span class="p">.</span><span class="na">withVelocity</span><span class="p">(</span><span class="n">desiredRotationsPerSecond</span><span class="p">));</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span><span class="w">      </span><span class="cm">/*Use Motion Magic Voltage */</span>
+<span class="w">    </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">setControl</span><span class="p">(</span><span class="n">m_mmVelocityVoltage</span><span class="p">.</span><span class="na">withPosition</span><span class="p">(</span><span class="n">desiredRotationsPerSecond</span><span class="p">));</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="mi">3</span><span class="p">:</span><span class="w">      </span><span class="cm">/*Use Motion Magic Torque Current FOC */</span>
+<span class="w">    </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">setControl</span><span class="p">(</span><span class="n">m_mmVelocityTorque</span><span class="p">.</span><span class="na">withPosition</span><span class="p">(</span><span class="n">desiredRotationsPerSecond</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>That’s it! These are all the changes neccessary to support running a motor under <strong>Motion Magic</strong> control. It was very little code to add, to get the the benefits of a very smooth and repeatable motion.</p>
+</section>
+</section>
+<section id="motion-magic-expo">
+<h2>Motion Magic Expo<a class="headerlink" href="#motion-magic-expo" title="Permalink to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This section is copied directly from the CTRE manual. See the link to original document in the References section</p>
+</div>
+<p>Whereas traditional <strong>Motion Magic</strong> generates a trapezoidal or S-Curve profile, <strong>Motion Magic Expo</strong> generates an exponential profile. This allows the profile to best match the system dynamics, reducing both overshoot and time to target compared to a trapezoidal profile. Generally, this makes the Expo control <strong>FASTER</strong> that the traditional position controls.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Motion Magic Expo controls are only used for Position PIDS!</p>
+</div>
+<img alt="../_images/ExpoControl.001.jpg" src="../_images/ExpoControl.001.jpg" />
+<p>Motion Magic Expo uses the kV and kA characteristics of the system, as well as an optional cruise velocity. The Motion Magic Expo kV and kA configs are separate from the slot gain configs, as they may use different units and have different behaviors.</p>
+<p>The Motion Magic Expo kV represents the voltage required to maintain a given velocity and is in units of Volts/rps. Dividing the supply voltage by kV results in the maximum velocity of the profile. As a result, when supply voltage is fixed, a higher profile kV results in a lower profile velocity. Unlike with gain slots, it is safer to start from a higher kV than what is ideal.</p>
+<p>The Motion Magic Expo kA represents the voltage required to apply a given acceleration and is in units of Volts/(rps/s). Dividing the supply voltage by kA results in the maximum acceleration of the profile from 0. As a result, when supply voltage is fixed, a higher profile kA results in a lower profile acceleration. Unlike with gain slots, it is safer to start from a higher kA than what is ideal.</p>
+<p>The following parameters must be set when controlling using Motion Magic® Expo:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Expo kV - voltage required to maintain a given velocity, in V/rps</p></li>
+<li><p>Expo kA - voltage required to apply a given acceleration, in V/(rps/s)</p></li>
+<li><p>Cruise Velocity (optional) - peak velocity of the profile; set to 0 to target the system’s max velocity</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If the <strong>Motion Magic</strong> cruise velocity is set to zero, the profile will accelerate towards the maximum possible velocity based on the profile kV. Otherwise, the profile will accelerate towards the specified cruise velocity.</p>
+</div>
+</section>
+<section id="example-motion-magic-expo-position">
+<h2>Example Motion Magic Expo - Position<a class="headerlink" href="#example-motion-magic-expo-position" title="Permalink to this heading"></a></h2>
+<section id="turret-constants">
+<h3>Turret Constants<a class="headerlink" href="#turret-constants" title="Permalink to this heading"></a></h3>
+<p>First, let’s take a look at the Constants file. We define a new slot for the PID Values. The terms are the same as in the previous example. Notice that we also added a motion magic configuration. For <strong>Motion Magic Expo</strong>, we want the controller to use the maximum speed possible to get to our position point so we have seth the cruise velocity to zero.</p>
+<p>For Expo velocity (kV) we are using the same velocity target as in the previous example. Which means, a velocity target of 1 rps results in 0.12 V output.</p>
+<p>For acceleration we need to be careful becuase the mechanism is going to move as fast as possible and we don’t want to break it. So we conservatively set the kA value to 0.1. This compares to the 0.01 kA we used in the the  <strong>Motion Magic Velocity</strong> example. Rember that a higher kA will result in a <em>slower</em> acceleration in Expo. The exact opposite of <strong>Motion Magic Velocity</strong>! This is a conservative number that is a good plae to start for tuning this control.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="p">).</span><span class="na">withSlot2</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Slot2Configs</span><span class="p">()</span><span class="w">            </span><span class="cm">/* Motion Magic Expo  */</span>
+<span class="w">            </span><span class="p">.</span><span class="na">wwithKS</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span><span class="w">       </span><span class="c1">// Add 0.25 V output to overcome static friction</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withKV</span><span class="p">(</span><span class="mf">.12</span><span class="p">)</span><span class="w">        </span><span class="c1">// A velocity target of 1 rps results in 0.12 V output</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withKA</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span><span class="w">       </span><span class="c1">// An acceleration of 1 rps/s requires 0.01 V output</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withKP</span><span class="p">(</span><span class="mf">4.8</span><span class="p">)</span><span class="w">        </span><span class="c1">// A position error of 2.5 rotations results in 12 V output</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withKI</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w">          </span><span class="c1">// no output for integrated error</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withKD</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span><span class="w">        </span><span class="c1">// A velocity error of 1 rps results in 0.1 V output</span>
+<span class="p">).</span><span class="na">withMotionMagic</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">MotionMagicConfigs</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withMotionMagicCruiseVelocity</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span><span class="w">   </span><span class="c1">// Unlimited cruise velocity</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withMotionMagicExpo_kV</span><span class="p">(</span><span class="mf">0.12</span><span class="p">)</span><span class="w">          </span><span class="c1">// kV is around 0.12 V/rps</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withMotionMagicExpo_kA</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span><span class="w">          </span><span class="c1">// Use a slower kA of 0.1 V/(rps/s)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>These are all the changes to the constants class.</p>
+</section>
+<section id="turret-subsystem">
+<h3>Turret Subsystem<a class="headerlink" href="#turret-subsystem" title="Permalink to this heading"></a></h3>
+<p>There are no changes to the Turret Subsystem for <strong>Motion Magic Expo</strong>. That is one of the key benefits to seperating the <em>business</em> logic from the <em>motor</em> logic. As <strong>Motion Magic Expo</strong> is a motor control feature, all of the changes are in the <strong>TurretKraken</strong> class.</p>
+</section>
+<section id="turret-kraken">
+<h3>Turret Kraken<a class="headerlink" href="#turret-kraken" title="Permalink to this heading"></a></h3>
+<p>The first change we make is to define our new motor controls for Expo. We define a Motion Magic Expo Voltage control using the PID Slot 2 gains that we defined in constants. Then we define the same control but instead using TorqueFOC. We use the same PID values for the Torque control as we did in all the previous examples.</p>
+<p>..code-block:: Java</p>
+<blockquote>
+<div><p>private final MotionMagicExpoVoltage m_mmExpoVoltage = new MotionMagicExpoVoltage(0).withSlot(2);
+private final MotionMagicExpoTorqueCurrentFOC m_mmExpoTorque = new MotionMagicExpoTorqueCurrentFOC(0.0).withSlot(1);</p>
+</div></blockquote>
+<p>And finally, we change the <em>runVelocity</em> method to set the proper motor control mode base on the value of the <em>controlMode</em> variable:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/***************************************************************************</span>
+<span class="cm">* The runVelocity function can run (based on the controlMode Variable either:</span>
+<span class="cm">*     0-means run Position Voltage Control Mode</span>
+<span class="cm">*     1-means run Position Torque Control Mode</span>
+<span class="cm">*     2-means run Motion Magic Expo Voltage Control Mode</span>
+<span class="cm">*     3-means run Motion Magic Expo Torque Control mode</span>
+<span class="cm">***************************************************************************/</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">runPosition</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">desiredRotations</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">controlMode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="w">      </span><span class="cm">/* Use Position Voltage */</span>
+<span class="w">      </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">setControl</span><span class="p">(</span><span class="n">m_positionVoltage</span><span class="p">.</span><span class="na">withPosition</span><span class="p">(</span><span class="n">desiredRotations</span><span class="p">));</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w">      </span><span class="cm">/* Use Position Torque */</span>
+<span class="w">      </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">setControl</span><span class="p">(</span><span class="n">m_positionTorque</span><span class="p">.</span><span class="na">withPosition</span><span class="p">(</span><span class="n">desiredRotations</span><span class="p">));</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span><span class="w">      </span><span class="cm">/* Use Motion Magic Position Voltage */</span>
+<span class="w">      </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">setControl</span><span class="p">(</span><span class="n">m_mmExpoVoltage</span><span class="p">.</span><span class="na">withPosition</span><span class="p">(</span><span class="n">desiredRotations</span><span class="p">));</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">3</span><span class="p">:</span><span class="w">      </span><span class="cm">/* Use Motion Magic Position Torque */</span>
+<span class="w">      </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">setControl</span><span class="p">(</span><span class="n">m_mmExpoTorque</span><span class="p">.</span><span class="na">withPosition</span><span class="p">(</span><span class="n">desiredRotations</span><span class="p">));</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And that’s it. These are all the changes neccessary to convert the sample project use <strong>Motion Magic Expo</strong>.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SysIDTuning.html" class="btn btn-neutral float-left" title="SysID PID Tuning" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="stateSpaceControl.html" class="btn btn-neutral float-right" title="State Space Control" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

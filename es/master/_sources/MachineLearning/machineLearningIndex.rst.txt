@@ -1,0 +1,56 @@
+.. raw:: html 
+   
+   <meta name="robots" content="noindex">
+   
+############################
+Machine Learning
+############################
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+  
+   Preparing Images</MachineLearning/processImages>
+   Training the Model</MachineLearning/training>
+   Colab Model Training</MachineLearning/colabTraining>
+   Axon Model Training</MachineLearning/axonTraining>
+   Deploying the Model</MachineLearning/deploymentIndex>
+   Inference Script</MachineLearning/deploymentScript>
+   USB Deployment for Raspberry Pi</MachineLearning/usbDeployment>
+   USB Deployment for Jetson Nano</MachineLearning/jetsonDeployment>
+   Machine Learning-Based Control</MachineLearning/control>
+
+*Machine Learning* has greatly expanded what is possible in the field of robotics. Robots have traditionally operated in very controlled environments using well defined algorithms.  These algorithms must be written to anticipate every scenario that may occur during the robot's operation. This has limited the type of operations that the robot can perform and has largely prevented the widespread use of robots in uncontrolled environments. 
+
+In the FIRST Robotics Competition, machine learning can be used to detect game pieces, scoring locations, or even other robots.  In order to implement machine learning on an FRC robot you don't need to know all of the details about the technology behind it, but if you'd like to learn more there are some resources in the page reference section. 
+
+In order to implement a Machine Learning application we need to setup an efficient workflow. Creating a successful machine learning application is an iterative process that is continued until you have a satisfactory outcome.  This workflow will generally conform to the following set of processes:
+
+* Collect and load images into an application for annotation.  The collection process will normally involve taking a video of the objects that you are interested in tracking.
+
+* Annotating the images, which involves drawing bounding boxes around objects of interest and labelling them.
+
+* Preprocessing and augmenting the images to increase the amount and variability of the training dataset.  
+
+* Training a deep learning model and validating it against a validation dataset. Two commonly used deep learning models for object detection are *MobileNet* and *Yolo*.
+
+* Placing the trained model in an environment where it can be easily tested using a camera stream or set of images.  
+
+* Once we are satisfied with how the model performs it can be deployed to an edge device such as a robot.  The model is converted to format that has a small memory footprint that runs efficiently on the edge device.
+
+* Finally we can use data coming from the trained model to control the robot.  
+
+.. image:: /images/MachineLearning/FRCMachineLearning.001.jpeg 
+
+There are multiple ways to carry out the machine learning process.  FRC has a tool called `Axon <https://docs.wpilib.org/en/stable/docs/software/wpilib-tools/axon/introduction.html>`_ that implements the training, testing, and exporting of the machine learning model. The model is then deployed to a Raspberry Pi using a `Coral USB Accelerator <https://coral.ai/products/accelerator>`_ or a Jetson for real-time processing of the images. 
+
+An alternative process, and the one that will be documented in the next sections, is to use the `Roboflow <https://roboflow.com>`_ platform to upload video, annotate, preprocess, and augment the images in preparation for training. Once we have a good dataset of prepared images we'll use it to train a deep learning model. For our example we'll a `Yolo <https://pjreddie.com/darknet/yolo/>`_ model for training.  
+
+We'll be using `Google Colab <https://colab.research.google.com/?utm_source=scs-index>`_ to train the model.  The trained model can then be moved to a PC or your final deployment platform for testing.  At the end of the training process this document details the use of an `OAK-D Stereo Depth Camera <https://shop.luxonis.com/products/1098obcenclosure>`_ connected to a Raspberry Pi as our deployment platform.  This camera can be connected to your PC while testing.  
+
+The OAK-D camera has an onboard Tensor Processing Unit (TPU) that runs the model and processes the images before sending it to the Raspberry Pi. Most of these steps are still applicable if you have a different camera.  The only change will be the final model file format used for deployment.  For instance, if you're using a Raspberry Pi with a *Coral USB Accelerator* you will use a *Tensorflow Lite* model format.
+
+.. image:: /images/MachineLearning/FRCMachineLearning.002.jpeg 
+
+The deployment process for *Roboflow*, *Google Colab*, with the *OAK-D Camera* and *Raspberry Pi* will be documented in the following sections.
+  

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Control Algorithms &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Communication Protocols" href="communications.html" />
+    <link rel="prev" title="Actuators" href="actuators.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotControl/robotControlIndex.html">Robot Control</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="robotConceptsIndex.html">Robot Concepts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="robotSystems.html">Robot Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensors.html">Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actuators.html">Actuators</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Control Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#robot-software-design">Robot Software Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#real-time-operating-systems-rtos">Real Time Operating Systems (RTOS)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#general-purpose-operating-systems">General Purpose Operating Systems</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#microprocessor-operating-systems">Microprocessor Operating Systems</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#real-time-operating-system">Real Time Operating System</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="communications.html">Communication Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kinematics.html">Robot Kinematics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">Robot Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coordinate.html">Coordinate System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamicalSystems.html">Dynamical Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="poseEstimation.html">Pose Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kalmanFilters.html">Kalman Filters</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RoboRIORobots/roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../MachineLearning/machineLearningIndex.html">Machine Learning</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="robotConceptsIndex.html">Robot Concepts</a></li>
+      <li class="breadcrumb-item active">Control Algorithms</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RobotConcepts/controlAlgo.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="control-algorithms">
+<h1>Control Algorithms<a class="headerlink" href="#control-algorithms" title="Permalink to this heading"></a></h1>
+<p>Members of the programming team are primarily tasked with writing algorithms that control the robot.  This is the most heavily researched areas of robotics with a high demand of skilled programmers, especially those who understand robotic systems. To get an understanding of robot programming it’s helpfull to try and categorize the algorithms into their functional areas.</p>
+<p>A robot receives input from two sources; a <strong>user interface</strong> that sends it commands, and the <strong>sensors</strong> that perceive the environment around it.  Once the input is received the robot has to plan an action to perform and send <strong>control</strong> signals to it’s actuators to carry out that action.  Input coming in from sensors must first be passed through the <strong>perception</strong> stack before it goes onto the <strong>planning</strong> algorithms. This is because sensors produce very large amounts of raw data that is coming in at a fast rate.  The robot has to make sense of that data in order to determine its state.  The <strong>power management</strong> stack monitors the battery status and current draw of the system.</p>
+<p>A critical piece of information that a robot would get from its sensors is <em>«Where am I?»</em> and <em>«What is my orientation?»</em> the representation of this in robotics is called a <strong>Pose</strong>.  The process of determining the robots” <strong>Pose</strong> is called <em>Localization</em>. As the robot moves is needs to ensure that is <em>Tracking</em> on its intended path. Localization and tracking are the primary components that represent the robots” state.</p>
+<p>The perception algorithms can get vast amounts of raw data coming in from its sensors much of which may not be useful for determining its state.  The raw sensor data may need to be passed through <strong>Filtering</strong> routines to extract the pertinent information. Filtering is used to remove noise from the system and limit the rate of the data flow among other things. Another critical component of the perception stack is to <strong>detect</strong> objects and <strong>classify</strong> them in a meaningful way.</p>
+<p><strong>Prediction</strong> takes in past and current information and predicts what will happen in the future.  This is done using <em>Kalman Filters</em>, which is a large subject area. There is more infomation about Kalman Filters and filters in general in the <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/advanced-controls/filters/introduction.html">WPI Documentation</a>. <strong>Path Planning</strong> and <strong>Trajectory Planning</strong> is concerned with getting the robot from where it is now to where it needs to be.  A path is a set of waypoints from one location to another whereas a trajectory indicates the time at which the robot should reach each waypoint and the velocity at which it should be travelling. Similar to the real world, the robot may use a map to assist the path planning process. There may also be a set of <strong>Recovery Routines</strong> in order to account for unexpected situations that the robot may encounter on the way to its goal.</p>
+<p>Finally, in order for the robot to communicate with a User Interface, and for the onboard devices to communicate with each other, there are a number of <strong>Networking Protocols</strong> that programmers will need to understand.  In <em>First Robotics</em>, the primary networking protocol between devices is <strong>CAN</strong>.</p>
+<img alt="../_images/FRCConcepts.012.jpeg" src="../_images/FRCConcepts.012.jpeg" />
+<section id="robot-software-design">
+<h2>Robot Software Design<a class="headerlink" href="#robot-software-design" title="Permalink to this heading"></a></h2>
+<p>Robots generally implement the following design pattern where it receives external commands to control actuators that interact with the physical world.  They use sensors to provide feedback, or system state, that helps direct them towards their goal.</p>
+<img alt="../_images/FRCConcepts.008.jpeg" src="../_images/FRCConcepts.008.jpeg" />
+<p>The software code should be organized to reflect this design pattern.  All subsystems need to be initialized, a process sometimes referred to as <em>Bring-up</em>. The <em>Initialization</em> section will include the subsystem’s class constructor.  The code can be further sectioned into <em>Input Control, Feedback Control</em>, and <em>System State</em> to implement the design pattern. Note that not all subsystems will include all of these sections. For instance, an IMU may only include the <em>Bring-up</em> and <em>System State</em> sections.  During the testing phase, prior to getting a physical robot, there’s a lot of reliance on simulation, which can be provided its own section.</p>
+<img alt="../_images/FRCConcepts.021.jpeg" src="../_images/FRCConcepts.021.jpeg" />
+</section>
+<section id="real-time-operating-systems-rtos">
+<h2>Real Time Operating Systems (RTOS)<a class="headerlink" href="#real-time-operating-systems-rtos" title="Permalink to this heading"></a></h2>
+<section id="general-purpose-operating-systems">
+<h3>General Purpose Operating Systems<a class="headerlink" href="#general-purpose-operating-systems" title="Permalink to this heading"></a></h3>
+<p>A general-purpose operating system (GPOS) is designed to run a wide variety of applications and handle numerous tasks on a single computing device. These versatile operating systems, such as Microsoft Windows, macOS, and various Linux distributions, manage the computer’s resources like the CPU, memory, and storage to serve the diverse needs of different users and software. Unlike specialized systems, a GPOS offers flexibility, allowing users to switch between applications and perform multiple tasks simultaneously.
+Key Characteristics of a General-Purpose Operating System</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Versatility: GPOS can run many different types of software, from web browsers and office suites to games and creative tools.</p></li>
+<li><p>Resource Management: It manages hardware resources, such as the CPU and memory, to ensure that multiple applications can run efficiently without monopolizing the system’s power.</p></li>
+<li><p>User Interface: A GPOS provides a user-friendly interface (often a graphical user interface or GUI) that allows users to interact with the computer and its applications easily.</p></li>
+<li><p>Multitasking: It supports running multiple processes or applications at the same time, allowing users to perform various tasks concurrently.</p></li>
+</ul>
+</div></blockquote>
+<section id="examples-of-general-purpose-operating-systems">
+<h4>Examples of General-Purpose Operating Systems<a class="headerlink" href="#examples-of-general-purpose-operating-systems" title="Permalink to this heading"></a></h4>
+<blockquote>
+<div><ul class="simple">
+<li><p>Microsoft Windows: Pre-installed on most personal computers, it is a popular choice for a broad range of applications.</p></li>
+<li><p>macOS: The operating system for Apple Macintosh computers, known for its design and user experience.</p></li>
+<li><p>Linux: An open-source operating system with many different distributions, offering high flexibility and customizability.</p></li>
+<li><p>Android and iOS: While often considered distinct from desktop GPOS, these mobile operating systems also serve as general-purpose platforms for a wide range of mobile apps.</p></li>
+</ul>
+</div></blockquote>
+<img alt="../_images/FRCConcepts.013.jpeg" src="../_images/FRCConcepts.013.jpeg" />
+</section>
+</section>
+<section id="microprocessor-operating-systems">
+<h3>Microprocessor Operating Systems<a class="headerlink" href="#microprocessor-operating-systems" title="Permalink to this heading"></a></h3>
+<p>A microprocessor operating system doesn’t exist as a standalone entity; instead, it refers to a standard operating system (like Windows, macOS, or Linux) running on a computer that uses a microprocessor (CPU) as its central processing unit. The operating system is the software that manages the microprocessor and all other hardware, providing a platform for applications and user interaction, while the microprocessor is the hardware component that executes the instructions from the OS and applications.
+Here’s a breakdown of the relationship:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Microprocessor (CPU): This is the brain of the computer, a single chip that performs arithmetic, logic, and control functions. It fetches instructions, decodes them, and executes them, essentially performing all the calculations and data processing.</p></li>
+<li><p>Operating System (OS): This is the software that manages the microprocessor and other system resources. The OS performs tasks such as:</p></li>
+<li><p>Resource Management: Allocating and sharing resources like memory and the CPU among multiple programs.</p></li>
+<li><p>Task Scheduling: Starting, running, and terminating programs.</p></li>
+<li><p>User Interface: Providing the environment for users to interact with the computer.</p></li>
+<li><p>File Management: Organizing and storing files on disks.</p></li>
+<li><p>Device Drivers: Managing the communication between software and hardware devices like the keyboard and screen.</p></li>
+<li><p>Loading Programs: The boot process starts with small programs that direct the microprocessor to load parts of the OS from storage into memory, which the microprocessor then executes.</p></li>
+</ul>
+</div></blockquote>
+<p>In essence: You can’t have a «microprocessor operating system.» You have a microprocessor (hardware) that runs an operating system (software), enabling it to handle complex tasks and serve as a platform for applications.</p>
+<img alt="../_images/FRCConcepts.014.jpeg" src="../_images/FRCConcepts.014.jpeg" />
+</section>
+<section id="real-time-operating-system">
+<h3>Real Time Operating System<a class="headerlink" href="#real-time-operating-system" title="Permalink to this heading"></a></h3>
+<p>A Real-Time Operating System (RTOS) is a specialized operating system designed to execute tasks with strict and predictable timing requirements, prioritizing deterministic, low-latency responses over general user experience. Unlike general-purpose operating systems (GPOS), an RTOS ensures that time-critical tasks are completed within their designated deadlines, making them essential for embedded systems in fields like automotive, aerospace, industrial automation, and medical devices.</p>
+<section id="key-characteristics-of-an-rtos">
+<h4>Key Characteristics of an RTOS<a class="headerlink" href="#key-characteristics-of-an-rtos" title="Permalink to this heading"></a></h4>
+<blockquote>
+<div><ul class="simple">
+<li><p>Deterministic Behavior: RTOSes focus on predictable execution times for tasks, ensuring they complete within a defined timeframe.</p></li>
+<li><p>Task Prioritization: Tasks are scheduled based on their deadlines and criticality, with high-priority tasks gaining precedence over lower-priority ones.</p></li>
+<li><p>Low Latency: RTOSes guarantee quick responses to events and interrupts, a crucial feature for systems that require immediate action.</p></li>
+<li><p>Minimal Overhead: RTOSes are often lightweight, with minimal background processes to conserve resources and maintain efficiency in resource-constrained embedded systems.</p></li>
+<li><p>Memory Management: They provide efficient memory management and stack management to support the real-time nature of their applications.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="how-an-rtos-works">
+<h4>How an RTOS Works<a class="headerlink" href="#how-an-rtos-works" title="Permalink to this heading"></a></h4>
+<blockquote>
+<div><ul class="simple">
+<li><p>Scheduling: An RTOS scheduler manages tasks, placing them in states such as «ready,» «running,» or «blocked».</p></li>
+<li><p>Task States: Tasks transition through different states based on their need for resources or readiness to execute.</p></li>
+<li><p>Kernel and Hardware Interaction: The core of the RTOS, the kernel, interacts directly with the hardware, managing resources and providing services to applications.</p></li>
+<li><p>Hardware Abstraction: RTOSes often include Hardware Abstraction Layers (HALs) that simplify the use of hardware components like timers and communication buses, making development easier.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="common-applications">
+<h4>Common Applications<a class="headerlink" href="#common-applications" title="Permalink to this heading"></a></h4>
+<blockquote>
+<div><p>Automotive Systems: Controlling vehicle functions like braking or engine management.
+Aerospace: Managing critical flight control systems.
+Industrial Automation: Coordinating machinery and robotic arms in manufacturing plants.
+Medical Devices: Operating life-sustaining systems such as pacemakers.
+Telecommunications: Ensuring the timely delivery of data in communication networks.</p>
+</div></blockquote>
+<img alt="../_images/FRCConcepts.015.jpeg" src="../_images/FRCConcepts.015.jpeg" />
+</section>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Google Definitions of GPOS, Microprocessor, and real-time Operating Systems</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="actuators.html" class="btn btn-neutral float-left" title="Actuators" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="communications.html" class="btn btn-neutral float-right" title="Communication Protocols" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/es/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

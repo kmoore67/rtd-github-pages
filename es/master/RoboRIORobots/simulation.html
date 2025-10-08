@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robot Simulation &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Path Planner" href="PathPlanner.html" />
+    <link rel="prev" title="Swerve Drive" href="swervedrive.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotControl/robotControlIndex.html">Robot Control</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotConcepts/robotConceptsIndex.html">Robot Concepts</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="roboRIORobotsIndex.html">RoboRIO Robots</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="driverStation.html">Driver Station</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structure.html">Robot Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="joysticks.html">Joysticks and Game Controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motorConfig.html">Configuring Motors and Feedback Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pneumatics.html">Pneumatics Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swervedrive.html">Swerve Drive</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Simulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#simulation-program-flow">Simulation Program Flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-dcmotorsim-class">The <em>DCMotorSim</em> Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lab-robot-simulation">Lab - Robot Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#canivore-hardware-attached-simulation">CANivore Hardware Attached Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="PathPlanner.html">Path Planner</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../MachineLearning/machineLearningIndex.html">Machine Learning</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+      <li class="breadcrumb-item active">Robot Simulation</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RoboRIORobots/simulation.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="robot-simulation">
+<h1>Robot Simulation<a class="headerlink" href="#robot-simulation" title="Permalink to this heading"></a></h1>
+<p>Often a team may want to test their code without having an actual robot available. WPILib provides teams with the ability to simulate various robot features using simple gradle commands. To enable and run simulation in VSCode see <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/wpilib-tools/robot-simulation/introduction.html">Introduction to Robot Simulation</a>.</p>
+<section id="simulation-program-flow">
+<h2>Simulation Program Flow<a class="headerlink" href="#simulation-program-flow" title="Permalink to this heading"></a></h2>
+<p>The flow of a robot simulation is similar to that of a real robot.  An input voltage is applied to the device, such as a motor, that causes it to move.  Since the simulated robot has no actual device attached the movement needs to be predicted. This is done by advancing a timestamp by a small amount and predicting how far the device would have moved during that time period. The input voltage and dynamics of the system are used in order to make the prediction.</p>
+<p>The prediction is done using a simulation class called a <em>LinearSystem</em>. The <em>LinearSystem</em> models a real system and calculates the new position of a device, such as a motor, via an <cite>update()</cite> function. See <strong>State Space Control</strong> in this guide for more details on how linear system models work.</p>
+<p>The last step is to read the predicted positions of the system and use them to show the robot’s location in a simulation tool.</p>
+<img alt="../_images/FRCSimulation.001.jpeg" src="../_images/FRCSimulation.001.jpeg" />
+<p>A full example of how a simulation is implemented can be found in this <a class="reference external" href="https://github.com/Mechanical-Advantage/AdvantageKit/tree/main/example_projects/advanced_swerve_drive/src/main">SwerveDrive Example</a>.  Refer to the <em>ModuleIOSim</em> class.</p>
+</section>
+<section id="the-dcmotorsim-class">
+<h2>The <em>DCMotorSim</em> Class<a class="headerlink" href="#the-dcmotorsim-class" title="Permalink to this heading"></a></h2>
+<p><em>DCMotorSim</em> is probably the most important simulation class that we’ll use.  This class requires a definition of the motor that you’ll be using together with it’s gearing and moment of inertia. The user program sets an input voltage value to simulate the robot.  The <em>DCMotorSim</em> class builds a Linear System model internally in order to calculate the new position of the system via an <cite>update()</cite> function. (see State Space Control in this guide).</p>
+<img alt="../_images/FRCSimulation.002.jpeg" src="../_images/FRCSimulation.002.jpeg" />
+<p>There are a number of parameters that need to be supplied when defining a DCMotor, such as <em>Torque when stalled</em> or <em>Angular velocity under no load</em>. Fortunatelly, these are all provided for us in the Phoenix API.  Just select the motor that you’re using and the number of motors in a gearbox (usually 1).  For example.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="n">DCMotorSim</span><span class="w"> </span><span class="n">driveSim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DCMotorSim</span><span class="p">(</span><span class="n">DCMotor</span><span class="p">.</span><span class="na">getFalcon500</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="mf">6.75</span><span class="p">,</span><span class="w"> </span><span class="mf">0.025</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <em>gearing</em> and <em>moment of inertia</em> of the DC motor must also be provided.  These can be obtained from simulation examples. Use the ones shown above as a starting point.</p>
+<p>As the program runs the <strong>setInputVoltage()</strong> is usually called from the <strong>simulationPeriodic()</strong> loop of the subsystem, or from the <strong>execute()</strong> phase of a command, using:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">driveSim</span><span class="p">.</span><span class="na">setInputVoltage</span><span class="p">(</span><span class="n">driveAppliedVolts</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The Linear System model is then updated to compute the new positions of the system.  This would again be done in the <strong>simulationPeriodic()</strong> loop every <strong>0.02</strong> seconds.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">driveSim</span><span class="p">.</span><span class="na">update</span><span class="p">(</span><span class="mf">0.02</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Finally, the predicted positions of the system can be read and used to show the robot’s location in a simulation tool.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">drivePositionRad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">driveSim</span><span class="p">.</span><span class="na">getAngularPositionRad</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="lab-robot-simulation">
+<h2>Lab - Robot Simulation<a class="headerlink" href="#lab-robot-simulation" title="Permalink to this heading"></a></h2>
+<p>Create the simulated objects for the drive and turn motors of a swerve drive chassis.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="n">DCMotorSim</span><span class="w"> </span><span class="n">driveSim</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">DCMotorSim</span><span class="p">(</span><span class="n">DCMotor</span><span class="p">.</span><span class="na">getFalcon500Foc</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="mf">6.75</span><span class="p">,</span><span class="w"> </span><span class="mf">0.025</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">DCMotorSim</span><span class="w"> </span><span class="n">turnSim</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">DCMotorSim</span><span class="p">(</span><span class="n">DCMotor</span><span class="p">.</span><span class="na">getFalcon500Foc</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="mf">150.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">7.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.004</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Create functions to set the voltages on the motors.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setDriveVoltage</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">volts</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">driveAppliedVolts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MathUtil</span><span class="p">.</span><span class="na">clamp</span><span class="p">(</span><span class="n">volts</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">12.0</span><span class="p">,</span><span class="w"> </span><span class="mf">12.0</span><span class="p">);</span>
+<span class="w">        </span><span class="n">driveSim</span><span class="p">.</span><span class="na">setInputVoltage</span><span class="p">(</span><span class="n">driveAppliedVolts</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setTurnVoltage</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">volts</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">turnAppliedVolts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MathUtil</span><span class="p">.</span><span class="na">clamp</span><span class="p">(</span><span class="n">volts</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">12.0</span><span class="p">,</span><span class="w"> </span><span class="mf">12.0</span><span class="p">);</span>
+<span class="w">        </span><span class="n">turnSim</span><span class="p">.</span><span class="na">setInputVoltage</span><span class="p">(</span><span class="n">turnAppliedVolts</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Run <strong>update</strong> on the motors to progress them forward one timestamp.  This would be done in the <strong>simulationPeriodic()</strong> loop every <strong>0.02</strong> seconds.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">driveSim</span><span class="p">.</span><span class="na">update</span><span class="p">(</span><span class="mf">0.02</span><span class="p">);</span>
+<span class="n">turnSim</span><span class="p">.</span><span class="na">update</span><span class="p">(</span><span class="mf">0.02</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The drive and turn motors can then be read.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="p">.</span><span class="na">drivePositionRad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">driveSim</span><span class="p">.</span><span class="na">getAngularPositionRad</span><span class="p">();</span>
+<span class="n">inputs</span><span class="p">.</span><span class="na">turnPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">(</span><span class="n">turnSim</span><span class="p">.</span><span class="na">getAngularPositionRad</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>And be used to update odometry.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="p">.</span><span class="na">odometryDrivePositionsRad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="n">inputs</span><span class="p">.</span><span class="na">drivePositionRad</span><span class="p">};</span>
+<span class="n">inputs</span><span class="p">.</span><span class="na">odometryTurnPositions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rotation2d</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="n">inputs</span><span class="p">.</span><span class="na">turnPosition</span><span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="canivore-hardware-attached-simulation">
+<h2>CANivore Hardware Attached Simulation<a class="headerlink" href="#canivore-hardware-attached-simulation" title="Permalink to this heading"></a></h2>
+<p>CANivore supports hardware-attached simulation when used in an FRC robot program. This allows a CANivore to be used with real devices on supported host operating systems, see <a class="reference external" href="https://pro.docs.ctr-electronics.com/en/latest/docs/canivore/canivore-hardware-attached.html">CANivore Hardware Attached Simulation</a>.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>FRC Documentation <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/wpilib-tools/robot-simulation/device-sim.html">Device Simulation</a></p></li>
+<li><p>Phoenix Documentation <a class="reference external" href="https://docs.ctre-phoenix.com/en/latest/ch15a_Simulation.html#simulation">Simulation</a></p></li>
+<li><p>Phoenix <a class="reference external" href="https://github.com/CrossTheRoadElec/Phoenix6-Examples/blob/main/java/Simulation/src/main/java/frc/robot/Robot.java">Simulation Code Example</a></p></li>
+<li><p>AdvantageKit <a class="reference external" href="https://github.com/Mechanical-Advantage/AdvantageKit/tree/main/example_projects/advanced_swerve_drive/src/main">SwerveDrive Example</a> with Simulation</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="swervedrive.html" class="btn btn-neutral float-left" title="Swerve Drive" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="PathPlanner.html" class="btn btn-neutral float-right" title="Path Planner" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/es/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

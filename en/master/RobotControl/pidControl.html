@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PID Control &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PID Tuning" href="pidTuning.html" />
+    <link rel="prev" title="Classical Control" href="classicalControl.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="robotControlIndex.html">Robot Control</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="motorControl.html">Motor Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classicalControl.html">Classical Control</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">PID Control</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#types-of-pid-control">Types of PID Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#types-of-pid-control-implementation">Types of PID Control Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lab-example-code">Lab - Example Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#position-pid-control">Position PID Control</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#turretconstants">TurretConstants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#turret-subsystem">Turret Subsystem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#turretkraken">TurretKraken</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#velocity-pid-control">Velocity PID Control</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#shooterconstants">ShooterConstants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shooter-subsystem">Shooter Subsystem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shooterkraken">ShooterKraken</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pidTuning.html">PID Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SysIDTuning.html">Tuning using SysID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motionProfiling.html">Motion Profiling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stateSpaceControl.html">State Space Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LQR.html">Linear Quadractic Regulator</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotConcepts/robotConceptsIndex.html">Robot Concepts</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RoboRIORobots/roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../MachineLearning/machineLearningIndex.html">Machine Learning</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="robotControlIndex.html">Robot Control</a></li>
+      <li class="breadcrumb-item active">PID Control</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RobotControl/pidControl.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="pid-control">
+<h1>PID Control<a class="headerlink" href="#pid-control" title="Permalink to this heading"></a></h1>
+<section id="types-of-pid-control">
+<h2>Types of PID Control<a class="headerlink" href="#types-of-pid-control" title="Permalink to this heading"></a></h2>
+<p>There are two distinct types of PID control strategies, these are:</p>
+<ul class="simple">
+<li><p>Position PID Control</p></li>
+<li><p>Velocity PID Control</p></li>
+</ul>
+<p><em>Position PID Control</em> is used when you are trying to get a mechanism to a specific location. Such as “move the elevator 10 inches”, or “move the robot 10 meters”, or “move the shooter to 15 degrees”. All of these have a goal position that we want the mechanism to hit. Our setpoint would be the goal we want to hit and our measurement would be a distance.</p>
+<p><em>Velocity PID Control</em> is used when you want a mechanism to move at a target speed. Such as “run the shooter at 2,000 rpm” or “expel the intake at 200 rps”. Both of these examples have a goal speed that we want the mechanism to hit. Our setpoint would be the speed we want to hit and our measurement would be the rate at which the mechanism is moving.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The setpoint units and the measurement units MUST be of the same unit type. For example, <em>Position PIDS</em> might be inches or meters. For <em>Velociy PIDS</em> this might be revolutions per second or rotations per second. The key point is that the developer must take great care that the setpoint units and the meansurement units match.</p>
+</div>
+</section>
+<section id="types-of-pid-control-implementation">
+<h2>Types of PID Control Implementation<a class="headerlink" href="#types-of-pid-control-implementation" title="Permalink to this heading"></a></h2>
+<p>There are two distinct types of PID Control implementations. The first implementation is WPILIB. A PID Controller has been implemented in WPILIB which means that the PID loop runs on the Roborio. And as explained previously, the loop will run every 20ms (50 times per second). This seems fast, but an even faster implementation is to run the PID controller on the motor controller. Both CTRE and REV have a PID control process that runs on the motor controller. You pass in the PID values and the setpoint, then turn it loose. The really great part is that it is running at 1ms - or 1,000 times per second! In addition, the Roborio can be running other things rather than a PID loop.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Based on the performance and Roborio cpu savings our team prefers to run the PID loop on the motor controller. So our training will focus on using this method. However, there are circumstances when you must use the PID controller on the Roborio (such as multiple concurrent PID Loops) so it is important for you to know how to do both.</p>
+</div>
+</section>
+<section id="lab-example-code">
+<h2>Lab - Example Code<a class="headerlink" href="#lab-example-code" title="Permalink to this heading"></a></h2>
+<p>To help illustrate how to use a PID controller in our robot code it is best to use an example. You should download <strong>ProgTrain3</strong> from the teams github respository. The subsequent section will reference this code.</p>
+</section>
+<section id="position-pid-control">
+<h2>Position PID Control<a class="headerlink" href="#position-pid-control" title="Permalink to this heading"></a></h2>
+<p>Let’s take a look at the <strong>Turret</strong> subsystem. This is a copy of the <strong>Intake</strong> subsystem that we have used in the previous sessions. Let’s highlight the changes to the base <strong>Intake</strong> subsystem.</p>
+<p>The goal is to define 2 buttons on the driver controller. One will move the turret to 45 degrees to the left of center and the other will move the turret to 45 degrees to the right of center. As we want to move to a specific position on the turret, a Position PID Control is just what we need.</p>
+<section id="turretconstants">
+<h3>TurretConstants<a class="headerlink" href="#turretconstants" title="Permalink to this heading"></a></h3>
+<p>We will start with <strong>TurrentConstants</strong>. The first thing to do is define the PID values for the motor. We will include both Voltage and Torque based PID values so that you can run the code in simulation and see the difference for yourself.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="p">).</span><span class="na">withSlot0</span><span class="p">(</span>
+<span class="w">         </span><span class="k">new</span><span class="w"> </span><span class="n">Slot0Configs</span><span class="p">()</span><span class="w">            </span><span class="cm">/* Voltage-based position */</span>
+<span class="w">             </span><span class="p">.</span><span class="na">withKP</span><span class="p">(</span><span class="mf">2.4</span><span class="p">)</span><span class="w">        </span><span class="c1">// An error of 1 rotation results in 2.4v output</span>
+<span class="w">             </span><span class="p">.</span><span class="na">withKI</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span><span class="w">        </span><span class="c1">// No output for integrated error</span>
+<span class="w">             </span><span class="p">.</span><span class="na">withKD</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span><span class="w">        </span><span class="c1">// A velocity of 1 rps results in 0.1v output</span>
+<span class="w">     </span><span class="p">).</span><span class="na">withSlot1</span><span class="p">(</span>
+<span class="w">         </span><span class="k">new</span><span class="w"> </span><span class="n">Slot1Configs</span><span class="p">()</span><span class="w">            </span><span class="cm">/* Torque-based position  */</span>
+<span class="w">             </span><span class="p">.</span><span class="na">withKP</span><span class="p">(</span><span class="mf">60.0</span><span class="p">)</span><span class="w">       </span><span class="c1">// An error of 1 rotation results in 60 A output</span>
+<span class="w">             </span><span class="p">.</span><span class="na">withKI</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span><span class="w">        </span><span class="c1">// No output for integrated error</span>
+<span class="w">             </span><span class="p">.</span><span class="na">withKD</span><span class="p">(</span><span class="mf">6.0</span><span class="p">)</span><span class="w">        </span><span class="c1">// A velocity of 1 rps results in 6 A output</span>
+<span class="w">         </span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="turret-subsystem">
+<h3>Turret Subsystem<a class="headerlink" href="#turret-subsystem" title="Permalink to this heading"></a></h3>
+<p>In the <strong>Turret Subsystem</strong>, we define a new state for moving the turret, let’s call
+it <em>GOTOANGLE</em>:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Define the Valid States for the Turret Subsystem  */</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">State</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">IDLE</span><span class="p">,</span>
+<span class="w">   </span><span class="n">GOTOANGLE</span><span class="p">,</span>
+<span class="w">   </span><span class="n">CHARACTERIZE</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now, we define the left and right angles to move the turret. We want 45 degrees but the units for the motor are in <strong>rotations</strong>. So we determine the 45 degrees is equal to 20 motor rotations. Accordingly, we define a left angle of -20 rotations and a right angle of 20 rotations. We will assume that position zero will be straight forward.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">leftAngle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">20.0</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rightAngle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">20.0</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this example, we used 20 rotations as moving 45 degrees. A better solution would be to create a function that converts degrees into rotations and vice versa.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Assuming anything on a robot is quite dangerous. To keep things simple, we have omitted the code that would read the turret current position at robot start-up from the absolute encoder within the motor.</p>
+</div>
+<p>Next, we add a routine to handle the <strong>GOTOANGLE</strong> state. We will need to call the <strong>TurretKraken</strong> class to run to a specific position, passing the number of rotations we want:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">currentState</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">   </span><span class="k">case</span><span class="w"> </span><span class="n">IDLE</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="c1">// m_TurretKraken.stop();</span>
+<span class="w">   </span><span class="p">}</span>
+
+<span class="w">   </span><span class="k">case</span><span class="w"> </span><span class="n">GOTOANGLE</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="c1">//move turret to requested position</span>
+<span class="w">     </span><span class="n">m_TurretKraken</span><span class="p">.</span><span class="na">runPosition</span><span class="p">(</span><span class="n">requestedRotations</span><span class="p">);</span>
+<span class="w">     </span><span class="n">turretGoal</span><span class="p">.</span><span class="na">setDouble</span><span class="p">(</span><span class="n">requestedRotations</span><span class="p">);</span>
+<span class="w">     </span><span class="n">flipState</span><span class="p">(</span><span class="n">State</span><span class="p">.</span><span class="na">IDLE</span><span class="p">,</span><span class="mf">0.0</span><span class="p">);</span>
+
+<span class="w">   </span><span class="p">}</span>
+
+<span class="w">   </span><span class="k">case</span><span class="w"> </span><span class="n">CHARACTERIZE</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// End of Switch</span>
+</pre></div>
+</div>
+<p>We will also modify our <strong>flip-state</strong> function to pass in the requested rotation from the <em>command</em>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is an example of how to pass data from a command into a function.</p>
+</div>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">flipState</span><span class="p">(</span><span class="n">State</span><span class="w"> </span><span class="n">inState</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">reqRotations</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Setting state....&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">inState</span><span class="p">.</span><span class="na">name</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; Rotations-&quot;</span><span class="o">+</span><span class="w"> </span><span class="n">reqRotations</span><span class="p">);</span>
+<span class="w">    </span><span class="n">requestedRotations</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reqRotations</span><span class="p">;</span>
+<span class="w">    </span><span class="n">currentState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inState</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Next, we need to define some commands to go to the right or left angles.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="kd">public</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="nf">GotoLeftAngleCommand</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="c1">// Subsystem::RunOnce implicitly requires `this` subsystem.</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">runOnce</span><span class="p">(</span>
+<span class="w">     </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="cm">/* one-time action goes here */</span>
+<span class="w">       </span><span class="n">flipState</span><span class="p">(</span><span class="n">State</span><span class="p">.</span><span class="na">GOTOANGLE</span><span class="p">,</span><span class="n">leftAngle</span><span class="p">);</span>
+<span class="w">   </span><span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="nf">GotoRightAngleCommand</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="c1">// Subsystem::RunOnce implicitly requires `this` subsystem.</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">runOnce</span><span class="p">(</span>
+<span class="w">     </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="cm">/* one-time action goes here */</span>
+<span class="w">       </span><span class="n">flipState</span><span class="p">(</span><span class="n">State</span><span class="p">.</span><span class="na">GOTOANGLE</span><span class="p">,</span><span class="n">rightAngle</span><span class="p">);</span>
+<span class="w">   </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="turretkraken">
+<h3>TurretKraken<a class="headerlink" href="#turretkraken" title="Permalink to this heading"></a></h3>
+<p>Ok, now we move onto the changes for the <strong>TurretKraken</strong> class. First, let’s define our position control commands:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">PositionVoltage</span><span class="w"> </span><span class="n">m_positionVoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PositionVoltage</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">withSlot</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">PositionTorqueCurrentFOC</span><span class="w"> </span><span class="n">m_positionTorque</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PositionTorqueCurrentFOC</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">withSlot</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>And finally, we define our <strong>runPosition</strong> function. Notice, that the nummber of rotations to move is passed in from the <strong>Turret</strong> class and put into the CTRE Motor control statement:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">runPosition</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">desiredRotations</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">useTorque</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="cm">/* Use velocity voltage */</span>
+<span class="w">      </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">setControl</span><span class="p">(</span><span class="n">m_positionVoltage</span><span class="p">.</span><span class="na">withPosition</span><span class="p">(</span><span class="n">desiredRotations</span><span class="p">));</span>
+<span class="w">   </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="cm">/* Use velocity torque */</span>
+<span class="w">      </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">setControl</span><span class="p">(</span><span class="n">m_positionTorque</span><span class="p">.</span><span class="na">withPosition</span><span class="p">(</span><span class="n">desiredRotations</span><span class="p">));</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And that’s it. You now have example code to run a motor to a specific number of rotations.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>You should run this example in simulation. Look under the Shuffle board-Turret tab. When you press the “X” button, notice the position moving to -20 rotations. When you press the “Y” button, the position should be moving to 20 rotations.</p>
+</div>
+</section>
+</section>
+<section id="velocity-pid-control">
+<h2>Velocity PID Control<a class="headerlink" href="#velocity-pid-control" title="Permalink to this heading"></a></h2>
+<p>Let’s take a look at the <strong>Shooter</strong> subsystem. This is a copy of the <strong>Intake</strong> subsystem that we have used in the previous sessions. Let’s highlight the changes to the base <strong>Intake</strong> subsystem.</p>
+<p>The goal is to define 1 button on the driver controller that will run the shooter up to a constant velocity of 2,000 revolution per minute. As we want to move the shooter wheel at a specific velocity, a Velocit PID Control is just what we need.</p>
+<section id="shooterconstants">
+<h3>ShooterConstants<a class="headerlink" href="#shooterconstants" title="Permalink to this heading"></a></h3>
+<p>In Shooter Constants we define the speed that we want the shooter wheel to run at.In this case 2,000 revolutions per minute.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">kShooterSpeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2000.0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Next, we add the PID values for a Velocity PID. First we use a Volatage-base strategy and then we define PID values for a Torque-based strategy. please note that these values are different from the position PID values defined for the Intake subsystem.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="p">).</span><span class="na">withSlot0</span><span class="p">(</span>
+<span class="w">   </span><span class="k">new</span><span class="w"> </span><span class="n">Slot0Configs</span><span class="p">()</span><span class="w">     </span><span class="cm">/* Voltage-based velocity requires a velocity feed forward to account for the back-emf of the motor */</span>
+<span class="w">      </span><span class="p">.</span><span class="na">withKP</span><span class="p">(</span><span class="mf">0.11</span><span class="p">)</span><span class="w">       </span><span class="c1">// An error of 1 rotation per second results in 0.11 V output</span>
+<span class="w">      </span><span class="p">.</span><span class="na">withKI</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span><span class="w">        </span><span class="c1">// No output for integrated error</span>
+<span class="w">      </span><span class="p">.</span><span class="na">withKD</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span><span class="w">        </span><span class="c1">// No output for error derivative</span>
+<span class="w">      </span><span class="p">.</span><span class="na">withKS</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span><span class="w">        </span><span class="c1">// To account for friction, add 0.1 V of static feedforward</span>
+<span class="w">      </span><span class="p">.</span><span class="na">withKV</span><span class="p">(</span><span class="mf">0.12</span><span class="p">)</span><span class="w">       </span><span class="c1">// Kraken X60 is a 500 kV motor, 500 rpm per V = 8.333 rps per V, 1/8.33 = 0.12 volts / rotation per second</span>
+<span class="p">).</span><span class="na">withSlot1</span><span class="p">(</span>
+<span class="w">   </span><span class="k">new</span><span class="w"> </span><span class="n">Slot1Configs</span><span class="p">()</span><span class="w">     </span><span class="cm">/* Torque-based velocity does not require a velocity feed forward, as torque will accelerate the rotor up to the desired velocity by itself */</span>
+<span class="w">      </span><span class="p">.</span><span class="na">withKP</span><span class="p">(</span><span class="mf">5.0</span><span class="p">)</span><span class="w">        </span><span class="c1">// An error of 1 rotation per second results in 5 A output</span>
+<span class="w">      </span><span class="p">.</span><span class="na">withKI</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span><span class="w">        </span><span class="c1">// No output for integrated error</span>
+<span class="w">      </span><span class="p">.</span><span class="na">withKD</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span><span class="w">        </span><span class="c1">// No output for error derivative</span>
+<span class="w">      </span><span class="p">.</span><span class="na">withKS</span><span class="p">(</span><span class="mf">2.5</span><span class="p">)</span><span class="w">        </span><span class="c1">// To account for friction, add 2.5 A of static feedforward</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="shooter-subsystem">
+<h3>Shooter Subsystem<a class="headerlink" href="#shooter-subsystem" title="Permalink to this heading"></a></h3>
+<p>The Shooter subsystem is a copy of the Intake subsystem, but converted into velocity instead of position. We define a new state which is <em>Shoot</em> rather than <em>Intake</em>.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Define the Valid States for the shooter Subsystem  */</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">State</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">IDLE</span><span class="p">,</span>
+<span class="w">   </span><span class="n">SHOOT</span><span class="p">,</span>
+<span class="w">   </span><span class="n">RUNNING</span><span class="p">,</span>
+<span class="w">   </span><span class="n">CHARACTERIZE</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We change our state processing code to call the <em>runVelocity</em> method in the <em>shootKraken</em> class based on our new state. We also pass in the shooter speed we want to run the shooter wheel at. We get this from the <em>shooterConstants</em> file we deined previously.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">currentState</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">   </span><span class="k">case</span><span class="w"> </span><span class="n">IDLE</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="n">mShooterKraken</span><span class="p">.</span><span class="na">stop</span><span class="p">();</span>
+<span class="w">   </span><span class="p">}</span>
+
+<span class="w">   </span><span class="k">case</span><span class="w"> </span><span class="n">SHOOT</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="c1">//run shooter motor at a constant speed</span>
+<span class="w">     </span><span class="n">mShooterKraken</span><span class="p">.</span><span class="na">runVelocity</span><span class="p">(</span><span class="n">ShooterConstants</span><span class="p">.</span><span class="na">kShooterSpeed</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+<span class="w">     </span><span class="n">flipState</span><span class="p">(</span><span class="n">State</span><span class="p">.</span><span class="na">RUNNING</span><span class="p">);</span>
+<span class="w">   </span><span class="p">}</span>
+
+<span class="w">   </span><span class="k">case</span><span class="w"> </span><span class="n">RUNNING</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{}</span>
+
+
+<span class="w">   </span><span class="k">case</span><span class="w"> </span><span class="n">CHARACTERIZE</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// End of Switch</span>
+</pre></div>
+</div>
+<p>Then we add our new Shoot Command to give the operators a button to press:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="nf">shootCommand</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="c1">// Subsystem::RunOnce implicitly requires `this` subsystem.</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">runOnce</span><span class="p">(</span>
+<span class="w">      </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="cm">/* one-time action goes here */</span>
+<span class="w">         </span><span class="n">flipState</span><span class="p">(</span><span class="n">State</span><span class="p">.</span><span class="na">SHOOT</span><span class="p">);</span>
+<span class="w">   </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="shooterkraken">
+<h3>ShooterKraken<a class="headerlink" href="#shooterkraken" title="Permalink to this heading"></a></h3>
+<p>The <strong>ShooterKraken</strong> is a copy of the <strong>IntakeKraken</strong>. But it is modified for the velocity control. First, we define our <em>Velocity</em> control commands. One for <em>VelocityVoltage</em> and one for <em>VelocityTorque</em>.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Control</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">VelocityVoltage</span><span class="w"> </span><span class="n">m_velocityVoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">VelocityVoltage</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">withSlot</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">    </span><span class="cm">/* Start at velocity 0, use slot 0 */</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">VelocityTorqueCurrentFOC</span><span class="w"> </span><span class="n">m_velocityTorque</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">VelocityTorqueCurrentFOC</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">withSlot</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w">  </span><span class="cm">/* Start at velocity 0, use slot 1 */</span>
+</pre></div>
+</div>
+<p>Finally, we define our <em>runVelocity</em> method to run the appropriate motor command based on the controlMode variable.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="cm">/*********************</span>
+<span class="cm">* The runVelocity function can run (based on the controlMode variable) either:</span>
+<span class="cm">*     0-means run Velocity Voltage Control Mode</span>
+<span class="cm">*     1-means run Velocity Torque Control Mode</span>
+<span class="cm">*</span>
+<span class="cm">**********************/</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">runVelocity</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">RPM</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Feedforward</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="c1">//Convert rotations per minute into rotations per second</span>
+<span class="w">   </span><span class="kt">double</span><span class="w"> </span><span class="n">desiredRotationsPerSecond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">RPM</span><span class="o">/</span><span class="mf">60.0</span><span class="p">);</span>
+
+<span class="w">   </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">controlMode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="w">      </span><span class="cm">/* Use velocity voltage */</span>
+<span class="w">         </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">setControl</span><span class="p">(</span><span class="n">m_velocityVoltage</span><span class="p">.</span><span class="na">withVelocity</span><span class="p">(</span><span class="n">desiredRotationsPerSecond</span><span class="p">));</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w">      </span><span class="cm">/* Use velocity torque */</span>
+<span class="w">         </span><span class="n">m_talonFX</span><span class="p">.</span><span class="na">setControl</span><span class="p">(</span><span class="n">m_velocityTorque</span><span class="p">.</span><span class="na">withVelocity</span><span class="p">(</span><span class="n">desiredRotationsPerSecond</span><span class="p">));</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>That’s it! These are all the changes necessary to run the shooter wheel in velocity control mode at a defined speed.</p>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Video - <a class="reference external" href="https://resourcium.org/journey/companion-resources-everything-you-need-know-about-control-theory">Everything You Need to Know About Control Theory</a> by Brian Douglas.</p></li>
+<li><p>Video Resource - <a class="reference external" href="https://engineeringmedia.com/videos">Control Theory</a> by Brian Douglas.</p></li>
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/index.html">PID Basics</a></p></li>
+<li><p>FRC Documentation - <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/commandbased/pid-subsystems-commands.html#">PID Control through PIDSubsystems and PIDCommands</a></p></li>
+<li><p>FRC  Documentation - <a class="reference external" href="(https://docs.wpilib.org/en/stable/docs/software/advanced-controls/controllers/pidcontroller.html">PID Control in WPILib</a></p></li>
+<li><p>FRC Programming Done Right - <a class="reference external" href="https://frc-pdr.readthedocs.io/en/latest/control/pid_control.html">PID Control</a></p></li>
+<li><p>TexasRobots - <a class="reference external" href="https://www.youtube.com/watch?v=xlQW8vGJWEs&amp;ab_channel=texasRobots">Motion Magic Video</a> YouTube</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="classicalControl.html" class="btn btn-neutral float-left" title="Classical Control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pidTuning.html" class="btn btn-neutral float-right" title="PID Tuning" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

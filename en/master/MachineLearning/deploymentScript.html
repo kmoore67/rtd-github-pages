@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Inference Script &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="USB Camera Deployment for Raspberry Pi" href="usbDeployment.html" />
+    <link rel="prev" title="Deploying the Model" href="deploymentIndex.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotControl/robotControlIndex.html">Robot Control</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotConcepts/robotConceptsIndex.html">Robot Concepts</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RoboRIORobots/roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="machineLearningIndex.html">Machine Learning</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="processImages.html">Preparing Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training.html">Training the Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="colabTraining.html">Colab Model Training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="axonTraining.html">Axon Model Training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploymentIndex.html">Deploying the Model</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Inference Script</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#start-the-camera">Start the Camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#intialize-the-network-tables">Intialize the Network Tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-the-object-detection-model">Load the Object Detection Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-the-object-detection-loop">Run the Object Detection Loop</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#displaying-output">Displaying Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#populating-the-network-tables">Populating the Network Tables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usbDeployment.html">USB Deployment for Raspberry Pi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jetsonDeployment.html">USB Deployment for Jetson Nano</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control.html">Machine Learning-Based Control</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="machineLearningIndex.html">Machine Learning</a></li>
+      <li class="breadcrumb-item active">The Inference Script</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/MachineLearning/deploymentScript.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="the-inference-script">
+<h1>The Inference Script<a class="headerlink" href="#the-inference-script" title="Permalink to this heading"></a></h1>
+<p>Once we have an object detection model file for the target platform a python script must be deployed to run the inference.  The inference script follows the general flow pattern as seen in the next graphic.  The key addition is that we put data coming in from the inference pipeline into <em>Network Tables</em> for use in our WPI program.  The following sections will step you through each part of the script flow.</p>
+<img alt="../_images/FRCMachineLearning.018.jpeg" src="../_images/FRCMachineLearning.018.jpeg" />
+<section id="start-the-camera">
+<h2>Start the Camera<a class="headerlink" href="#start-the-camera" title="Permalink to this heading"></a></h2>
+<p>The cameras used for object detection fall into two broad categories.  There are simple USB cameras, which includes the Raspberry Pi camera. The Raspberry Pi camera is a <em>Camera Serial Interface (CSI)</em> device that defines an interface between a camera and a host processor. The purpose of this interface was to standardise the attachment of camera modules to processors for the mobile phone industry. This will sometimes be referred to as the <em>onboard</em> camera.  The USB camera is simply plugged into the USB port, as the name suggests.</p>
+<p>The other category of cameras have intergrated CPUs and memory to process images prior to sending it to the host computer.  These will normally be depth cameras that are capable of providing spacial information about objects in their field-of-view (FOV). The most popular cameras in this category have included the <em>Kinect</em> and the <em>RealSense</em> devices.  However, both of these products are being discontinued so for this deployment we’ll be using the  <a class="reference external" href="https://shop.luxonis.com/products/1098obcenclosure">OAK-D Stereo Depth Camera</a> by Luxonis.</p>
+<p>Depending on how you’ll deploy object detection, the script must be capable of starting the appropriate camera.</p>
+</section>
+<section id="intialize-the-network-tables">
+<h2>Intialize the Network Tables<a class="headerlink" href="#intialize-the-network-tables" title="Permalink to this heading"></a></h2>
+<p>We’re going to want to do something with the data that comes in from the object detection pipeline, so we need a way to send it back to the robot.  For FRC, this is done using the Network Tables that are deployed on the camera connected host device, i.e. Raspberry Pi or Jetson Nano. The format of the data will be similar to the that shown in the following graphic.</p>
+<img alt="../_images/FRCMachineLearning.012.jpeg" src="../_images/FRCMachineLearning.012.jpeg" />
+</section>
+<section id="load-the-object-detection-model">
+<h2>Load the Object Detection Model<a class="headerlink" href="#load-the-object-detection-model" title="Permalink to this heading"></a></h2>
+</section>
+<section id="run-the-object-detection-loop">
+<h2>Run the Object Detection Loop<a class="headerlink" href="#run-the-object-detection-loop" title="Permalink to this heading"></a></h2>
+<section id="displaying-output">
+<h3>Displaying Output<a class="headerlink" href="#displaying-output" title="Permalink to this heading"></a></h3>
+<p>Since we’ll be running on the Raspberry Pi or Jetson Nano without a desktop GUI (headless mode) the data will need to be displayed via an MJPeg server.</p>
+<p>Running the MJPeg Server is the default mode of the script.  However, while testing you may also want to run the script on a PC or a the Jetson in desktop GUI mode.  For this purpose you can pass in the <strong>–gui</strong> parameter to display the output in a GUI window.</p>
+</section>
+<section id="populating-the-network-tables">
+<h3>Populating the Network Tables<a class="headerlink" href="#populating-the-network-tables" title="Permalink to this heading"></a></h3>
+<p>As mentioned above data coming in from the inference pipeline is put into the WPI Network Tables.  Most of this data is sent as a JSON string that must be parsed in by the WPI robot program.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="deploymentIndex.html" class="btn btn-neutral float-left" title="Deploying the Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="usbDeployment.html" class="btn btn-neutral float-right" title="USB Camera Deployment for Raspberry Pi" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/en/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/en/master/rtd-github-pages_en_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

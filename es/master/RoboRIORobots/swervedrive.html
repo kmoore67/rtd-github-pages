@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swerve Drive &mdash; HOT Programmers Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Robot Simulation" href="simulation.html" />
+    <link rel="prev" title="Pneumatics Control" href="pneumatics.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HOT Programmers Guide
+          </a>
+              <div class="version">
+                master
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Programming/programmingIndex.html">Programming Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/softwareInstallIndex.html">Setup Development Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SoftwareInstall/testingIndex.html">Setup Testing Environment</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotBasics/robotBasicsIndex.html">Robot Basics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotControl/robotControlIndex.html">Robot Control</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../RobotConcepts/robotConceptsIndex.html">Robot Concepts</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="roboRIORobotsIndex.html">RoboRIO Robots</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="driverStation.html">Driver Station</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structure.html">Robot Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="joysticks.html">Joysticks and Game Controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motorConfig.html">Configuring Motors and Feedback Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pneumatics.html">Pneumatics Control</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Swerve Drive</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-swerve-drive-in-the-phoenix-tuner-x">Configuring Swerve Drive in the Phoenix Tuner X</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setting-offsets">Setting Offsets</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-api-configuration">Hardware API Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#swerve-drive-program-sequence">Swerve Drive Program Sequence</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#convert-joystick-input">1. Convert Joystick Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-chassisspeeds-object">2. Create <em>ChassisSpeeds</em> Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#convert-to-robot-relative-chassis-speeds">3. Convert to Robot Relative Chassis Speeds</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#convert-to-module-speeds-and-angle">4. Convert to Module Speeds and Angle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#desaturate-wheel-speeds">5. Desaturate Wheel Speeds</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apply-new-states">6. Apply New States</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#optimize-wheel-speeds">7. Optimize Wheel Speeds</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apply-power">8. Apply Power</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#drivetrain-class">Drivetrain Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#swervemodule-class">SwerveModule Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#joystickdrive-command">JoystickDrive Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#odometry-and-pose-estimation">Odometry and Pose Estimation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#phoenix-swervedrive-api">Phoenix SwerveDrive API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="simulation.html">Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PathPlanner.html">Path Planner</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../MachineLearning/machineLearningIndex.html">Machine Learning</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/referenceIndex.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HOT Programmers Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="roboRIORobotsIndex.html">RoboRIO Robots</a></li>
+      <li class="breadcrumb-item active">Swerve Drive</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/RoboRIORobots/swervedrive.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <meta name="robots" content="noindex"><section id="swerve-drive">
+<h1>Swerve Drive<a class="headerlink" href="#swerve-drive" title="Permalink to this heading"></a></h1>
+<p>This section describes how the <em>Swerve Drive</em> drivetrain works.  Swerve drive, also known as holonomic or omnidirectional drive, is a unique drive system used in the FIRST Robotics Competition (FRC). It allows for precise control of both translational and rotational movement. This precision is valuable for tasks that require accurate positioning, such as aligning to score game pieces or navigating in tight spaces.</p>
+<p>The programming team has a dedicated robot for learning and for preparing our code for competition.  The hardware configuration for this robot is shown below.</p>
+<p>For a full code example of a Swerve Drive chassis see this <a class="reference external" href="https://github.com/Mechanical-Advantage/AdvantageKit/tree/main/example_projects/advanced_swerve_drive/src/main">Advanced SwerveDrive Example</a>. This example also incorporates <strong>AdvantageKit</strong>, which is an advanced logging and simulation framework.</p>
+<section id="configuring-swerve-drive-in-the-phoenix-tuner-x">
+<h2>Configuring Swerve Drive in the Phoenix Tuner X<a class="headerlink" href="#configuring-swerve-drive-in-the-phoenix-tuner-x" title="Permalink to this heading"></a></h2>
+<p>Before running any robot code the Swerve Drive chassis can be configured and verified in the <em>Phoenix6 Tuner X</em>.  The tuner gives you a view of the entire Swerve Drive chassis and ensures that all of the modules work together as a single unit.  Under the Mechanisms page in Tuner X is the <em>Swerve Project Generator</em>. This utility guides the user through configuring their modules, verifying their drivetrain, encoder inverts, drivetrain inverts and more.</p>
+<section id="setting-offsets">
+<h3>Setting Offsets<a class="headerlink" href="#setting-offsets" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>For finding the offsets, use a piece of 1x1 metal that is straight against the forks of the front and back modules (on the left and right side) to ensure that the modules are straight.</p></li>
+<li><p>Point the bevel gears of all the wheels in the same direction (either facing left or right), where a postive input to the drive motor drives the robot forward (you can use phoenix tuner to test this). If for some reason you set the offsets with the wheels backwards, you can change the driveMotorInvert value to fix.</p></li>
+<li><p>Open smartdashboard (or shuffleboard and go to the smartdashboard tab), you will see 4 printouts called «Mod 0 Cancoder», «Mod 1 Cancoder», etc.</p></li>
+<li><p>If you have already straightened the modules, copy those 4 numbers exactly (to 2 decimal places) to their respective angleOffset variable in constants.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The CANcoder values printed to smartdashboard are in degrees, when copying the values to angleOffset you must use Rotation2d.fromDegrees(«copied value»).</p>
+</div>
+<p>See the <a class="reference external" href="https://pro.docs.ctr-electronics.com/en/latest/docs/tuner/tuner-swerve/index.html">Swerve Project Generator</a> for detailed instructions on running the configuration and verification of the drive train.</p>
+</section>
+</section>
+<section id="hardware-api-configuration">
+<h2>Hardware API Configuration<a class="headerlink" href="#hardware-api-configuration" title="Permalink to this heading"></a></h2>
+<p>The swerve drive robot uses four modules that are represented by the <em>SwerveModule</em> class in our code.  Each module consists of two Falcon500 motors.  One motor drives the wheel linearly and the other rotates the wheel in the desired direction.  There’s a <a class="reference external" href="https://store.ctr-electronics.com/cancoder/">CTRE CANcoder</a>, which is a rotary sensor, that determines the angle of the wheel with respect to the robot chassis.</p>
+<p>Each module is assembled onto the chassis to implement the robot.  The drive motors will provide linear motion whereas the azimuth motor will rotate the wheel to the desired angle.  The numbering relates to the CANbus port of each device.  Since the rotary sensor is a different device from the motor it’s allowed to have the same port number.  The port mappings are listed in the <em>Contants</em> file of the code.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Need Programming Robot Config Diagram</p>
+</div>
+<p>Program code objects need to implemented to represent each of the hardware components and their functionality.  The <em>Drivetrain</em> object encapsulates the all of the drive train components and coordinates their activity.  The <em>SwerveModule</em> represents each swerve drive hardware module together with its functionality.  Each swerve module comprises two motors, one for lateral movement and the other to control the steer angle.  A rotary encoder is used to track the steer angle.</p>
+<img alt="../_images/SwerveDrive.005.jpeg" src="../_images/SwerveDrive.005.jpeg" />
+<dl class="simple">
+<dt>The following device configurations are applied.</dt><dd><ul class="simple">
+<li><p>The Default configuration is first applied.</p></li>
+<li><p>All motors are set to Brake mode.</p></li>
+<li><p>Drive motors are <cite>setInverted(true)</cite> on the left side. Equivalent to  <cite>Clockwise_Positive</cite>. The default value is <cite>CounterClockwise_Positive</cite></p></li>
+<li><p>CANcoder MagnetOffsets are applied</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="swerve-drive-program-sequence">
+<h2>Swerve Drive Program Sequence<a class="headerlink" href="#swerve-drive-program-sequence" title="Permalink to this heading"></a></h2>
+<p>Programming a Swerve Drive robot is a little more complicated than programming a Differential Drive robot.  The general flow is documented in the following diagram that shows the programming steps required to translate commands sent in from a game controller to the point at which power is sent to each of the eight motors that make up the Swerve Drive chassis.</p>
+<p>The decision on where to place each of these steps is left up to the implementer. A possible implementation is shown below.  Steps 7 and 8 must be done in the <em>SwerveModule</em>.  You could also do step 6 in the <em>SwerveModule</em> instead of the <em>Drivetrain</em>.  Some implementations might do step 2 in <em>RobotContainer</em>.</p>
+<img alt="../_images/SwerveDrive.007.jpeg" src="../_images/SwerveDrive.007.jpeg" />
+<section id="convert-joystick-input">
+<h3>1. Convert Joystick Input<a class="headerlink" href="#convert-joystick-input" title="Permalink to this heading"></a></h3>
+<p>Converts joystick input to a magnitude of the desired velocity.  This is a unitless value between <cite>-1</cite> and <cite>1</cite> and will be converted to meters per/sec which the <em>ChassisSpeeds</em> object requires.</p>
+<p>The unitless direction magnitude value computed from the previous step are converted to <cite>velocity meters per second</cite> by multiplying by the maximum speed of the motors.</p>
+<img alt="../_images/SwerveDrive.008.jpeg" src="../_images/SwerveDrive.008.jpeg" />
+</section>
+<section id="create-chassisspeeds-object">
+<h3>2. Create <em>ChassisSpeeds</em> Object<a class="headerlink" href="#create-chassisspeeds-object" title="Permalink to this heading"></a></h3>
+<p>The <em>ChassisSpeeds</em> object tracks the lateral and turn velocity of the robot.  We’ll use it to convert from the <strong>Game Field</strong> relative heading to the <strong>Robot</strong> relative heading in the next step.   Here’s an overview picture of what the <em>ChassisSpeeds</em> object expects and it functions.</p>
+<img alt="../_images/FRCKinematics%26Odometry.015.jpeg" src="../_images/FRCKinematics%26Odometry.015.jpeg" />
+</section>
+<section id="convert-to-robot-relative-chassis-speeds">
+<h3>3. Convert to Robot Relative Chassis Speeds<a class="headerlink" href="#convert-to-robot-relative-chassis-speeds" title="Permalink to this heading"></a></h3>
+<p>Converts a user provided field-relative <em>ChassisSpeeds</em> into a robot-relative <em>ChassisSpeeds</em> using the function <cite>fromFieldRelativeSpeeds()</cite>. The <em>ChassisSpeeds</em> object represents the robot’s speeds in the <strong>Game Field</strong> frame of reference. Positive <cite>X</cite> is away from your alliance wall. Positive <cite>Y</cite> is to your left when standing behind the alliance wall.</p>
+<p>The angle of the robot as measured by a gyroscope. The robot’s angle is considered to be zero when it is facing directly away from your alliance station wall. The new X and Y speeds are calculated after the rotation.  The omega radians per second remains the same.</p>
+<img alt="../_images/SwerveDrive.010.jpeg" src="../_images/SwerveDrive.010.jpeg" />
+<p>When translating and rotating the swerve drivetrain at the same time it tends to skew to one side.  To prevent this we use the <cite>discretize()</cite> function, which converts a continous-time chassis speed into a discrete-time one such that when the discrete-time chassis speed is applied for one timestep, the robot moves as if the velocity components are independent (i.e., the robot moves v_x * dt along the x-axis, v_y * dt along the y-axis, and omega * dt around the z-axis).</p>
+</section>
+<section id="convert-to-module-speeds-and-angle">
+<h3>4. Convert to Module Speeds and Angle<a class="headerlink" href="#convert-to-module-speeds-and-angle" title="Permalink to this heading"></a></h3>
+<p>The function <cite>toSwerveModuleStates()</cite> in the <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/kinematics-and-odometry/swerve-drive-kinematics.html">SwerveDriveKinematics</a> class performs inverse kinematics. It takes the desired chassis speed and converts it into an array containing each of the four module states. The function takes a <em>ChassisSpeeds</em> data structure as input and returns an array of <em>ModuleState</em> entries.  The function uses matrix multiplication to compute the new module values.</p>
+<p>The <em>inverseKinematics</em> matrix holds each module’s X and Y offset from the robot’s center of rotation.  By default, the center of rotation is the center of the robot chassis. This is multipled by a vector that holds the required chassis speeds. The multiplication computes the XY speed value for each module taking into account its offset. The XY value is then used to compute the speed required for each wheel.</p>
+<img alt="../_images/SwerveDrive.013.jpeg" src="../_images/SwerveDrive.013.jpeg" />
+<p>In the case that the desired chassis speeds are zero (i.e. the robot will be stationary), the previously calculated module angle will be maintained.</p>
+</section>
+<section id="desaturate-wheel-speeds">
+<h3>5. Desaturate Wheel Speeds<a class="headerlink" href="#desaturate-wheel-speeds" title="Permalink to this heading"></a></h3>
+<p>Renormalizes the wheel speeds if any individual speed is above the specified maximum. Sometimes, after inverse kinematics, the requested speed from one or more modules may be above the max attainable speed for the driving motor on that module. To fix this issue, one can reduce all the wheel speeds to make sure that all requested module speeds are at-or-below the absolute threshold, while maintaining the ratio of speeds between modules.</p>
+</section>
+<section id="apply-new-states">
+<h3>6. Apply New States<a class="headerlink" href="#apply-new-states" title="Permalink to this heading"></a></h3>
+<p>Now that the desired wheel speed and angle has been computed for each wheel it is sent to the respective module.</p>
+</section>
+<section id="optimize-wheel-speeds">
+<h3>7. Optimize Wheel Speeds<a class="headerlink" href="#optimize-wheel-speeds" title="Permalink to this heading"></a></h3>
+<p>This minimizes the change in heading the desired swerve module state would require by potentially reversing the direction the wheel spins. If this is used with the PIDController class’s continuous input functionality, the furthest a wheel will ever rotate is 90 degrees.</p>
+</section>
+<section id="apply-power">
+<h3>8. Apply Power<a class="headerlink" href="#apply-power" title="Permalink to this heading"></a></h3>
+<p>To apply power to the motors a Closed Loop PID controller is used. For the drive motor the PID loop will measure the speed of the wheel.  The angle motor will move the wheel to the required angle using the CANcoder as its measurement device.</p>
+<p>The Closed Loop PID control can be done in the user program or within the controllers of the <em>Kraken</em> motors.</p>
+<img alt="../_images/FRCroboRIO.011.jpeg" src="../_images/FRCroboRIO.011.jpeg" />
+</section>
+</section>
+<section id="drivetrain-class">
+<h2>Drivetrain Class<a class="headerlink" href="#drivetrain-class" title="Permalink to this heading"></a></h2>
+<p>The drivetrain requires an object for each of the four swerve modules.  There needs to be a way to translate the required speed and direction of the drivetrain chassis into the individual speed and direction of each of the four wheel modules.  This is the job of the <em>SwerveDriveKinematics</em> class, which takes in the locations of the wheels relative to the physical center of the robot in order to compute the required control input for each wheel. These control inputs tell the wheel how fast it should be going and what angle it should be at.</p>
+<p>When the <em>Drivetrain</em> is initiated the desired wheel directions are set in the Rotate configuration.  If Field Oriented mode is set then this allows it to rotate to the zero gyro position.</p>
+<img alt="../_images/SwerveDrive.012.jpeg" src="../_images/SwerveDrive.012.jpeg" />
+<p>After the wheel control inputs have been calculated by the <em>SwerveDriveKinematics</em> class the <em>Drivetrain</em> sets the wheel velocities.</p>
+<p>A gyro is required to track the orientation of the robot with respect to the game field.</p>
+<img alt="../_images/SwerveDrive.004.jpeg" src="../_images/SwerveDrive.004.jpeg" />
+</section>
+<section id="swervemodule-class">
+<h2>SwerveModule Class<a class="headerlink" href="#swervemodule-class" title="Permalink to this heading"></a></h2>
+<p>The following picture shows the <a class="reference external" href="https://www.swervedrivespecialties.com/products/mk4i-swerve-module">MK4i Swerve Module</a> that we use and it’s representation by the <em>SwerveModule</em> class in the code.</p>
+<p>The wheel is turned to the required angle by a PID controller that is driven off of the rotary sensor.  This sensor will boot to it’s absolute position, meaning that it will maintain its angle between startups.  The absolute position is initially set to zero when all wheels are pointed forwards.</p>
+<img alt="../_images/SwerveDrive.003.jpeg" src="../_images/SwerveDrive.003.jpeg" />
+<p>The current distance travelled by the wheel and its current angle is given by the <em>SwerveModulePosition</em> data structure.  This is updated in the period loop of the program.</p>
+<p>The <em>SwerveModuleState</em> data structure is used to hold the desired wheel speed and angle. This is normally updated from the <em>Drivetrain</em> class to set the desired speed and angle that each wheel module should be commanded to.  If the current angle and the desired angle are the same then no power is sent to the turn motor.</p>
+<p>The wheel angle and drive speed direction may get changed due to wheel optimization.  See the step <em>7. Optimize Wheel Speeds</em> above.</p>
+<img alt="../_images/SwerveDrive.011.jpeg" src="../_images/SwerveDrive.011.jpeg" />
+</section>
+<section id="joystickdrive-command">
+<h2>JoystickDrive Command<a class="headerlink" href="#joystickdrive-command" title="Permalink to this heading"></a></h2>
+<p>The objective of the <em>JoystickDrive</em> command is to drive the robot based on user input.  This is the default command that runs on the Drivetrain.  The left joystick axis is used to move the robot laterally (forward, back, left, and right) relative to the game field.  The right axis is used to rotate the robot.  It will rotated it to the orientation of the joystick.</p>
+</section>
+<section id="odometry-and-pose-estimation">
+<h2>Odometry and Pose Estimation<a class="headerlink" href="#odometry-and-pose-estimation" title="Permalink to this heading"></a></h2>
+<p>It’s important to keep track of the robot’s position and heading on the game field during the course of the match. This is especially useful during the autonomous period for complex tasks like path following.  This is function is performed by the <em>SwerveDriveOdometry</em> class that takes readings from your swerve drive encoders and swerve azimuth encoders.</p>
+<p>During the course of the match the odometry may become less accurate, perhaps as a result of collisions with other robots. To mitigate this we can use the <em>SwerveDrivePoseEstimator</em> class, which is a wrapper for the <em>SwerveDriveOdometry</em> class, and provides the additional functionality of fusing camera data to come up with a more accurate estimate of the where the robot is.</p>
+<section id="phoenix-swervedrive-api">
+<h3>Phoenix SwerveDrive API<a class="headerlink" href="#phoenix-swervedrive-api" title="Permalink to this heading"></a></h3>
+<p>Phoenix software provides some <a class="reference external" href="https://pro.docs.ctr-electronics.com/en/latest/docs/api-reference/api-usage/swerve/swerve-overview.html">Swerve API</a> libraries that may be a useful resource.  This would be difficult to intergrate into a project using <em>AdvantageKit</em>, so may only be useful for code ideas at this time.</p>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>FRC documentation <a class="reference external" href="https://docs.wpilib.org/en/latest/docs/software/kinematics-and-odometry/swerve-drive-kinematics.html">Swerve Drive Kinematics</a></p></li>
+<li><p>AdvantageKit <a class="reference external" href="https://github.com/Mechanical-Advantage/AdvantageKit/tree/main/example_projects/advanced_swerve_drive/src/main">SwerveDrive Example</a></p></li>
+<li><p><a class="reference external" href="https://www.swervedrivespecialties.com/products/mk4i-swerve-module">MK4i Module</a></p></li>
+<li><p><a class="reference external" href="https://store.ctr-electronics.com/cancoder/">CTRE CANcoder</a></p></li>
+<li><p><a class="reference external" href="https://store.ctr-electronics.com/content/user-manual/CANCoder%20User's%20Guide.pdf">CTRE CANcoder User Guide</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pneumatics.html" class="btn btn-neutral float-left" title="Pneumatics Control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="simulation.html" class="btn btn-neutral float-right" title="Robot Simulation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright HOT Programming Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/en/master/">en</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">es</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/rtd-github-pages/es/dev/">dev</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/rtd-github-pages/es/master/">master</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.pdf">pdf</a></dd>
+        
+          <dd><a href="/rtd-github-pages/es/master/rtd-github-pages_es_master.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      <a href="https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/">Continuous Documentation</a> hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
